@@ -34,11 +34,13 @@
 ![snapshot](images/ls.png)
 
 * Current permissions :
+
   Devops.txt : -rw-rw-r--
-  `-`     → indicates it’s a regular file (not a directory or special file).
-  `rw-` → (user/owner) → read + write, no execute.
-  `rw-` → (group) → read + write, no execute.
-  `r--` → (others) → read only, no write or execute.
+  
+  - `-`     → indicates it’s a regular file (not a directory or special file).
+  - `rw-` → (user/owner) → read + write, no execute.
+  - `rw-` → (group) → read + write, no execute.
+  - `r--` → (others) → read only, no write or execute.
 
 * Same permissions applied to notes.txt and script.sh.
 
@@ -80,16 +82,16 @@ However, you can still run the file by explicitly invoking the interpreter (e.g.
 
 ## Commands Used
 
-`touch fname` - Creates empty file.
-`echo "Hello" > fname` - Create file with content.
-`vim fname` - Create/open file in Vim.
-`cat fname` - Prints files content.
-`vim -R fname` - Open file in read only mode.
-`cat /etc/passwd | head -5` - Prints first 5 lines of /etc/passwd.
-`cat /etc/passwd | tail -5` - Prints last 5 lines of /etc/passwd.
-`chmod +x fname` - Adding executable permission for all(owner,group,others).
-`chmod -w fname` - Removing write permission for all(owner,group,others).
-`mkdir -m 755 dname` - Create directory with permissions(rwx,r-x,r-x).
+* `touch fname` - Creates empty file.
+* `echo "Hello" > fname` - Create file with content.
+* `vim fname` - Create/open file in Vim.
+* `cat fname` - Prints files content.
+* `vim -R fname` - Open file in read only mode.
+* `cat /etc/passwd | head -5` - Prints first 5 lines of /etc/passwd.
+* `cat /etc/passwd | tail -5` - Prints last 5 lines of /etc/passwd.
+* `chmod +x fname` - Adding executable permission for all(owner,group,others).
+* `chmod -w fname` - Removing write permission for all(owner,group,others).
+* `mkdir -m 755 dname` - Create directory with permissions(rwx,r-x,r-x).
 
 ## What I Learned
 
