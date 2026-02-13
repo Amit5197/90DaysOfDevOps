@@ -36,7 +36,7 @@ total_lines(){
 
 report(){
 	report="log_report_$(date +%Y-%m-%d-%H-%M).txt"
-	echo "Date Of Analysis : $(date +"Date : "%Y-%m-%d" Time : "%H-%M)" >> $report
+	echo "Date Of Analysis : $(date +%Y-%m-%d" Time : "%H-%M)" >> $report
 	echo "Name Of Log File : $fname" >> $report
 	total_lines >> $report
 	err_count >> $report

@@ -93,7 +93,7 @@ move(){
    ![snapshot](images/output1.png)
    ![snapshot](images/output2.png)
    
-   [Here is the report file generated. ](archive/log_report_2026-02-14-01-21.txt)
+   [Here is the report file generated. ](archive/)
    
 ---
 
