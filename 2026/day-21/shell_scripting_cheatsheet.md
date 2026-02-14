@@ -5,7 +5,7 @@
 1. Shebang (`#!/bin/bash`) — what it does and why it matters
 
 ```This is a shebang, first line on the script. It sets your interpreter to use `/bin/bash`.
-If it is not specified than `/bin/sh` the default interpreter will be used.
+    If it is not specified than `/bin/sh` the default interpreter will be used.
 ```
 
 2. Running a script — `chmod +x`, `./script.sh`, `bash script.sh`
