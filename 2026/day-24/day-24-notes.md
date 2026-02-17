@@ -79,7 +79,7 @@
 1. Start making changes to a file but **do not commit**
 2. Now imagine you need to urgently switch to another branch — try switching. What happens?
 
-    ![snapshot](images/switch_without_commit.png)
+    ![snapshot](images/stash.png)
     
     * If changes doesn't conflict with the branch you are switching to it will let you switch, else it will not allow switch.
     
