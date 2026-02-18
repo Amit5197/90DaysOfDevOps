@@ -97,7 +97,7 @@ specified
 
 4. Answer:
    - Which strategy would you use for a startup shipping fast?
-     * Trunk
+     * Trunk Based
      
    - Which strategy would you use for a large team with scheduled releases?
      * Git Flow
