@@ -131,7 +131,7 @@ Answer these from memory (no Googling). Then verify your answers:
 
 ## Topic
 * DNS resolution - 
-     When you search any domain(www.example.com) it searches in locally in cache for its ip address, If not present
+     When you search any domain(www.example.com) it searches locally in cache for its ip address, If not present
      then it sends a request to DNS requesting IP address. DNS send the ip address back, your system connects to
      the domain using that ip address.
 * Subnets - 
