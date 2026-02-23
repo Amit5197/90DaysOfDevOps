@@ -40,11 +40,11 @@
 2. Each line is a **layer**. Note how some layers show sizes and some show 0B
 3. Write in your notes: What are layers and why does Docker use them?
 
-      Docker image layers are created with every changes made to the file system.
-      Every instruction in dockerfile creates a separate layer (FROM, COPY, RUN, CMD etc).
-      Layers are very important as docker caches every layer while creating the image and stores it in docker engine.
-      Now if you recreate after changing docker uses cached layers for unchanged layers. 
-      Hence images are build faster and more efficient.
+       Docker image layers are created with every changes made to the file system.
+       Every instruction in dockerfile creates a separate layer (FROM, COPY, RUN, CMD etc).
+       Layers are very important as docker caches every layer while creating the image and stores it in docker engine.
+       Now if you recreate after changing docker uses cached layers for unchanged layers. 
+       Hence images are build faster and more efficient.
       
     ![snapshot](images/layers.png)
     
@@ -63,9 +63,9 @@ Practice the full lifecycle on one container:
 
 Check `docker ps -a` after each step — observe the state changes.
 
-    ![snapshot](images/state.png)
+   ![snapshot](images/state.png)
     
-    ![snapshot](images/state1.png)
+   ![snapshot](images/state1.png)
     
 ---
 
@@ -94,7 +94,7 @@ Check `docker ps -a` after each step — observe the state changes.
 
     ![snapshot](images/4-fip.png)
     ![snapshot](images/4-fport.png)
-
+    ![snapshot](images/4-fmount.png)
 
 ---
 
