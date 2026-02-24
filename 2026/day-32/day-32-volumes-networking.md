@@ -24,7 +24,7 @@
    
 4. Run a brand new container with the **same volume**
 
-   ![snapshot](images/2-c.png)
+   ![snapshot](images/2-C.png)
    
 5. Is the data still there?
 
@@ -81,15 +81,15 @@
 ## Task 5: Custom Networks
 1. Create a custom bridge network called `my-app-net`
 
-   ![snapshot](images/4-c.png)
+   ![snapshot](images/5-a.png)
    
 2. Run two containers on `my-app-net`
 
-   ![snapshot](images/4-c.png)
+   ![snapshot](images/5-b.png)
    
 3. Can they ping each other by **name** now? **YES**
 
-   ![snapshot](images/4-c.png)
+   ![snapshot](images/5-c.png)
    
 4. Write in your notes: Why does custom networking allow name-based communication but the default bridge doesn't?
 * Custom networking enables built-in DNS, so container can resolve each other by name.
