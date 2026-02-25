@@ -1,0 +1,8 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: my-nginx
+    volumes:
+      - ~/docker-practice/data:/usr/share/nginx/html
+    ports:
+      - "81:80"
