@@ -84,8 +84,8 @@ Practice and document these:
 2. Create a `.env` file and reference variables from it in your compose file
 3. Verify the variables are being picked up
 
-   [All File](Two-Container)
+   [All Files](Two-Container)
    
-   ![snapshot](images/5-g.png)
+   ![snapshot](images/5.png)
    
 ---
