@@ -6,7 +6,7 @@ echo "Check set -o pipefail"
 cat count.txt | grep "total"
 echo "After failing script running without set -o"
 
-echo -e "\n"
+echo -u "\n"
 echo "Undefined variable -u"
 echo $a
 echo "After using undefined variable script running without set -u"
