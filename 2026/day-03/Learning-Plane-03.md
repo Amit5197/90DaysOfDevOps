@@ -28,8 +28,8 @@ Linux process management is the operating system's core function of controlling 
 | **`pkill`** | `pkill -u user` | Signals processes based on name or other attributes (e.g., specific user). |
 | **`bg`** | `bg %1` | Resumes a suspended job in the background. |
 | **`fg`** | `fg %1` | Brings a background job to the foreground. |
-| **`du -ah`** | `fg %1` | Show disk usages of current directory. |
-| **`free -h`** | `fg %1` | Display Free and used memory in Human redable units. |
+| **`du -ah`** | `du -ah` | Show disk usages of current directory. |
+| **`free -h`** | `free -h` | Display Free and used memory in Human redable units. |
 
 ## 📂 File System
 **Navigate directories, manipulate files, and manage permissions.**
