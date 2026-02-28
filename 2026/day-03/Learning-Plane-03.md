@@ -23,13 +23,8 @@ Linux process management is the operating system's core function of controlling 
 | Command | Usage Example | Description |
 | :--- | :--- | :--- |
 | **`ps`** | `ps aux` | Displays a detailed snapshot of all currently running processes. |
-<img width="296" height="91" alt="image" src="https://github.com/user-attachments/assets/39303068-fe35-4b6d-8c50-6c7b3bc53c42" />
-
 | **`top`** | `top` | Shows real-time system statistics and a dynamic list of processes. |
-
 | **`htop`** | `htop` | An interactive, colorful process viewer. |
-<img width="1312" height="847" alt="image" src="https://github.com/user-attachments/assets/57156f1c-6b54-4a74-be53-6a393e450549" />
-
 | **`kill`** | `kill 1234` | Terminates the process with PID `1234`. |
 | **`killall`** | `killall firefox` | Kills all processes named "firefox". |
 | **`pkill`** | `pkill -u user` | Signals processes based on name or other attributes (e.g., specific user). |
