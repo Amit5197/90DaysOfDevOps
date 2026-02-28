@@ -1,4 +1,4 @@
-Task- 
+Task-03
 Today’s goal is to build your Linux command confidence.
 
 You will create a cheat sheet of commands focused on:
@@ -6,8 +6,6 @@ You will create a cheat sheet of commands focused on:
 Process management
 File system
 Networking troubleshooting
-
-Today I focused on something very basic but very powerful — Linux commands.
 
 What Is Linux Process management?
 Linux process management is the operating system's core function of controlling and monitoring all running programs (processes) to ensure efficient resource utilization and system stability. This involves tasks such as process creation, scheduling, termination, and managing communication between processes.
