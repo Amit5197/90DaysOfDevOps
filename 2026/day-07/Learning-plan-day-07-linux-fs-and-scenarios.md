@@ -35,7 +35,7 @@ Document the purpose of these essential directories:
 
 
 **Hands-on task:**
-```bash
+
 # Find the largest log file in /var/log
 du -sh /var/log/* 2>/dev/null | sort -h | tail -5
 
