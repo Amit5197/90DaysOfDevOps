@@ -73,21 +73,24 @@ What i learned: Always check status first, then investigate based on what you se
 # Scenario 1: Service Not starting.
 A web application service called 'myapp' failed to start after a server reboot.What commands would you run to diagnose the issue?Write at least 4 commands in order.
 
-#systemctl status myapp (Why: Check if active, failed,or stopped)
-#journalctl –u myapp –n 50 (Why : Read recent logs to find error messages)
-#systemctl is-enabled myapp (Why: Verify if it starts on boot.)
-#systemctl list-units –type=service (Why: Confirm service exists and is recognized)
+01: (#systemctl status myapp) (Why: Check if active, failed,or stopped)
+
+02: (#journalctl –u myapp –n 50) (Why : Read recent logs to find error messages)
+
+03: (#systemctl is-enabled myapp) (Why: Verify if it starts on boot)
+
+04: (#systemctl list-units –type=service) (Why: Confirm service exists and is recognized)
 
 # Scenario 2 : High CPU Usage.
 Your manager reports that the application server is slow.You SSH into the server. What commands would you run to identify ?which process is using high CPU?
 
-Use a command tat shows live CPU usage : top .
+01: Use a command tat shows live CPU usage : top .
 
-Look for processes sorted by CPU percentage : (#ps aux –sort=-%cpu | head –10)
+02: Look for processes sorted by CPU percentage : (#ps aux –sort=-%cpu | head –10)
 
-Easier interactive monitoring : (#htop)
+03: Easier interactive monitoring : (#htop)
 
-Note the PID(process ID ) of the top process.
+04: Note the PID(process ID ) of the top process.
 
 # Scenario 3 : Finding Docker service Logs.
 A developer asks: "Where are the logs for the 'docker' service?"The service is managed by systemd.What commands would you use?
@@ -96,7 +99,7 @@ A developer asks: "Where are the logs for the 'docker' service?"The service is m
 
 02: (#journalctl –u docker –n 50) (why : view last 50 log lines)
 
-03. (#journalctl -u docker –f) : (why: follow logs in real-time )
+03: (#journalctl -u docker –f) : (why: follow logs in real-time )
 
 # Scenario 4 : Permission Denied Script
 A script at /home/user/backup.sh is not executing.When you run it: ./backup.sh
