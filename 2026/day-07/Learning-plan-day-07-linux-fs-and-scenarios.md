@@ -50,12 +50,12 @@ Solved scenario: understanding how to approach scenarios.
 
 Example scenario : Check if a service is running.
 
-1: Question: How do you check if the nginx service is running ?
+# 1: Question: How do you check if the nginx service is running ?
 
 Check service status : systemctl status nginx
 Why this command? To see what service is active, failed, or stopped.
 
-2 If service is not found, list all service : systemctl list-units –type=service
+# 2 If service is not found, list all service : systemctl list-units –type=service
 
 Why this command? To see what service exist on the system.
 
@@ -64,7 +64,7 @@ Why this command? To know if it will start automatically after reboot
 
 What i learned: Always check status first, then investigate based on what you see.
 
-Scenario 1: Service Not starting.
+# Scenario 1: Service Not starting.
 A web application service called 'myapp' failed to start after a server reboot.What commands would you run to diagnose the issue?Write at least 4 commands in order.
 
 1.systemctl status myapp (Why: Check if active, failed,or stopped)
@@ -75,7 +75,7 @@ systemctl is-enabled myapp (Why: Verify if it starts on boot.)
 
 systemctl list-units –type=service (Why: Confirm service exists and is recognized)
 
-Scenario 2 : High CPU Usage.
+# Scenario 2 : High CPU Usage.
 Your manager reports that the application server is slow.You SSH into the server. What commands would you run to identify ?which process is using high CPU?
 
 Use a command tat shows live CPU usage : top .
@@ -86,25 +86,25 @@ Easier interactive monitoring : htop.
 
 Note the PID(process ID ) of the top process.
 
-Scenario 3 : Finding Docker service Logs.
+# Scenario 3 : Finding Docker service Logs.
 A developer asks: "Where are the logs for the 'docker' service?"The service is managed by systemd.What commands would you use?
 
-systemctl status docker (why : confirm service state)
+01: systemctl status docker (why : confirm service state)
 
-journalctl –u docker –n 50 (why : view last 50 log lines)
+02: journalctl –u docker –n 50 (why : view last 50 log lines)
 
-3.journalctl -u docker –f : (why: follow logs in real-time )
+03. journalctl -u docker –f : (why: follow logs in real-time )
 
-Scenario 4 : Permission Denied Script
+# Scenario 4 : Permission Denied Script
 A script at /home/user/backup.sh is not executing.When you run it: ./backup.sh
 
 You get: "Permission denied" ? What commands would you use to fix this?
 
-Check current permissions : ls –l /home/user/backup.sh ( Look for –rw-r--r—notice no 'x’ = not executable.
+01: Check current permissions : ls –l /home/user/backup.sh ( Look for –rw-r--r—notice no 'x’ = not executable.
 
-check for execute permission. chmod +x /home/user/backup.sh :
+02: check for execute permission. chmod +x /home/user/backup.sh :
 
-verify it worked : ls –l /home/user/backup.sh (Look for : -rwx-xr-x )
+03: verify it worked : ls –l /home/user/backup.sh (Look for : -rwx-xr-x )
 
-Try running it : ./backup.sh
+04: Try running it : ./backup.sh
 
