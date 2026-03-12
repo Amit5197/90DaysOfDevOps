@@ -47,7 +47,7 @@ verify : cat /etc/group | grep -E "developers|admins"
 
 ### Task 03: Assign users to groups:
 
-# add users to groups:
+**add users to groups:**
 
 sudo usermod -aG developers tokyo
 sudo usermod -aG developers berlin
