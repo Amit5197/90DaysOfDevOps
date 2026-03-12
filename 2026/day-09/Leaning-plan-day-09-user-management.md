@@ -10,53 +10,55 @@ Figure out how to:
 03- Set up shared directories with group permissions
 04- Use what you learned from Days 1-7 to find the right commands!**
 
-### Task 1: Create Users 
+### Task 01: Create Users 
 
-01- Create three users with home directories and passwords:
+# 01- Create three users with home directories and passwords:
 
-01- tokyo
-02- berlin
-03- professor
+- 'tokyo'
+- 'berlin'
+- 'professor'
 
-=> sudo useradd -m tokyo
-sudo useradd -m berlin
-sudo useradd -m professor
+**sudo useradd -m tokyo
+  sudo useradd -m berlin
+  sudo useradd -m professor**
+  
  -m creates /home/username
 
-2. Set Passwords:
-sudo passwd tokyo
-sudo passwd berlin
-sudo passwd professor
+# 02- Set Passwords:
+**sudo passwd tokyo
+  sudo passwd berlin
+  sudo passwd professor**
 
-3. verify users : 
-cat /etc/passwd | grep -E "tokyo|berlin|professor"
+# 03- verify users: 
 
-check home directories : ls -l /home
+**cat /etc/passwd | grep -E "tokyo|berlin|professor"
+check home directories : ls -l /home**
 
 ---
 
- ### Task 2 :  Create Groups :
+ ### Task 02 : Create Groups:
  
-sudo groupadd developers
-sudo groupadd admins
+**sudo groupadd developers
+sudo groupadd admins**
 
 verify : cat /etc/group | grep -E "developers|admins"
 
 ---
 
-### Task 3: Assign users to groups 
+### Task 03: Assign users to groups:
 
-- add users to groups :
-sudo usermod -aG developers tokyo
+# add users to groups:
+
+**sudo usermod -aG developers tokyo
 sudo usermod -aG developers berlin
 sudo usermod -aG admins berlin
-sudo usermod -aG admins professor
+sudo usermod -aG admins professor**
 
 - aG : append to group
 
 ---
 
-### Task 4 :  Shared Directory.
+### Task 04 : Shared Directory.
 
 1.Create Directory - sudo mkdir /opt/dev-project
 
@@ -72,7 +74,7 @@ verify : ls -l /opt/dev-project
 
 ---
 
-# Task 5 : Team Workspace
+### Task 05 : Team Workspace:
 
 1. Create User : sudo useradd -m nairobi
 sudo passwd nairobi
@@ -95,3 +97,8 @@ sudo chmod 775 /opt/team-workspace
 5.Test as nairobi :
 sudo -u nairobi touch /opt/team-workspace/test.txt
 verify : ls -l /opt/team-workspace
+
+
+## What I Learned
+
+**As a devops learner i have done hands on experience to create user, pass and assign permisstion in linux environment.**
