@@ -49,10 +49,10 @@ verify : cat /etc/group | grep -E "developers|admins"
 
 **add users to groups:**
 
-sudo usermod -aG developers tokyo
-sudo usermod -aG developers berlin
-sudo usermod -aG admins berlin
-sudo usermod -aG admins professor
+01- sudo usermod -aG developers tokyo
+02- sudo usermod -aG developers berlin
+03- sudo usermod -aG admins berlin
+04- sudo usermod -aG admins professor
 
 - aG : append to group
 
