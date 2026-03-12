@@ -54,7 +54,7 @@ verify : cat /etc/group | grep -E "developers|admins"
 03- sudo usermod -aG admins berlin
 04- sudo usermod -aG admins professor
 
-- aG : append to group
+aG : append to group
 
 ---
 
