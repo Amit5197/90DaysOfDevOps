@@ -14,9 +14,9 @@ Figure out how to:
 
 # 01- Create three users with home directories and passwords:
 
-- 'tokyo'
-- 'berlin'
-- 'professor'
+- `tokyo`
+- `berlin`
+- `professor`
 
 **sudo useradd -m tokyo
   sudo useradd -m berlin
