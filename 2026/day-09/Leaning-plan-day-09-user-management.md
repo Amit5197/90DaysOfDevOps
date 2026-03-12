@@ -37,7 +37,7 @@ check home directories : ls -l /home**
 ---
 
  ### Task 02 : Create Groups:
- 
+
 **sudo groupadd developers
 sudo groupadd admins**
 
@@ -49,10 +49,10 @@ verify : cat /etc/group | grep -E "developers|admins"
 
 # add users to groups:
 
-**sudo usermod -aG developers tokyo
+sudo usermod -aG developers tokyo
 sudo usermod -aG developers berlin
 sudo usermod -aG admins berlin
-sudo usermod -aG admins professor**
+sudo usermod -aG admins professor
 
 - aG : append to group
 
