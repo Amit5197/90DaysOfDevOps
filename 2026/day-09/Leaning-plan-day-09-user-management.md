@@ -95,9 +95,8 @@ sudo chgrp project-team /opt/team-workspace
 sudo chmod 775 /opt/team-workspace
 
 5.Test as nairobi :
-sudo -u nairobi touch /opt/team-workspace/test.txt
+sudo -u nairobi touch /opt/team-workspace/nairobi.txt
 verify : ls -l /opt/team-workspace
-
 
 ## What I Learned
 
