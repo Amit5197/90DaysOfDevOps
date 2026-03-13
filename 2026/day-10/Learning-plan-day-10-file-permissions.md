@@ -31,6 +31,8 @@ Master file permissions and basic file operations in Linux.
 
 ![day-10-task-02](https://github.com/user-attachments/assets/c4d34555-d1bb-485c-bacc-e388e2efc0e0)
 
+<img width="875" height="696" alt="image" src="https://github.com/user-attachments/assets/bd85a061-a274-46cd-bb3b-5ece4604c539" />
+
 ---
 
 ### Task 3: Understand Permissions 
