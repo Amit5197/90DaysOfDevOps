@@ -31,7 +31,7 @@ Figure out how to:
 
 # 03- verify users: 
 
-**cat /etc/passwd | grep -E "tokyo|berlin|professor"
+**(cat /etc/passwd | grep -E "tokyo|berlin|professor") or use- (#cat /etc/passwd | grep -E "tokyo|berlin|professor)
 check home directories : ls -l /home**
 
 ---
@@ -49,12 +49,12 @@ verify : cat /etc/group | grep -E "developers|admins"
 
 **add users to groups:**
 
-01- sudo usermod -aG developers tokyo
-02- sudo usermod -aG developers berlin
-03- sudo usermod -aG admins berlin
-04- sudo usermod -aG admins professor
+**sudo usermod -aG developers tokyo
+  sudo usermod -aG developers berlin
+  sudo usermod -aG admins berlin
+  sudo usermod -aG admins professor**
 
-aG : append to group
+**(aG : append to group)**
 
 ---
 
