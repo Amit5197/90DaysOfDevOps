@@ -1,5 +1,4 @@
-![day-09-task-01](https://github.com/user-attachments/assets/d1a37ca4-601c-449d-b595-75e48f35ba00)
-# Day 09 – Linux User & Group Management Challenge
+### Day 09 – Linux User & Group Management Challenge
 **Task**
 
 # Today's goal is to practice user and group management by completing hands-on challenges.
