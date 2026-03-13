@@ -98,7 +98,7 @@ Permissions: 775 (drwxrwxr-x)
 ### Commands Used
 
 ###  Create three users with password
-```bash
+```
 sudo useradd -m tokyo
 sudo useradd -m berlin
 sudo useradd -m professor
@@ -109,38 +109,42 @@ sudo passwd nairobi
 ```
 
 ### Group Creation
-
+```
 sudo groupadd developers
 sudo groupadd admins
 sudo groupadd project-team
+```
 
 ### Assign Users to Groups
-
+```
 sudo usermod -aG developers tokyo
 sudo usermod -aG developers,admins berlin
 sudo usermod -aG admins professor
 sudo usermod -aG project-team nairobi
 sudo usermod -aG project-team tokyo
+```
 
 ### Directory Configuration & Permissions
-
+```
 sudo mkdir /opt/dev-project
 sudo chgrp developers /opt/dev-project
 sudo chmod 775 /opt/dev-project
 sudo mkdir /opt/team-workspace
 sudo chgrp project-team /opt/team-workspace
 sudo chmod 775 /opt/team-workspace
-
+```
 ### Verification
 
 # Verifying User Creation
 grep -e tokyo -e berlin -e professor /etc/passwd
 
 # Verifying Group Assignments
+```
 groups tokyo
 groups berlin
 groups professor
 groups nairobi
+```
 
 # Testing Write Access (Development Project)
 su tokyo
