@@ -89,11 +89,11 @@ Using `chown` you can change both owner and group together:
    touch heist-project/plans/strategy.conf
    ```
 
-![task_5.1](https://github.com/srdangat/90DaysOfDevOps/blob/master/2026/day-11/task5.1.png)
+
 
 2. Create group `planners`: `sudo groupadd planners`
 
-![task_5.2](https://github.com/srdangat/90DaysOfDevOps/blob/master/2026/day-11/task5.2.png)
+
 
 3. Change ownership of entire `heist-project/` directory:
    - Owner: `professor`
@@ -102,7 +102,7 @@ Using `chown` you can change both owner and group together:
 
 4. Verify all files and subdirectories changed: `ls -lR heist-project/`
 
-![task_5.3](https://github.com/srdangat/90DaysOfDevOps/blob/master/2026/day-11/task5.3.png)
+
 
 ---
 
@@ -111,7 +111,7 @@ Using `chown` you can change both owner and group together:
 1. Create users: `tokyo`, `berlin`, `nairobi` (if not already created)
 2. Create groups: `vault-team`, `tech-team`
 
-![task_6.2](https://github.com/srdangat/90DaysOfDevOps/blob/master/2026/day-11/task6.2.png)
+
 
 3. Create directory: `bank-heist/`
 4. Create 3 files inside:
@@ -121,7 +121,7 @@ Using `chown` you can change both owner and group together:
    touch bank-heist/escape-plan.txt
    ```
 
-![task_64](https://github.com/srdangat/90DaysOfDevOps/blob/master/2026/day-11/task64.png)   
+  
 
 5. Set different ownership:
    - `access-codes.txt` → owner: `tokyo`, group: `vault-team`
