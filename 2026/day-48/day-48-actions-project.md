@@ -4,7 +4,7 @@
 
 ###  [All YML files created](https://github.com/Afroz-J-Shaikh/github-actions-capstone/tree/main/.github/workflows)
 
-### [Docker Hub Link to image] (https://hub.docker.com/repository/docker/afroz25/my-app/general)
+### [Docker Hub Link to image](https://hub.docker.com/repository/docker/afroz25/my-app/general)
 
 ## Task 1: Set Up the Project Repo
 1. Create a new repo called `github-actions-capstone` (or use your existing `github-actions-practice`)
@@ -67,7 +67,7 @@ Create `.github/workflows/pr-pipeline.yml`:
 
   * PR comment (comment actually on PR)
 
-   ![snapshot](images/pr-comment.png)
+   ![snapshot](images/pr_comment.png)
 
 ---
 
@@ -115,11 +115,17 @@ Create `.github/workflows/health-check.yml`:
   
   ### Badges
 
-   ![snapshot](images/badges.png)
+   [![pr pipeline](https://github.com/Afroz-J-Shaikh/github-actions-capstone/actions/workflows/pr-pipeline.yml/badge.svg?branch=feature&event=pull_request)](https://github.com/Afroz-J-Shaikh/github-actions-capstone/actions/workflows/pr-pipeline.yml)
+
+[![main pipeline](https://github.com/Afroz-J-Shaikh/github-actions-capstone/actions/workflows/main-pipeline.yml/badge.svg)](https://github.com/Afroz-J-Shaikh/github-actions-capstone/actions/workflows/main-pipeline.yml)
+
+[![health checkout](https://github.com/Afroz-J-Shaikh/github-actions-capstone/actions/workflows/health-check.yml/badge.svg)](https://github.com/Afroz-J-Shaikh/github-actions-capstone/actions/workflows/health-check.yml)
+
 
   ### Pipeline Architecture Diagram
 
-  graph TD
+ ```mermaid
+graph TD
     A[PR opened] --> B[Build & Test]
     B -->|Pass| C[PR Comment]
     B -->|Fail| D[PR Comment]
@@ -132,6 +138,7 @@ Create `.github/workflows/health-check.yml`:
     J --> K[Health Check]
     K -->|Pass| L[Summary]
     K -->|Fail| M[Summary]
+```
 
    ![snapshot](images/next.png)
 
