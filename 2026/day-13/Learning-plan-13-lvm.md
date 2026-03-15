@@ -10,3 +10,37 @@ Learn LVM to manage storage flexibly – create, extend, and mount volumes.
 ## Expected Output
 - A markdown file: `day-13-lvm.md`
 - Screenshots of command outputs
+
+---
+
+## Before You Start
+
+Switch to root user:
+```bash
+sudo -i
+```
+or
+```bash
+sudo su
+```
+No spare disk? Create a virtual one (watch the tutorial):
+```bash
+dd if=/dev/zero of=/tmp/disk1.img bs=1M count=1024
+losetup -fP /tmp/disk1.img
+losetup -a   # Note the device name (e.g., /dev/loop0)
+```
+
+---
+
+## Challenge Tasks
+
+### 1. Check Current Storage
+```bash
+lsblk      # List all block devices and partitions
+pvs        # Show existing physical volumes
+vgs        # Show existing volume groups
+lvs        # Show existing logical volumes
+df -h      # Show mounted filesystems and their usage
+```
+![alt text](image.png)
+
