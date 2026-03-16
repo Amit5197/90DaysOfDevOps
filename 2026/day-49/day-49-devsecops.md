@@ -276,3 +276,8 @@ Draw this diagram in your notes. You just built a **DevSecOps pipeline** — sec
 Secret scanning detects sensitive data (like API keys or passwords) accidentally committed to code, preventing leaks.
 
 Dependency review analyzes project libraries to catch vulnerabilities, outdated packages, or risky changes before they’re merged.
+
+---
+
+
+DevSecOps means including security in every step of making and running software. Developers, security teams, and operations work together to find and fix security problems early. This helps create safer software faster.
