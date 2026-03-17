@@ -1,0 +1,61 @@
+name: Scheduled Health Check
+
+on:
+  schedule:
+    # Runs every 12 hours
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: ${{ vars.DOCKER_USERNAME }}/node-app
+  CONTAINER_NAME: node-app
+
+jobs:
+  health-check:
+    name: Docker Health Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Pull latest Docker image
+        run: docker pull ${{ env.IMAGE_NAME }}:latest
+
+      - name: Run container in detached mode
+        run: |
+          docker run -d \
+            --name ${{ env.CONTAINER_NAME }} \
+            -p 3000:3000 \
+            ${{ env.IMAGE_NAME }}:latest
+
+      - name: Wait and run health check
+        run: |
+          sleep 5
+          chmod +x health_check.sh
+          ./health_check.sh
+
+      - name: Stop and remove container
+        if: always()
+        run: |
+          docker stop ${{ env.CONTAINER_NAME }} || true
+          docker rm ${{ env.CONTAINER_NAME }} || true
+
+      - name: Create health check summary
+        if: always()
+        run: |
+          STATUS="PASSED"
+          if [ "${{ job.status }}" != "success" ]; then
+            STATUS="FAILED"
+          fi
+
+          echo "## Health Check Report" >> $GITHUB_STEP_SUMMARY
+          echo "- Image: ${{ env.IMAGE_NAME }}:latest" >> $GITHUB_STEP_SUMMARY
+          echo "- Status: ${STATUS}" >> $GITHUB_STEP_SUMMARY
+          echo "- Time: $(date)" >> $GITHUB_STEP_SUMMARY
