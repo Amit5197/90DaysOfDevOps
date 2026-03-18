@@ -42,5 +42,18 @@ vgs        # Show existing volume groups
 lvs        # Show existing logical volumes
 df -h      # Show mounted filesystems and their usage
 ```
-![alt text](image.png)
+<img width="962" height="616" alt="image" src="https://github.com/user-attachments/assets/602110fd-7ce7-41b0-9831-86ef4e6a3d1a" />
+
+---
+
+### 2. Create Physical Volume
+```bash
+pvcreate /dev/nvme1n1   # Initialize /dev/nvme1n1 as a physical volume for LVM
+pvs                      # Verify physical volume creation
+```
+
+
+
+
+
 
