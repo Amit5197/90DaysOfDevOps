@@ -41,6 +41,8 @@ Verify they exist:
 kubectl get namespaces
 ```
 
+![image](images/ns.png)
+
 You can also create a namespace from a manifest:
 ```yaml
 # namespace.yaml
@@ -62,7 +64,7 @@ kubectl run nginx-dev --image=nginx:latest -n dev
 kubectl run nginx-staging --image=nginx:latest -n staging
 ```
 
-![image](images/ns.png)
+![image](images/pod-ns.png)
 
 List pods across all namespaces:
 ```bash
@@ -127,6 +129,8 @@ kubectl get deployments -n dev
 kubectl get pods -n dev
 ```
 
+![image](images/task3.png)
+
 You should see 3 pods with names like `nginx-deployment-xxxxx-yyyyy`.
 
 **Verify:** What do the READY, UP-TO-DATE, and AVAILABLE columns mean in the deployment output?
@@ -160,6 +164,7 @@ The Deployment controller detects that only 2 of 3 desired replicas exist and im
 - Yes,different name but same prefix
 
 ![image](images/task4.png)
+
 ---
 
 ### Task 5: Scale the Deployment
@@ -175,9 +180,16 @@ kubectl scale deployment nginx-deployment --replicas=2 -n dev
 kubectl get pods -n dev
 ```
 
+![image](images/scale.png)
+
+
+![image](images/down.png)
+
 Watch how Kubernetes creates or terminates pods to match the desired count.
 
 You can also scale by editing the manifest — change `replicas: 4` in your YAML file and run `kubectl apply -f nginx-deployment.yaml` again.
+
+![image](images/scale-declarative.png)
 
 **Verify:** When you scaled down from 5 to 2, what happened to the extra pods?
 
@@ -242,7 +254,11 @@ kubectl get pods -A
 ![image](images/cleanup.png)
 
 **Verify:** Are all your resources gone?
-- Yes all resource gone
+- Yes, all resources gone
+
+
+
+---
 
 **What namespaces are and why you would use them**
 - Namespaces are like folders in Kubernetes that separate resources inside one cluster
@@ -276,8 +292,8 @@ kubectl get pods -A
 
 **How scaling works (both imperative and declarative)**
 
-`Imperative`: you directly tell Kubernetes how many replicas you want using a command.
-`Declarative`: you update the Deployment manifest (YAML) with the desired replicas.
+1. `Imperative`: you directly tell Kubernetes how many replicas you want using a command.
+2. `Declarative`: you update the Deployment manifest (YAML) with the desired replicas.
 
 **How rolling updates and rollbacks work**
 
