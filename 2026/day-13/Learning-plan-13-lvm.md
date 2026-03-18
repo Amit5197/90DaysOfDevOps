@@ -34,54 +34,42 @@ losetup -a   # Note the device name (e.g., /dev/loop0)
 
 ## Challenge Tasks
 
-### 1. Check Current Storage
+### Task-01. Check Current Storage
 ```bash
 lsblk      # List all block devices and partitions
 pvs        # Show existing physical volumes
 vgs        # Show existing volume groups
 lvs        # Show existing logical volumes
-df -h      # Show mounted filesystems and their usage
+df -h      # Show mounted/storage filesystems and their usage
 ```
-<img width="962" height="616" alt="image" src="https://github.com/user-attachments/assets/602110fd-7ce7-41b0-9831-86ef4e6a3d1a" />
+**Commands run:**
+```bash
+lsblk
+pvs
+vgs
+lvs
+df -h
+```
+**Observation:**
+| Device       | Size | Mountpoint | Notes |
+|-------------|------|------------|-------|
+| /dev/nvme0n1 | 8G   | /          | Root filesystem |
+| /dev/nvme1n1 | 10G  | -          | Free disk available |
+
+- No existing physical volumes, volume groups, or logical volumes
+- `/dev/root` usage: 6.8G, 27% used
+
+✅ **Conclusion:** A free disk (`/dev/nvme1n1`) is available for LVM.
+
+<img width="962" height="692" alt="image" src="https://github.com/user-attachments/assets/10ff407a-c7f4-4140-aaef-f08341ded07e" />
 
 ---
 
-### 2. Create Physical Volume
+### Task-02. Create Physical Volume
 ```bash
 pvcreate /dev/nvme1n1   # Initialize /dev/nvme1n1 as a physical volume for LVM
 pvs                      # Verify physical volume creation
 ```
-
-### 3. Create Volume Group
-```bash
-vgcreate devops-vg /dev/nvme1n1   # Create a volume group named devops-vg
-vgs                                # Verify volume group creation
-```
-
-### 4. Create Logical Volume
-```bash
-lvcreate -L 500M -n app-data devops-vg   # Create a logical volume named app-data with 500MB
-lvs                                       # Verify logical volume creation
-```
-
-### 5. Format and Mount Logical Volume
-```bash
-mkfs.ext4 /dev/devops-vg/app-data               # Format LV with ext4 filesystem
-mkdir -p /mnt/app-data                          # Create mount point
-mount /dev/devops-vg/app-data /mnt/app-data    # Mount LV
-df -h /mnt/app-data                             # Verify mounted filesystem size and usage
-```
-
-### 6. Extend Logical Volume
-```bash
-lvextend -L +200M /dev/devops-vg/app-data   # Extend LV by 200MB
-resize2fs /dev/devops-vg/app-data           # Resize filesystem to use new space
-df -h /mnt/app-data                           # Verify updated size and usage
-```
-
-
-## Task 2: Create Physical Volume
-
 **Command:**
 ```bash
 pvcreate /dev/nvme1n1
@@ -92,12 +80,15 @@ pvs
 - `/dev/nvme1n1` initialized as a physical volume
 - `pvs` shows it ready for LVM
 
-![task2](https://github.com/srdangat/90DaysOfDevOps/blob/master/2026/day-13/task2.png)
+<img width="761" height="517" alt="image" src="https://github.com/user-attachments/assets/211e03a3-5846-47f7-ab5f-7b7e3d65ec4e" />
 
 ---
 
-## Task 3: Create Volume Group
-
+### Task-03. Create Volume Group
+```bash
+vgcreate devops-vg /dev/nvme1n1   # Create a volume group named devops-vg
+vgs                                # Verify volume group creation
+```
 **Command:**
 ```bash
 vgcreate devops-vg /dev/nvme1n1
@@ -106,13 +97,16 @@ vgs
 
 **Observation:**
 - Volume group `devops-vg` created with 10G free space
-
-![task3](https://github.com/srdangat/90DaysOfDevOps/blob/master/2026/day-13/task3.png)
+  
+<img width="582" height="163" alt="image" src="https://github.com/user-attachments/assets/eb1877e0-bd3b-44dc-b352-5b283b3c8522" />
 
 ---
 
-## Task 4: Create Logical Volume
-
+### Task-04. Create Logical Volume
+```bash
+lvcreate -L 500M -n app-data devops-vg   # Create a logical volume named app-data with 500MB
+lvs                                       # Verify logical volume creation
+```
 **Command:**
 ```bash
 lvcreate -L 500M -n app-data devops-vg
@@ -122,12 +116,17 @@ lvs
 **Observation:**
 - Logical volume `app-data` of 500MB created under `devops-vg`
 
-![task4](https://github.com/srdangat/90DaysOfDevOps/blob/master/2026/day-13/task4.png)
+<img width="951" height="153" alt="image" src="https://github.com/user-attachments/assets/14e97a91-c1d9-4543-88bd-f2aa2ba1b937" />
 
 ---
 
-## Task 5: Format and Mount Logical Volume
-
+### Task-05. Format and Mount Logical Volume
+```bash
+mkfs.ext4 /dev/devops-vg/app-data               # Format LV with ext4 filesystem
+mkdir -p /mnt/app-data                          # Create mount point
+mount /dev/devops-vg/app-data /mnt/app-data    # Mount LV
+df -h /mnt/app-data                             # Verify mounted filesystem size and usage
+```
 **Commands:**
 ```bash
 mkfs.ext4 /dev/devops-vg/app-data
@@ -140,13 +139,16 @@ df -h /mnt/app-data
 - LV formatted as `ext4`
 - Mounted at `/mnt/app-data`
 - Filesystem shows: Size 452M, Used 24K, Available 417M (filesystem overhead reduces usable size)
-
-![task5](https://github.com/srdangat/90DaysOfDevOps/blob/master/2026/day-13/task5.png)
+<img width="862" height="407" alt="image" src="https://github.com/user-attachments/assets/d54d1b72-6c8c-48b2-a4a6-1c4a533ac478" />
 
 ---
 
-## Task 6: Extend Logical Volume
-
+### 6. Extend Logical Volume
+```bash
+lvextend -L +200M /dev/devops-vg/app-data   # Extend LV by 200MB
+resize2fs /dev/devops-vg/app-data           # Resize filesystem to use new space
+df -h /mnt/app-data                           # Verify updated size and usage
+```
 **Commands:**
 ```bash
 lvextend -L +200M /dev/devops-vg/app-data
@@ -158,10 +160,8 @@ df -h /mnt/app-data
 - LV size increased by 200MB (total 700MB)
 - Filesystem resized to use new space
 - Filesystem shows: Size 637M, Used 24K, Available 594M (filesystem overhead applies)
-
-![task6](https://github.com/srdangat/90DaysOfDevOps/blob/master/2026/day-13/task6.png)
-
----
+  
+<img width="1180" height="292" alt="image" src="https://github.com/user-attachments/assets/566dff1b-75a8-4e4b-a7d7-31b06af8ec64" />
 
 ## Key Learnings
 
