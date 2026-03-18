@@ -179,13 +179,13 @@ You should see pods like `etcd`, `kube-apiserver`, `kube-scheduler`, `kube-contr
 
 ### What each kube-system pod does
 
-`core dns` : Provides DNS services so pods can communicate using service names.
-`etcd-devops-cluster-control-plane ` : Distributed key-value store that holds all cluster configuration and state.
-`kindnet-8mkrr`: Networking plugin used by KIND to enable pod networking.
-`kube-apiserver-devops-cluster-control-plane` : Main API server that handles all Kubernetes API requests.
-`kube-controller-manager-devops-cluster-control-plane` : Runs controllers that manage cluster state such as nodes, replicas, and endpoints.
-`kube-proxy-xk4lf` : Manages network rules and enables service networking for pods.
-`kube-scheduler-devops-cluster-control-plane ` : Assigns newly created pods to available nodes.
+* `core dns` : Provides DNS services so pods can communicate using service names.
+* `etcd-devops-cluster-control-plane ` : Distributed key-value store that holds all cluster configuration and state.
+* `kindnet-8mkrr`: Networking plugin used by KIND to enable pod networking.
+* `kube-apiserver-devops-cluster-control-plane` : Main API server that handles all Kubernetes API requests.
+* `kube-controller-manager-devops-cluster-control-plane` : Runs controllers that manage cluster state such as nodes, replicas, and endpoints.
+* `kube-proxy-xk4lf` : Manages network rules and enables service networking for pods.
+* `kube-scheduler-devops-cluster-control-plane ` : Assigns newly created pods to available nodes.
 
 ---
 
