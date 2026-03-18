@@ -62,31 +62,43 @@ Keep it short, real, and repeatable.
 
   <img width="1108" height="432" alt="image" src="https://github.com/user-attachments/assets/73f253ad-cd94-4811-9c70-2edb3790804d" />
 
+---
+
 - **Reachability:** `ping -c 4 google.com`
 - Reachability: google.com (0% packet loss).
 - Observation: Excellent network connectivity with ~1ms latency**
 
   <img width="1162" height="262" alt="image" src="https://github.com/user-attachments/assets/ff12aff4-5749-4fcc-902f-39a2365c5904" />
 
+---
+
 - **Path:** `traceroute gogle.com`
 - Obervation: Successfully reached the destonation at hop 20,depspite a block of timeouts (* * *) on hops 11-29 caused by network security filtering.
   
  <img width="1471" height="278" alt="image" src="https://github.com/user-attachments/assets/6a73780b-b98a-44b9-8dcf-26537947c4df" />
+
+---
 
 - **Ports:** `ss -tulpn`
 - Observation: SSH is listening on port 22 (on 0.0.0.0, meaning it accepts outside connections),and the local DNS resolver is listening on port 53 (on 127.0.0.53, for internal system use only)
 
   <img width="1606" height="371" alt="image" src="https://github.com/user-attachments/assets/f4add39d-573e-4291-af8d-aa1de7d22fe4" />
 
+---
+
 - **Name resolution:** `dig google.com`
 - Observation: The DNS query returned status: NOERROR and successfully resolved google.com to 6 IP addresses: 192.178.218.100,192.178.218.138,192.178.218.113,192.178.218.139,192.178.218.102 and 192.178.218.101
 
  <img width="777" height="462" alt="image" src="https://github.com/user-attachments/assets/5a6d7578-f393-426f-909f-5165a5200d2f" />
 
+---
+
 - **HTTP check:** `curl -I https://www.gmail.com`
 - Observation: Received HTTP status 301 (Moved Permanently), indicating the server is redirecting the request to https://www.gmail.com/
 
   <img width="672" height="367" alt="image" src="https://github.com/user-attachments/assets/cedc15fb-6fb2-4ed9-a27a-88938c570dd8" />
+
+---
 
 - **Connections snapshot:** `netstat -an | head` — count ESTABLISHED vs LISTEN (rough).
 - Observation: Captured 1 ESTABLISHED connection on port 22 (the active SSH session) and multiple ports in LISTEN state.
@@ -101,7 +113,6 @@ Keep it short, real, and repeatable.
 - From the same machine, test it: `nc -zv localhost 22`
   
 <img width="692" height="91" alt="image" src="https://github.com/user-attachments/assets/376b74fd-beef-45e2-ae81-6a0088cf458d" />
-
 
 - If not reachable: Next steps would be checking service status (systemctl status ssh) or firewall rules.
 
