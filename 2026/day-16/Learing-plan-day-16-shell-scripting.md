@@ -61,6 +61,9 @@ chmod +x hello.sh
    - Asks for their favourite tool
    - Prints: `Hello <name>, your favourite tool is <tool>`
 
+<img width="735" height="256" alt="image" src="https://github.com/user-attachments/assets/6820018a-19c1-4250-ad64-6a218bbf8183" />
+<img width="1593" height="825" alt="image" src="https://github.com/user-attachments/assets/2a042259-8f98-4717-b8b3-3d82a29bbc85" />
+
 ---
 
 ### Task 4: If-Else Conditions
