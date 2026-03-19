@@ -246,7 +246,7 @@ kubectl get pods -A
 ---
 
 - What namespaces are and why you would use them
-* Namespaces are used to organize and isolate deployemnts/pods.
+   * Namespaces are used to organize and isolate deployemnts/pods.
 
 - Your Deployment manifest and an explanation of each section
 ```yaml
@@ -273,34 +273,34 @@ spec:
         ports:
         - containerPort: 80
 ```
-* `apiVersion`: `apps/v1`
-* `kind`: `deployment`
-* `metadata` - contains (name, namespace, labels)
-* `spec` - deployments specifications
-* `repicas` - how many replicas to create 
-* `selector` - matches pods with label `app: nginx`
-* `template.metadata` - contains pods labels, must match the selector (app: nginx)
-* `template.spec` - pods specification (containers,name,image,port)
+    * `apiVersion`: `apps/v1`
+    * `kind`: `deployment`
+    * `metadata` - contains (name, namespace, labels)
+    * `spec` - deployments specifications
+    * `repicas` - how many replicas to create 
+    * `selector` - matches pods with label `app: nginx`
+    * `template.metadata` - contains pods labels, must match the selector (app: nginx)
+    * `template.spec` - pods specification (containers,name,image,port)
 
 - What happens when you delete a Pod managed by a Deployment vs a standalone Pod
-* A standalone pod is gone forever. A managed pod is created again to match desired state.
+   * A standalone pod is gone forever. A managed pod is created again to match desired state.
 
 - How scaling works (both imperative and declarative)
-* `imperative` : You directly tell Kubernetes how many replicas you want using a command.
-* `declarative` : You update the Deployment manifest (YAML) with the desired replicas.
+   * `imperative` : You directly tell Kubernetes how many replicas you want using a command.
+   * `declarative` : You update the Deployment manifest (YAML) with the desired replicas.
 
 - How rolling updates and rollbacks work
 
-* **Rolling updates** (Gradual replacement of Pods with new spec)
-   - When you change something (eg. iamge) k8s doesn't replace all pods at once.
-   - A new replica set is created with updated pod template.
-   - Old pods are deleted one by one.
-   - Ensures `0 downtime` by keeping some pods available while new ones become available.
+   * **Rolling updates** (Gradual replacement of Pods with new spec)
+      - When you change something (eg. iamge) k8s doesn't replace all pods at once.
+      - A new replica set is created with updated pod template.
+      - Old pods are deleted one by one.
+      - Ensures `0 downtime` by keeping some pods available while new ones become available.
 
-* **Rollbacks** (Revert to a previous Deployment revision if the update fails)
-   - If something goes wrong in a rollout you can revert to previous or a specific 
-     version.
-   - K8s keeps a history of replicasets for each deployemnt.
-   - Quick recovery from failed updates without manual redeployment.
+   * **Rollbacks** (Revert to a previous Deployment revision if the update fails)
+      - If something goes wrong in a rollout you can revert to previous or a specific 
+        version.
+      - K8s keeps a history of replicasets for each deployemnt.
+      - Quick recovery from failed updates without manual redeployment.
 
 ---
