@@ -76,6 +76,14 @@ chmod +x hello.sh
    - Checks if the file **exists** using `-f`
    - Prints appropriate message
 
+<img width="760" height="270" alt="image" src="https://github.com/user-attachments/assets/8711920a-dba5-4085-9510-13d178a2fadc" />
+
+<img width="1918" height="678" alt="image" src="https://github.com/user-attachments/assets/a4bb734a-289f-4d19-86e9-f8e6cb979031" />
+
+<img width="1057" height="698" alt="image" src="https://github.com/user-attachments/assets/43cf6d55-4805-4d25-ac39-50e7b0e4cf48" />
+
+<img width="756" height="222" alt="image" src="https://github.com/user-attachments/assets/2f46f766-7776-4c35-b973-3cb021641640" />
+
 ---
 
 ### Task 5: Combine It All
