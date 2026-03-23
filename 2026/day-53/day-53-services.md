@@ -278,25 +278,25 @@ Only the built-in `kubernetes` service in the default namespace should remain.
      - Client → Service → Pods 
 
 ### Your three Service manifests with an explanation of each type
-   * ClusterIP
+   * **ClusterIP**
 
    ![snapshot](images/clusterip.png)
 
-     - Default service type.
-     - Exposes pods inside cluster online.
-     - Provides a stable internal IP + DNS name.
-     - Used for internal communication between micro-services.
+   - Default service type.
+   - Exposes pods inside cluster online.
+   - Provides a stable internal IP + DNS name.
+   - Used for internal communication between micro-services.
 
-   * NodePrt IP
+   * **NodePrt IP**
 
    ![snapshot](images/nodeport.png)
 
-     - Exposes pods externally. Opens a port on evry node.
-     - Provides access through <NodeIP>:<NodePort>  
-     - Internally, traffic floes through cluster IP service.
-     - Used for tesing/development.
+   - Exposes pods externally. Opens a port on evry node.
+   - Provides access through <NodeIP>:<NodePort>  
+   - Internally, traffic floes through cluster IP service.
+   - Used for tesing/development.
 
-   * LoadBalancer
+   * **LoadBalancer**
 
    ![snapshot](images/loadbalancer.png)
 
