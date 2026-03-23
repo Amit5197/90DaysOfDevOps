@@ -300,11 +300,11 @@ Only the built-in `kubernetes` service in the default namespace should remain.
 
    ![snapshot](images/loadbalancer.png)
 
-     - Creates an external load balancer (in cloud environments).
-     - Exposes pods externally with single IP.
-     - Internally, k8s creates `cluster IP` & `NodePort IP` then the cloud loadbalancer routes   
-       trrafic into them.
-     - Used for production-grade external access.
+   - Creates an external load balancer (in cloud environments).
+   - Exposes pods externally with single IP.
+   - Internally, k8s creates `cluster IP` & `NodePort IP` then the cloud loadbalancer routes   
+     trrafic into them.
+   - Used for production-grade external access.
 
 ### The difference between ClusterIP, NodePort, and LoadBalancer
 
@@ -336,8 +336,8 @@ Only the built-in `kubernetes` service in the default namespace should remain.
      - One of the Pods processes the request and returns a response (e.g., Nginx welcome page)
 
 ### What Endpoints are and how to inspect them
-    - Endpoints connects a service to the actual running pods.
-    - The endpoints maintains the dynamic list of IP addresses for the pods that match the service's
+   - Endpoints connects a service to the actual running pods.
+   - The endpoints maintains the dynamic list of IP addresses for the pods that match the service's
       selector.
    - Inspect them using:
       - `kubectl get endpoints`
