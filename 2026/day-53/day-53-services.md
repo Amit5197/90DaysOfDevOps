@@ -259,87 +259,89 @@ Only the built-in `kubernetes` service in the default namespace should remain.
 
 **Verify:** Is everything cleaned up?
 
+    ![snapshot](images/7.png)
+
 ---
 
 ### What problem Services solve and how they relate to Pods and Deployments
    * Every Pod gets its own IP address. But there are two problems:
-    1. Pod IPs are **not stable** — when a Pod restarts or gets replaced, it gets a new IP
-    2. A Deployment runs **multiple Pods** — which IP do you connect to?
+     1. Pod IPs are **not stable** — when a Pod restarts or gets replaced, it gets a new IP
+     2. A Deployment runs **multiple Pods** — which IP do you connect to?
 
    * A Service solves both problems. It provides:
-    - A **stable IP and DNS name** that never changes
-    - **Load balancing** across all Pods that match its selector
+     - A **stable IP and DNS name** that never changes
+     - **Load balancing** across all Pods that match its selector
    * Relationship:
-    - Deployment: Manages Pods (creates 3 replicas)
-    - Pods: Run your application (nginx)
-    - Service: Sits in front of Pods, Uses labels (selector) to find them.Routes traffic to them
-    - Client → Service → Pods 
+     - Deployment: Manages Pods (creates 3 replicas)
+     - Pods: Run your application (nginx)
+     - Service: Sits in front of Pods, Uses labels (selector) to find them.Routes traffic to them
+     - Client → Service → Pods 
 
 ### Your three Service manifests with an explanation of each type
    * ClusterIP
 
     ![snapshot](images/clusterip.png)
 
-    - Default service type.
-    - Exposes pods inside cluster online.
-    - Provides a stable internal IP + DNS name.
-    - Used for internal communication between micro-services.
+     - Default service type.
+     - Exposes pods inside cluster online.
+     - Provides a stable internal IP + DNS name.
+     - Used for internal communication between micro-services.
 
    * NodePrt IP
 
     ![snapshot](images/nodeport.png)
 
-    - Exposes pods externally. Opens a port on evry node.
-    - Provides access through <NodeIP>:<NodePort>  
-    - Internally, traffic floes through cluster IP service.
-    - Used for tesing/development.
+     - Exposes pods externally. Opens a port on evry node.
+     - Provides access through <NodeIP>:<NodePort>  
+     - Internally, traffic floes through cluster IP service.
+     - Used for tesing/development.
 
    * LoadBalancer
 
     ![snapshot](images/loadbalancer.png)
 
-    - Creates an external load balancer (in cloud environments).
-    - Exposes pods externally with single IP.
-    - Internally, k8s creates `cluster IP` & `NodePort IP` then the cloud loadbalancer routes   
-      trrafic into them.
-    - Used for production-grade external access.
+     - Creates an external load balancer (in cloud environments).
+     - Exposes pods externally with single IP.
+     - Internally, k8s creates `cluster IP` & `NodePort IP` then the cloud loadbalancer routes   
+       trrafic into them.
+     - Used for production-grade external access.
 
 ### The difference between ClusterIP, NodePort, and LoadBalancer
 
 | Type | Accessible From | Use Case | Backed By |
-|------|----------------|----------|
+|------|-----------------|----------|-----------|
 | ClusterIP | Inside the cluster only | Internal communication between services |ClusterIP |
 | NodePort | Outside via `<NodeIP>:<NodePort>` | Development, testing, direct node access | ClusterIP + NodePort |
 | LoadBalancer | Outside via cloud load balancer | Production traffic in cloud environments | ClusterIP + NodePort + Cloud LoadBalancer |
 
 ### How Kubernetes DNS works for service discovery
    * The core component:
-    - **Core DNS**: The default cluster DNS server. It runs as a Deployment (in kube-system ns)
-      and watches the k8s API for new services and endpoints.
-    - **Kubelet**: On evry node, the kubelet configures each pod's `/etc/resolv.conf` file to 
-      point to the coreDNS service IP.
-    - **Service Obejct**: When you create a service k8s assigns a stable clusterIP and coreDNS
-      immediately creates a DNS record for it.
+     - **Core DNS**: The default cluster DNS server. It runs as a Deployment (in kube-system ns)
+       and watches the k8s API for new services and endpoints.
+     - **Kubelet**: On evry node, the kubelet configures each pod's `/etc/resolv.conf` file to 
+       point to the coreDNS service IP.
+     - **Service Obejct**: When you create a service k8s assigns a stable clusterIP and coreDNS
+       immediately creates a DNS record for it.
    * The DNS naming convection
-    - k8s uses a strict predictable hierarchy for DNS names. The full qualified DNS name :
-        `service-name.namespace.svc.cluster.local`
+     - k8s uses a strict predictable hierarchy for DNS names. The full qualified DNS name :
+         `service-name.namespace.svc.cluster.local`
    * How a Query is Resolved
-    - A Pod makes a request using the Service DNS name:wget http://web-app-clusterip.
-    - The request goes to CoreDNS for resolution.
-    - CoreDNS resolves the Service name → ClusterIP. (Example: web-app-clusterip → ClusterIP)
-    - Traffic is routed to the Service via ClusterIP.
-    - The Service forwards the request to its Endpoints (Pods).
-    - The Service selects Pods using labels (app: web-app)
-    - Traffic is load-balanced across all healthy Pods
-    - One of the Pods processes the request and returns a response (e.g., Nginx welcome page)
+     - A Pod makes a request using the Service DNS name:wget http://web-app-clusterip.
+     - The request goes to CoreDNS for resolution.
+     - CoreDNS resolves the Service name → ClusterIP. (Example: web-app-clusterip → ClusterIP)
+     - Traffic is routed to the Service via ClusterIP.
+     - The Service forwards the request to its Endpoints (Pods).
+     - The Service selects Pods using labels (app: web-app)
+     - Traffic is load-balanced across all healthy Pods
+     - One of the Pods processes the request and returns a response (e.g., Nginx welcome page)
 
 ### What Endpoints are and how to inspect them
-   - Endpoints connects a service to the actual running pods.
-   - The endpoints maintains the dynamic list of IP addresses for the pods that match the service's
-     selector.
-   - Inspect them using :
-     - `kubectl get endpoints`
-     - `kubectl get endpoints <service-name> -o yaml`
-     - `kubectl describe endpoints <service-name>`
+    - Endpoints connects a service to the actual running pods.
+    - The endpoints maintains the dynamic list of IP addresses for the pods that match the service's
+      selector.
+   - Inspect them using:
+      - `kubectl get endpoints`
+      - `kubectl get endpoints <service-name> -o yaml`
+      - `kubectl describe endpoints <service-name>`
 
 ---
