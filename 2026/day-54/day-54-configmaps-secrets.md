@@ -62,7 +62,7 @@ Use environment variables for simple key-value settings. Use volume mounts for f
 
 **Verify:** Are the mounted file values plaintext or base64? **Plain Text**
 
----ssh -i "batch-10.pem" ubuntu@ec2-3-88-67-61.compute-1.amazonaws.com
+---
 
 ## Task 6: Update a ConfigMap and Observe Propagation
 1. Create a ConfigMap `live-config` with a key `message=hello`
@@ -96,6 +96,7 @@ Delete all pods, ConfigMaps, and Secrets you created.
    * `ConfigMaps` are used for non-sensitive config and `Secrets` for sensitive data.
 
 - The difference between environment variables and volume mounts
+
 | Enviroment Variables | Volume Mounts |
 |----------------------|---------------|
 | Injected into the container at Pod startup. Values come from ConfigMaps, Secrets, or literals. | Mount ConfigMaps or Secrets as files inside the container’s filesystem. |
