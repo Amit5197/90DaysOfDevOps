@@ -26,6 +26,61 @@ Create `log_rotate.sh` that:
 4. Prints how many files were compressed and deleted
 5. Exits with an error if the directory doesn't exist
 
+#Output
+1. we need to ensure the directory exists and that the files have "old" timestamps. If we just touch them now, they will be 0 days old, and the script won't find anything to compress or delete!
+
+# Create the directory
+sudo mkdir -p /var/log/myapp
+
+# Create the files
+sudo touch /var/log/myapp/text1.log /var/log/myapp/text2.log /var/log/myapp/text3.log /var/log/myapp/text4.log /var/log/myapp/text5.log
+
+2. Backdate the Files (Crucial Step)
+Since your script looks for files older than 7 days, we need to "trick" the system into thinking these files were created a long time ago using the touch -d command.
+
+# Set these to 10 days ago so the script catches them
+sudo touch -d "10 days ago" /var/log/myapp/text1.log /var/log/myapp/text2.log /var/log/myapp/text3.log /var/log/myapp/text4.log /var/log/myapp/text5.log
+
+3. Verify the Setup
+Before running your script, you can check the timestamps of your new files to make sure they look "old" to the system:
+
+```
+ls -l /var/log/myapp
+```
+4. Run your Script
+Now that the files exist and are "old" enough, run your script. Note that since /var/log is a system directory, you will likely need to use sudo to give the script permission to modify files there:
+
+```
+sudo ./log_rotate.sh /var/log/myapp
+```
+What should happen:
+The script will see the 5 .log files.
+It will compress them into .log.gz files.
+It will print: Files compressed (.log > 7 days): 5.
+
+* To see the script work perfectly from start to finish, I recommend clearing the folder and creating only the .log files first. Run these commands:
+* # 1. Clear the folder so it's fresh
+sudo rm /var/log/myapp/*
+
+# 2. Create only the .log files
+sudo touch /var/log/myapp/text{1..5}.log
+
+# 3. Backdate them so the script sees them as "Old"
+sudo touch -d "10 days ago" /var/log/myapp/text{1..5}.log
+
+Now, Run Your Script
+Once the folder only contains the 5 .log files, execute your script:
+
+```sudo ./log_rotate.sh /var/log/myapp
+```
+What you should see after running it:
+
+The console should print: Files compressed (.log > 7 days): 5.
+
+If you run ls /var/log/myapp, the .log files will be gone, and you will only see text1.log.gz through text5.log.gz.
+
+<img width="1902" height="478" alt="image" src="https://github.com/user-attachments/assets/e2819130-d4fb-46c5-9cd5-290929dc2885" />
+
 ---
 
 ### Task 2: Server Backup Script
@@ -37,7 +92,7 @@ Create `backup.sh` that:
 5. Deletes backups older than 14 days from the destination
 6. Handles errors — exit if source doesn't exist
 
-<img width="727" height="296" alt="image" src="https://github.com/user-attachments/assets/dfeab15a-bda2-4785-893b-fca9f719795e" />
+
 
 ---
 
