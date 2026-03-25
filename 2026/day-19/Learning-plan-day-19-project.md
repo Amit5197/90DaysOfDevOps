@@ -86,7 +86,7 @@ If you run ls /var/log/myapp, the .log files will be gone, and you will only see
 ### Task 2: Server Backup Script
 Create `backup.sh` that:
 1. Takes a source directory and backup destination as arguments
-2. Creates a timestamped `.tar.gz` archive (e.g., `backup-2026-02-08.tar.gz`)
+2. Creates a timestamped `.tar.gz` archive (e.g., `backup-2026-03-25.tar.gz`)
 3. Verifies the archive was created successfully
 4. Prints archive name and size
 5. Deletes backups older than 14 days from the destination
@@ -140,14 +140,15 @@ Create `maintenance.sh` that:
 ### output
 # Create the file
 sudo touch /var/log/maintenance.log
-
 # Change ownership to your user so the script can write to it
 sudo chown $USER:$USER /var/log/maintenance.log
-
 **Create the maintenance.sh Script**
-``` chmod +x maintenance.sh ``` #For the system to "understand how to run" the file, you must set the execute permission:
-``` ./maintenance.sh ``` #Run the script manually to test if it writes to your new log file:
-``` cat /var/log/maintenance.log ``` #Now, check the contents of the log file in /var/log:
+# For the system to "understand how to run" the file, you must set the execute permission:
+``` chmod +x maintenance.sh ```
+# Run the script manually to test if it writes to your new log file:
+``` ./maintenance.sh ```
+# Now, check the contents of the log file in /var/log:
+``` cat /var/log/maintenance.log ```
 
 <img width="882" height="612" alt="image" src="https://github.com/user-attachments/assets/4444af43-9b13-4386-a263-a1417d13dfd3" />
 
