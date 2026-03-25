@@ -92,7 +92,15 @@ Create `backup.sh` that:
 5. Deletes backups older than 14 days from the destination
 6. Handles errors — exit if source doesn't exist
 
+### Output:
+* This script is a classic "Set and Forget" backup utility. It uses tar for archiving and includes a verification step to ensure your data is actually safe before it starts cleaning up old files.
+* The Backup Script (backup.sh)
 
+**Create the file: nano backup.sh and paste the code.
+Permissions: chmod +x backup.sh
+Run it: ```` ./backup.sh /var/log/myapp /home/ubuntu/backups ```**
+
+<img width="1026" height="487" alt="image" src="https://github.com/user-attachments/assets/cddd35ae-71c9-4b79-99e7-d674ae38cc01" />
 
 ---
 
