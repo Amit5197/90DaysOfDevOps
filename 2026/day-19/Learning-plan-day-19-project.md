@@ -126,6 +126,7 @@ Run it: ```` ./backup.sh /var/log/myapp /home/ubuntu/backups ```**
 1. Reading your current schedule- To see what is already running on your user account, run-
 ``` crontab -l ``` output- ``` no crontab for ubuntu ```
 
+<img width="872" height="523" alt="image" src="https://github.com/user-attachments/assets/516c64a6-11e3-4c56-8f4f-34644871e702" />
 
 ---
 
