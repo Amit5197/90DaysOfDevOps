@@ -120,6 +120,12 @@ Run it: ```` ./backup.sh /var/log/myapp /home/ubuntu/backups ```**
    - Run `log_rotate.sh` every day at 2 AM
    - Run `backup.sh` every Sunday at 3 AM
    - Run a health check script every 5 minutes
+  
+### Output
+
+1. Reading your current schedule- To see what is already running on your user account, run-
+``` crontab -l ``` output- ``` no crontab for ubuntu ```
+
 
 ---
 
