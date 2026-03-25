@@ -1,5 +1,6 @@
-# while [ condition ]; do ... done
 #!/bin/bash
+
+# while [ condition ]; do ... done
 
 read -p "Enter the number you want: " num
 
