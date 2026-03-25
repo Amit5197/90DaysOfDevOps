@@ -137,7 +137,38 @@ Create `maintenance.sh` that:
 3. Logs all output to `/var/log/maintenance.log` with timestamps
 4. Write the cron entry to run it daily at 1 AM
 
+### output
+# Create the file
+sudo touch /var/log/maintenance.log
+
+# Change ownership to your user so the script can write to it
+sudo chown $USER:$USER /var/log/maintenance.log
+
+**Create the maintenance.sh Script**
+``` chmod +x maintenance.sh ``` #For the system to "understand how to run" the file, you must set the execute permission:
+``` ./maintenance.sh ``` #Run the script manually to test if it writes to your new log file:
+``` cat /var/log/maintenance.log ``` #Now, check the contents of the log file in /var/log:
+
+<img width="882" height="612" alt="image" src="https://github.com/user-attachments/assets/4444af43-9b13-4386-a263-a1417d13dfd3" />
+
 ---
+
+### HealthCheck
+
+# Create the file
+``` sudo touch /var/log/maintenance.log ```
+# Change ownership to your user so the script can write to it
+``` sudo chown $USER:$USER /var/log/maintenance.log ```
+# Create a scriptfile 
+``` vim maintenance.sh ```
+# Make it Executable
+``` chmod +x vim maintenance.sh ```
+# Run and Verify
+``` ./maintenance.sh ```
+# Now, check the contents of the log file in /var/log:
+``` cat /var/log/maintenance.log ```
+
+<img width="826" height="822" alt="image" src="https://github.com/user-attachments/assets/7499ac23-ae4d-43a5-8922-7032f3805c22" />
 
 ## Hints
 - Compress old files: `find /path -name "*.log" -mtime +7 -exec gzip {} \;`
@@ -149,18 +180,19 @@ Create `maintenance.sh` that:
 ---
 
 ## What I learned
-
-* Validation: Used if [ ! -d "$DIR" ] to prevent scripts from running on missing paths.
-
-* Arguments: Mastered $1,$2,$# to create dynamic,reusable scripts.
-
-* Advanced File Handling: find command: Combined -mtime, -exec, and -delete for automated file cleanup.
-
-* Compression: Used tar and gzip to compress large files and keep the server from running out of disk space.
-
-* Understood the cron syntax (* * * * *) to schedule tasks during off-peak hours (e.g., 1 AM `0 1 * * *` )  .
-
-* Combined log rotation and backups into one maintenance.sh script to keep the crontab organized and easy to manage.
++  Validation: Used if [ ! -d "$DIR" ] to prevent scripts from running on missing paths.
++ Arguments: Mastered $1,$2,$# to create dynamic,reusable scripts.
++ Advanced File Handling: find command: Combined -mtime, -exec, and -delete for automated file cleanup.
++ Compression: Used tar and gzip to compress large files and keep the server from running out of disk space.
++ Understood the cron syntax (* * * * *) to schedule tasks during off-peak hours (e.g., 1 AM `0 1 * * *` )  .
++ Combined log rotation and backups into one maintenance.sh script to keep the crontab organized and easy to manage.
++ Learned how to create a log rotation script to compress .log files and delete log or .gz files older than 30 days.
++ Learned how to write a backup script to back up folders and automatically delete backup files older than 14 days.
++ Understood how to create .tar.gz archive files for efficient backup storage.
++ Handled and troubleshot errors such as “permission denied” and “file not found.”
++ Learned how cron entries work and how to schedule scripts (log rotation and backup) automatically.
++ Created a main maintenance.sh script to call both the log rotation and backup scripts together.
++ Learned how to redirect output after calling functions and store the logs in a separate log file for proper monitoring.
 
 * Tee Command: Implemented tee to view real-time output while saving to a log file.
 
