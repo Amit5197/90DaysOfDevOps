@@ -49,6 +49,7 @@ Check the PVCs: `kubectl get pvc` — you should see `web-data-web-0`, `web-data
 
 **Verify:** What are the exact pod names and PVC names?
 >Pod Names: `statefulset-0` `statefulset-1` `statefulset-2`
+
 >PVC Names: `volume-statefulset-0` `volume-statefulset-1` `volume-statefulset-2`
 
 ---
@@ -92,7 +93,7 @@ The new pod reconnected to the same PVC.
    ![snapshot](images/6-b.png)
 
 **Verify:** After scaling down, how many PVCs exist?
-   * all 5 PVC exists.
+   * all 5 PVCs exists.
 
 ---
 
