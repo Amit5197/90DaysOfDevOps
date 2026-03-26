@@ -64,22 +64,31 @@
     # This is a single-line comment
     echo "Hello"  # This prints Hello(Inline comment)
     ```
+- **This is a multi-line comment. It can span several lines.**
+- **Example**:
+``` <<'COMMENT'
+Hi This is Amit as a devops engineer.
+Learning a Josh-10 batch with Trainwaithshubham.
+COMMENT ```
+
+echo "This is after the comment block."
+
 
 ## 4.Variables:
 - **Declaring**: Store a value in a name (no spaces around =)
 - **Example**: 
     ```bash
-        NAME="Sanket"
+        NAME="Amit"
     ```
 - **Using**: Add `$` before the variable name to get its value.
 - **Example**:
     ```bash
-    echo $NAME # Prints Sanket
+    echo $NAME # Prints Amit
     ```
 - **Quoting**:
  - **Double quotes " "**: Variable is replaced with its value.
     ```bash
-    echo "Hello $NAME"   # Prints Hello Sanket
+    echo "Hello $NAME"   # Prints Hello Amit
     ```
  - **Single quotes ' '** : Variable is not replaced.
     ```bash
@@ -118,7 +127,7 @@
     echo "Exit status of last command: $?"  # 0 means command succeeded
 
     ./script.sh                             # $0 = script.sh, no arguments
-    ./script.sh Sanket                      # $1 = Sanket, $# = 1, $@ = Sanket
+    ./script.sh Amit                      # $1 = Amit, $# = 1, $@ = Amit
     ./script.sh a b c                       # $1 = a, $# = 3, $@ = a b c
 ```
 
