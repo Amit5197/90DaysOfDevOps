@@ -7,6 +7,7 @@
 2. Set up your Git identity — name and email
 3. Verify your configuration
 
+<img width="872" height="166" alt="image" src="https://github.com/user-attachments/assets/92fff0e3-c822-4322-8488-74c512f77ac4" />
 
 ---
 
@@ -15,6 +16,8 @@
 2. Initialize it as a Git repository
 3. Check the status — read and understand what Git is telling you
 4. Explore the hidden `.git/` directory — look at what's inside
+
+<img width="1027" height="596" alt="image" src="https://github.com/user-attachments/assets/15fdc472-bc74-4e49-8bc6-552131ffd91e" />
 
 ---
 
@@ -28,6 +31,59 @@
    - What it does (1 line)
    - An example of how to use it
 
+## Setup & Config
+
+  ### git init
+  - Initializes a new Git repository.
+  - **Example**: 
+      ```
+      git init 
+      ```
+  ### git config
+  - Configures Git username or email.
+  - **Example**:
+    ```
+        git config --global user.name "Your Name"
+        git config --global user.email "Your Email"
+     ```
+  - View Config Values
+    - **Example**:
+      ```
+        git config --global --list
+      ```
+
+      ## Basic Workflow
+
+  ### git add
+  - Stages files for commit.
+  - **Example**:
+      ```
+      git add git-commands.md
+      ```
+
+  ### git commit
+  - Save staged changes with a message explaining what you changed.
+  - **Example**:
+      ```
+      git commit -m "Add git commands reference"
+      ```
+
+  ## Viewing Changes
+
+  ### git status
+  - Lists which files are modified and not yet stage
+  - **Example**:
+      ```
+      git status
+      ```
+
+  ### git log
+  - Shows the history of commits in your repository who changed what,when,and why.
+  - Its also shows Commit hash,Author name & email,Date,Commit message
+  - **Example**:
+      ```
+      git log
+      ```
 ---
 
 ### Task 4: Stage and Commit
@@ -36,6 +92,19 @@
 3. Commit with a meaningful message
 4. View your commit history
 
+```
+  git add git-command.md
+  git status
+  
+  On branch master
+  No commits yet
+      Changes to be committed:
+        (use "git rm --cached <file>..." to unstage)
+        new file: git-command.md
+        
+  git commmit -m "Initial git command reference"
+  
+```
 ---
 
 ### Task 5: Make More Changes and Build History
@@ -44,6 +113,8 @@
 3. Stage and commit again with a different, descriptive message
 4. Repeat this process at least **3 times** so you have multiple commits in your history
 5. View the full history in a compact format
+
+<img width="995" height="410" alt="image" src="https://github.com/user-attachments/assets/9688a852-0561-482c-b973-f6054bc107d7" />
 
 ---
 
@@ -55,34 +126,27 @@ Answer these questions in your own words (add them to a `day-22-notes.md` file):
 4. What is the `.git/` folder and what happens if you delete it?
 5. What is the difference between a **working directory**, **staging area**, and **repository**?
 
+## Answer
+1. What is the difference between `git add` and `git commit`?
+- `git add` tells Git which changes you want to include in the next commit. It moves changes from the Working Directory to the Staging Area.
+- `git commit` saves staged changes with a message explaining what you changed.
+
+2. What does the **staging area** do? Why doesn't Git just commit directly?
+- The staging area is like a waiting room for changes. You choose what to include in your next commit.
+- Git doesn't commit directly so you can decide exactly which changes to save and organize your commits better.
+
+3. What information does `git log` show you?
+- `git log` shows a history of commits in your repository.
+- It includes the commit ID, author, date, and commit message for each change.
+
+4. What is the `.git/` folder and what happens if you delete it?
+- The `.git/` folder stores all Git information for your project: commits, branches, tags, and configuration.
+- If you delete it, Git will no longer track your project, and you will lose all version history
+
+5. What is the difference between a **working directory**, **staging area**, and **repository**?
+- **Working Directory:** Where you make and see changes to your files.
+- **Staging Area:** Where you put changes you want to commit.
+- **Repository:** Where Git stores all committed changes permanently.
+
 ---
 
-## Ongoing Task
-
-**Keep updating `git-commands.md` every day** as you learn new Git commands in the upcoming days. This will become your personal Git reference. Maintain a clean commit history — one commit per update with a clear message.
-
----
-
-## Hints
-- All you need today are about 8-10 Git commands — Google them, try them, break things
-- Read what `git status` tells you — it's your best friend
-- Use `man git-<command>` or `git <command> --help` to explore
-
----
-
-## Submission
-1. Share a screenshot of your `git log --oneline` output showing multiple commits
-2. Add your `day-22-notes.md` to `2026/day-22/`
-3. Commit and push to your fork
-4. Add your submission for Community Builder of the week on discord
-
----
-
-## Learn in Public
-
-Share your first Git repo and commit history on LinkedIn.
-
-`#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
-
-Happy Learning!
-**TrainWithShubham**
