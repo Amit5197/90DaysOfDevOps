@@ -21,8 +21,13 @@ Local Repository: This is the permanent database where Git saves your "Commits" 
 ## 3. Top 5 Commands You Will Use Daily
 
 Command,What it does
+
 ``` git init ``` #Turns a normal folder into a Git repository.
+
 ``` git status ``` #Shows you which files are modified or ready to be saved.
+
 ``` git add <file> ``` #"Moves your changes into the ""Staging Area."""
+
 ``` "git commit -m ""msg""" ``` Saves your changes permanently with a descriptive note.
+
 ``` git log ``` #Shows you the history of every save you've ever made.
