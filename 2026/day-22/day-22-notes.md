@@ -144,9 +144,19 @@ Answer these questions in your own words (add them to a `day-22-notes.md` file):
 - If you delete it, Git will no longer track your project, and you will lose all version history
 
 5. What is the difference between a **working directory**, **staging area**, and **repository**?
-- **Working Directory:** Where you make and see changes to your files.
-- **Staging Area:** Where you put changes you want to commit.
-- **Repository:** Where Git stores all committed changes permanently.
++ **Working Directory** is your local filesystem — the actual files you see and edit in your project folder. Changes here are untracked until you explicitly tell Git about them.
++ **Staging Area** (also called the "index") is a preparation zone between your working directory and the repository. When you run ``` git add ``` , you're copying a snapshot of changes into the staging area. This lets you craft precise commits — you can stage some changes from a file while leaving others unstaged.
++ **Repository** (the .git folder) is Git's permanent database of committed snapshots. When you run ``` git commit ``` , everything in the staging area gets written here as a new commit object. This history is what gets pushed to GitHub, etc.
+
+## Workflow:
+
+``` Working Directory  →  git add  →  Staging Area  →  git commit  →  Repository
+   (edit files)                  (review/prep)                   (permanent history) ```
+
+
+
+
+
 
 ---
 
