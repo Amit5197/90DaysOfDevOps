@@ -150,8 +150,8 @@ Answer these questions in your own words (add them to a `day-22-notes.md` file):
 
 ## Workflow:
 
-``` Working Directory  →  git add  →  Staging Area  →  git commit  →  Repository
-   (edit files)                  (review/prep)                   (permanent history) ```
+Working Directory  →  git add  →  Staging Area  →  git commit  →  Repository
+   (edit files)                  (review/prep)                   (permanent history)
 
 
 
