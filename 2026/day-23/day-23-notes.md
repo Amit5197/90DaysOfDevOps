@@ -1,11 +1,5 @@
 # Day 23 – Git Branching & Working with GitHub
 
-## Task
-
-Now that you know how to create repos, stage, and commit — it's time to learn the most powerful concept in Git: **branching**. Branches let you work on features, fixes, and experiments in isolation without breaking your main code. You'll also push your work to GitHub for the first time.
-
----
-
 ## Challenge Tasks
 
 ### Task 1: Understanding Branches
