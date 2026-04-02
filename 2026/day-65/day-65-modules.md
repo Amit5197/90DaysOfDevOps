@@ -244,6 +244,18 @@ terraform destroy
 
 ![image](images/final_destroy.png)
 
+
+**Hand-Written VPC vs Registry VPC Module**
+
+| Aspect           | Hand-written VPC | Terraform VPC Module |
+| ---------------- | ---------------- | -------------------- |
+| Total Resources  | 6                | 17                   |
+| Lines of Code    | ~50              | ~20                  |
+| Production Ready | No               | Yes                  |
+| Maintained       | By Developer     | By Community         |
+| Reusable         | Limited          | High                 |
+
+
 **Module best practices:**
 - `Use clear names` easy to understand resources and variables
 - `Keep files organized` use `main.tf`, `variables.tf`, `outputs.tf`
