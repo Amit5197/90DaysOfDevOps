@@ -247,7 +247,7 @@ terraform destroy
 
 **Hand-Written VPC vs Registry VPC Module**
 
-| Aspect           | Hand-written VPC | Terraform VPC Module |
+| Aspect           | Hand-written VPC | Registry VPC Module  |
 | ---------------- | ---------------- | -------------------- |
 | Total Resources  | 6                | 17                   |
 | Lines of Code    | ~50              | ~20                  |
