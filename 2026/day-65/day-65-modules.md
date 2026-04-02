@@ -242,6 +242,8 @@ Notice the `module.vpc.`, `module.web_server.`, `module.web_sg.` prefixes.
 terraform destroy
 ```
 
+![image](images/final_destroy.png)
+
 **Module best practices:**
 - `Use clear names` easy to understand resources and variables
 - `Keep files organized` use `main.tf`, `variables.tf`, `outputs.tf`
