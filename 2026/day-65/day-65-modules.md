@@ -218,37 +218,37 @@ terraform destroy
 ```
 
 Write down five module best practices:
-- Always pin versions for registry modules
-- Keep modules focused -- one concern per module
-- Use variables for everything, hardcode nothing
-- Always define outputs so callers can reference resources
-- Add a README.md to every custom module
+   - Always pin versions for registry modules
+   - Keep modules focused -- one concern per module
+   - Use variables for everything, hardcode nothing
+   - Always define outputs so callers can reference resources
+   - Add a README.md to every custom module
 
 
 - Comparison: hand-written VPC vs registry VPC module (resources created)
 
-* **Hand-written VPC (Day 62) **
-   - VPC 1
-   - Subnet 1
-   - Internet Gateway 1
-   - Route Table 1
-   - Route Table Association 1
-   - Security Group 1
-Total = 6 resources
+   * **Hand-written VPC (Day 62) **
+     - VPC 1
+     - Subnet 1
+     - Internet Gateway 1
+     - Route Table 1
+     - Route Table Association 1
+     - Security Group 1
+   Total = 6 resources
 
-* **VPC Module Terraform Registry**
-   - VPC
-   - aws_vpc.this 1
-   - Default resources (auto-managed by module)
-   - aws_default_network_acl.this 1
-   - aws_default_route_table.default 1
-   - aws_default_security_group.this 1
-   - Internet Gateway
-   - aws_internet_gateway.this 1
-   - Subnets Public 2 , Private 2 Total subnets = 4
-   - Route Tables Public 1 Private 2 ,Total = 3
-   - Routes aws_route.public_internet_gateway 1
-   - Route Table Associations Public 2 Private 2 Total = 4
-Total = 17 resources
+   * **VPC Module Terraform Registry**
+     - VPC
+     - aws_vpc.this 1
+     - Default resources (auto-managed by module)
+     - aws_default_network_acl.this 1
+     - aws_default_route_table.default 1
+     - aws_default_security_group.this 1
+     - Internet Gateway
+     - aws_internet_gateway.this 1
+     - Subnets Public 2 , Private 2 Total subnets = 4
+     - Route Tables Public 1 Private 2 ,Total = 3
+     - Routes aws_route.public_internet_gateway 1
+     - Route Table Associations Public 2 Private 2 Total = 4
+   Total = 17 resources
 
 ---
