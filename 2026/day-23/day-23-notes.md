@@ -108,38 +108,66 @@ In your `devops-git-practice` repo, perform the following:
 
 ### Task 4: Pull from GitHub
 1. Make a change to a file **directly on GitHub** (use the GitHub editor)
-2. Pull that change to your local repo
-3. Answer in your notes: What is the difference between `git fetch` and `git pull`?
 
+<img width="1917" height="862" alt="image" src="https://github.com/user-attachments/assets/edd98bd1-8889-45a2-af70-136afa213d66" />
+
+2. Pull that change to your local repo
+
+<img width="1031" height="388" alt="image" src="https://github.com/user-attachments/assets/39fb5a92-95b1-442e-b83d-19bb6ac58379" />
+
+
+3. Answer in your notes: What is the difference between `git fetch` and `git pull`?
+- `git fetch` : Downloads changes from remote only; does not change your branch,just updates remote info.
+  or `Git fetch` goes to the remote server (GitHub) and downloads all the new data.
+  What it does: Updates your remote-tracking branches (like `origin/main` ).
+- `git pull` : Downloads changes from remote and merges them into your current branch, updating your local branch immediately.
+  What it does: It downloads the new data AND tries to automatically stitch it into your current files.
+  
 ---
 
 ### Task 5: Clone vs Fork
 1. **Clone** any public repository from GitHub to your local machine
+
+<img width="1576" height="445" alt="image" src="https://github.com/user-attachments/assets/903df6d0-55b8-4743-9364-67572c9eb6e6" />
+
 2. **Fork** the same repository on GitHub, then clone your fork
+
+- `clone` : Download the project from GitHub to my computer.
+- `fork` : Make my own copy in of someone else’s project on GitHub.
+
 3. Answer in your notes:
-   - What is the difference between clone and fork?
-   - When would you clone vs fork?
+   1- What is the difference between clone and fork?
+         - `clone` : Download the project from GitHub to my computer.
+         - `fork` : Make my own copy in of someone else’s project on GitHub.
+     
+   2- When would you clone vs fork?
+         - `clone when`:
+             - You are working on your own project.
+             - You already have write access.
+             - You just want the code locally.
+             - Example: Working in your company repo where you’re a team member.
+        - `fork when`
+             - You don’t have write access.
+             - You want to contribute to open source.
+             - You want your own safe copy.
+             - Example: Contributing to aws-containers repository retail-store-sample-app.
+
+
+  3- You don’t have write access.
+         - You want to contribute to open source.
+         - You want your own safe copy.
+         - Example: Contributing to aws-containers repository retail-store-sample-app
    - After forking, how do you keep your fork in sync with the original repo?
-
+    - After forking and cloning my fork, I add the original repository as an script.js remote. Then I fetch changes from script.js, merge the script.js default branch into my current branch,and push the updates to my fork.
+      - Example:
+        ```
+        git remote add upstream git@github.com:Amit5197/Uptime-Kuma.git
+        git checkout main
+        git fetch script.js
+        git merge script.js/main
+        git push origin main
+        ```
 ---
-
-## Hints
-- When you create a branch, it starts from the commit you're currently on
-- `git switch` is the modern alternative to `git checkout` for switching branches
-- To push a new branch: `git push -u origin <branch-name>`
-- A fork is a GitHub concept, not a Git concept
-
----
-
-## Submission
-1. Add your `day-23-notes.md` to `2026/day-23/`
-2. Update `git-commands.md` with all new commands and commit
-3. Push to your fork
-
----
-
-
-`#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
 Happy Learning!
 **TrainWithShubham**
