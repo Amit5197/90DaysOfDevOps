@@ -33,13 +33,46 @@ Why it helps: It keeps your project organized and lets you experiment safely. If
 ### Task 2: Branching Commands — Hands-On
 In your `devops-git-practice` repo, perform the following:
 1. List all branches in your repo
+- `git branch`
+
+<img width="1618" height="490" alt="image" src="https://github.com/user-attachments/assets/7b82c71f-a2f7-48d0-b290-7699999dc8fa" />
+<img width="1230" height="132" alt="image" src="https://github.com/user-attachments/assets/267a224b-0c06-4836-ac29-11c582dc214e" />
+
 2. Create a new branch called `feature-1`
+- `git branch feature-1`
+
+<img width="1385" height="125" alt="image" src="https://github.com/user-attachments/assets/228ecd10-00a9-4382-88c1-284631fd3463" />
+
 3. Switch to `feature-1`
+- `git switch feature-1`
+
+<img width="810" height="72" alt="image" src="https://github.com/user-attachments/assets/1691392c-b99f-4685-8b66-d44e5adc4037" />
+
 4. Create a new branch and switch to it in a single command — call it `feature-2`
+- `git checkout -b feature-2`
+
+<img width="1427" height="82" alt="image" src="https://github.com/user-attachments/assets/cbf89389-84db-486d-82a7-5f9f02ea8a97" />
+
 5. Try using `git switch` to move between branches — how is it different from `git checkout`?
+- `git switch <branch>`   :only switches branches.  
+- `git checkout <branch>` :switches branches and can also restore files.
+
+<img width="840" height="77" alt="image" src="https://github.com/user-attachments/assets/1e8541c9-0623-4d8c-86b0-6c5deeb92202" />
+
 6. Make a commit on `feature-1` that does **not** exist on `main`
+- `git commit -m "Add git branch command section to git-commands.md"`
+
+<img width="1242" height="63" alt="image" src="https://github.com/user-attachments/assets/4f84e5b5-40f4-45fd-af7b-80db6bcb4f58" />
+
 7. Switch back to `main` — verify that the commit from `feature-1` is not there
+
+<img width="908" height="177" alt="image" src="https://github.com/user-attachments/assets/fe0a98f5-f72c-4050-a730-16ce07e6484b" />
+
 8. Delete a branch you no longer need
+- `git branch -d feature-2`
+
+<img width="1397" height="261" alt="image" src="https://github.com/user-attachments/assets/ae6f8776-1a58-43ab-bdd6-989a7ef4d92b" />
+
 9. Add all branching commands to your `git-commands.md`
 
 ---
