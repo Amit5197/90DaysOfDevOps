@@ -87,11 +87,22 @@ In your `devops-git-practice` repo, perform the following:
 
 3. Push your `main` branch to GitHub
 
+<img width="997" height="827" alt="image" src="https://github.com/user-attachments/assets/c863f6bc-12c3-4007-a63a-1e3e25fe84b0" />
+<img width="1007" height="652" alt="image" src="https://github.com/user-attachments/assets/f95ee5d1-1e09-4fe7-9667-a4bdeb7be6bc" />
+
 4. Push `feature-1` branch to GitHub
+<img width="725" height="147" alt="image" src="https://github.com/user-attachments/assets/07035b69-0a94-42c4-9456-9e6a04924156" />
+<img width="872" height="218" alt="image" src="https://github.com/user-attachments/assets/32849ac2-5928-450c-92a4-b1090514e24c" />
 
 5. Verify both branches are visible on GitHub
 
+<img width="823" height="497" alt="image" src="https://github.com/user-attachments/assets/8257031e-c031-4cd6-918f-c86c08921a9e" />
+
 6. Answer in your notes: What is the difference between `origin` and `upstream`?
+- `origin`: origin is the default name for the repo you cloned,points to your own GitHub repository where you push and pull changes.
+`example`: https://github.com/amit5197/devops-git-practice.git
+- `upstream`: upstream refers to the original repository you forked from.You use it to pull updates from the original project into your fork.
+`example`: https://github.com/amit5197/90DaysOfDevOps
 
 ---
 
