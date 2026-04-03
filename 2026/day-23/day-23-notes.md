@@ -136,16 +136,20 @@ In your `devops-git-practice` repo, perform the following:
 - `fork` : Make my own copy in of someone else’s project on GitHub.
 
 3. Answer in your notes:
+
    1- What is the difference between clone and fork?
+   
          - `clone` : Download the project from GitHub to my computer.
          - `fork` : Make my own copy in of someone else’s project on GitHub.
      
    2- When would you clone vs fork?
+   
          - `clone when`:
              - You are working on your own project.
              - You already have write access.
              - You just want the code locally.
              - Example: Working in your company repo where you’re a team member.
+   
         - `fork when`
              - You don’t have write access.
              - You want to contribute to open source.
@@ -156,9 +160,11 @@ In your `devops-git-practice` repo, perform the following:
   3- You don’t have write access.
          - You want to contribute to open source.
          - You want your own safe copy.
-         - Example: Contributing to aws-containers repository retail-store-sample-app
+         - Example: Contributing to aws-containers repository Uptime-kuma
    - After forking, how do you keep your fork in sync with the original repo?
-    - After forking and cloning my fork, I add the original repository as an script.js remote. Then I fetch changes from script.js, merge the script.js default branch into my current branch,and push the updates to my fork.
+
+   - After forking and cloning my fork, I add the original repository as an script.js remote. Then I fetch changes from script.js, merge the script.js default branch into my current branch,and push the updates to my fork.
+
       - Example:
         ```
         git remote add upstream git@github.com:Amit5197/Uptime-Kuma.git
