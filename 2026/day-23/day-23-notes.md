@@ -79,10 +79,18 @@ In your `devops-git-practice` repo, perform the following:
 
 ### Task 3: Push to GitHub
 1. Create a **new repository** on GitHub (do NOT initialize it with a README)
+
+<img width="1227" height="751" alt="image" src="https://github.com/user-attachments/assets/73e609d2-0a26-4b33-9791-d4f1f12d395c" />
+
 2. Connect your local `devops-git-practice` repo to the GitHub remote
+<img width="1301" height="206" alt="image" src="https://github.com/user-attachments/assets/97c0c8a5-a859-4149-b023-36112fb743d4" />
+
 3. Push your `main` branch to GitHub
+
 4. Push `feature-1` branch to GitHub
+
 5. Verify both branches are visible on GitHub
+
 6. Answer in your notes: What is the difference between `origin` and `upstream`?
 
 ---
