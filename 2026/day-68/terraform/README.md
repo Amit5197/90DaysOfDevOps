@@ -36,8 +36,11 @@
 
 5. After deployment, retrieve instances details with:
     `terraform output instance_details`
-
-### Notes
+    
+6. To destroy all resources and avoid AWS charges:
+      `terraform destroy`
+      
+### Note
 
 - **Replace the AMI IDs** in `variables.tf` with ones valid for your AWS account and region.
 - **Create your SSH key pair before applying**: generate an SSH key locally with `ssh-keygen` and place the public key file (`key_name.pub`) in the Terraform folder before running Terraform.  
