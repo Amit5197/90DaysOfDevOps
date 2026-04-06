@@ -77,7 +77,7 @@ Create the `.gitignore`:
 .terraform.lock.hcl
 ```
 
-   ![snapshot](images/1.png)
+   ![snapshot](images/2.png)
 
 **Document:** Why is this file structure considered best practice?
    - This keeps the code clean and neat.
@@ -219,7 +219,7 @@ terraform plan -var-file="prod.tfvars"
 terraform apply -var-file="prod.tfvars"
 ```
 
-   ![snapshot](images/5-d.png)
+   ![snapshot](images/5-c.png)
 
 After all three are deployed, verify:
 ```bash
@@ -229,7 +229,7 @@ terraform workspace select staging && terraform output
 terraform workspace select prod && terraform output
 ```
 
-   ![snapshot](images/5-c.png)
+   ![snapshot](images/5-d.png)
 
 Go to the AWS console and verify:
 - Three separate VPCs with different CIDR ranges
