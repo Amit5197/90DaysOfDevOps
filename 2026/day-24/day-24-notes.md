@@ -42,6 +42,15 @@ Since main had no new commits of its own, Git didn't need to combine any diverge
 ` git merge feature-signup `
 + Merge conflicts happen because the same file is edited in two branches.
 
+<img width="682" height="102" alt="image" src="https://github.com/user-attachments/assets/d003e146-cd4d-4e93-83a9-4df4cce98753" />
+<img width="1171" height="220" alt="image" src="https://github.com/user-attachments/assets/d3119bc5-6159-498d-a80b-f28e950a6499" />
+
++ Resolved conflict
+<img width="686" height="242" alt="image" src="https://github.com/user-attachments/assets/012460b2-2d80-48c4-9486-8bfdf9de9f98" />
+
++ git log
+<img width="680" height="143" alt="image" src="https://github.com/user-attachments/assets/e25e6fa7-bff5-442d-aab1-0ffb151f824e" />
+
 6. Answer in your notes:
    - What is a fast-forward merge?
      A fast-forward merge occurs when the current branch (main) has no additional commits relative to the feature branch (feature-login). In this case, Git simply        moves the pointer of the target branch forward to the latest commit of the feature branch. No new "merge commit" is created because the history remains a          single, straight line.
