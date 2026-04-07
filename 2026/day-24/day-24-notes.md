@@ -67,9 +67,18 @@ Since main had no new commits of its own, Git didn't need to combine any diverge
 
 ### Task 2: Git Rebase — Hands-On
 1. Create a branch `feature-dashboard` from `main`, add 2-3 commits
+
+<img width="911" height="743" alt="image" src="https://github.com/user-attachments/assets/74a5376b-0878-4ea8-b962-2eebb0d3cf7e" />
+
 2. While on `main`, add a new commit (so `main` moves ahead)
+<img width="900" height="211" alt="image" src="https://github.com/user-attachments/assets/506f3880-fe35-46d6-aab7-92be84da572b" />
+
 3. Switch to `feature-dashboard` and rebase it onto `main`
+
+
 4. Observe your `git log --oneline --graph --all` — how does the history look compared to a merge?
+
+
 5. Answer in your notes:
    - What does rebase actually do to your commits?
    - How is the history different from a merge?
