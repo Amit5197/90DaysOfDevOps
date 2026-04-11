@@ -31,3 +31,26 @@ Command,What it does
 ``` "git commit -m ""msg""" ``` Saves your changes permanently with a descriptive note.
 
 ``` git log ``` #Shows you the history of every save you've ever made.
+
+## Git Branch add and feature add
+
+git checkout main
+git stash
+git checkout feature-login
+git checkout main
+git stash pop
+git stash list
+task 5
+git checkout -b feature-hotfix
+echo "Fix 1" >> fix.txt
+git commit -am "Fix 1"
+
+echo "Fix 2" >> fix.txt
+git commit -am "Fix 2"
+
+echo "Fix 3" >> fix.txt
+git commit -am "Fix 3"
+
+git checkout main
+git log --oneline
+git cherry-pick <commit-id>
