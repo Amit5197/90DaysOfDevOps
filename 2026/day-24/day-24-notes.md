@@ -113,14 +113,39 @@ Since main had no new commits of its own, Git didn't need to combine any diverge
 
 ### Task 3: Squash Commit vs Merge Commit
 1. Create a branch `feature-profile`, add 4-5 small commits (typo fix, formatting, etc.)
+
+<img width="515" height="912" alt="image" src="https://github.com/user-attachments/assets/50296301-602a-4408-b0be-dd9b82a51475" />
+
 2. Merge it into `main` using `--squash` — what happens?
++ ```git switch main```
++ ```git merge --squash feature-profile```
+
+<img width="723" height="235" alt="image" src="https://github.com/user-attachments/assets/eda794ea-dc10-4fef-a593-b9f2166860d1" />
+
 3. Check `git log` — how many commits were added to `main`?
+
+<img width="711" height="248" alt="image" src="https://github.com/user-attachments/assets/680a4167-5f0c-4101-a6ab-d14ce54976eb" />
+
 4. Now create another branch `feature-settings`, add a few commits
++ ```git checkout -b feature-setting```
+
 5. Merge it into `main` **without** `--squash` (regular merge) — compare the history
+
+<img width="713" height="257" alt="image" src="https://github.com/user-attachments/assets/e5c413ac-0bfa-4810-9a59-bb90eefde7ce" />
+<img width="725" height="201" alt="image" src="https://github.com/user-attachments/assets/edcd7c74-630e-4fa9-ab4c-11b86cfc6413" />
+
 6. Answer in your notes:
    - What does squash merging do?
+   + A sqaush merge applies the changes of a branch but not its individual commit history
+
    - When would you use squash merge vs regular merge?
+  + use squash merge for a clean, simplified history.
+  + and use regular merge when you need to preserve full commit history.
+   
    - What is the trade-off of squashing?
+  + `trade-off` squashing is cleaner history at the cost if losing detailed commit .
+
+  + or - The `trade-off` of squashing is that while it keeps the main branch history clean and linear,it removes the detailed commit history of the feature branch by combining everything into a single commit.
 
 ---
 
