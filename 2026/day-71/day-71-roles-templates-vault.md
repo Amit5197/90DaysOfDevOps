@@ -344,7 +344,7 @@ echo ".vault_pass" >> .gitignore
 ansible-playbook db-setup.yml --vault-password-file .vault_pass
 ```
 
-   ![snapshot](images/5-d.png)
+   ![snapshot](images/5-e.png)
 
 Or set it in `ansible.cfg`:
 ```ini
