@@ -151,50 +151,64 @@ Since main had no new commits of its own, Git didn't need to combine any diverge
 
 ### Task 4: Git Stash — Hands-On
 1. Start making changes to a file but **do not commit**
+<img width="772" height="571" alt="image" src="https://github.com/user-attachments/assets/9fb212ca-b3dc-4da5-8636-3c9edcc9242d" />
+
 2. Now imagine you need to urgently switch to another branch — try switching. What happens?
++ git allows switching branches with uncommited changes if they dont conflict with the target the branch
++ If there is no conflict,git allows the switch and your changes move with you.
++ If there is a conflict,git blocks the switch to prevent overwriting your changes.
+
 3. Use `git stash` to save your work-in-progress
+
+<img width="752" height="477" alt="image" src="https://github.com/user-attachments/assets/11dd210d-5d0c-4735-b3a8-f29a0e56aee0" />
+
 4. Switch to another branch, do some work, switch back
 5. Apply your stashed changes using `git stash pop`
 6. Try stashing multiple times and list all stashes
 7. Try applying a specific stash from the list
 8. Answer in your notes:
    - What is the difference between `git stash pop` and `git stash apply`?
+
+      `git stash pop`: brings your stashed changes back to your working directory.deletes that entry from your stash list immediately.
+
+      `git stash apply`: brings the stashed changes back to your working directory.keeps the entry in your stash list.
+
    - When would you use stash in a real-world workflow?
+      - If I’m working on a feature and need to urgently switch branches to fix a production bug,I would use git stash to temporarily save my unfinished changes before switching.
 
 ---
 
 ### Task 5: Cherry Picking
 1. Create a branch `feature-hotfix`, make 3 commits with different changes
+<img width="487" height="982" alt="image" src="https://github.com/user-attachments/assets/33d18403-a594-4654-ba5a-7aa425de670d" />
+
 2. Switch to `main`
+
+```git switch main```
+
 3. Cherry-pick **only the second commit** from `feature-hotfix` onto `main`
+<img width="717" height="522" alt="image" src="https://github.com/user-attachments/assets/40de458d-3572-4c86-a6c1-e7ee872cb291" />
+<img width="702" height="615" alt="image" src="https://github.com/user-attachments/assets/6ad24bb4-a77d-432d-9eb3-ec806162debf" />
+
+
 4. Verify with `git log` that only that one commit was applied
+
+<img width="615" height="196" alt="image" src="https://github.com/user-attachments/assets/6c401521-14f4-4ea2-b157-65c324140538" />
+<img width="666" height="196" alt="image" src="https://github.com/user-attachments/assets/2e94e2e7-62fc-4f61-b90a-277decb359d8" />
+
 5. Answer in your notes:
    - What does cherry-pick do?
+   + git cherry-pick is like copy-pasting a specific commit from one branch to another.
+   + or - copy a specific commit from one branch and apply it onto our current branch.
+    
    - When would you use cherry-pick in a real project?
+   + when i need specific commit but do not want the enitre branch to be commit.
+     
    - What can go wrong with cherry-picking?
+   + merge conflicts if same file was modified.
+   + Commit history confusion because it creates new commit ids.
 
 ---
-
-## Hints
-- Visualize history: `git log --oneline --graph --all`
-- To intentionally create a merge conflict: edit the **same line** of the **same file** on two branches
-- Stash with a message: `git stash push -m "description"`
-- Cherry-pick needs a commit hash — find it with `git log --oneline`
-
----
-
-## Submission
-1. Add your `day-24-notes.md` to `2026/day-24/`
-2. Update `git-commands.md` with all new commands and commit
-3. Push to your fork
-
----
-
-## Learn in Public
-
-Share your merge vs rebase comparison on LinkedIn — a diagram or screenshot of `git log --graph` goes a long way!
-
-`#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
 Happy Learning!
 **TrainWithShubham**
