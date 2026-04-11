@@ -67,23 +67,47 @@ Since main had no new commits of its own, Git didn't need to combine any diverge
 
 ### Task 2: Git Rebase — Hands-On
 1. Create a branch `feature-dashboard` from `main`, add 2-3 commits
-
++ Create a branch feature-dashboard from main, add 2-3 commits
+  + ``` git checkout -b feature-dashboard ```
++ While on main, add a new commit (so main moves ahead)
+  
 <img width="911" height="743" alt="image" src="https://github.com/user-attachments/assets/74a5376b-0878-4ea8-b962-2eebb0d3cf7e" />
 
 2. While on `main`, add a new commit (so `main` moves ahead)
 <img width="900" height="211" alt="image" src="https://github.com/user-attachments/assets/506f3880-fe35-46d6-aab7-92be84da572b" />
 
 3. Switch to `feature-dashboard` and rebase it onto `main`
++ Switch to feature-dashboard and rebase it onto main
++ ``` git checkout -b feature-dashboard ```
++ ``` git rebase main ```
 
+<img width="671" height="207" alt="image" src="https://github.com/user-attachments/assets/d25eadd0-065a-4940-ac5a-f4c15fd7626d" />
 
 4. Observe your `git log --oneline --graph --all` — how does the history look compared to a merge?
++ git merge creates a branching history with a merge commit while rebase creates a linear history by rewriting commits without merge commit.
 
+<img width="705" height="263" alt="image" src="https://github.com/user-attachments/assets/9c57b067-de65-4a91-b389-451f10d1809c" />
 
 5. Answer in your notes:
    - What does rebase actually do to your commits?
-   - How is the history different from a merge?
+      - Rebase "rewrites history" by taking your feature-dashboard branch commits and replaying them one by one on top of the latest version of main.
+      or- Rebase rewrites your commits by replaying them on top of another branch , creating new commit ids and changing their base.
+      or - Git Rebase is the process of moving or combining a sequence of commits to a new base commit. It effectively "rewrites" the history of your branch.
+
+    - How is the history different from a merge?
+      - `merge`preserves history exactly as it happened.creates a merge commit.
+      - `rebase`rewrites history. moves your commits on top of feature-dashboard branch,creates a linear,clean history.no merge commit.
+      - or difference between Merge and Rebase lies in how they treat time and the "story" of your project.
+   
    - Why should you **never rebase commits that have been pushed and shared** with others?
+      - because rebase changes commit id's, if others pulled the old commits:their history won’t match yours anymore causes conflicts,duplicated commits.
+
    - When would you use rebase vs merge?
+
+      - `rebase`: keeping history linear
+      or- we can rebase when we are working on private or a local branch
+      - `merge`: working on shared branches.you want full history preserved.
+      or- merge for safe collabration and shared branches
 
 ---
 
