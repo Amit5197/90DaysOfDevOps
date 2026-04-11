@@ -400,6 +400,10 @@ The output should show mostly `ok` with zero or minimal `changed`. This proves y
 
 4. Clean up your EC2 instances when done. If you used Terraform: `terraform destroy`. If manual: terminate from the console.
 
+   ![snapshot](images/destroy.png)
+
+   ![snapshot](images/aws.png)
+
 ---
 
 - How Vault protected Docker Hub credentials
