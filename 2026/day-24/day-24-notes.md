@@ -135,17 +135,17 @@ Since main had no new commits of its own, Git didn't need to combine any diverge
 <img width="725" height="201" alt="image" src="https://github.com/user-attachments/assets/edcd7c74-630e-4fa9-ab4c-11b86cfc6413" />
 
 6. Answer in your notes:
+
    - What does squash merging do?
    + A sqaush merge applies the changes of a branch but not its individual commit history
 
    - When would you use squash merge vs regular merge?
-  + use squash merge for a clean, simplified history.
-  + and use regular merge when you need to preserve full commit history.
+    + use squash merge for a clean, simplified history.
+    + and use regular merge when you need to preserve full commit history.
    
    - What is the trade-off of squashing?
-  + `trade-off` squashing is cleaner history at the cost if losing detailed commit .
-
-  + or - The `trade-off` of squashing is that while it keeps the main branch history clean and linear,it removes the detailed commit history of the feature branch by combining everything into a single commit.
+   + `trade-off` squashing is cleaner history at the cost if losing detailed commit .
+   + or - The `trade-off` of squashing is that while it keeps the main branch history clean and linear,it removes the detailed commit history of the feature branch by combining everything into a single commit.
 
 ---
 
