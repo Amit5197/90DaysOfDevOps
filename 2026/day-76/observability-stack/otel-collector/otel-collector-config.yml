@@ -1,0 +1,31 @@
+receivers:                     #Accepts OTLP data via gRPC (4317) and HTTP (4318)
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:                    #Batches data before exporting (reduces overhead)
+  batch:
+
+exporters:                     #exporting data to prometheus
+  prometheus:
+    endpoint: 0.0.0.0:8889
+  debug:
+    verbosity: detailed
+
+service:
+  pipelines:
+    metrics:                  #Metrics go to a Prometheus-compatible endpoint on port 8889 (Prometheus scrapes this)
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [prometheus]
+    traces:                   #Traces go to debug output (console) 
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug]
+    logs:                     #Logs go to debug output (console) 
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug]
