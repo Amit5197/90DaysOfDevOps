@@ -340,20 +340,4 @@ Worker nodes run in private subnets and require a NAT Gateway for internet acces
 | **Data Transfer**        | Network usage                         | **~$2–10/month**                 |
 | **Total Estimated Cost** |                                       | **~$240–300/month (~$8–10/day)** |
 
-
-
 ---
-
-## Submission
-1. Add `day-81-eks-intro.md` to `2026/day-81/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share on LinkedIn: "Provisioned a production-grade EKS cluster using the AI-BankApp's Terraform configs today -- VPC with 9 subnets across 3 AZs, managed node group, 6 EKS add-ons including EBS CSI driver and metrics server, plus ArgoCD pre-installed via Helm. Deployed the AI-BankApp with MySQL and Ollama AI chatbot on EKS. Infrastructure as Code from day one."
-
-`#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
-
-Happy Learning!
-**TrainWithShubham**
