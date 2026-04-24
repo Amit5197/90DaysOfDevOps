@@ -1,0 +1,71 @@
+# GatewayClass: defines which controller manages Gateway resources
+apiVersion: gateway.networking.k8s.io/v1
+kind: GatewayClass
+metadata:
+  name: envoy-gateway
+spec:
+  controllerName: gateway.envoyproxy.io/gatewayclass-controller
+---
+# Gateway: entry point (creates load balancer + listeners)
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: bankapp-gateway
+  namespace: bankapp
+spec:
+  gatewayClassName: envoy-gateway  # Uses Envoy Gateway controller
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80  # HTTP traffic entry
+    - name: https
+      protocol: HTTPS
+      port: 443  # HTTPS traffic entry
+      # hostname: <your-ip>.nip.io
+      tls:
+        mode: Terminate  # TLS handled at gateway
+        certificateRefs:
+          - name: bankapp-tls
+---
+# HTTPRoute: defines routing rules to backend service
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: bankapp-route
+  namespace: bankapp
+spec:
+  parentRefs:
+    - name: bankapp-gateway
+      sectionName: https
+    - name: bankapp-gateway
+      sectionName: http
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /  # match all paths
+      backendRefs:
+        - name: bankapp-service
+          port: 8080
+---
+# BackendTrafficPolicy: enables sticky sessions using cookies
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: BackendTrafficPolicy
+metadata:
+  name: bankapp-session
+  namespace: bankapp
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: bankapp-route
+  loadBalancer:
+    type: ConsistentHash
+    consistentHash:
+      type: Cookie
+      cookie:
+        name: BANKAPP_AFFINITY
+        ttl: 3600s
+  timeout:
+    http:
+      requestTimeout: 120s
