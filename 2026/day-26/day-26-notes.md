@@ -44,11 +44,30 @@ Every time you switch to the browser to create a PR, check an issue, or manage a
 
 ### Task 3: Issues
 1. Create an issue on one of your repos from the terminal — give it a title, body, and a label
+<img width="820" height="212" alt="image" src="https://github.com/user-attachments/assets/c90be3a7-456a-4201-9c44-d173c23e0b7d" />
+<img width="1710" height="482" alt="image" src="https://github.com/user-attachments/assets/f5e66447-7d87-4081-9a46-6ad502e8041b" />
 2. List all open issues on that repo
-3. View a specific issue by its number
-4. Close an issue from the terminal
-5. Answer in your notes: How could you use `gh issue` in a script or automation?
+<img width="922" height="188" alt="image" src="https://github.com/user-attachments/assets/6c20a233-8148-420a-b338-fb0598f57dfb" />
 
+3. View a specific issue by its number
+<img width="922" height="188" alt="image" src="https://github.com/user-attachments/assets/6c20a233-8148-420a-b338-fb0598f57dfb" />
+
+4. Close an issue from the terminal
+<img width="922" height="98" alt="image" src="https://github.com/user-attachments/assets/46ff578f-50c1-4264-a7e5-01b7d570219e" />
+<img width="1282" height="767" alt="image" src="https://github.com/user-attachments/assets/d9384b52-5e66-4c03-b1c5-a9610b5146e9" />
+
+5. Answer in your notes: How could you use `gh issue` in a script or automation?
+- By combining gh issue commands in a script,you can automatically:
+        - Check open issues
+        - Add comments
+        - Close issues
+
+    - Example:
+        ```
+        gh issue list --repo Amit5197/gh-cli-task-day26
+        gh issue comment 1 --repo Amit5197/gh-cli-task-day26 --body "Checked automatically."
+        gh issue close 1 --repo Amit5197/gh-cli-task-day26
+        ```
 ---
 
 ### Task 4: Pull Requests
