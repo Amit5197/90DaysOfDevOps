@@ -68,17 +68,34 @@ Every time you switch to the browser to create a PR, check an issue, or manage a
         gh issue comment 1 --repo Amit5197/gh-cli-task-day26 --body "Checked automatically."
         gh issue close 1 --repo Amit5197/gh-cli-task-day26
         ```
+
+        # For Uninstall GITHUB from CLI
+
+      ```winget uninstall GitHub.cli```
 ---
 
 ### Task 4: Pull Requests
 1. Create a branch, make a change, push it, and create a **pull request** entirely from the terminal
-2. List all open PRs on a repo
-3. View the details of your PR — check its status, reviewers, and checks
-4. Merge your PR from the terminal
-5. Answer in your notes:
-   - What merge methods does `gh pr merge` support?
-   - How would you review someone else's PR using `gh`?
+<img width="773" height="616" alt="image" src="https://github.com/user-attachments/assets/db25c158-170c-4f30-a82e-86fd92ff56c3" />
+<img width="1292" height="845" alt="image" src="https://github.com/user-attachments/assets/c14f42ea-0456-4bac-8d8e-4670dc64b711" />
 
+2. List all open PRs on a repo
+```gh pr list```
+
+4. View the details of your PR — check its status, reviewers, and checks
+<img width="577" height="132" alt="image" src="https://github.com/user-attachments/assets/cbe5b433-1fd5-4f6c-afc4-d87e35fa8f9e" />
+
+5. Merge your PR from the terminal
+<img width="1277" height="837" alt="image" src="https://github.com/user-attachments/assets/056b2e55-4c30-4130-a30f-88b14b57dc80" />
+
+6. Answer in your notes:
+   - What merge methods does `gh pr merge` support?
+     + Merge Commit
+     + Squash and Merge
+     + Rebase and Merge
+
+   - How would you review someone else's PR using `gh`?
+     + ```gh pr review <PR-number>```
 ---
 
 ### Task 5: GitHub Actions & Workflows (Preview)
