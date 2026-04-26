@@ -55,13 +55,30 @@
 
 ### Task 2: Git Revert — Hands-On
 1. Make 3 commits (commit X, Y, Z)
-2. Revert commit Y (the middle one) — what happens?
-3. Check `git log` — is commit Y still in the history?
-4. Answer in your notes:
-   - How is `git revert` different from `git reset`?
-   - Why is revert considered **safer** than reset for shared branches?
-   - When would you use revert vs reset?
+<img width="765" height="933" alt="image" src="https://github.com/user-attachments/assets/dda17cd8-7ff4-440e-bdf8-eab5ab90df8a" />
 
+2. Revert commit Y (the middle one) — what happens?
+```git revert 1a91427````
+<img width="653" height="52" alt="image" src="https://github.com/user-attachments/assets/98e24476-db9f-4b70-ad35-d7fb7c1a63bd" />
+<img width="802" height="426" alt="image" src="https://github.com/user-attachments/assets/d6e12f06-4cf7-44a3-bcde-c14e9afb2dc6" />
+
++ A new commit is created that undoes the changes from commit Y. The original commit Y remains in the history, but its changes are reversed in the codebase.
+
+3. Check `git log` — is commit Y still in the history?
++ Yes, commit Y is still in the history, but it has been reverted by a new commit that undoes its changes.
+
+4. Answer in your notes:
+   ### How is `git revert` different from `git reset`?
+     + git reset removes commits from branch history and also delete when we use --hard
+     + git revert does not commit that undoes the changes ,keep history safe
+
+   ### Why is revert considered **safer** than reset for shared branches?
+     + git revert is safer because it does not rewrite history it creates a new commit that undoes changes so everyone in the team stay in sync.
+     + git reset changes hisotry and requires force push which can break other developers branches.
+
+   ### When would you use revert vs reset?
+    +  Will use git revert when i am working on a Shared Branches.
+    +  Will use git reset when the commit is not Pushed yet.
 ---
 
 ### Task 3: Reset vs Revert — Summary
@@ -69,10 +86,10 @@ Create a comparison in your notes:
 
 | | `git reset` | `git revert` |
 |---|---|---|
-| What it does | ? | ? |
-| Removes commit from history? | ? | ? |
-| Safe for shared/pushed branches? | ? | ? |
-| When to use | ? | ? |
+| What it does | git reset moves the branch pointer and rewrites history | git revert creates a new commit that cancels the previous one |
+| Removes commit from history? | Yes | No |
+| Safe for shared/pushed branches? | No | Yes |
+| When to use | When working on locally and commit is not pushed yet | When working on shered or pushed branches |
 
 ---
 
