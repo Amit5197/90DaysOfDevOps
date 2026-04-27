@@ -100,35 +100,18 @@ Every time you switch to the browser to create a PR, check an issue, or manage a
 
 ### Task 5: GitHub Actions & Workflows (Preview)
 1. List the workflow runs on any public repo that uses GitHub Actions
+```gh run list --repo aws-containers/retail-store-sample-app```
+
 2. View the status of a specific workflow run
+<img width="1136" height="725" alt="image" src="https://github.com/user-attachments/assets/09077c7c-e1b2-4218-90ae-4cdc5b0f2268" />
+<img width="1305" height="321" alt="image" src="https://github.com/user-attachments/assets/b9e19eec-68c0-4074-9cd6-269dec9542a3" />
+
 3. Answer in your notes: How could `gh run` and `gh workflow` be useful in a CI/CD pipeline?
+```gh run``` : Monitoring and Troubleshooting
++ gh run is focused on the execution of your pipelines. It is the command-line equivalent of the "Actions" tab in your browser.
 
-(Don't worry if you haven't learned GitHub Actions yet — this is a preview for upcoming days)
-
----
-
-### Task 6: Useful `gh` Tricks
-Explore and try these — add the ones you find useful to your `git-commands.md`:
-1. `gh api` — make raw GitHub API calls from the terminal
-2. `gh gist` — create and manage GitHub Gists
-3. `gh release` — create and manage releases
-4. `gh alias` — create shortcuts for commands you use often
-5. `gh search repos` — search GitHub repos from the terminal
-
----
-
-## Hints
-- `gh help` and `gh <command> --help` are your best friends
-- Most `gh` commands work with `--repo owner/repo` to target a specific repo
-- Use `--json` flag with most commands to get machine-readable output (useful for scripting)
-- `gh pr create --fill` auto-fills the PR title and body from your commits
-
----
-
-## Submission
-1. Add your `day-26-notes.md` to `2026/day-26/`
-2. Update `git-commands.md` with `gh` commands — this completes your Git & GitHub reference from Days 22–26
-3. Push to your fork
+```gh workflow``` : Management and Manual Control
++ gh workflow focuses on the definition and triggering of the pipelines. This is where you manage the "logic" of your CI/CD.
 
 ---
 
