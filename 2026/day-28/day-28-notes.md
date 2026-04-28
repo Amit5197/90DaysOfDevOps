@@ -132,11 +132,14 @@ Type `crontab -e` to edit your schedule.
 Add the following line to run at 3 AM every day:
 `0 3 * * * /path/to/your/script.sh`
 Syntax Breakdown:
+
+```
 `0` : Minute (0)
 `3` : Hour (3 AM)
 `*` : Every day of the month
 `*` : Every month
 `*` : Every day of the week
+```
 Save and exit (for vim, press Esc, then type :wq and hit Enter).
 
 9. What is the difference between `git fetch` and `git pull`?
@@ -145,14 +148,6 @@ Save and exit (for vim, press Esc, then type :wq and hit Enter).
 
 10. What is LVM and why would you use it instead of regular partitions?
 + `LVM` (Logical Volume Manager) - lvm resize volumes, combine disks, and take snapshots without downtime
-
----
-
-### Task 4: Organize Your Work
-1. Make sure all your daily submissions (day-1 through day-27) are committed and pushed
-2. Check that your `git-commands.md` is up to date
-3. Check that your shell scripting cheat sheet is complete
-4. Verify your GitHub profile and repos are clean (from Day 27)
 
 ---
 
