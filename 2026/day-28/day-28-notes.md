@@ -1,13 +1,5 @@
 # Day 28 – Revision Day: Everything from Day 1 to Day 27
 
-## Task
-
-You've covered a lot of ground in 27 days — DevOps fundamentals, Linux deep dives, Shell scripting, Python basics, Git & GitHub, and even your developer branding. Today, **stop and revise**. No new concepts. Just solidify what you've learned.
-
-The goal is to identify gaps, revisit topics you struggled with, and make sure you can confidently explain and use everything covered so far.
-
----
-
 ## What You've Covered So Far
 
 | Days | Topic | Key Concepts |
@@ -33,8 +25,6 @@ The goal is to identify gaps, revisit topics you struggled with, and make sure y
 ### Task 1: Self-Assessment Checklist
 Go through the checklist below. For each item, mark yourself honestly:
 - **Can do confidently**
-- **Need to revisit**
-- **Haven't done yet**
 
 #### Linux
 - [ ] Navigate the file system, create/move/delete files and directories
@@ -60,10 +50,10 @@ Go through the checklist below. For each item, mark yourself honestly:
 - [ ] Schedule scripts with crontab
 
 #### Git & GitHub
-- [ ] Initialize a repo, stage, commit, and view history
-- [ ] Create and switch branches
-- [ ] Push to and pull from GitHub
-- [ ] Explain clone vs fork
+- [✅] Initialize a repo, stage, commit, and view history
+- [✅] Create and switch branches
+- [✅] Push to and pull from GitHub
+- [✅] Explain clone vs fork
 - [ ] Merge branches — understand fast-forward vs merge commit
 - [ ] Rebase a branch and explain when to use it vs merge
 - [ ] Use git stash and git stash pop
@@ -73,6 +63,10 @@ Go through the checklist below. For each item, mark yourself honestly:
 - [ ] Explain GitFlow, GitHub Flow, and Trunk-Based Development
 - [ ] Use GitHub CLI to create repos, PRs, and issues
 
+- **Need to revisit**
+
+
+- **Haven't done yet**
 ---
 
 ### Task 2: Revisit Your Weak Spots
