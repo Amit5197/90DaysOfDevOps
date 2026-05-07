@@ -120,11 +120,21 @@ Private registries are commonly used by companies to securely store internal app
 ---
 
 ### Task 3: Run Real Containers
-1. Run an **Nginx** container and access it in your browser
-2. Run an **Ubuntu** container in interactive mode — explore it like a mini Linux machine
-3. List all running containers
-4. List all containers (including stopped ones)
-5. Stop and remove a container
+1. Run an **Nginx** container and access it in your browser: **docker run -d -p 80:80 nginx <host_port>:<container_port>**
+<img width="743" height="363" alt="image" src="https://github.com/user-attachments/assets/12642f4c-4fd3-4a4f-bf64-96d0607fe716" />
+<img width="1450" height="496" alt="image" src="https://github.com/user-attachments/assets/cb8ac5eb-355d-4da8-95ef-6686debbf29b" />
+
+2. Run an **Ubuntu** container in interactive mode — explore it like a mini Linux machine: **docker run -it ubuntu**
+<img width="763" height="588" alt="image" src="https://github.com/user-attachments/assets/a8d6c019-616e-49ec-a8a3-6aaa139c4851" />
+
+3. List all running containers: **docker ps**
+<img width="777" height="107" alt="image" src="https://github.com/user-attachments/assets/dd8edb38-ef2f-47d0-b120-4f4a5014ecf9" />
+
+4. List all containers (including stopped ones): **docker ps -a**
+<img width="1497" height="112" alt="image" src="https://github.com/user-attachments/assets/79165c65-4fee-42a2-ac3e-95958a06c4d0" />
+
+5. Stop and remove a container: **docker stop && docker rm**
+<img width="686" height="157" alt="image" src="https://github.com/user-attachments/assets/e0b07022-3227-491b-89ee-537e9d916bae" />
 
 ---
 
