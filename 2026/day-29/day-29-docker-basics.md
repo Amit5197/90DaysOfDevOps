@@ -100,9 +100,22 @@ Private registries are commonly used by companies to securely store internal app
 
 ### Task 2: Install Docker
 1. Install Docker on your machine (or use a cloud instance)
+<img width="666" height="132" alt="image" src="https://github.com/user-attachments/assets/75a8bb00-049f-4a2c-87c6-bf2d1ed8f196" />
+<img width="786" height="222" alt="image" src="https://github.com/user-attachments/assets/e9a6c2e2-03cb-475b-8ded-5f162e74995f" />
+<img width="507" height="498" alt="image" src="https://github.com/user-attachments/assets/43afaeb3-5f37-4178-9a97-0d5a942a0d54" />
+
 2. Verify the installation
-3. Run the `hello-world` container
+<img width="736" height="507" alt="image" src="https://github.com/user-attachments/assets/803fb803-9865-4f46-9fac-779610724a70" />
+
+3. Run the `hello-world` container: docker run hello-world
+<img width="736" height="507" alt="image" src="https://github.com/user-attachments/assets/7490d97c-6b11-49b9-97c7-16a3a86938ce" />
+
 4. Read the output carefully — it explains what just happened
++ Docker didn’t find the hello-world image on your machine.
++ It downloaded (pulled) it from Docker Hub.
++ Docker created a container from that image.
++ The container ran a small program that printed “Hello from Docker!”
++ The container exited.
 
 ---
 
