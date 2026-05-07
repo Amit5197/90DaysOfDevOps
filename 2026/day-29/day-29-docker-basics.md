@@ -139,38 +139,29 @@ Private registries are commonly used by companies to securely store internal app
 ---
 
 ### Task 4: Explore
-1. Run a container in **detached mode** — what's different?
-2. Give a container a custom **name**
-3. Map a **port** from the container to your host
-4. Check **logs** of a running container
-5. Run a command **inside** a running container
+1. Run a container in **detached mode** — **detached mode : detach mode run containers in background mode**
+<img width="718" height="81" alt="image" src="https://github.com/user-attachments/assets/1d959a43-6ab5-4d97-bd8a-97ece14267b5" />
 
----
+2. Give a container a custom **name: docker run -d --name web httpd**
+<img width="748" height="327" alt="image" src="https://github.com/user-attachments/assets/023421c3-7d63-4537-a95b-cff12dae5a5d" />
 
-## Hints
-- `docker run`, `docker ps`, `docker stop`, `docker rm`
-- Interactive mode: `-it` flag
-- Detached mode: `-d` flag
-- Port mapping: `-p host:container`
-- Naming: `--name`
-- Logs: `docker logs`
-- Exec into container: `docker exec`
+3. Map a **port** from the container to your host: **docker run -d --name web2 -p 80:80 nginx <host_port>:<container_port>**
+<img width="751" height="175" alt="image" src="https://github.com/user-attachments/assets/c67891bc-109f-48ae-b2be-5f7e2000c8d8" />
+
+4. Check **logs** of a running container: **docker logs**
+<img width="775" height="516" alt="image" src="https://github.com/user-attachments/assets/5203851d-2689-4f7e-ac36-92aa644b67ea" />
+
+5. Run a command **inside** a running container: **docker exec -it**
+<img width="756" height="372" alt="image" src="https://github.com/user-attachments/assets/1a2ca0f9-60c3-4fdd-b349-12f61837bef3" />
 
 ---
 
 ## Why This Matters for DevOps
-Docker is the foundation of modern deployment. Every CI/CD pipeline, Kubernetes cluster, and microservice architecture starts with containers. Today you took the first step.
++ Docker is the foundation of modern deployment. 
++ Every CI/CD pipeline, Kubernetes cluster, and microservice architecture starts with containers. 
++ Today you took the first step.
 
 ---
-
-## Submission
-1. Add your `day-29-docker-basics.md` to `2026/day-29/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share your first Docker container screenshot on LinkedIn.
 
 `#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
