@@ -48,13 +48,26 @@ You will:
 
 5. Remove an image you no longer need
 <img width="776" height="352" alt="image" src="https://github.com/user-attachments/assets/81f3892b-7f9a-4f6a-86eb-8ab958c0b69c" />
+<img width="718" height="125" alt="image" src="https://github.com/user-attachments/assets/445aeaef-c037-42ac-80fe-f8f9ab728ffe" />
 
 ---
 
 ### Task 2: Image Layers
 1. Run `docker image history nginx` — what do you see?
+<img width="877" height="690" alt="image" src="https://github.com/user-attachments/assets/3426910c-7060-4dd5-bb9d-b40d6e0d61c7" />
++ A list of instructions used to build the nginx image (e.g., CMD, EXPOSE, ENTRYPOINT, COPY, RUN, ENV, LABEL) Each instruction corresponds to a layer.
+  
 2. Each line is a **layer**. Note how some layers show sizes and some show 0B
++ Layers with a size (MB or kB) were created by instructions that modify the filesystem,such as RUN, COPY, or ADD.
++ Layers showing 0B were created by instructions that only change metadata, such as ENV, CMD, EXPOSE, LABEL, or ENTRYPOINT.These do not change the filesystem.
+
 3. Write in your notes: What are layers and why does Docker use them?
+- Docker layers are read-only filesystem snapshots created by each instruction in a Dockerfile.
+- Docker uses layers because:
+    - They allow build caching (faster builds)
+    - They allow images to share
+ common layers (saves storage).
+    - They make image downloads faster (only new layers are pulled)
 
 ---
 
