@@ -49,8 +49,35 @@ Documents that container uses port 5000.
 
 ### Task 3: CMD vs ENTRYPOINT
 1. Create an image with `CMD ["echo", "hello"]` — run it, then run it with a custom command. What happens?
+<img width="736" height="882" alt="image" src="https://github.com/user-attachments/assets/c9c70996-d2f0-40b7-8cea-3ec4c41cbbb1" />
+- Run without arguments: The container runs the default command echo hello and outputs:
+```
+hello
+
+```
+Run with a custom command: When you run the container with a custom command (e.g., echo "custom command"), the custom command completely overrides the CMD, so the output is:
+
+```
+custom command
+
+```
+
 2. Create an image with `ENTRYPOINT ["echo"]` — run it, then run it with additional arguments. What happens?
+
+<img width="758" height="668" alt="image" src="https://github.com/user-attachments/assets/4cb17689-3865-4348-91ee-269e6d99cf5b" />
+
+- Run without arguments: The container runs echo with no arguments,resulting in a blank line (no output).
+
+- Run with additional arguments: When you pass arguments (e.g., hello-world), they are appended to the ENTRYPOINT, so it runs echo hello-world and outputs:
+
+```
+hello-world
+```
+
 3. Write in your notes: When would you use CMD vs ENTRYPOINT?
+
+- Use CMD when you want to provide a default command that can be changed easily when you run the container.
+- Use ENTRYPOINT when you want to set a fixed command that always runs.
 
 ---
 
