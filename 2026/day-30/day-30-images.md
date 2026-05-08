@@ -55,7 +55,8 @@ You will:
 ### Task 2: Image Layers
 1. Run `docker image history nginx` — what do you see?
 <img width="877" height="690" alt="image" src="https://github.com/user-attachments/assets/3426910c-7060-4dd5-bb9d-b40d6e0d61c7" />
-+ A list of instructions used to build the nginx image (e.g., CMD, EXPOSE, ENTRYPOINT, COPY, RUN, ENV, LABEL) Each instruction corresponds to a layer.
+
+- A list of instructions used to build the nginx image (e.g., CMD, EXPOSE, ENTRYPOINT, COPY, RUN, ENV, LABEL) Each instruction corresponds to a layer.
   
 2. Each line is a **layer**. Note how some layers show sizes and some show 0B
 + Layers with a size (MB or kB) were created by instructions that modify the filesystem,such as RUN, COPY, or ADD.
@@ -82,7 +83,8 @@ Practice the full lifecycle on one container:
 7. **Kill** it
 8. **Remove** it
 
-Check `docker ps -a` after each step — observe the state changes.
+<img width="862" height="400" alt="image" src="https://github.com/user-attachments/assets/8dd2c2e6-dfcf-4ddc-ab53-df065d1eef78" />
+<img width="871" height="947" alt="image" src="https://github.com/user-attachments/assets/f9367495-c75d-4600-b579-f545543b79ee" />
 
 ---
 
