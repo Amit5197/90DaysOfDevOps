@@ -17,9 +17,7 @@ You will:
 2. List all images on your machine — note the sizes
 <img width="720" height="155" alt="image" src="https://github.com/user-attachments/assets/82a7db31-c7ab-4836-8956-93670ea92ca0" />
 
-3. Compare `ubuntu` vs `alpine` — why is one much smaller?
-   
-    | Image         | Disk Usage | Content Size |
+| Image         | Disk Usage | Content Size |
     | ------------- | ---------- | ------------ |
     | alpine:latest | 13.1MB     | 3.95MB       |
     | nginx:latest  | 240MB      | 65.8MB       |
@@ -29,9 +27,27 @@ You will:
 
     **Transfer Size(Content Size) is amount of data used when pulling the inage over a network**
 
-5. Inspect an image — what information can you see?
+3. Compare `ubuntu` vs `alpine` — why is one much smaller?
 
-6. Remove an image you no longer need
+- `Ubuntu` is a full-featured Linux distribution, while `Alpine` is a minimal distribution optimized for containers. 
+- `Ubuntu` is larger because it includes GNU tools and glibc, whereas `Alpine` uses BusyBox and musl, making it much smaller.
+
+4. Inspect an image — what information can you see?
+<img width="510" height="916" alt="image" src="https://github.com/user-attachments/assets/43346e75-4084-4c0b-9d72-35df57c04c00" />
+
+    - Image ID: sha256:6d7c150df58d41c...
+    - Image: nginx:latest
+    - Exposed Port: 80/tcp (HTTP)
+    - Repository: docker.io/library/nginx
+    - Environment variable
+    - NGINX Version: 1.29.8
+    - ENTRYPOINT
+    - CMD
+    - Lables,maintainer
+    - Filesystem | Uses layered filesystem | 7 layers
+
+5. Remove an image you no longer need
+<img width="776" height="352" alt="image" src="https://github.com/user-attachments/assets/81f3892b-7f9a-4f6a-86eb-8ab958c0b69c" />
 
 ---
 
