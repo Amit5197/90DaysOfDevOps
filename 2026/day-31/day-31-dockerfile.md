@@ -51,16 +51,12 @@ Documents that container uses port 5000.
 1. Create an image with `CMD ["echo", "hello"]` — run it, then run it with a custom command. What happens?
 <img width="736" height="882" alt="image" src="https://github.com/user-attachments/assets/c9c70996-d2f0-40b7-8cea-3ec4c41cbbb1" />
 - Run without arguments: The container runs the default command echo hello and outputs:
-```
-hello
 
-```
-Run with a custom command: When you run the container with a custom command (e.g., echo "custom command"), the custom command completely overrides the CMD, so the output is:
+`hello`
 
-```
-custom command
+- Run with a custom command: When you run the container with a custom command (e.g., echo "custom command"), the custom command completely overrides the CMD, so the output is:
 
-```
+`custom command`
 
 2. Create an image with `ENTRYPOINT ["echo"]` — run it, then run it with additional arguments. What happens?
 
@@ -70,9 +66,7 @@ custom command
 
 - Run with additional arguments: When you pass arguments (e.g., hello-world), they are appended to the ENTRYPOINT, so it runs echo hello-world and outputs:
 
-```
-hello-world
-```
+`hello-world`
 
 3. Write in your notes: When would you use CMD vs ENTRYPOINT?
 
