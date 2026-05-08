@@ -25,14 +25,25 @@ Today's goal is to **write Dockerfiles and build custom images**.
 
 ### Task 2: Dockerfile Instructions
 Create a new Dockerfile that uses **all** of these instructions:
-- `FROM` — base image
-- `RUN` — execute commands during build
-- `COPY` — copy files from host to image
-- `WORKDIR` — set working directory
-- `EXPOSE` — document the port
-- `CMD` — default command
+- `FROM` `python:3.12-alpine`
+Uses lightweight Python image based on Alpine Linux.
 
-Build and run it. Understand what each line does.
+- `WORKDIR` `/app`
+Sets /app as working directory inside container.
+
+- `COPY . .`
+Copies everything from your my-first-image folder into /app inside container.
+
+- `RUN` `pip install -r requirements.txt`
+Installs all Python dependencies.
+
+- `EXPOSE 5000`
+Documents that container uses port 5000.
+
+- `CMD ["python","app.py"]`
+
+<img width="738" height="260" alt="image" src="https://github.com/user-attachments/assets/700bb18e-a43e-43ea-8ae4-f3efe2752c33" />
+<img width="868" height="778" alt="image" src="https://github.com/user-attachments/assets/6c6a7b62-4a3d-4dec-b265-a5100c66bdb3" />
 
 ---
 
