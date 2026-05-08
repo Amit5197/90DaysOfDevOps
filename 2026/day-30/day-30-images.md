@@ -103,8 +103,11 @@ Practice the full lifecycle on one container:
 
 6. **Inspect** the container — find its IP address, port mappings, and mounts
 <img width="560" height="925" alt="image" src="https://github.com/user-attachments/assets/bc582756-f116-42cd-bb2e-8da32d80375e" />
+
 <img width="907" height="352" alt="image" src="https://github.com/user-attachments/assets/c38dda7c-5ad4-4eba-af37-3bf9173345fa" />
+
 <img width="451" height="256" alt="image" src="https://github.com/user-attachments/assets/cf8b8fd5-7015-4fab-a969-758c4d83502d" />
+
 <img width="372" height="101" alt="image" src="https://github.com/user-attachments/assets/aa5a19ea-9f55-4c4e-b4cd-988a375d9699" />
 
 ---
@@ -113,27 +116,12 @@ Practice the full lifecycle on one container:
 1. Stop all running containers in one command
 2. Remove all stopped containers in one command
 3. Remove unused images
+<img width="702" height="462" alt="image" src="https://github.com/user-attachments/assets/42c6a9c3-38a7-41dc-8bbd-b2a101d23df1" />
+
 4. Check how much disk space Docker is using
+- 0B of disk space because all images and containers were removed successfully.
 
 ---
-
-## Hints
-- Image history: `docker image history`
-- Create without starting: `docker create`
-- Follow logs: `docker logs -f`
-- Inspect: `docker inspect`
-- Cleanup: `docker system df`, `docker system prune`
-
----
-
-## Submission
-1. Add your `day-30-images.md` to `2026/day-30/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share what surprised you about image layers or container states on LinkedIn.
 
 `#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
