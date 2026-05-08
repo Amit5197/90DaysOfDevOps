@@ -92,9 +92,20 @@ Practice the full lifecycle on one container:
 1. Run an Nginx container in detached mode
 2. View its **logs**
 3. View **real-time logs** (follow mode)
+<img width="797" height="872" alt="image" src="https://github.com/user-attachments/assets/c431e500-083c-423a-9ea3-a72fd558a1db" />
+
+
 4. **Exec** into the container and look around the filesystem
+<img width="720" height="696" alt="image" src="https://github.com/user-attachments/assets/a230a63b-a1f1-43d4-a7b7-a71932f7d9e5" />
+
 5. Run a single command inside the container without entering it
+<img width="697" height="277" alt="image" src="https://github.com/user-attachments/assets/827f96e6-17e9-4da1-8da0-efbe4312bec5" />
+
 6. **Inspect** the container — find its IP address, port mappings, and mounts
+<img width="560" height="925" alt="image" src="https://github.com/user-attachments/assets/bc582756-f116-42cd-bb2e-8da32d80375e" />
+<img width="907" height="352" alt="image" src="https://github.com/user-attachments/assets/c38dda7c-5ad4-4eba-af37-3bf9173345fa" />
+<img width="451" height="256" alt="image" src="https://github.com/user-attachments/assets/cf8b8fd5-7015-4fab-a969-758c4d83502d" />
+<img width="372" height="101" alt="image" src="https://github.com/user-attachments/assets/aa5a19ea-9f55-4c4e-b4cd-988a375d9699" />
 
 ---
 
