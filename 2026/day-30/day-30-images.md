@@ -104,10 +104,13 @@ Practice the full lifecycle on one container:
 6. **Inspect** the container — find its IP address, port mappings, and mounts
 <img width="560" height="925" alt="image" src="https://github.com/user-attachments/assets/bc582756-f116-42cd-bb2e-8da32d80375e" />
 
+**IP address**
 <img width="907" height="352" alt="image" src="https://github.com/user-attachments/assets/c38dda7c-5ad4-4eba-af37-3bf9173345fa" />
 
+**port mappings**
 <img width="451" height="256" alt="image" src="https://github.com/user-attachments/assets/cf8b8fd5-7015-4fab-a969-758c4d83502d" />
 
+**mount**
 <img width="372" height="101" alt="image" src="https://github.com/user-attachments/assets/aa5a19ea-9f55-4c4e-b4cd-988a375d9699" />
 
 ---
