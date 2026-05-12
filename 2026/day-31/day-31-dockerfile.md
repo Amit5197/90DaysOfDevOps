@@ -115,6 +115,22 @@ Documents that container uses port 5000.
 - Use CMD when you want to provide a default command that can be changed easily when you run the container.
 - Use ENTRYPOINT when you want to set a fixed command that always runs.
 
+## CMD vs ENTRYPOINT — Quick Memory Table
+
+| Aspect | CMD | ENTRYPOINT |
+|------|-----|-----------|
+| Purpose | Provides a default command | Defines the main executable |
+| Overridden by `docker run` | ✅ Yes | ❌ No (unless `--entrypoint`) |
+| User input treated as | New command | Arguments to the executable |
+| Flexibility | High | Low (fixed behavior) |
+| Best use case | Dev, utility, base images | Apps, CLIs, production services |
+| Common example | `CMD ["bash"]` | `ENTRYPOINT ["nginx"]` |
+| If both are used | CMD is replaced | ENTRYPOINT always runs |
+| Interview memory line | “CMD is a default” | “ENTRYPOINT is mandatory” |
+
+### One-Line Memory Trick
+**CMD = suggestion | ENTRYPOINT = rule**
+
 ---
 
 ### Task 4: Build a Simple Web App Image
@@ -136,21 +152,67 @@ Documents that container uses port 5000.
 1. Create a `.dockerignore` file in one of your project folders
 2. Add entries for: `node_modules`, `.git`, `*.md`, `.env`
 3. Build the image — verify that ignored files are not included
+<img width="862" height="492" alt="image" src="https://github.com/user-attachments/assets/855998e9-be59-4ae6-8ced-6eb24812ce10" />
+<img width="905" height="123" alt="image" src="https://github.com/user-attachments/assets/d96b0beb-d624-4d12-bd7f-d6da9761b0f6" />
+
+- node_modules, .git, any .md files, and .env are not present.
+- index.html or required files are present.
 
 ---
 
 ### Task 6: Build Optimization
 1. Build an image, then change one line and rebuild — notice how Docker uses **cache**
+
+```bash
+FROM python:3.11-slim
+WORKDIR /app
+COPY . .
+RUN pip install -r requirements.txt
+CMD ["python","app.py"]
+```
+Observation: The image is built successfully and all layers are created.
+
+Change one line and rebuild: change in app.py
+
+```bash
+FROM python:3.11-slim
+WORKDIR /app
+COPY . .
+RUN pip install -r requirements.txt
+CMD ["python","app.py"]
+```
+
+Observation:
+Even though only the application code changed
+Docker re-ran pip install -r requirements.txt
+Any change in source code invalidated the cache for all following layers.
+
 2. Reorder your Dockerfile so that frequently changing lines come **last**
+```bash
+FROM python:3.11-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["python","app.py"]
+
+Observation:
+Docker reused cached layers for: Base image, Working directory, Dependency installation.
+
 3. Write in your notes: Why does layer order matter for build speed?
+- Docker builds images in layers and caches each layer.
+- If a layer changes, Docker Rebuilds that layer and all layers after it.
+- By placing:
+    - Rarely changing files (dependencies) first.
+    - Frequently changing files (source code) last.
+- Docker can reuse cached layers,resulting in faster rebuilds.
 
----
-
-## Hints
-- Build: `docker build -t name:tag .`
-- The `.` at the end is the build context
-- `COPY . .` copies everything from host to container
-- Nginx serves files from `/usr/share/nginx/html/`
+##Docker Layer Order and Build Speed
+Why Layer Order Matters for Build Speed?
+- Docker uses caching to speed up builds. When you build an image, Docker checks each instruction in your Dockerfile:
+- Caching Logic: If a layer hasn't changed, Docker reuses the cached version. However, once a layer is modified, all subsequent layers must be rebuilt from scratch.
+- Optimal Order: You should place infrequently changed instructions (like installing OS packages or dependencies) at the top and frequently changed instructions (like your source code) at the bottom.
+- Result: This ensures that when you edit your code, Docker only has to rebuild the very last layer, keeping builds fast.
 
 ---
 
