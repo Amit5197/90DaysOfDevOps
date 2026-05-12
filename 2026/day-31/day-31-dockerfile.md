@@ -161,9 +161,10 @@ Documents that container uses port 5000.
 ---
 
 ### Task 6: Build Optimization
+
 1. Build an image, then change one line and rebuild — notice how Docker uses **cache**
 
-```bash
+```
 FROM python:3.11-slim
 WORKDIR /app
 COPY . .
@@ -171,10 +172,9 @@ RUN pip install -r requirements.txt
 CMD ["python","app.py"]
 ```
 Observation: The image is built successfully and all layers are created.
-
 Change one line and rebuild: change in app.py
 
-```bash
+```
 FROM python:3.11-slim
 WORKDIR /app
 COPY . .
@@ -188,13 +188,15 @@ Docker re-ran pip install -r requirements.txt
 Any change in source code invalidated the cache for all following layers.
 
 2. Reorder your Dockerfile so that frequently changing lines come **last**
-```bash
+
+```
 FROM python:3.11-slim
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY . .
 CMD ["python","app.py"]
+```
 
 Observation:
 Docker reused cached layers for: Base image, Working directory, Dependency installation.
