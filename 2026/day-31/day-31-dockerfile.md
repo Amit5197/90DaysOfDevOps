@@ -119,11 +119,16 @@ Documents that container uses port 5000.
 
 ### Task 4: Build a Simple Web App Image
 1. Create a small static HTML file (`index.html`) with any content
+<img width="585" height="123" alt="image" src="https://github.com/user-attachments/assets/37ebe298-0d49-44f8-925b-da5c8bf109d1" />
+
 2. Write a Dockerfile that:
    - Uses `nginx:alpine` as base
    - Copies your `index.html` to the Nginx web directory
 3. Build and tag it `my-website:v1`
 4. Run it with port mapping and access it in your browser
+<img width="585" height="123" alt="image" src="https://github.com/user-attachments/assets/88e4ea57-49ee-4b88-a03f-6610c2601175" />
+<img width="851" height="543" alt="image" src="https://github.com/user-attachments/assets/3c355701-67ed-4c96-88da-c65c378ec47c" />
+<img width="862" height="430" alt="image" src="https://github.com/user-attachments/assets/fd0af181-b206-41d7-8e53-6781be8a27bc" />
 
 ---
 
