@@ -21,6 +21,48 @@ Today's goal is to **write Dockerfiles and build custom images**.
 
 **Verify:** The message prints on `docker run`
 
+### 🐳 Docker Errors Faced and debugged
+
+❌ Error 1: [echo: not found
+ ``/bin/sh: 1: [echo: not found ``
+
+Reason :
+
+ - Image  ``(my-ubuntu:v1) `` was built earlier with an  ``incorrect CMD ``
+
+ - Dockerfile was fixed later, but image was  ``not rebuilt ``
+
+ - Docker kept using the old broken image
+
+Fix :
+
+docker build -t my-ubuntu:v2 .
+docker run my-ubuntu:v2
+
+Key Learning :
+
+Docker images are  ``immutable — always rebuild after Dockerfile changes. ``
+
+ ❌ Error 2: ``Wrong Dockerfile Name``
+
+ Docker only auto-detects a file named exactly Dockerfile
+(case-sensitive).
+Fix: If the file is named incorrectly (e.g. DockerFile, dockerfile, Dockerfile-dev), Docker will fail to build unless explicitly     told which file to use.
+
+❌ Error 3:  ``Container name already in use ``
+
+Conflict. The container name "/first-container" is already in use
+Reason :
+ - A container named first-container already exists
+ - Docker does not allow  ``duplicate container names ``
+Fix :
+docker rm first-container
+or
+`docker run --name first-container-v2 my-ubuntu:v1`
+
+Key Learning :
+Container names must be unique.
+
 ---
 
 ### Task 2: Dockerfile Instructions
