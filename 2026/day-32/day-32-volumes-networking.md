@@ -1,18 +1,5 @@
 # Day 32 – Docker Volumes & Networking
 
-## Task
-Today's goal is to **solve two real problems: data persistence and container communication**.
-
-Containers are ephemeral — they lose data when removed. And by default, containers can't easily talk to each other. Today you fix both.
-
----
-
-## Expected Output
-- A markdown file: `day-32-volumes-networking.md`
-- Screenshots of your experiments
-
----
-
 ## Challenge Tasks
 
 ### Task 1: The Problem
@@ -20,11 +7,15 @@ Containers are ephemeral — they lose data when removed. And by default, contai
 <img width="1007" height="532" alt="image" src="https://github.com/user-attachments/assets/c8fc2f03-049a-4420-a68e-f748e01916b4" />
 
 2. Create some data inside it (a table, a few rows — anything)
+<img width="751" height="807" alt="image" src="https://github.com/user-attachments/assets/6f1b794f-04e2-4c1b-a1ef-359522a57b2a" />
 
 3. Stop and remove the container
-4. Run a new one — is your data still there?
+<img width="721" height="197" alt="image" src="https://github.com/user-attachments/assets/c3a37d9f-00b8-4d2c-85cd-69d2aa7afc3f" />
 
-Write what happened and why.
+4. Run a new one — is your data still there?
+<img width="767" height="740" alt="image" src="https://github.com/user-attachments/assets/9237a79b-c411-4214-8b38-9ec14a270ee7" />
+
+## What happened and why----> Data is Still there- No, Data is lost when a container is removed because containers are ephemeral and do not persist data by default.
 
 ---
 
