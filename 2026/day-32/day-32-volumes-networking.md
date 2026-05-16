@@ -21,12 +21,24 @@
 
 ### Task 2: Named Volumes
 1. Create a named volume
-2. Run the same database container, but this time **attach the volume** to it
-3. Add some data, stop and remove the container
-4. Run a brand new container with the **same volume**
-5. Is the data still there?
+<img width="762" height="212" alt="image" src="https://github.com/user-attachments/assets/0d16540b-c9c1-4968-b1de-c623289c3e95" />
 
-**Verify:** `docker volume ls`, `docker volume inspect`
+2. Run the same database container, but this time **attach the volume** to it
+<img width="802" height="73" alt="image" src="https://github.com/user-attachments/assets/30880eb9-d4c0-4fe5-a9c8-e8a849433dd1" />
+
+3. Add some data, stop and remove the container
+<img width="770" height="862" alt="image" src="https://github.com/user-attachments/assets/e2f70566-7e8c-471a-8ac7-87fba47a25be" />
+<img width="720" height="190" alt="image" src="https://github.com/user-attachments/assets/a9ed26a2-15f6-4895-ba63-16c543a5d15b" />
+
+4. Run a brand new container with the **same volume**
+<img width="793" height="802" alt="image" src="https://github.com/user-attachments/assets/12ffc116-a58e-40bb-a465-9e0178072d7c" />
+
+5. Is the data still there?
+- Yes, all previous data ,tables and rows are still there.
+
+Verify: `docker volume ls`, `docker volume inspect`
+
+<img width="722" height="408" alt="image" src="https://github.com/user-attachments/assets/1eb5c509-a027-452d-81dd-bcfe61429c8e" />
 
 ---
 
