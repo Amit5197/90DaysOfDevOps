@@ -1,0 +1,43 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_PASSWORD: admin@123
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: admin
+      MYSQL_ROOT_PASSWORD: admin@123
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+
+  wordpress:
+    image: wordpress
+    container_name: app
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: admin
+      WORDPRESS_DB_PASSWORD: admin@123
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wp_data:/var/www/html
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+   
+
+volumes:
+  db_data:
+  wp_data:
