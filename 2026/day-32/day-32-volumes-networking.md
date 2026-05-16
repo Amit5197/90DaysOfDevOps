@@ -73,6 +73,7 @@ Verify: `docker volume ls`, `docker volume inspect`
 
 2. Inspect the default `bridge` network
 <img width="550" height="916" alt="image" src="https://github.com/user-attachments/assets/59f61e36-c3cb-40cc-b8ba-f73aa36942d0" />
+
 - `docker network inspect` is the command used to retrieve detailed configuration and status information about a specific Docker network.
 - The `bridge network` is indeed the default network in Docker.
 
@@ -82,43 +83,41 @@ Verify: `docker volume ls`, `docker volume inspect`
 <img width="721" height="360" alt="image" src="https://github.com/user-attachments/assets/d271ab16-7eac-4b7b-b7b3-eb7adf5abfc9" />
 
 4. Run two containers on the default bridge — can they ping each other by **IP**?
+- Yes
+
+<img width="661" height="407" alt="image" src="https://github.com/user-attachments/assets/70519f9f-12a1-43df-b525-56e9bc4993ae" />
 
 ---
 
 ### Task 5: Custom Networks
 1. Create a custom bridge network called `my-app-net`
+<img width="627" height="232" alt="image" src="https://github.com/user-attachments/assets/10cee769-cf99-46e3-9a1c-d73ce72609cf" />
+
 2. Run two containers on `my-app-net`
+- Conatiner Name-
+- DB
+- web
+
 3. Can they ping each other by **name** now?
+<img width="1150" height="422" alt="image" src="https://github.com/user-attachments/assets/ba3eaad0-f903-436a-ac8f-4c0243eadd3c" />
+
 4. Write in your notes: Why does custom networking allow name-based communication but the default bridge doesn't?
+- Default Docker `bridge network` `does not have built-in DNS`, so containers cannot resolve each other by name. They need IPs.
+- `User-defined networks` have `embedded DNS`, so containers can communicate using their names.
 
 ---
 
 ### Task 6: Put It Together
 1. Create a custom network
+<img width="710" height="233" alt="image" src="https://github.com/user-attachments/assets/ae957462-f184-4ae1-ae04-40519b81511a" />
+
 2. Run a **database container** (MySQL/Postgres) on that network with a volume for data
 3. Run an **app container** (use any image) on the same network
 4. Verify the app container can reach the database by container name
+<img width="1141" height="542" alt="image" src="https://github.com/user-attachments/assets/d7c1f9f4-8cc6-4a04-907f-c42139a1b631" />
 
 ---
 
-## Hints
-- Volumes: `docker volume create`, `-v volume_name:/path`
-- Bind mount: `-v /host/path:/container/path`
-- Networking: `docker network create`, `--network`
-- Ping: `docker exec container1 ping container2`
-
----
-
-## Submission
-1. Add your `day-32-volumes-networking.md` to `2026/day-32/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share what happened when you deleted a container without a volume on LinkedIn. The "aha moment" is real.
-
-`#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
 Happy Learning!
 **TrainWithShubham**
