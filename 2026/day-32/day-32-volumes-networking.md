@@ -44,18 +44,43 @@ Verify: `docker volume ls`, `docker volume inspect`
 
 ### Task 3: Bind Mounts
 1. Create a folder on your host machine with an `index.html` file
+<img width="732" height="221" alt="image" src="https://github.com/user-attachments/assets/c51d99db-0327-4bd5-ab53-650e850c33a3" />
+<img width="837" height="581" alt="image" src="https://github.com/user-attachments/assets/64dfc0e3-88ed-471f-9d82-5a813f220843" />
+
 2. Run an Nginx container and **bind mount** your folder to the Nginx web directory
 3. Access the page in your browser
+<img width="837" height="581" alt="image" src="https://github.com/user-attachments/assets/a7130d70-f56a-4ec9-85fc-e584533598b0" />
+
 4. Edit the `index.html` on your host — refresh the browser
+<img width="935" height="662" alt="image" src="https://github.com/user-attachments/assets/994691e4-95cf-498b-a7bd-0abdb638d551" />
 
-Write in your notes: What is the difference between a named volume and a bind mount?
+## What is the difference between a named volume and a bind mount?
 
+**Volumes vs Bind Mounts**
+**Volumes:**
+- Managed by Docker.
+- Stored in a part of the host filesystem which is managed by Docker.
+- Preferred method for data persistence.
+
+**Bind Mounts:**
+- Maps a file or directory on the host to a file or directory in the container.
+- More complex but provides flexibility to interact with the host system.
 ---
 
 ### Task 4: Docker Networking Basics
 1. List all Docker networks on your machine
+<img width="451" height="91" alt="image" src="https://github.com/user-attachments/assets/fc405960-3235-4860-96ed-b0cdb045899d" />
+
 2. Inspect the default `bridge` network
+<img width="550" height="916" alt="image" src="https://github.com/user-attachments/assets/59f61e36-c3cb-40cc-b8ba-f73aa36942d0" />
+- `docker network inspect` is the command used to retrieve detailed configuration and status information about a specific Docker network.
+- The `bridge network` is indeed the default network in Docker.
+
 3. Run two containers on the default bridge — can they ping each other by **name**?
+- NO
+
+<img width="721" height="360" alt="image" src="https://github.com/user-attachments/assets/d271ab16-7eac-4b7b-b7b3-eb7adf5abfc9" />
+
 4. Run two containers on the default bridge — can they ping each other by **IP**?
 
 ---
