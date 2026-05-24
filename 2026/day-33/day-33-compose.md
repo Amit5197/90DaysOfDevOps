@@ -98,27 +98,10 @@ docker compose ps
 2. Create a `.env` file and reference variables from it in your compose file
 3. Verify the variables are being picked up
 
----
-
-## Hints
-- Start: `docker compose up -d`
-- Stop: `docker compose down`
-- Logs: `docker compose logs -f`
-- Compose creates a default network for all services automatically
-- Service names in compose are the DNS names containers use to talk to each other
+<img width="1900" height="782" alt="image" src="https://github.com/user-attachments/assets/7d0180d9-56eb-4eb2-913b-3b7b2e9705fd" />
 
 ---
 
-## Submission
-1. Add your compose files and `day-33-compose.md` to `2026/day-33/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share your WordPress + MySQL running via Compose on LinkedIn.
-
-`#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
 Happy Learning!
 **TrainWithShubham**
