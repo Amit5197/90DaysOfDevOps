@@ -38,6 +38,17 @@ They should:
 Start it, access WordPress in your browser, and set it up.
 
 **Verify:** Stop and restart with `docker compose down` and `docker compose up` — is your WordPress data still there?
+[Compose file](wordpress-mysql/docker-compose.yml)
+
+<img width="862" height="342" alt="image" src="https://github.com/user-attachments/assets/62fc4796-144a-4a32-a799-af21f278982a" />
+<img width="1850" height="961" alt="image" src="https://github.com/user-attachments/assets/9b3094de-b3e2-4237-ba9a-181b62fccb4e" />
+<img width="1888" height="1016" alt="image" src="https://github.com/user-attachments/assets/c18dd864-6c39-4328-a2c0-625cf8cc4411" />
+<img width="1917" height="971" alt="image" src="https://github.com/user-attachments/assets/9a14a9a4-88b6-4c62-9926-b0217398ddf3" />
+
+- Yes Wordpress data is available there.
+
+<img width="852" height="130" alt="image" src="https://github.com/user-attachments/assets/0fadc80f-2e25-4910-b446-3c7f450dd836" />
+<img width="1592" height="898" alt="image" src="https://github.com/user-attachments/assets/92a02311-281c-48f4-92fd-399cdc2a1deb" />
 
 ---
 
