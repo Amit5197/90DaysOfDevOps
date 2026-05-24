@@ -6,10 +6,10 @@ services:
       - "3306:3306"
  
   environment:
-  MYSQL_ROOT_PASSWORD: root_password
+  MYSQL_ROOT_PASSWORD: root
   MYSQL_DATABASE: wordpress
-  MYSQL_USER: wordpress_user
-  MYSQL_PASSWORD: wordpress_password
+  MYSQL_USER: wordpress
+  MYSQL_PASSWORD: wordpress
     
     volumes:
       - db_data:/var/lib/mysql
