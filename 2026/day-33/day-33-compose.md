@@ -5,6 +5,7 @@
 ### Task 1: Install & Verify
 1. Check if Docker Compose is available on your machine
 2. Verify the version
+<img width="753" height="73" alt="image" src="https://github.com/user-attachments/assets/eb0d7d22-c4dd-473c-9554-8c3f6e35df70" />
 
 ---
 
@@ -14,6 +15,13 @@
 3. Start it with `docker compose up`
 4. Access it in your browser
 5. Stop it with `docker compose down`
+
+    [Dockerfile](compose-basics/Dockerfile)
+
+   [Compose file](compose-basics/docker-compose.yml)
+
+<img width="1898" height="781" alt="image" src="https://github.com/user-attachments/assets/388992e3-febe-4971-942c-711071ce84f9" />
+<img width="1902" height="562" alt="image" src="https://github.com/user-attachments/assets/6e2931ab-f34e-4cbb-9f12-5a8a11250508" />
 
 ---
 
