@@ -55,12 +55,41 @@ Start it, access WordPress in your browser, and set it up.
 ### Task 4: Compose Commands
 Practice and document these:
 1. Start services in **detached mode**
+
+```
+docker compose up -d
+```
+<img width="906" height="118" alt="image" src="https://github.com/user-attachments/assets/d5c73d73-959a-4562-bc2c-8ee854aa58a0" />
+
 2. View running services
+```
+docker compose ps
+```
+<img width="948" height="165" alt="image" src="https://github.com/user-attachments/assets/acf3e2ab-678d-4b35-b6c9-a069b5beb8f0" />
+
 3. View **logs** of all services
-4. View logs of a **specific** service
-5. **Stop** services without removing
-6. **Remove** everything (containers, networks)
-7. **Rebuild** images if you make a change
+```docker compose logs db && docker compose logs wordpress```
+
+<img width="1000" height="702" alt="image" src="https://github.com/user-attachments/assets/19d5f251-c266-498c-b6b9-6af8e85588c0" />
+
+5. View logs of a **specific** service
+
+```docker compose logs db```
+
+<img width="1902" height="307" alt="image" src="https://github.com/user-attachments/assets/ec7b2d22-04a3-4194-a52b-e52578274261" />
+
+6. **Stop** services without removing
+```docker compose stop```
+
+<img width="947" height="106" alt="image" src="https://github.com/user-attachments/assets/70bc8196-04d4-47bf-8b7a-86fa3991e0d1" />
+
+8. **Remove** everything (containers, networks)
+```docker compose down```
+
+<img width="947" height="116" alt="image" src="https://github.com/user-attachments/assets/d4aea21b-fcb7-4423-a42f-0c91c8382224" />
+
+10. **Rebuild** images if you make a change
+```docker compose up --build```
 
 ---
 
