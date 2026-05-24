@@ -1,41 +1,52 @@
 services:
-  db:
-    image: mysql:8.0
-    container_name: db
+  mysql:
+    image: mysql:latest
+    container_name: wp-mysql
+      #environment:
+      #MYSQL_ROOT_PASSWORD: root
+      #MYSQL_DATABASE: wordpress
+      #MYSQL_USER: wordpress
+      #MYSQL_PASSWORD: wordpress
+    env_file:
+      - path: ./mysql.env
+
     ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      - 3306:3306
     volumes:
-      - db_data:/var/lib/mysql
-    restart: unless-stopped
+      - wp-mysql:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 30s
-      timeout: 10s
+      test: ["CMD","mysqladmin","ping","-h","localhost"]
+      interval: 10s
+      timeout: 5s
       retries: 5
       start_period: 30s
-
+    networks:
+      - wp-net
   wordpress:
-    image: wordpress
-    container_name: app
-    ports:
-      - "8080:80"
-    environment:
-      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
-      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
-      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
-      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
-    volumes:
-      - wp_data:/var/www/html
-    restart: unless-stopped
+    image: wordpress:latest
+    container_name: wp-wordpress
     depends_on:
-      db:
+      mysql:
         condition: service_healthy
+          #environment:
+          #WORDPRESS_DB_HOST: mysql:3306
+          #WORDPRESS_DB_USER: wordpress
+          #WORDPRESS_DB_PASSWORD: wordpress
+          #WORDPRESS_DB_NAME: wordpress
+    env_file:
+      - path: ./wp.env
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - wp-data:/var/www/html
+    networks:
+      - wp-net
 
 volumes:
-  db_data:
-  wp_data:
+    wp-mysql:
+    wp-data:
+
+networks:
+    wp-net:
+      driver: bridge
