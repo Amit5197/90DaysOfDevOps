@@ -48,6 +48,9 @@ Write in your notes: Why is the multi-stage image so much smaller?
 4. Push it to Docker Hub
 5. Pull it on a different machine (or after removing locally) to verify
 
+<img width="742" height="256" alt="image" src="https://github.com/user-attachments/assets/0f2a76ca-5c68-4a93-9b03-a9266a764f05" />
+<img width="757" height="265" alt="image" src="https://github.com/user-attachments/assets/1bd36b25-fe32-47f5-b4b6-da39c93dc2dc" />
+
 ---
 
 ### Task 4: Docker Hub Repository
