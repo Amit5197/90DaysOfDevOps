@@ -21,10 +21,23 @@ Note down the size — you'll compare it later.
 1. Rewrite the Dockerfile using **multi-stage build**:
    - Stage 1: Build the app (install dependencies, compile)
    - Stage 2: Copy only the built artifact into a minimal base image (`alpine`, `distroless`, or `scratch`)
+
 2. Build the image and check its size again
+
 3. Compare the two sizes
 
+- First image size is 638 MB
+- Multi-stage image size is 256 MB
+
+[Dockerfile](java-app/Dockerfile.multistage)
+
+```docker build -f Dockerfile.multistage -t java-multi-stage:v1 .```
+
+<img width="750" height="977" alt="image" src="https://github.com/user-attachments/assets/b8199a8c-7927-4b4a-af28-763b02475b70" />
+
 Write in your notes: Why is the multi-stage image so much smaller?
+
+- Multi-stage builds smaller images because they separate “build” from “runtime”, copying only what’s necessary into the final image.
 
 ---
 
