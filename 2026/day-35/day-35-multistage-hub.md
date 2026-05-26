@@ -64,6 +64,11 @@ Write in your notes: Why is the multi-stage image so much smaller?
 3. Explore the **tags** tab — understand how versioning works
 4. Pull a specific tag vs `latest` — what happens?
 
+- Specific tag (e.g., 1.0) = pulls that exact version of the image.
+- latest = pulls whatever image is currently marked latest, which can change.
+
+<img width="1892" height="847" alt="image" src="https://github.com/user-attachments/assets/ed83c786-1c99-4788-a95d-078adb114b96" />
+
 ---
 
 ### Task 5: Image Best Practices
@@ -73,14 +78,13 @@ Apply these to one of your images and rebuild:
 3. Combine `RUN` commands to **reduce layers**
 4. Use **specific tags** for base images (not `latest`)
 
-Check the size before and after.
+[Dockerfile](java-app/Dockerfile.final)
+
+
+Dockehub link : https://hub.docker.com/repository/docker/amit5197/java-multi-stage/
+
 
 ---
-
-## Learn in Public
-Share your before/after image sizes on LinkedIn — the difference is always impressive.
-
-`#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
 Happy Learning!
 **TrainWithShubham**
