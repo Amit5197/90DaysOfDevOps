@@ -10,7 +10,9 @@ Create a `docker-compose.yml` for a 3-service stack:
 
  [Code](web_db_cache/)
 
-Write a simple Dockerfile for the web app. The app doesn't need to be complex — even a "Hello World" that connects to the database is enough.
+- Run and build all images - ```docker compose up -d```
+
+<img width="1062" height="161" alt="image" src="https://github.com/user-attachments/assets/313f7a61-1ffb-46df-b8e3-d42e17570ce8" />
 
 ---
 
@@ -19,7 +21,15 @@ Write a simple Dockerfile for the web app. The app doesn't need to be complex �
 2. Add a **healthcheck** on the database service
 3. Use `depends_on` with `condition: service_healthy` so the app waits for the database to be truly ready, not just started
 
-**Test:** Bring everything down and up — does the app wait for the DB?
+**Test**: checking everything on docker compose **UP** & **DOWN** — does the app wait for the DB?
+- **Yes**
+
+<img width="781" height="136" alt="image" src="https://github.com/user-attachments/assets/73cb7c0c-9e1c-49a1-8003-9b0bf092802e" />
+<img width="937" height="90" alt="image" src="https://github.com/user-attachments/assets/fe7eb737-351d-45eb-8be9-5d24445faff0" />
+
+- Postgres container starts first.
+- Healthcheck waits until DB is ready.
+- App container starts only after DB is healthy
 
 ---
 
