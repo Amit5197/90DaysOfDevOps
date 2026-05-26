@@ -9,6 +9,9 @@
 
 Note down the size — you'll compare it later.
 
+```docker build -t java-single-stage```
+
+
 ---
 
 ### Task 2: Multi-Stage Build
