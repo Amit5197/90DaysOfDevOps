@@ -10,8 +10,8 @@
 Note down the size — you'll compare it later.
 
 ```docker build -t java-single-stage .```
-<img width="778" height="500" alt="image" src="https://github.com/user-attachments/assets/16b10fdb-75b8-4969-a87e-6aafb55c7ecb" />
-<img width="751" height="222" alt="image" src="https://github.com/user-attachments/assets/c1773e65-360c-4890-98ae-7b1b8eb2e684" />
+
+<img width="1900" height="563" alt="image" src="https://github.com/user-attachments/assets/6c65ec0c-4fac-4462-bcec-a04a8240c059" />
 
 [Dockerfile](java-app/Dockerfile)
 
