@@ -48,9 +48,13 @@ Write in your notes: Why is the multi-stage image so much smaller?
 4. Push it to Docker Hub
 5. Pull it on a different machine (or after removing locally) to verify
 
+```docker push amit5197/java-multi-stage:v```
+
+```docker pull amit5197/java-multi-stage:v```
+
 <img width="1348" height="647" alt="image" src="https://github.com/user-attachments/assets/6f871905-d99f-4d87-9d77-d9e270d25539" />
 
-<img width="1902" height="592" alt="image" src="https://github.com/user-attachments/assets/ac4a2d78-8d18-4d4a-8f56-8f35974afeca" />
+<img width="1220" height="472" alt="image" src="https://github.com/user-attachments/assets/7f81683c-e33a-4500-a2ac-bdadcd736ea3" />
 
 ---
 
