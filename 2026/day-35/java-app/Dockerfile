@@ -10,5 +10,9 @@ COPY src/Main.java .
 # Compile Java file
 RUN javac Main.java
 
+#Showing all steps & verify that files are exactly where they should be during the image build process.
+
+RUN ls -la
+
 # Run the program
 CMD ["java", "Main"]
