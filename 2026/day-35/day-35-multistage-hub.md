@@ -50,6 +50,7 @@ Write in your notes: Why is the multi-stage image so much smaller?
 
 <img width="742" height="256" alt="image" src="https://github.com/user-attachments/assets/0f2a76ca-5c68-4a93-9b03-a9266a764f05" />
 <img width="757" height="265" alt="image" src="https://github.com/user-attachments/assets/1bd36b25-fe32-47f5-b4b6-da39c93dc2dc" />
+<img width="1902" height="592" alt="image" src="https://github.com/user-attachments/assets/ac4a2d78-8d18-4d4a-8f56-8f35974afeca" />
 
 ---
 
