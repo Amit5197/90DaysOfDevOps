@@ -33,7 +33,7 @@ Note down the size — you'll compare it later.
 
 ```docker build -f Dockerfile.multistage -t java-multi-stage:v1 .```
 
-<img width="750" height="977" alt="image" src="https://github.com/user-attachments/assets/b8199a8c-7927-4b4a-af28-763b02475b70" />
+<img width="1612" height="783" alt="image" src="https://github.com/user-attachments/assets/c2802928-e76c-4021-9952-ea00799439bd" />
 
 Write in your notes: Why is the multi-stage image so much smaller?
 
