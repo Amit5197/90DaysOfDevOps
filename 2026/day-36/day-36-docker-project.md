@@ -13,6 +13,8 @@ A **Python Flask/Django** app with a database
 
 [Python-Flash-App](Python-Flash-App)
 
+<img width="1897" height="263" alt="image" src="https://github.com/user-attachments/assets/ea8a1b6d-f011-4105-ba15-bb62b4947c67" />
+
 ---
 
 ### Task 2: Write the Dockerfile
@@ -52,12 +54,16 @@ Run `docker compose up` and verify everything works together.
    - How to run it with Docker Compose
    - Any environment variables needed
 
+<img width="1897" height="263" alt="image" src="https://github.com/user-attachments/assets/6726d9c2-0a82-4714-902d-dcfebf2e0335" />
+
 ---
 
 ### Task 5: Test the Whole Flow
 1. Remove all local images and containers
 2. Pull from Docker Hub and run using only your compose file
 3. Does it work fresh? If not — fix it until it does
+
+<img width="1063" height="200" alt="image" src="https://github.com/user-attachments/assets/afbdb55f-62f1-4fc9-a7eb-f90ebca1fa80" />
 
 ---
 
