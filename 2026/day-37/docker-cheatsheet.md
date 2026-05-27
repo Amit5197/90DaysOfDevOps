@@ -109,3 +109,5 @@
   - Use `FROM <builder>` for build‑time tools, then `FROM <runtime>` for final image, copying only needed artifacts.
 - `HEALTHCHECK` – define how Docker should check if the container is healthy.
 - `ENV <KEY>=<VALUE>` – set environment variables in the image.
+
+- `RUN ls -la` - show all running steps in dockerfile 
