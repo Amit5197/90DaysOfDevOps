@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}New Note — Personal Notes App{% endblock %}
+
+{% block content %}
+<div class="form-page">
+    <div class="form-header">
+        <a href="{{ url_for('index') }}" class="back-link" id="back-to-home-link">← Back to Notes</a>
+        <h1 class="form-title">Create a New Note</h1>
+        <p class="form-subtitle">Write down anything worth remembering.</p>
+    </div>
+
+    <div class="form-card">
+        <form action="{{ url_for('add_note') }}" method="POST" id="add-note-form" novalidate>
+
+            <div class="form-group">
+                <label for="note-title" class="form-label">Title</label>
+                <input type="text" id="note-title" name="title" class="form-input"
+                    placeholder="Give your note a clear title…" value="{{ title if title else '' }}" maxlength="200"
+                    required autofocus aria-required="true" aria-describedby="title-hint">
+                <span id="title-hint" class="field-hint">Max 200 characters</span>
+            </div>
+
+            <div class="form-group">
+                <label for="note-content" class="form-label">Content</label>
+                <textarea id="note-content" name="content" class="form-textarea" placeholder="Start writing your note…"
+                    rows="12" required aria-required="true"
+                    aria-describedby="content-counter">{{ content if content else '' }}</textarea>
+                <span id="content-counter" class="field-hint char-counter">0 words</span>
+            </div>
+
+            <div class="form-actions">
+                <a href="{{ url_for('index') }}" class="btn btn--secondary" id="cancel-add-btn">Cancel</a>
+                <button type="submit" class="btn btn--primary" id="submit-add-btn">
+                    💾 Save Note
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Live word counter
+    const textarea = document.getElementById('note-content');
+    const counter = document.getElementById('content-counter');
+    function updateCounter() {
+        const words = textarea.value.trim() ? textarea.value.trim().split(/\s+/).length : 0;
+        counter.textContent = words + ' word' + (words !== 1 ? 's' : '');
+    }
+    textarea.addEventListener('input', updateCounter);
+    updateCounter();
+</script>
+{% endblock %}
