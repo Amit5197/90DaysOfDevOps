@@ -11,7 +11,7 @@ Choose **one** of these (or use your own project):
 
 A **Python Flask/Django** app with a database
 
-[App](Python-Flash-App/)
+(Python-Flash-App)
 
 ---
 
@@ -22,7 +22,8 @@ A **Python Flask/Django** app with a database
 4. Keep the image **small** — use alpine or slim base images
 5. Add a `.dockerignore` file
 
-[Dockerfile](Python-Flash-App/Dockerfile)
+(Python-Flash-App/Dockerfile)
+
 Build and test it locally.
 
 ---
