@@ -3,7 +3,7 @@
 ## Container commands
 
 - Run a container interactively from an image on Docker Hub:
-  - `docker run -it <image>`
+  - `docker run -id <image>`
 - Run a container in detached mode:
   - `docker run -d <image>`
 - List running containers:
