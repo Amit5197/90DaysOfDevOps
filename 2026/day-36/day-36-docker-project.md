@@ -39,6 +39,8 @@ Write a `docker-compose.yml` that includes:
 
 Run `docker compose up` and verify everything works together.
 
+[Docker Compose](./Python-Flash-App/docker-compose.yml)
+
 ---
 
 ### Task 4: Ship It
