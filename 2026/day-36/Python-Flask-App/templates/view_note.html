@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}{{ note.title }} — Personal Notes App{% endblock %}
+
+{% block content %}
+<div class="form-page">
+    <div class="form-header">
+        <a href="{{ url_for('index') }}" class="back-link" id="back-from-view-link">← Back to Notes</a>
+        <h1 class="form-title">{{ note.title }}</h1>
+        <p class="form-subtitle">
+            Created {{ note.formatted_created() }}
+            {% if note.updated_at != note.created_at %}
+            · Updated {{ note.formatted_updated() }}
+            {% endif %}
+            · {{ note.word_count() }} word{{ 's' if note.word_count() != 1 }}
+        </p>
+    </div>
+
+    <div class="form-card view-card">
+        <div class="note-content-body" id="note-full-content">
+            {{ note.content | replace('\n', '<br>') | safe }}
+        </div>
+
+        <div class="form-actions view-actions">
+            <a href="{{ url_for('edit_note', note_id=note.id) }}" class="btn btn--primary" id="edit-from-view-btn">
+                ✏️ Edit Note
+            </a>
+            <form action="{{ url_for('delete_note', note_id=note.id) }}" method="POST"
+                onsubmit="return confirm('Delete this note permanently?');">
+                <button type="submit" class="btn btn--danger" id="delete-from-view-btn">
+                    🗑️ Delete
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
