@@ -1,0 +1,24 @@
+# Environment secrets — never commit this
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# SQLite (local dev fallback)
+*.db
+*.sqlite3
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/
