@@ -71,20 +71,5 @@ Keep it short — one line per command, something you'd actually reference on th
 
 ---
 
-## Revisit Weak Spots
-Pick **2 topics** you marked as shaky and redo the hands-on tasks from that day.
-
----
-
-## Suggested Flow (45–60 minutes)
-- 10 min: go through the checklist honestly
-- 10 min: answer quick-fire questions
-- 20 min: build your cheat sheet
-- 10 min: redo one weak area
-
----
-
-`#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
-
 Happy Learning!
 **TrainWithShubham**
