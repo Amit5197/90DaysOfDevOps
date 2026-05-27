@@ -14,6 +14,7 @@ A **Python Flask/Django** app with a database
 [Python-Flash-App](Python-Flash-App)
 
 <img width="1897" height="263" alt="image" src="https://github.com/user-attachments/assets/ea8a1b6d-f011-4105-ba15-bb62b4947c67" />
+<img width="928" height="170" alt="image" src="https://github.com/user-attachments/assets/38a8cd4a-34fc-4605-adde-8e070d551ff6" />
 
 ---
 
@@ -63,7 +64,10 @@ Run `docker compose up` and verify everything works together.
 2. Pull from Docker Hub and run using only your compose file
 3. Does it work fresh? If not — fix it until it does
 
+<img width="1162" height="262" alt="image" src="https://github.com/user-attachments/assets/f049d32f-4c90-4d24-98f0-a7d57dcc8922" />
 <img width="1063" height="200" alt="image" src="https://github.com/user-attachments/assets/afbdb55f-62f1-4fc9-a7eb-f90ebca1fa80" />
+<img width="928" height="170" alt="image" src="https://github.com/user-attachments/assets/7ae15fa2-0546-46ee-8cba-ca9b1bfd1f7c" />
+<img width="1311" height="331" alt="image" src="https://github.com/user-attachments/assets/34b6f478-a87d-4163-bf52-60291cf07535" />
 
 ---
 
