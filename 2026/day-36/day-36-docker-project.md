@@ -9,7 +9,9 @@ Choose **one** of these (or use your own project):
 - A **static website** served by Nginx with a backend API
 - Any app from your GitHub that doesn't have Docker yet
 
-If you don't have an app, clone a simple open-source one and Dockerize it.
+A **Python Flask/Django** app with a database
+
+[App](Python-Flash-App/)
 
 ---
 
@@ -20,6 +22,7 @@ If you don't have an app, clone a simple open-source one and Dockerize it.
 4. Keep the image **small** — use alpine or slim base images
 5. Add a `.dockerignore` file
 
+[Dockerfile](Python-Flash-App/Dockerfile)
 Build and test it locally.
 
 ---
