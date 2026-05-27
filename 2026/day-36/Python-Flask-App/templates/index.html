@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Personal Notes App{% endblock %}
+
+{% block content %}
+<div class="page-hero">
+    <div class="hero-text">
+        <h1 class="hero-title">Your Notes</h1>
+        <p class="hero-subtitle">Capture ideas, thoughts, and everything in between.</p>
+    </div>
+    <a href="{{ url_for('add_note') }}" class="btn btn--primary" id="hero-add-note-btn">
+        + New Note
+    </a>
+</div>
+
+<!-- ── Search Bar ── -->
+<form class="search-form" action="{{ url_for('index') }}" method="GET" role="search" id="search-form">
+    <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" name="q" id="search-input" class="search-input" placeholder="Search your notes…"
+            value="{{ search_query }}" autocomplete="off" aria-label="Search notes">
+        {% if search_query %}
+        <a href="{{ url_for('index') }}" class="search-clear" aria-label="Clear search">×</a>
+        {% endif %}
+    </div>
+</form>
+
+<!-- ── Notes Grid ── -->
+{% if notes %}
+{% if search_query %}
+<p class="results-label">
+    Found <strong>{{ notes|length }}</strong> result{{ 's' if notes|length != 1 }} for "<em>{{ search_query }}</em>"
+</p>
+{% endif %}
+
+<div class="notes-grid" id="notes-grid">
+    {% for note in notes %}
+    <article class="note-card" id="note-card-{{ note.id }}">
+        <div class="note-card__header">
+            <h2 class="note-card__title">
+                <a href="{{ url_for('view_note', note_id=note.id) }}" id="note-title-link-{{ note.id }}">
+                    {{ note.title }}
+                </a>
+            </h2>
+            <div class="note-card__actions">
+                <a href="{{ url_for('edit_note', note_id=note.id) }}" class="action-btn action-btn--edit"
+                    id="edit-btn-{{ note.id }}" aria-label="Edit note {{ note.title }}">✏️</a>
+                <form action="{{ url_for('delete_note', note_id=note.id) }}" method="POST" style="display:inline;"
+                    onsubmit="return confirm('Delete this note? This cannot be undone.');">
+                    <button type="submit" class="action-btn action-btn--delete" id="delete-btn-{{ note.id }}"
+                        aria-label="Delete note {{ note.title }}">🗑️</button>
+                </form>
+            </div>
+        </div>
+
+        <p class="note-card__preview">{{ note.preview() }}</p>
+
+        <div class="note-card__footer">
+            <span class="note-meta">
+                📅 {{ note.created_at.strftime('%b %d, %Y') }}
+            </span>
+            <span class="note-meta note-meta--words">
+                {{ note.word_count() }} word{{ 's' if note.word_count() != 1 }}
+            </span>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+
+{% else %}
+<div class="empty-state" id="empty-state">
+    <div class="empty-state__icon">📭</div>
+    {% if search_query %}
+    <h2 class="empty-state__title">No notes found</h2>
+    <p class="empty-state__subtitle">Try a different search term or <a href="{{ url_for('index') }}">view all notes</a>.
+    </p>
+    {% else %}
+    <h2 class="empty-state__title">No notes yet</h2>
+    <p class="empty-state__subtitle">Start capturing your thoughts — create your first note!</p>
+    <a href="{{ url_for('add_note') }}" class="btn btn--primary" id="empty-add-note-btn">
+        + Create First Note
+    </a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}
