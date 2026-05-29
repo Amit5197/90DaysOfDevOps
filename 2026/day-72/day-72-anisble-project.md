@@ -325,7 +325,7 @@ ansible-playbook site.yml --check --diff
 # Full deploy
 ansible-playbook site.yml
 
-![image](images/full_deploy.png)
+![image](images/deploy.png)
 
 ![image](images/deploy2.png)
 
