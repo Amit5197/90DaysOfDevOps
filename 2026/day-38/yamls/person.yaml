@@ -1,0 +1,14 @@
+---
+- name: Amit K PAndey
+- role: DevOps Engineer
+- experience_years: 2+ years 
+- learning: True
+  Tools:
+  - Github
+  - Docker
+  - Jenkins
+  - Kubernetes
+  - Terraform
+  - Ansible
+
+  Hobbies: [Playing Cricket, Reading Books, Resercheing New Technologies]

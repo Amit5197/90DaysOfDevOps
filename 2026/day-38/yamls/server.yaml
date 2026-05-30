@@ -1,0 +1,12 @@
+# Nested Objects
+server:
+  name: web-server
+  ip: 192.10.0.1
+  port: 80
+
+database:
+  host: db-server
+  name: dev_db
+  credentials:
+    user: admin
+    password: admin@123
