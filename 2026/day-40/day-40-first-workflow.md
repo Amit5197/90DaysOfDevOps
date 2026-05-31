@@ -33,29 +33,69 @@ Push it. Go to the **Actions** tab on GitHub and watch it run.
 
 - Yes,it is green
 
+![action Verify](image-1.png)
 
 ---
 
 ### Task 3: Understand the Anatomy
 Look at your workflow file and write in your notes what each key does:
 - `on:`
+   - Defines `when the worflow is triggered`
+   - It listen for event `push`
+
 - `jobs:`
+   - Defines the jobs that the worflow will execute
+   - A `workflow` can have one or multiple jobs
+
 - `runs-on:`
+   - Specifies the virtual machine(runner) env the job will use.
+   - `ubuntu-latest`,`windows-latest`,`macos-latest`
+
 - `steps:`
+   - Defines the sequences of actions the job will execute
+   - Steps run one after another inside the job.
+
 - `uses:`
+   - Tells Github to use a prebuilt action
+   - Checkout action to clone the repo.
+
 - `run:`
-- `name:` (on a step)
+   - Executes commands directly on the runner
+
+- `name:` (on a step)- This is the name of the workflow
+   - Give the step a humand readable label in the Actions UI.
 
 ---
 
 ### Task 4: Add More Steps
 Update `hello.yml` to also:
+
 1. Print the current date and time
+```
+- name: Print current date and time
+  run: date
+```
+
 2. Print the name of the branch that triggered the run (hint: GitHub provides this as a variable)
+```
+- name: Print branch name
+  run: echo "Branch name is ${{ github.ref_name }}**
+```
+
 3. List the files in the repo
+```
+- name: List repository files
+  run: ls -la
+```
+
 4. Print the runner's operating system
+```
+- name: runner operating system
+  run: echo "Runner OS is $RUNNER_OS"
 
 Push again — watch the new run.
+
+![again push action](image-2.png)
 
 ---
 
@@ -65,6 +105,13 @@ Push again — watch the new run.
 3. Fix it and push again
 
 Write in your notes: What does a failed pipeline look like? How do you read the error?
+
+- Error
+![error](image-3.png)
+
+- Fix
+
+![fix](image-4.png)
 
 ---
 
