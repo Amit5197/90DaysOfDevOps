@@ -89,7 +89,7 @@ Update `hello.yml` to also:
 ```
 
 4. Print the runner's operating system
-```
+
 - name: runner operating system
   run: echo "Runner OS is $RUNNER_OS"
 
