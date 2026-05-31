@@ -62,9 +62,9 @@ Look at your workflow file and write in your notes what each key does:
 - `run:`
    - Executes commands directly on the runner
 
-- `name:` (on a step)- This is the name of the workflow
+- `name:` (on a step)
+   - This is the name of the workflow
    - Give the step a humand readable label in the Actions UI.
-
 ---
 
 ### Task 4: Add More Steps
@@ -89,9 +89,10 @@ Update `hello.yml` to also:
 ```
 
 4. Print the runner's operating system
-
+```
 - name: runner operating system
   run: echo "Runner OS is $RUNNER_OS"
+```
 
 Push again — watch the new run.
 
