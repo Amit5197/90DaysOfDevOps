@@ -14,7 +14,7 @@ This is the moment CI/CD stops being a concept and becomes real.
 2. Clone it locally
 3. Create the folder structure: `.github/workflows/`
 
-![image](image.png)
+![image](images/image.png)
 
 ---
 
@@ -33,7 +33,7 @@ Push it. Go to the **Actions** tab on GitHub and watch it run.
 
 - Yes,it is green
 
-![image](image-1.png)
+![image](images/image-1.png)
 
 ---
 
@@ -96,7 +96,7 @@ Update `hello.yml` to also:
 
 Push again — watch the new run.
 
-![image](image-2.png)
+![image](images/image-2.png)
 
 ---
 
@@ -108,11 +108,11 @@ Push again — watch the new run.
 Write in your notes: What does a failed pipeline look like? How do you read the error?
 
 - Error
-![image](image-3.png)
+![image](images/image-3.png)
 
 - Fix
 
-![image](image-4.png)
+![image](images/image-4.png)
 
 ---
 
