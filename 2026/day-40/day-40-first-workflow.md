@@ -62,9 +62,9 @@ Look at your workflow file and write in your notes what each key does:
 - `run:`
    - Executes commands directly on the runner
 
-- `name:` (on a step)- This is the name of the workflow
+- `name:` (on a step)
+   - This is the name of the workflow
    - Give the step a humand readable label in the Actions UI.
-
 ---
 
 ### Task 4: Add More Steps
