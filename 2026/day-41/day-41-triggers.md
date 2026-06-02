@@ -14,7 +14,15 @@ Your pipeline runs on push. Today you learn **every way to trigger a workflow** 
 4. Create a new branch, push a commit, and open a PR
 5. Watch the workflow run automatically
 
-**Verify:** Does it show up on the PR page?
+**Verify:** Does it show up on the PR page? - **Yes**
+
+- After creating pull request
+  
+<img width="1917" height="701" alt="image" src="https://github.com/user-attachments/assets/cab5b107-cc3d-411f-a357-ac8c5b5718c0" />
+
+- After updating pull request
+
+<img width="1481" height="512" alt="image" src="https://github.com/user-attachments/assets/959ec7d2-11f7-4cea-8fbb-d410d04843c2" />
 
 ---
 
