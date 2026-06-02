@@ -16,6 +16,8 @@ Your pipeline runs on push. Today you learn **every way to trigger a workflow** 
 
 **Verify:** Does it show up on the PR page? - **Yes**
 
+[pr-check.yml file](https://github.com/Amit5197/github-actions-practice/blob/main/.github/workflows/pr-check.yml)
+
 - After creating pull request
   
 <img width="1917" height="701" alt="image" src="https://github.com/user-attachments/assets/cab5b107-cc3d-411f-a357-ac8c5b5718c0" />
