@@ -46,6 +46,10 @@ Your pipeline runs on push. Today you learn **every way to trigger a workflow** 
 
 **Verify:** Can you trigger it manually and see your input printed?
 
+[Manual.yml file](https://github.com/Amit5197/github-actions-practice/blob/main/.github/workflows/manual.yml)
+
+<img width="1913" height="725" alt="image" src="https://github.com/user-attachments/assets/71e61c14-9526-4de4-bbee-6aa14adcff75" />
+
 ---
 
 ### Task 4: Matrix Builds
@@ -57,12 +61,35 @@ Create `.github/workflows/matrix.yml` that:
 
 Then extend the matrix to also include 2 operating systems — how many total jobs run now?
 
+<img width="1918" height="913" alt="image" src="https://github.com/user-attachments/assets/a54014b0-a8cf-453a-917d-a8c311561056" />
+
 ---
 
 ### Task 5: Exclude & Fail-Fast
 1. In your matrix, **exclude** one specific combination (e.g., Python 3.10 on Windows)
+- After adding exclude for python-3.10 on macos it skipped that job.
+<img width="1918" height="913" alt="image" src="https://github.com/user-attachments/assets/e9c54d71-d8f9-4715-868a-95d450bab63e" />
+
 2. Set `fail-fast: false` — trigger a failure in one job and observe what happens to the rest
+ - `fail-fast: false`
+
+<img width="1918" height="768" alt="image" src="https://github.com/user-attachments/assets/003a6aa9-5446-4b77-8459-7a706a80df93" />
+
 3. Write in your notes: What does `fail-fast: true` (the default) do vs `false`?
+
+- `fail-fast: true`
+
+<img width="1895" height="786" alt="image" src="https://github.com/user-attachments/assets/615b9c4b-1c55-4cc3-8e07-931a5c12a44e" />
+
+- Observation
+
+- `fail-fast: false`):
+     - In the workflow, a failure was triggered for Python 3.11 using exit 1. 
+     - As shown in the screenshot,the jobs (`windows-latest, 3.11`) and (`ubuntu-latest, 3.11`) `failed`,but the other jobs continued running and completed successfully.
+     - This shows that `fail-fast: false` allows all matrix jobs to run even if some fail.
+
+  - `fail-fast: true (default)`: If one job fails, the remaining matrix jobs are cancelled.
+  - `fail-fast: false`: If one job fails, the other jobs continue running until completion.
 
 ---
 
