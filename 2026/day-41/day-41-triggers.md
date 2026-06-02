@@ -30,8 +30,11 @@ Your pipeline runs on push. Today you learn **every way to trigger a workflow** 
 
 ### Task 2: Scheduled Trigger
 1. Add a `schedule:` trigger to any workflow using cron syntax
-2. Set it to run every day at midnight UTC
+2. Set it to run every day at midnight UTC - (`0 0 * * *`)
 3. Write in your notes: What is the cron expression for every Monday at 9 AM?
+ > 0 9 * * 1
+
+[shedule.yml file](https://github.com/Amit5197/github-actions-practice/actions/workflows/schedule.yml)
 
 ---
 
