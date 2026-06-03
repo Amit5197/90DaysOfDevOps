@@ -21,7 +21,7 @@ Create `person.yaml` that describes yourself with:
 
 **Verify:** Run `cat person.yaml` — does it look clean? No tabs?
 
-![Person](image.png)
+![image](images/image.png)
 
 ---
 
@@ -36,7 +36,7 @@ Write in your notes: What are the two ways to write a list in YAML?
 
 - Using square brackets [ ] inline format
 
-![Tool & hobbies](image-1.png)
+![image](images/image-1.png)
 
 ---
 
@@ -48,7 +48,7 @@ Create `server.yaml` that describes a server:
 **Verify:** Try adding a tab instead of spaces — what happens when you validate it?
 - Gives wrong indentation error
 
-![sever](image-2.png)
+![image](images/image-2.png)
 
 ---
 
@@ -60,7 +60,7 @@ In `server.yaml`, add a `startup_script` field using:
 Write in your notes: When would you use `|` vs `>`?
 -  `|` - Use when formatting matters (scripts, commands, exact output) &  `>` - Use when you want cleaner, wrapped text without line breaks
 
-![server2](image-3.png)
+![image](images/image-3.png)
 
 ---
 
@@ -70,7 +70,7 @@ Write in your notes: When would you use `|` vs `>`?
 3. Intentionally break the indentation — what error do you get?
 4. Fix it and validate again
 
-![yaml lint](image-4.png)
+![image](images/image-4.png)
 
 - geting error
 
@@ -86,7 +86,7 @@ Write in your notes: When would you use `|` vs `>`?
 
 Fixed
 
-![yaml lint fixed](image-5.png)
+![image](images/image-5.png)
 
 
 ---
