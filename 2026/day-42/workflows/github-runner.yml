@@ -1,57 +1,23 @@
-name: github runner demo
+name: running 3 different OS
 
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
-  ubuntu-job:
-    runs-on: ubuntu-latest
+  info:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
-      - name: print ubuntu runner info
+      - name: Print OS name
+        run: echo "OS name :" ${{ matrix.os }}
+      - name: Runners Hostname
         run: |
-          echo "Operating System:"
-          cat /etc/os-release | grep PRETTY_NAME
-          echo "Kernel Info:"
-          uname -a
-          echo "Hostname:"
+          echo "Hostname :" 
           hostname
-          echo "Current User:"
-          whoami
-
-      - name: print tools version
-        run: |
-          echo "Docker version:"
-          docker --version
-          echo "Python version:"
-          python --version
-          echo "Node version:"
-          node --version
-          echo "Git version:"
-          git --version
-
-  windows-job:
-    runs-on: windows-latest
-    steps:
-      - name: print windows runner info
-        shell: powershell
-        run: |
-          Write-Host "Operating System:"
-          Get-CimInstance Win32_OperatingSystem | Select-Object -ExpandProperty Caption
-          Write-Host "OS Version:"
-          [Environment]::OSVersion.Version
-          Write-Host "Hostname:"
-          $env:COMPUTERNAME
-          Write-Host "Current User:"
-          [Security.Principal.WindowsIdentity]::GetCurrent().Name
-          
-  macos-job:
-     runs-on: macos-latest
-     steps:
-       - name: print macos runner info
-         run: |
-           echo "Operating system:"
-           sw_vers
-           echo "Hostname:"
-           hostname
-           echo "Current User:"
-           whoami
+      - name: The current github user running the job
+        run: echo "Current user :" ${{ github.actor }}
+      
+      - name: The current runner user running the job
+        run: echo "Current runner user:" $(whoami)
