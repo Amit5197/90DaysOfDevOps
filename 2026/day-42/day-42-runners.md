@@ -87,9 +87,10 @@ Every job needs a machine to run on. Today you understand **runners** — GitHub
 ### Task 5: Labels
 1. Add a **label** to your self-hosted runner (e.g., `my-linux-runner`)
 2. Update your workflow to use `runs-on: [self-hosted, my-linux-runner]`
-3. Trigger it — does it still pick up the job?
+3. Trigger it — does it still pick up the job? - **Yes**
 
 Write in your notes: Why are labels useful when you have multiple self-hosted runners?
+- When you have multiple self‑hosted runners, labels let you choose exactly which runner should execute a job.
 
 ---
 
@@ -98,13 +99,12 @@ Fill this in your notes:
 
 | | GitHub-Hosted | Self-Hosted |
 |---|---|---|
-| Who manages it? | ? | ? |
-| Cost | ? | ? |
-| Pre-installed tools | ? | ? |
-| Good for | ? | ? |
-| Security concern | ? | ? |
+| Who manages it? | GitHub | We manage it |
+| Cost | Free 2000 mins (per month, public repos unlimited) | As per our own infrastructure usage |
+| Pre-installed tools | Yes (common languages, build tools, Docker, etc.) | No (we install and maintain ourselves) |
+| Good for | Small independent jobs, quick CI/CD setup | Production workloads, specialized environments |
+| Security concern | Controlled by GitHub —so must be handled carefully | Our responsibility — we must secure the machine, patch OS/tools, and protect secrets |
 
 ---
 
-Happy Learning!
 **TrainWithShubham**
