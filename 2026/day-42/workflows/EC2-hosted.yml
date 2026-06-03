@@ -1,0 +1,22 @@
+name: self-hosted-runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  self-hosted:
+    runs-on:  EC2-runner
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@vv4
+
+      - name: Print Hostname
+        run: hostname
+
+      - name: Print Working Directory
+        run: pwd
+
+      - name: Create a File
+
+        run: echo "Welcome to self hosted runner" > self-hosted.txt
