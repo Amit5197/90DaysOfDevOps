@@ -18,8 +18,29 @@ Every job needs a machine to run on. Today you understand **runners** — GitHub
    - The current user running the job
 3. Watch all 3 run in parallel
 
-Write in your notes: What is a GitHub-hosted runner? Who manages it?
+<img width="1907" height="837" alt="image" src="https://github.com/user-attachments/assets/1b049c19-2308-4c12-86f8-7e0e92b9265a" />
 
+<img width="1911" height="682" alt="image" src="https://github.com/user-attachments/assets/b9e91a5b-46a3-4491-9ecb-90329a378e12" />
+
+<img width="1902" height="697" alt="image" src="https://github.com/user-attachments/assets/4108f894-be6a-4864-a187-6c309fba02e4" />
+
+<img width="1897" height="891" alt="image" src="https://github.com/user-attachments/assets/3660f4c0-6f2f-4093-85ff-59da38782d6f" />
+
+
+**What is a GitHub-hosted runner? Who manages it?**
+
+    What is a GitHub-hosted runner? Who manages it?
+
+    - `Github-hosted` runner is a temporary virtual machine provided by GitHub that runs GitHub Actions workflows.
+
+    - `GitHub-hosted` runners are managed by GitHub on Microsoft Azure infrastructure.
+    
+    - Responsible for:
+        - Creating the virtual machine
+        - Installing software
+        -  Maintaining security
+        - Deleting the machine after the job completes.
+        
 ---
 
 ### Task 2: Explore What's Pre-installed
