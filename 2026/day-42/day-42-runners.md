@@ -34,6 +34,7 @@ Every job needs a machine to run on. Today you understand **runners** — GitHub
     - `Github-hosted` runner is a temporary virtual machine provided by GitHub that runs GitHub Actions workflows.
 
     - `GitHub-hosted` runners are managed by GitHub on Microsoft Azure infrastructure.
+    
     - Responsible for:
         - Creating the virtual machine
         - Installing software
