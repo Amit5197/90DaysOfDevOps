@@ -1,0 +1,54 @@
+name: github runner demo
+
+on:
+  workflow_dispatch: 
+
+
+jobs:
+  ubuntu-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print ubuntu runner info
+        run: |
+          echo "Operating System:"
+          uname -a
+          echo "Hostname:"
+          hostname
+          echo "Current User:"
+          whoami
+
+      - name: print tools version
+        run: |
+          echo "Docker version:"
+          docker --version
+          echo "Python version:"
+          python --version
+          echo "Node version:"
+          node --version
+          echo "Git version:"
+          git --version
+
+
+  windows-job:
+    runs-on: windows-latest
+    steps:
+      - name: print windows runner info
+        run: |
+          echo "Opearting System:"
+          winver
+          echo "Hostname:"
+          hostname
+          echo "Current User:"
+          whoami
+          
+  macos-job:
+     runs-on: macos-latest
+     steps:
+       - name: print macos runner info
+         run: |
+           echo "Operating system:"
+           system_profiler SPSoftwareDataType
+           echo "Hostname:"
+           hostname
+           echo "Current User:"
+           whoami
