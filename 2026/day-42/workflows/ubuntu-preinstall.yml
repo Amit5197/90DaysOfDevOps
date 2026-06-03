@@ -1,0 +1,21 @@
+name: ubuntu preinstalled software
+
+on:
+  workflow_dispatch: 
+
+
+jobs:
+  ubuntu-job:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: print tools version
+        run: |
+          echo "Docker version:"
+          docker --version
+          echo "Python version:"
+          python --version
+          echo "Node version:"
+          node --version
+          echo "Git version:"
+          git --version
