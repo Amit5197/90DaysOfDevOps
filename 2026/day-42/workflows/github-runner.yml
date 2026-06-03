@@ -10,6 +10,8 @@ jobs:
       - name: print ubuntu runner info
         run: |
           echo "Operating System:"
+          cat /etc/os-release | grep PRETTY_NAME
+          echo "Kernel Info:"
           uname -a
           echo "Hostname:"
           hostname
@@ -34,11 +36,13 @@ jobs:
         shell: powershell
         run: |
           Write-Host "Operating System:"
-          Get-CimInstance Win32_OperatingSystem | Select-Object Caption, Version, OSArchitecture
+          Get-CimInstance Win32_OperatingSystem | Select-Object -ExpandProperty Caption
+          Write-Host "OS Version:"
+          [Environment]::OSVersion.Version
           Write-Host "Hostname:"
-          hostname
+          $env:COMPUTERNAME
           Write-Host "Current User:"
-          whoami
+          [Security.Principal.WindowsIdentity]::GetCurrent().Name
           
   macos-job:
      runs-on: macos-latest
