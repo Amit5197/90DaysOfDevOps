@@ -3,7 +3,6 @@ name: github runner demo
 on:
   workflow_dispatch: 
 
-
 jobs:
   ubuntu-job:
     runs-on: ubuntu-latest
@@ -28,17 +27,17 @@ jobs:
           echo "Git version:"
           git --version
 
-
   windows-job:
     runs-on: windows-latest
     steps:
       - name: print windows runner info
+        shell: powershell
         run: |
-          echo "Opearting System:"
-          winver
-          echo "Hostname:"
+          Write-Host "Operating System:"
+          Get-CimInstance Win32_OperatingSystem | Select-Object Caption, Version, OSArchitecture
+          Write-Host "Hostname:"
           hostname
-          echo "Current User:"
+          Write-Host "Current User:"
           whoami
           
   macos-job:
@@ -47,7 +46,7 @@ jobs:
        - name: print macos runner info
          run: |
            echo "Operating system:"
-           system_profiler SPSoftwareDataType
+           sw_vers
            echo "Hostname:"
            hostname
            echo "Current User:"
