@@ -37,7 +37,7 @@ Every job needs a machine to run on. Today you understand **runners** — GitHub
         -  Installing software
         -  Maintaining security
         -  Deleting the machine after the job completes.
-
+        
 ---
 
 ### Task 2: Explore What's Pre-installed
