@@ -51,7 +51,11 @@ Every job needs a machine to run on. Today you understand **runners** — GitHub
    - Git version
 2. Look up the GitHub docs for the full list of pre-installed software on `ubuntu-latest`
 
-Write in your notes: Why does it matter that runners come with tools pre-installed?
+<img width="1918" height="812" alt="image" src="https://github.com/user-attachments/assets/e48442bf-12cd-4028-9854-bb156f1da3a2" />
+
+**Write in your notes: Why does it matter that runners come with tools pre-installed?**
+
+- It matters because pre-installed tools make workflows faster and easier to configure. Developers can run builds and tests immediately without installing common tools like Docker, Python, Node.js, and Git, while GitHub maintains and updates the environment.
 
 ---
 
