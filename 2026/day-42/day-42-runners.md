@@ -71,6 +71,8 @@ Every job needs a machine to run on. Today you understand **runners** — GitHub
 
 <img width="1567" height="545" alt="image" src="https://github.com/user-attachments/assets/00fc5a6c-4321-422f-a0b4-e478cd1745c6" />
 
+<img width="1631" height="472" alt="image" src="https://github.com/user-attachments/assets/b620b3f7-0200-4561-9d24-8c7ab7097150" />
+
 ---
 
 ### Task 4: Use Your Self-Hosted Runner
@@ -83,7 +85,10 @@ Every job needs a machine to run on. Today you understand **runners** — GitHub
 4. Trigger it and watch it run on your own hardware
 
 **Verify:** Check your machine — is the file there?
+- Yes,file is there
 
+<img width="1631" height="472" alt="image" src="https://github.com/user-attachments/assets/37f85b66-4932-4790-b4b3-afdb6535c97e" />
+  
 ---
 
 ### Task 5: Labels
@@ -92,7 +97,9 @@ Every job needs a machine to run on. Today you understand **runners** — GitHub
 3. Trigger it — does it still pick up the job? - **Yes**
 
 Write in your notes: Why are labels useful when you have multiple self-hosted runners?
-- When you have multiple self‑hosted runners, labels let you choose exactly which runner should execute a job.
+- Labels are useful when you have multiple self-hosted runners because they help GitHub Actions choose the correct runner for a specific job
+
+<img width="1772" height="772" alt="image" src="https://github.com/user-attachments/assets/dcfaca8a-a39a-4d98-8865-dd7786623250" />
 
 ---
 
