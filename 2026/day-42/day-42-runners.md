@@ -69,6 +69,8 @@ Every job needs a machine to run on. Today you understand **runners** — GitHub
 
 **Verify:** Your runner appears in the Runners list with a green dot.
 
+<img width="1567" height="545" alt="image" src="https://github.com/user-attachments/assets/00fc5a6c-4321-422f-a0b4-e478cd1745c6" />
+
 ---
 
 ### Task 4: Use Your Self-Hosted Runner
