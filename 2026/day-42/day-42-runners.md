@@ -69,7 +69,7 @@ Every job needs a machine to run on. Today you understand **runners** — GitHub
 
 **Verify:** Your runner appears in the Runners list with a green dot.
 
-<img width="1567" height="545" alt="image" src="https://github.com/user-attachments/assets/00fc5a6c-4321-422f-a0b4-e478cd1745c6" />
+<img width="1075" height="702" alt="image" src="https://github.com/user-attachments/assets/200bea48-60ef-4738-a2dc-5e629d27f8ab" />
 
 <img width="1631" height="472" alt="image" src="https://github.com/user-attachments/assets/b620b3f7-0200-4561-9d24-8c7ab7097150" />
 
