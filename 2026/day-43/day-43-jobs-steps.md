@@ -93,27 +93,22 @@ Create `.github/workflows/smart-pipeline.yml` that:
 2. Has a `lint` job and a `test` job running in parallel
 3. Has a `summary` job that runs after both, prints whether it's a `main` branch push or a feature branch push, and prints the commit message
 
----
+<img width="1901" height="577" alt="image" src="https://github.com/user-attachments/assets/0d0e3e07-a699-418f-b91f-7ad06d304ba9" />
 
-## Hints
-- Job dependency: `needs: [job-name]`
-- Set output: `echo "date=$(date)" >> $GITHUB_OUTPUT`
-- Read output: `${{ needs.job-name.outputs.date }}`
-- Conditionals: `if: github.ref == 'refs/heads/main'`
-- Commit message: `${{ github.event.commits[0].message }}`
+<img width="1902" height="877" alt="image" src="https://github.com/user-attachments/assets/75dd6b31-da1d-47fb-adfb-c80dcec0b4b0" />
 
 ---
 
-## Documentation
-Create `day-43-jobs-steps.md` with:
-- Key workflow snippets
-- What `needs:` and `outputs:` do in your own words
+## Key Takeaways
 
----
-
-## Submission
-1. Add `day-43-jobs-steps.md` to `2026/day-43/`
-2. Commit and push to your fork
+| Concept              | Purpose                                                 |
+| -------------------- | ------------------------------------------------------- |
+| `needs:`             | Create job dependencies                                 |
+| `env:`               | Define environment variables at workflow/job/step level |
+| `outputs:`           | Pass data between jobs                                  |
+| `if:`                | Run steps/jobs conditionally                            |
+| `continue-on-error:` | Allow steps to fail without stopping the job            |
+| GitHub Context       | Access workflow metadata (SHA, actor, ref, etc.)        |
 
 ---
 
