@@ -38,6 +38,8 @@ Print all three in a single step and verify each is accessible.
 
 Then use a **GitHub context variable** — print the commit SHA and the actor (who triggered the run).
 
+<img width="1897" height="797" alt="image" src="https://github.com/user-attachments/assets/a9269024-b45f-4830-8996-fa1952cf7f3d" />
+
 ---
 
 ### Task 3: Job Outputs
@@ -45,7 +47,28 @@ Then use a **GitHub context variable** — print the commit SHA and the actor (w
 2. Create a second job that **reads that output** and prints it
 3. Pass the value using `outputs:` and `needs.<job>.outputs.<name>`
 
-Write in your notes: Why would you pass outputs between jobs?
+<img width="1911" height="570" alt="image" src="https://github.com/user-attachments/assets/df8c8557-59ad-41fc-97b0-508d204cd0b6" />
+<img width="1907" height="762" alt="image" src="https://github.com/user-attachments/assets/40bc008b-4b71-44fb-85ee-7c9acdcf666d" />
+
+Write in your notes: 
+
+**Why would you pass outputs between jobs?**
+
+- Each job runs separately, so Job 2 cannot see what Job 1 created.
+- Outputs are used to pass that result from Job 1 to Job 2.
+- Example:
+  
+- Job 1 – Build Docker image
+    - This job builds the image and creates a tag for example:myapp:1.0.0
+
+- Job 2 – Push image to registry
+    - This job must know which image tag was created so it can push the correct image.
+
+- Job 3 – Deploy the app
+    - The deployment job also needs the same tag myapp:1.0.0 to deploy that exact image.
+
+- Why pass outputs?
+    - The tag created in Job 1 is passed as an output so the other jobs know exactly which Docker image to use.
 
 ---
 
@@ -55,6 +78,12 @@ In a workflow, add:
 2. A step that only runs when the previous step **failed**
 3. A job that only runs on **push** events, not on pull requests
 4. A step with `continue-on-error: true` — what does this do?
+
+<img width="1900" height="717" alt="image" src="https://github.com/user-attachments/assets/4105f830-e033-45e4-bf5a-2873ce9d7fc8" />
+
+<img width="1895" height="747" alt="image" src="https://github.com/user-attachments/assets/c41f4fc0-9361-4b70-b871-46076cae130a" />
+
+<img width="1875" height="712" alt="image" src="https://github.com/user-attachments/assets/6e3e526e-5437-47ff-b08f-2881fc1509d4" />
 
 ---
 
