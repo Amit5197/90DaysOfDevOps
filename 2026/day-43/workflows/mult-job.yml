@@ -1,6 +1,7 @@
 name: multi-job dependencies
-
 on:
+  push:
+    branches: [ "**" ] # This triggers on a push to ANY branch
   workflow_dispatch:
 
 jobs:
