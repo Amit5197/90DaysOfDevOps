@@ -15,6 +15,13 @@ Today your pipeline starts doing **real work** — storing sensitive values secu
 
 Write in your notes: Why should you never print secrets in CI logs?
 
+<img width="1907" height="580" alt="image" src="https://github.com/user-attachments/assets/2c6c1914-abb6-44b6-8aca-99fc0d4d5c60" />
+<img width="1067" height="312" alt="image" src="https://github.com/user-attachments/assets/afce415a-b6bb-4a66-b275-08e07facfc2a" />
+
+GitHub automatically replaces secrets with ***
+
+<img width="1912" height="772" alt="image" src="https://github.com/user-attachments/assets/fd76d95b-5cba-4bc2-b8a3-6d81dd0e8226" />
+
 ---
 
 ### Task 2: Use Secrets as Environment Variables
