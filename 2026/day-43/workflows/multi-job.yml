@@ -1,6 +1,8 @@
 name: multi-job dependencies
 
 on:
+  push:
+    branches: [ main, master ]
   workflow_dispatch:
   
 jobs:
