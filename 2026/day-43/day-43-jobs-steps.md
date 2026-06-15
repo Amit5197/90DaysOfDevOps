@@ -18,6 +18,14 @@ Make `deploy` run only **after** `test` succeeds.
 
 **Verify:** Check the workflow graph in the Actions tab — does it show the dependency chain?
 
+- Yes It show the dependency chain
+  
+<img width="1906" height="777" alt="image" src="https://github.com/user-attachments/assets/6e604607-1a38-40cc-9c2d-d23a4b03894e" />
+
+- `needs` : tells gitHub actions which job must finish before another job can start.
+
+[ Build ] ──► [ Test ] ──► [ Deploy ]
+
 ---
 
 ### Task 2: Environment Variables
