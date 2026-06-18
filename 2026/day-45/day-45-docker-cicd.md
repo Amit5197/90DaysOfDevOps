@@ -51,12 +51,20 @@ Add a condition so the push step only runs on the `main` branch — not on featu
 
 Test it: push to a feature branch and verify the image is built but NOT pushed.
 
+<img width="1892" height="847" alt="image" src="https://github.com/user-attachments/assets/8059f94e-7a5b-47a0-a23b-b5996f04741e" />
+
+- On the `Amit5197-patch-1` branch, the image was built and the push step was skipped.
+  
+<img width="1895" height="850" alt="image" src="https://github.com/user-attachments/assets/a0f7ed9f-d43d-4d43-96d5-297a51716d1d" />
+
 ---
 
 ### Task 5: Add a Status Badge
 1. Get the badge URL for your `docker-publish` workflow from the Actions tab
 2. Add it to your `README.md`
 3. Push — the badge should show green
+
+<img width="882" height="300" alt="image" src="https://github.com/user-attachments/assets/60e1e2fe-36d1-4715-852b-5025d026f3b4" />
 
 ---
 
@@ -67,35 +75,29 @@ Test it: push to a feature branch and verify the image is built but NOT pushed.
 
 Write in your notes: What is the full journey from `git push` to a running container?
 
+(Dockerhub)(https://hub.docker.com/repository/docker/amit5197/webapp/general)
+
+- Yes,its woking
+
+<img width="1750" height="452" alt="image" src="https://github.com/user-attachments/assets/096e8490-3510-4568-ac1a-ca236a8fb8fe" />
+
+<img width="1792" height="897" alt="image" src="https://github.com/user-attachments/assets/682d249c-d76d-410d-95a8-e1a6929033c5" />
+
+1. git push – Code is pushed to GitHub.
+
+2. GitHub Actions triggers – The CI/CD workflow starts and Copleted all task or jobs.
+
+3. Checkout code: `uses: actions/checkout@v4`
+
+4. Login to Docker Hub: `uses: docker/login-action@v3`
+
+5. Build Docker image using the Dockerfile.
+    - If code is pushed to main: Docker image is built, tagged, and pushed to Docker Hub.
+    - If pushed to other branches or PRs:Docker image is only built for testing. It is not pushed to Docker Hub.
+
+6. Run the container: `docker run -d --name web -p 80:80 amit5197/webapp:latestimage_ID`
+
 ---
-
-## Hints
-- Docker login: `uses: docker/login-action@v3`
-- Build and push: `uses: docker/build-push-action@v5`
-- Short SHA: `${{ github.sha }}` (use `cut` or `slice` to get first 7 chars)
-- Badge URL format: `https://github.com/<user>/<repo>/actions/workflows/<file>.yml/badge.svg`
-
----
-
-## Documentation
-Create `day-45-docker-cicd.md` with:
-- Your complete workflow YAML
-- Docker Hub link to your image
-- Screenshot of the pipeline run
-- The full journey described in Task 6
-
----
-
-## Submission
-1. Add `day-45-docker-cicd.md` to `2026/day-45/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share your Docker Hub image link and the green badge on LinkedIn.
-
-`#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
 Happy Learning!
 **TrainWithShubham**
