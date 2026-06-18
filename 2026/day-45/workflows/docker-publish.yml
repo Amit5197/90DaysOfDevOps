@@ -1,0 +1,48 @@
+name: docker cicd
+
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # - name: Build docker image & Tag
+      #   uses: docker/build-push-action@v6
+      #   with:
+      #     context: .
+      #     push: false
+      #     tags: webapp:latest
+            
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Set short SHA using slice
+        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
+      # Build and Push only on main
+      - name: Build, tag & push to Docker Hub if pushed from main
+        if: github.ref_name == 'main'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/webapp:latest
+            ${{ secrets.DOCKER_USERNAME }}/webapp:sha-${{ env.SHORT_SHA }}
+
+    # Build only for feature branches and PRs
+      - name: Build image if pushed from other branches or PRs
+        if: github.ref_name != 'main'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
