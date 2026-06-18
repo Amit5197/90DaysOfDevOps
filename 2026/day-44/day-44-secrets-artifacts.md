@@ -29,6 +29,10 @@ GitHub automatically replaces secrets with ***
 2. Use it in a shell command without ever hardcoding it
 3. Add `DOCKER_USERNAME` and `DOCKER_TOKEN` as secrets (you'll need these on Day 45)
 
+<img width="1876" height="787" alt="image" src="https://github.com/user-attachments/assets/e836693c-725f-483f-acd8-97e25512e956" />
+
+<img width="1402" height="422" alt="image" src="https://github.com/user-attachments/assets/47be4a0e-4be0-4b8b-8e8c-a1f15ef07857" />
+
 ---
 
 ### Task 3: Upload Artifacts
