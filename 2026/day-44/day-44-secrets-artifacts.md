@@ -42,6 +42,10 @@ GitHub automatically replaces secrets with ***
 
 **Verify:** Can you see and download it from GitHub?
 
+- Yes, downloaded it.
+
+<img width="1912" height="692" alt="image" src="https://github.com/user-attachments/assets/807f5211-0423-4b06-a3e7-cbc60b8fd322" />
+
 ---
 
 ### Task 4: Download Artifacts Between Jobs
@@ -49,6 +53,12 @@ GitHub automatically replaces secrets with ***
 2. Job 2: download the artifact from Job 1 and use it (print its contents)
 
 Write in your notes: When would you use artifacts in a real pipeline?
+Artifacts are used to store and transfer files generated during pipelines.
+Test reports,
+
+<img width="1901" height="552" alt="image" src="https://github.com/user-attachments/assets/92493f49-64d1-49b5-827b-dbd44c99d1e0" />
+
+<img width="1887" height="832" alt="image" src="https://github.com/user-attachments/assets/42da654a-66df-494d-9031-e2f251b24ca1" />
 
 ---
 
