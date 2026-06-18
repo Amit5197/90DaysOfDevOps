@@ -73,6 +73,12 @@ Take any script from your earlier days (Python or Shell) and run it in CI:
 3. Intentionally break the script — verify the pipeline goes red
 4. Fix it — verify it goes green again
 
+<img width="1917" height="817" alt="image" src="https://github.com/user-attachments/assets/1a753e52-4143-41d7-89ef-82e87867c056" />
+
+<img width="1896" height="547" alt="image" src="https://github.com/user-attachments/assets/08e26eab-38b9-48c5-94dc-6af6e9992de3" />
+
+<img width="1917" height="907" alt="image" src="https://github.com/user-attachments/assets/5d0f232f-a701-4bca-bf64-311592495e1a" />
+
 ---
 
 ### Task 6: Caching
@@ -80,21 +86,26 @@ Take any script from your earlier days (Python or Shell) and run it in CI:
 2. Run it twice — observe the time difference
 3. Write in your notes: What is being cached and where is it stored?
 
----
+- What is cache: Python packages downloaded by pip from requirements.txt.
+- Where it’s stored: On GitHub Actions servers, restored to the runner at ~/.cache/pip.
 
-## Hints
-- Secrets: `${{ secrets.SECRET_NAME }}`
-- Upload artifact: `uses: actions/upload-artifact@v4`
-- Download artifact: `uses: actions/download-artifact@v4`
-- Cache: `uses: actions/cache@v4`
-- GitHub masks secret values in logs automatically
+<img width="1480" height="557" alt="image" src="https://github.com/user-attachments/assets/6fcb6b1b-40fa-4a0b-a8d5-107a82667fa1" />
 
 ---
 
-## Learn in Public
-Share your first real test run passing in CI on LinkedIn.
+**What I lerned from Secret Management**
 
-`#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
+- **Store sensitive data (like API keys, tokens, passwords) in GitHub Actions Secrets, not in code.**
+- **They are encrypted, injected at runtime, and never exposed in logs.**
+
+**The Secret Management Lifecycle**
+- Encryption at Rest: When you save a token (like DOCKER_TOKEN) in GitHub's settings, GitHub immediately encrypts it using strong asymmetric encryption before it ever hits their databases.
+
+- Injected on Demand: The secret is only decrypted and injected into the runner environment at the exact moment a specific job or step requests it via the ${{ secrets.YOUR_SECRET }} syntax.
+
+- Automatic Log Masking: If a script accidentally tries to print out or echo that secret to the standard output, GitHub Actions automatically intercepts it and replaces the value with in the build logs.
+
+---
 
 Happy Learning!
 **TrainWithShubham**
