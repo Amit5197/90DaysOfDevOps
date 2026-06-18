@@ -78,6 +78,9 @@ Extend `reusable-build.yml`:
    - Reads and prints the `build_version` output
 
 **Verify:** Does the second job print the version from the reusable workflow?
+- yes
+  
+<img width="1086" height="582" alt="image" src="https://github.com/user-attachments/assets/c51285b6-09ba-427f-9100-b1ed10180a01" />
 
 ---
 
@@ -92,6 +95,10 @@ Create a **custom composite action** in your repo at `.github/actions/setup-and-
 
 **Verify:** Does your custom action run and print the greeting?
 
+- Yes,custom action run and print the greeting
+
+<img width="1662" height="887" alt="image" src="https://github.com/user-attachments/assets/f0257088-6336-4bc8-9b3a-6171775184a3" />
+
 ---
 
 ### Task 6: Reusable Workflow vs Composite Action
@@ -100,11 +107,11 @@ Fill this in your notes:
 | | Reusable Workflow | Composite Action |
 |---|---|---|
 | Triggered by | `workflow_call` | `uses:` in a step |
-| Can contain jobs? | ? | ? |
-| Can contain multiple steps? | ? | ? |
-| Lives where? | ? | ? |
-| Can accept secrets directly? | ? | ? |
-| Best for | ? | ? |
+| Can contain jobs? | Yes | No |
+| Can contain multiple steps? | Yes | Yes |
+| Lives where? | .github/workflows/ | .github/actions/ |
+| Can accept secrets directly? | Yes | No |
+| Best for | Reusing full workflows| Reusing small step groups |
 
 ---
 
