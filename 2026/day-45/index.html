@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Docker CI/CD Pipeline Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin:0;
+  font-family:Segoe UI, Arial, sans-serif;
+  background:linear-gradient(135deg,#1d2b64,#f8cdda);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  color:white;
+}
+
+.container {
+  background:rgba(0,0,0,0.35);
+  padding:30px;
+  border-radius:20px;
+  width:90%;
+  max-width:1000px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.4);
+  text-align:center;
+}
+
+h1 {
+  margin-bottom:25px;
+  font-size:42px;
+}
+
+.badge {
+  margin-bottom:30px;
+}
+
+/* Horizontal pipeline */
+.pipeline {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.stage {
+  padding:20px 25px;
+  border-radius:12px;
+  font-size:18px;
+  font-weight:bold;
+  position:relative;
+  flex:1;
+  min-width:150px;
+  text-align:center;
+  color:white;
+  transition: transform 0.3s;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.stage:hover {
+  transform: translateY(-5px);
+}
+
+/* Stage colors */
+.stage.checkout { background:#3498db; }   /* Blue */
+.stage.build { background:#2ecc71; }      /* Green */
+.stage.push { background:#e67e22; }       /* Orange */
+.stage.pullrun { background:#9b59b6; }    /* Purple */
+
+/* Icons */
+.stage span.icon {
+  font-size:32px;
+  margin-bottom:10px;
+}
+
+/* Arrow between stages */
+.stage::after {
+  content:'→';
+  position:absolute;
+  right:-20px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:24px;
+  color:#fff;
+}
+
+.stage:last-child::after {
+  content:'';
+}
+
+.tech {
+  margin-top:30px;
+}
+
+.tech span {
+  display:inline-block;
+  background:white;
+  color:black;
+  padding:6px 12px;
+  margin:5px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🚀 Docker CI/CD using GitHub Actions</h1>
+
+<div class="badge">
+<img src="https://github.com/srdangat/github-actions-practice/actions/workflows/docker-publish.yml/badge.svg" alt="GitHub Actions Docker Publish Status">
+</div>
+
+<div class="pipeline">
+  <div class="stage checkout">
+    <span class="icon">🔄</span>
+    Code Checkout
+  </div>
+  <div class="stage build">
+    <span class="icon">🐳</span>
+    Build
+  </div>
+  <div class="stage push">
+    <span class="icon">📤</span>
+    Push
+  </div>
+  <div class="stage pullrun">
+    <span class="icon">🚀</span>
+    Pull & Run
+  </div>
+</div>
+
+<div class="tech">
+<span>Docker</span>
+<span>Nginx</span>
+<span>GitHub Actions</span>
+<span>Docker Hub</span>
+</div>
+
+</div>
+
+</body>
+</html>
