@@ -39,6 +39,10 @@ Create `.github/workflows/reusable-build.yml`:
 
 **Verify:** This file alone won't run — it needs a caller. That's next.
 
+<img width="1457" height="597" alt="image" src="https://github.com/user-attachments/assets/5a9f4c81-0257-4ee9-8441-73935b0977fe" />
+
+(https://github.com/Amit5197/github-actions-practice/actions/workflows/Reusable-build.yml)
+
 ---
 
 ### Task 3: Create a Caller Workflow
@@ -58,6 +62,10 @@ Create `.github/workflows/call-build.yml`:
 3. Push to `main` and watch it run
 
 **Verify:** In the Actions tab, do you see the caller triggering the reusable workflow? Click into the job — can you see the inputs printed?
+
+<img width="1857" height="572" alt="image" src="https://github.com/user-attachments/assets/cfa22b70-bf0b-4f55-9e36-91bbd4ff52a6" />
+
+<img width="1872" height="891" alt="image" src="https://github.com/user-attachments/assets/bb96eef4-c79f-408b-9d44-bbda3f58beb9" />
 
 ---
 
