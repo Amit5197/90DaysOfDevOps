@@ -10,9 +10,17 @@ You've been writing workflows from scratch every time. In the real world, teams 
 ### Task 1: Understand `workflow_call`
 Before writing any code, research and answer in your notes:
 1. What is a **reusable workflow**?
+- A `reusable workflow` is a GitHub Actions workflow that can be called from another workflow, allowing you to REUSE the same automation logic across multiple workflows.
+
 2. What is the `workflow_call` trigger?
+- `workflow_call` is a GitHub Actions trigger that allows a workflow to be executed by another workflow instead of events like push or pull_request.
+
 3. How is calling a reusable workflow different from using a regular action (`uses:`)?
+- `Reusable Workflow` is used at the workflow level and written inside `jobs.<job_id>.uses.` It is used to reuse a complete workflow with jobs and steps,for example calling a build pipeline.
+- `Regular Action` is used at the `step level` and written inside `steps.uses`. It is used to reuse a single task,for example checking out code or running Docker.
+
 4. Where must a reusable workflow file live?
+- It must be inside the folder: `.github/workflows/`
 
 ---
 
