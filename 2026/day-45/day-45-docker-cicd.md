@@ -40,6 +40,10 @@ Add steps to:
 
 **Verify:** Go to Docker Hub — is your image there with both tags?
 
+- Yes, both tags are in Dockerhub
+
+<img width="1217" height="786" alt="image" src="https://github.com/user-attachments/assets/2a790130-3cec-4c45-9264-d14d9079d561" />
+
 ---
 
 ### Task 4: Only Push on Main
