@@ -36,6 +36,8 @@ Create `.github/workflows/pr-checks.yml` — a real-world PR gate:
 
 **Verify:** Open a PR from a badly named branch — does the check fail?
 
+<img width="1866" height="807" alt="image" src="https://github.com/user-attachments/assets/6c63ebf8-94e1-4042-bbc8-873165199574" />
+
 ---
 
 ### Task 3: Scheduled Workflows (Cron Deep Dive)
