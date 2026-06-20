@@ -1,0 +1,36 @@
+name: Scheduled workflow
+
+on:
+  schedule:
+    - cron: "30 2 * * 1" # every Monday at 2:30 AM UTC
+    - cron: "0 */6 * * *" # every 6 hours
+  workflow_dispatch:
+
+jobs:
+  scheduled-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Print which schedule triggered 
+        run: |
+         if [ -z "${{ github.event.schedule }}" ]; then
+            echo "Workflow triggered manually"
+         else
+            echo "Workflow triggered by cron schedule: ${{ github.event.schedule }}"
+         fi
+
+      - name: Health Check
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://www.trainwithshubham.com/)
+          echo "HTTP Status: $STATUS"
+          if [ "$STATUS" -ne 200 ]; then
+            echo "Health check failed!"
+          exit 1
+          fi
+
+
+# -s silent mode, hides progress and error messages
+# -o /dev/null → discard the page content, don’t print HTML
+# -w "%{http_code}" → print only the HTTP status code (like 200, 404, etc.)
