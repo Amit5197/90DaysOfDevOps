@@ -79,7 +79,15 @@ Create `.github/workflows/smart-triggers.yml`:
 3. Add branch filters to only trigger on `main` and `release/*` branches
 4. Test it: push a change to a `.md` file — does the workflow skip?
 
+Yes,Workflow skip
+
+<img width="1182" height="672" alt="image" src="https://github.com/user-attachments/assets/42c67364-dd5d-4720-94f3-dd4ad927ea9c" />
+
 Write in your notes: When would you use `paths` vs `paths-ignore`?
+
+- Use paths when you want the workflow to run only if specific files or folders change.
+
+- Use paths-ignore when the workflow should run for most changes but skip certain files.
 
 ---
 
