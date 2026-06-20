@@ -47,12 +47,16 @@ Create `.github/workflows/scheduled-tasks.yml`:
 3. In the job, print which schedule triggered using `${{ github.event.schedule }}`
 4. Add a step that acts as a **health check** — curl a URL and check the response code
 
-Write in your notes:
-- The cron expression for: every weekday at 9 AM IST
-- The cron expression for: first day of every month at midnight
-- Why GitHub says scheduled workflows may be delayed or skipped on inactive repos
-
 **Important:** Also add `workflow_dispatch` so you can test it manually without waiting for the schedule.
+
+<img width="1882" height="857" alt="image" src="https://github.com/user-attachments/assets/9c399eeb-25b3-4acb-843d-195d371013b3" />
+
+Write in your notes:
+- The cron expression for: every weekday at 9 AM IST: `0 3 * * 1-5`
+- The cron expression for: first day of every month at midnight: `0 0 1 * *`
+- Why GitHub says scheduled workflows may be delayed or skipped on inactive repos
+   - Scheduled workflows run on shared runners and only on the default branch.
+   - GitHub may delay/skip schedules on inactive repositories to save resources.
 
 ---
 
