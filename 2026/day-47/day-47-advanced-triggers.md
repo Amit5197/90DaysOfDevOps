@@ -107,6 +107,12 @@ Create two workflows:
 
 **Verify:** Push a commit — does the test workflow run first, then trigger the deploy workflow?
 
+<img width="1727" height="891" alt="image" src="https://github.com/user-attachments/assets/10969d40-ec17-4969-ba58-3d44d6a7abb7" />
+
+https://github.com/Amit5197/github-actions-practice/blob/main/.github/workflows/tests.yml
+
+https://github.com/Amit5197/github-actions-practice/blob/main/.github/workflows/deploy-after-tests.yml
+
 ---
 
 ### Task 6: `repository_dispatch` — External Event Triggers
@@ -120,7 +126,31 @@ Create two workflows:
      -f client_payload='{"environment":"production"}'
    ```
 
+<img width="1710" height="745" alt="image" src="https://github.com/user-attachments/assets/8a5cfe21-cec7-4a3b-b374-17ea71149a05" />
+
+
 Write in your notes: When would an external system (like a Slack bot or monitoring tool) trigger a pipeline?
+
+When would an external system (like a Slack bot or monitoring tool) trigger a pipeline?
+
+**An external system (like a Slack bot or monitoring tool) would trigger a pipeline when an event outside GitHub needs a workflow to run, such as:**
+   - A Slack bot sending a deploy request to start deployment.
+   - A monitoring tool detecting an error and triggering a fix workflow.
+   - One repository finishing work and notifying another repository to run a workflow.
+
+---
+
+`workflow_call`
+   - Makes a workflow reusable, like a function.
+   - One workflow calls another directly.
+   - Can pass inputs and secrets.
+   - `Example`: `deploy.yml` calls `test.yml` before deploying.
+
+`workflow_run`
+   - Triggers a workflow after another workflow finishes.
+   - Runs automatically based on workflow completion and status.
+   - No input passing.
+   - `Example`: `deploy.yml` runs only `after tests succeed`.
 
 ---
 
