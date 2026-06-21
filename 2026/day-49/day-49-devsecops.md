@@ -181,36 +181,48 @@ Always active
 Draw this diagram in your notes. You just built a **DevSecOps pipeline** — security is now part of your automation, not an afterthought.
 
 ```mermaid
-graph TD
-    subgraph Platform_Security ["Continuous Security Guardrails"]
-        direction LR
-        N[Always Active Ingress] --> O[GitHub Secret Scanning]
-        N --> P[Real-time Push Protection]
+graph LR
+    %% Core Ingress & Platform Controls
+    subgraph Controls [Platform Security]
+        A[Code Ingress] -->|Push Protection| B(Repository Gate)
+        B -->|Secret Scanning| C{Branch Target}
     end
 
-    subgraph CI_Pipeline ["PR Validation Pipeline - CI"]
-        A[Pull Request Opened/Updated] --> B[Job: Build & Test]
-        B -->|Pass| C[Step: Dependency Vulnerability Check]
-        C --> D[Step: Post PR Status Comment]
+    %% PR Verification Chain
+    subgraph CI [CI Pipeline: Pull Request]
+        C -->|PR Open/Sync| D[Build & Lint]
+        D --> E[Dependency Check]
+        E --> F[PR Status Comment]
     end
 
-    subgraph CD_Pipeline ["Main Release Pipeline - CD"]
-        E[Merge to Main / Workflow Dispatch] --> F[Job: Build & Test]
-        F -->|Pass| G[Job: Docker Build & Push]
-        G -->|Success| H{Step: Trivy Image Scan}
+    %% Main Branch Deployment Chain
+    subgraph CD [CD Pipeline: Main Branch]
+        C -->|Merge to Main| G[Build & Test Execution]
+        G --> H[Docker Build & Push]
+        H --> I{Trivy Security Gate}
         
-        H -->|Pass: Exit Code 0| I[Job: Deploy to Production]
-        H -->|Fail: Exit Code 1| J[Step: Upload SARIF Security Report]
-        J --> K[Terminate Pipeline & Alert]
+        %% Scan Gates
+        I -->|Pass: Exit 0| J[Production Deploy]
+        I -->|Fail: Exit 1| K[Upload SARIF Report]
+        K --> L[Terminate Run]
     end
 
-    subgraph Ops_Pipeline ["Post-Deployment Operations"]
-        L[Cron Trigger: Every 12 Hours] --> M[Job: Synthetic Health Check]
-        M --> Q[Step: Publish GITHUB_STEP_SUMMARY]
+    %% Post-Deployment Operations
+    subgraph Ops [Operations]
+        M[Cron Trigger: 12h] --> N[Synthetic Health Check]
+        N --> O[Publish Step Summary]
     end
 
-    D -.->|Approved Merge| E
-    I -->|Active State| M
+    %% Lifecycle Connections
+    F -.->|Approved Merge| G
+    J -->|Uptime Monitoring| N
+
+    %% Enterprise Color Palette Styling
+    style Controls fill:#fafafa,stroke:#607d8b,stroke-width:2px;
+    style CI fill:#f4f9fd,stroke:#2196f3,stroke-width:1.5px;
+    style CD fill:#f5fdf9,stroke:#10b981,stroke-width:1.5px;
+    style Ops fill:#faf5ff,stroke:#a855f7,stroke-width:1.5px;
+    style I fill:#fef2f2,stroke:#ef4444,stroke-width:2px;
 ```
 ---
 
