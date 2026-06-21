@@ -180,7 +180,8 @@ Always active
 
 Draw this diagram in your notes. You just built a **DevSecOps pipeline** — security is now part of your automation, not an afterthought.
 
-```graph TD
+```
+graph TD
     %% Subgraph 1: Global Platform Security (Always On)
     subgraph Platform_Security [🛡️ Continuous Security Guardrails]
         direction LR
