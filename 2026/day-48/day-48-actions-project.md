@@ -114,11 +114,11 @@ Create `.github/workflows/health-check.yml`:
 ### Task 7: Add Badges & Documentation
 1. Add status badges for all your workflows to the repo `README.md`
 
-[![pr pipeline](https://github.com/Amit5197/github-actions-capstone/actions/workflows/pr-pipeline.yml/badge.svg?branch=feature&event=pull_request)](https://github.com/Amit5197/github-actions-capstone/actions/workflows/pr-pipeline.yml)
+## 📊 Pipeline Status
 
-[![main pipeline](https://github.com/Amit5197/github-actions-capstone/actions/workflows/main-pipeline.yml/badge.svg)](https://github.com/Amit5197/github-actions-capstone/actions/workflows/main-pipeline.yml)
-
-[![health checkout](https://github.com/Amit5197/github-actions-capstone/actions/workflows/health-check.yml/badge.svg)](https://github.com/Amit5197/github-actions-capstone/actions/workflows/health-check.yml)
+| Pull Request Pipeline | Main Branch Pipeline | Automated Health Check |
+| :--- | :--- | :--- |
+| [![pr pipeline](https://github.com/Amit5197/github-actions-capstone/actions/workflows/pr-pipeline.yml/badge.svg?branch=feature&event=pull_request)](https://github.com/Amit5197/github-actions-capstone/actions/workflows/pr-pipeline.yml) | [![main pipeline](https://github.com/Amit5197/github-actions-capstone/actions/workflows/main-pipeline.yml/badge.svg)](https://github.com/Amit5197/github-actions-capstone/actions/workflows/main-pipeline.yml) | [![health checkout](https://github.com/Amit5197/github-actions-capstone/actions/workflows/health-check.yml/badge.svg)](https://github.com/Amit5197/github-actions-capstone/actions/workflows/health-check.yml) |
 
 2. Add a **pipeline architecture diagram** in your notes — draw (or describe) the flow:
    ```
@@ -126,19 +126,36 @@ Create `.github/workflows/health-check.yml`:
    Merge to main → build & test → Docker build & push → deploy
    Every 12 hours → health check
    ```
+   
+The workflow is completely automated via GitHub Actions, securing the application from code commit all the way to deployment and continuous monitoring.
+
+```mermaid
+graph TD
+    A[PR opened] --> B[Build & Test]
+    B -->|Pass| C[Dependency vulnerability check]
+    C --> D[PR Comment]
+    
+    E[Merge to main] --> F[Build & Test]
+    F -->|Pass| G[Docker Build & Push]
+    G -->|Pass| H[Trivy image scan]
+    H -->|Pass| I[Deploy to environment]
+    H -->|Fail| J[Exit]
+
+    I --> K[Every 12 hours]
+    K --> L[Health Check]
+    L --> M[Summary]
+
+    N[Always active] --> O[GitHub secret scanning]
+    N --> P[Push protection for secrets]
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style E fill:#bbf,stroke:#333,stroke-width:2px
+    style I fill:#bfb,stroke:#333,stroke-width:2px
+    style L fill:#ffb,stroke:#333,stroke-width:2px
 
 3. Fill in your notes: What would you add next? (Slack notifications? Multi-environment? Rollback?)
 
-
----
-
-## Brownie Points: Add Security to Your Pipeline
-Want to go above and beyond? Add a **DevSecOps** step to your main pipeline:
-1. Add `aquasecurity/trivy-action` after the Docker build step to scan your image for vulnerabilities
-2. Fail the pipeline if any **CRITICAL** severity CVE is found
-3. Upload the scan report as an artifact
-
-This is a preview of what you'll do in depth on **Day 49**. If you get this working today, you're already thinking like a DevSecOps engineer.
+<img width="1020" height="437" alt="image" src="https://github.com/user-attachments/assets/ad878ac8-d819-410c-9e7d-69178ab0a20e" />
 
 ---
 
