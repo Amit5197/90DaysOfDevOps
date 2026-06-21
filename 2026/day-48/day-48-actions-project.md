@@ -103,18 +103,32 @@ Create `.github/workflows/health-check.yml`:
    echo "- Status: PASSED" >> $GITHUB_STEP_SUMMARY
    echo "- Time: $(date)" >> $GITHUB_STEP_SUMMARY
    ```
+<img width="1777" height="857" alt="image" src="https://github.com/user-attachments/assets/aac15447-93f0-4e27-90c2-a574c5956779" />
+
+- Heath Summary
+
+  <img width="1097" height="657" alt="image" src="https://github.com/user-attachments/assets/85af1c9c-ee99-406e-b2c9-e6846c9971f1" />
 
 ---
 
 ### Task 7: Add Badges & Documentation
 1. Add status badges for all your workflows to the repo `README.md`
+
+[![pr pipeline](https://github.com/Amit5197/github-actions-capstone/actions/workflows/pr-pipeline.yml/badge.svg?branch=feature&event=pull_request)](https://github.com/Amit5197/github-actions-capstone/actions/workflows/pr-pipeline.yml)
+
+[![main pipeline](https://github.com/Amit5197/github-actions-capstone/actions/workflows/main-pipeline.yml/badge.svg)](https://github.com/Amit5197/github-actions-capstone/actions/workflows/main-pipeline.yml)
+
+[![health checkout](https://github.com/Amit5197/github-actions-capstone/actions/workflows/health-check.yml/badge.svg)](https://github.com/Amit5197/github-actions-capstone/actions/workflows/health-check.yml)
+
 2. Add a **pipeline architecture diagram** in your notes — draw (or describe) the flow:
    ```
    PR opened → build & test → PR checks pass
    Merge to main → build & test → Docker build & push → deploy
    Every 12 hours → health check
    ```
+
 3. Fill in your notes: What would you add next? (Slack notifications? Multi-environment? Rollback?)
+
 
 ---
 
