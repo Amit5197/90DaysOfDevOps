@@ -126,35 +126,27 @@ Create `.github/workflows/health-check.yml`:
    Every 12 hours → health check
    ```
    
-The workflow is completely automated via GitHub Actions, securing the application from code commit all the way to deployment and continuous monitoring.
+### Pipeline Architecture Diagram
 
-```mermaid
+ ```mermaid
 graph TD
     A[PR opened] --> B[Build & Test]
-    B -->|Pass| C[Dependency vulnerability check]
-    C --> D[PR Comment]
+    B -->|Pass| C[PR Comment]
+    B -->|Fail| D[PR Comment]
     
     E[Merge to main] --> F[Build & Test]
     F -->|Pass| G[Docker Build & Push]
-    G -->|Pass| H[Trivy image scan]
-    H -->|Pass| I[Deploy to environment]
-    H -->|Fail| J[Exit]
-
-    I --> K[Every 12 hours]
-    K --> L[Health Check]
-    L --> M[Summary]
-
-    N[Always active] --> O[GitHub secret scanning]
-    N --> P[Push protection for secrets]
-
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style E fill:#bbf,stroke:#333,stroke-width:2px
-    style I fill:#bfb,stroke:#333,stroke-width:2px
-    style L fill:#ffb,stroke:#333,stroke-width:2px
+    G -->|Pass| H[Print Deploy to Production]
+    
+    I[Deploy] --> J[Every 12 hours]
+    J --> K[Health Check]
+    K -->|Pass| L[Summary]
+    K -->|Fail| M[Summary]
+```
 
 3. Fill in your notes: What would you add next? (Slack notifications? Multi-environment? Rollback?)
 
-<img width="1020" height="437" alt="image" src="https://github.com/user-attachments/assets/ad878ac8-d819-410c-9e7d-69178ab0a20e" />
+<img width="1020" height="437" alt="image" src="https://github.com/user-attachments/assets/c71b455a-080c-4929-8092-017adccce31f" />
 
 ---
 
