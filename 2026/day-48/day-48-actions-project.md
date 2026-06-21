@@ -1,9 +1,8 @@
 # Day 48 – GitHub Actions Project: End-to-End CI/CD Pipeline
 
-## Task
-You've learned workflows, triggers, secrets, Docker builds, reusable workflows, and advanced events. Today you **put it all together** in one project — a complete, production-style CI/CD pipeline that builds, tests, and deploys using everything you've learned from Day 40 to Day 47.
+###  [Node js Project URL](https://github.com/Amit5197/github-actions-capstone/tree/main)
 
-This is your GitHub Actions capstone.
+###  [All YML files created](https://github.com/Amit5197/github-actions-capstone/tree/main/.github/workflows)
 
 ---
 
