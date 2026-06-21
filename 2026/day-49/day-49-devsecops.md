@@ -244,9 +244,72 @@ Add SARIF output to Trivy and upload it — your scan results will appear in the
   with:
     sarif_file: 'trivy-results.sarif'
 ```
+<img width="1592" height="566" alt="image" src="https://github.com/user-attachments/assets/fbdbc880-abd0-48de-a9e8-9cea8607a618" />
+
+### What you learned about secret scanning and dependency review
+- **Secret Scanning** : It detects sensitive data accidently pushed to your repo. Preventing leaks.
+- **Dependency review** : It analyzes project libraries to catch vulnerabilities, outdated packages, or risky changes before they’re merged.
+
+
+### Capstone Project link
+
+[Capstone Project link](https://github.com/Amit5197/github-actions-capstone)
+
+### Full Main Pipeline
+
+<img width="1832" height="636" alt="image" src="https://github.com/user-attachments/assets/d612bab6-f745-4b2e-8df3-e9a04e5a1b12" />
+
+---
 
 ### Learn About OIDC (Keyless Authentication)
 Instead of storing cloud credentials as long-lived secrets, GitHub Actions can use OIDC to get short-lived tokens automatically. Research: "GitHub Actions OIDC" — it's how production pipelines authenticate to AWS, GCP, and Azure without storing any keys.
+
+Why Production Environments Require OIDC
+Zero Secret Management Overhead: There are no API keys to rotate every 90 days, and there is zero risk of an engineer accidentally exposing a permanent cloud key in a build log or public repository.
+
+Granular Least Privilege: You can configure your cloud provider to only trust tokens originating from a specific environment, tag, or branch. For example, your production deployment role can be locked down so it refuses connections unless the token proves the run originated from a protected main branch.
+
+Automated Expiry: Because the credentials expire automatically after a short window, even if a running container is somehow compromised during execution, the stolen token becomes completely useless shortly after.
+
+```
+name: Deploy with OIDC
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  id-token: write # 🔑 CRITICAL: Required to request the JWT from GitHub
+  contents: read  # Required to checkout the repository code
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 🛡️ Authenticate dynamically using OIDC instead of long-lived secrets
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::123456789012:role/my-github-actions-oidc-role
+          aws-region: us-east-1
+          # No secrets.AWS_ACCESS_KEY_ID needed! 
+          # The action automatically handles the OIDC token exchange exchange behind the scenes.
+
+      - name: Deploy Infrastructure
+        run: |
+          aws s3 sync ./dist s3://my-production-bucket-name
+```
+### How OIDC Works (The Trust Handshake)
+- Instead of passing a static password, GitHub acts as a trusted identity provider. The authentication follows a strict cryptographic handshake:
+- The Trigger: A workflow runs on GitHub.
+
+- The Request: The GitHub Actions runner requests an OIDC token from GitHub's internal token service. GitHub generates a unique JWT (JSON Web Token) containing metadata about the specific run (repository, workflow name, branch, actor).
+- The Handshake: The runner sends this JWT straight to your cloud provider (e.g., AWS, GCP, Azure).
+- The Validation: The cloud provider validates the signature of the token against GitHub's public keys and checks your configured Trust Policy (e.g., "Only allow tokens coming from repository my-org/my-app on the main branch").
+- The Access: If the metadata matches, the cloud provider issues a temporary, scoped IAM security token (typically valid for 15 to 60 minutes) to the runner, allowing it to deploy resources.
 
 ---
 
