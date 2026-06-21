@@ -59,6 +59,8 @@ Create `.github/workflows/pr-pipeline.yml`:
 
 **Verify:** Open a PR — does it run tests only (no Docker push)?
 
+<img width="1037" height="697" alt="image" src="https://github.com/user-attachments/assets/667de408-d88e-4ddc-be58-b059365444c5" />
+
 ---
 
 ### Task 5: Main Branch Pipeline
