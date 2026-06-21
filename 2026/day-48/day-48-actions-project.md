@@ -75,6 +75,16 @@ Create `.github/workflows/main-pipeline.yml`:
 
 **Verify:** Merge a PR to `main` — does it run tests → build Docker → deploy in sequence?
 
+<img width="1885" height="687" alt="image" src="https://github.com/user-attachments/assets/f64b40ed-db17-41c9-9f69-e55ae2c7e5eb" />
+
+- Image URL
+  
+<img width="1242" height="617" alt="image" src="https://github.com/user-attachments/assets/172af18d-9fc6-407a-82b0-f238681195eb" />
+
+- Docker Image
+  
+<img width="1247" height="917" alt="image" src="https://github.com/user-attachments/assets/986dca9c-8de8-43af-b421-face2c2031c3" />
+
 ---
 
 ### Task 6: Scheduled Health Check
