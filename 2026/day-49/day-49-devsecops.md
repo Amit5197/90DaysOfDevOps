@@ -8,6 +8,7 @@ Don't worry — this isn't a security course. You're just adding a few smart ste
 ---
 
 ## What is DevSecOps?
+- DevSecOps is aprocess of integrating security in every stage of your CI/CD pipeline. Instead of cathing vulnerabilities late in production, DevSecOps insures they are identified and fixed early in CI/CD pipelines.
 
 Think of it like this:
 
@@ -61,7 +62,13 @@ Push and check the Actions tab. Read the scan output.
 
 **Verify:** Can you see the vulnerability table in the logs? Did it pass or fail?
 
+- Trivy Scan Passed
+
+<img width="1376" height="682" alt="image" src="https://github.com/user-attachments/assets/d2e45524-63f0-4d1a-9fa7-976be89d2616" />
+
 Write in your notes: What CVEs (if any) were found? What base image are you using?
+- There were 11 critical issues,mainly coming from dependencies in the base image Node.js 20 and underlying Alpine Linux packages.
+- To fix this, the base image was upgraded to Node.js 22 and system packages were updated to patched versions.
 
 ---
 
