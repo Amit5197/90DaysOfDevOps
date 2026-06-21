@@ -148,23 +148,48 @@ Write in your notes: Why is it a good practice to limit workflow permissions? Wh
 ### Pipeline Architecture Diagram
 
 ```mermaid
-graph TD
-    A[PR opened] --> B[Build & Test]
-    B -->|Pass| C[Dependency vulnerability check]
-    C --> D[PR Comment]
-    
-    E[Merge to main] --> F[Build & Test]
-    F -->|Pass| G[Docker Build & Push]
-    G -->|Pass| H[Trivy image scan]
-    H -->|Pass| I[Deploy to environment]
-    H -->|Fail| J[Exit]
+graph LR
+    %% Core Ingress & Platform Controls
+    subgraph Controls [Platform Security]
+        A[Code Ingress] -->|Push Protection| B(Repository Gate)
+        B -->|Secret Scanning| C{Branch Target}
+    end
 
-    I --> K[Every 12 hours]
-    K --> L[Health Check]
-    L --> M[Summary]
+    %% PR Verification Chain
+    subgraph CI [CI Pipeline: Pull Request]
+        C -->|PR Open/Sync| D[Build & Lint]
+        D --> E[Dependency Check]
+        E --> F[PR Status Comment]
+    end
 
-    N[Always active] --> O[GitHub secret scanning]
-    N --> P[Push protection for secrets]
+    %% Main Branch Deployment Chain
+    subgraph CD [CD Pipeline: Main Branch]
+        C -->|Merge to Main| G[Build & Test Execution]
+        G --> H[Docker Build & Push]
+        H --> I{Trivy Security Gate}
+        
+        %% Scan Gates
+        I -->|Pass: Exit 0| J[Production Deploy]
+        I -->|Fail: Exit 1| K[Upload SARIF Report]
+        K --> L[Terminate Run]
+    end
+
+    %% Post-Deployment Operations
+    subgraph Ops [Operations]
+        M[Cron Trigger: 12h] --> N[Synthetic Health Check]
+        N --> O[Publish Step Summary]
+    end
+
+    %% Lifecycle Connections
+    F -.->|Approved Merge| G
+    J -->|Uptime Monitoring| N
+
+    %% Enterprise Color Palette Styling
+    style Controls fill:#fafafa,stroke:#607d8b,stroke-width:2px;
+    style CI fill:#f4f9fd,stroke:#2196f3,stroke-width:1.5px;
+    style CD fill:#f5fdf9,stroke:#10b981,stroke-width:1.5px;
+    style Ops fill:#faf5ff,stroke:#a855f7,stroke-width:1.5px;
+    style I fill:#fef2f2,stroke:#ef4444,stroke-width:2px;
 ```
 
 ---
