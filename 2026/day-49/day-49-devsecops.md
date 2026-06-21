@@ -182,49 +182,35 @@ Draw this diagram in your notes. You just built a **DevSecOps pipeline** — sec
 
 ```mermaid
 graph TD
-    %% Subgraph 1: Global Platform Security (Always On)
-    subgraph Platform_Security ["🛡️ Continuous Security Guardrails"]
+    subgraph Platform_Security ["Continuous Security Guardrails"]
         direction LR
         N[Always Active Ingress] --> O[GitHub Secret Scanning]
         N --> P[Real-time Push Protection]
     end
 
-    %% Subgraph 2: Pull Request Verification Pipeline
-    subgraph CI_Pipeline ["🧪 PR Validation Pipeline - CI"]
+    subgraph CI_Pipeline ["PR Validation Pipeline - CI"]
         A[Pull Request Opened/Updated] --> B[Job: Build & Test]
         B -->|Pass| C[Step: Dependency Vulnerability Check]
         C --> D[Step: Post PR Status Comment]
     end
 
-    %% Subgraph 3: Main Branch Deployment Pipeline
-    subgraph CD_Pipeline ["🚀 Main Release Pipeline - CD"]
+    subgraph CD_Pipeline ["Main Release Pipeline - CD"]
         E[Merge to Main / Workflow Dispatch] --> F[Job: Build & Test]
         F -->|Pass| G[Job: Docker Build & Push]
         G -->|Success| H{Step: Trivy Image Scan}
         
-        %% Trivy Conditionals
         H -->|Pass: Exit Code 0| I[Job: Deploy to Production]
         H -->|Fail: Exit Code 1| J[Step: Upload SARIF Security Report]
         J --> K[Terminate Pipeline & Alert]
     end
 
-    %% Subgraph 4: Scheduled Maintenance & Operations
-    subgraph Ops_Pipeline ["📡 Post-Deployment Operations"]
+    subgraph Ops_Pipeline ["Post-Deployment Operations"]
         L[Cron Trigger: Every 12 Hours] --> M[Job: Synthetic Health Check]
         M --> Q[Step: Publish GITHUB_STEP_SUMMARY]
     end
 
-    %% Cross-Pipeline Connections (Implicit Order)
     D -.->|Approved Merge| E
     I -->|Active State| M
-
-    %% Styling & Aesthetics
-    style Platform_Security fill:#fff3cd,stroke:#ffc107,stroke-width:2px;
-    style CI_Pipeline fill:#e8f4fd,stroke:#2196f3,stroke-width:2px;
-    style CD_Pipeline fill:#e8f8f5,stroke:#2ecc71,stroke-width:2px;
-    style Ops_Pipeline fill:#f4ecf7,stroke:#9b59b6,stroke-width:2px;
-    style H fill:#fadbd8,stroke:#e74c3c,stroke-width:2px;
-    style K fill:#7f8c8d,stroke:#34495e,stroke-width:1px;
 ```
 ---
 
