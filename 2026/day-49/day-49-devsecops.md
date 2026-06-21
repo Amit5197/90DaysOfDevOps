@@ -248,8 +248,9 @@ Add SARIF output to Trivy and upload it — your scan results will appear in the
 
 ### What you learned about secret scanning and dependency review
 - **Secret Scanning** : It detects sensitive data accidently pushed to your repo. Preventing leaks.
-- **Dependency review** : It analyzes project libraries to catch vulnerabilities, outdated packages, or risky changes before they’re merged.
+- **Dependency review** : It analyzes project libraries to catch vulnerabilities, outdated packages, or risky changes before they’re merged.---
 
+---
 
 ### Capstone Project link
 
