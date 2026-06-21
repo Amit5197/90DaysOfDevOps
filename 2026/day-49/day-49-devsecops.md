@@ -181,48 +181,41 @@ Always active
 Draw this diagram in your notes. You just built a **DevSecOps pipeline** — security is now part of your automation, not an afterthought.
 
 ```mermaid
-graph LR
-    %% Core Ingress & Platform Controls
-    subgraph Controls [Platform Security]
-        A[Code Ingress] -->|Push Protection| B(Repository Gate)
-        B -->|Secret Scanning| C{Branch Target}
+graph TD
+    %% 1. Platform Security Gate
+    subgraph Security ["🛡️ Security Guardrails"]
+        A[Git Ingress] -->|Secret Scanning| B(Push Protection Gate)
     end
 
-    %% PR Verification Chain
-    subgraph CI [CI Pipeline: Pull Request]
-        C -->|PR Open/Sync| D[Build & Lint]
-        D --> E[Dependency Check]
-        E --> F[PR Status Comment]
+    %% 2. Continuous Integration
+    subgraph CI ["🧪 CI Pipeline (Pull Request)"]
+        B --> C[Build & Test Application]
+        C --> D[Scan Vulnerable Dependencies]
+        D --> E[Post Status to Pull Request]
     end
 
-    %% Main Branch Deployment Chain
-    subgraph CD [CD Pipeline: Main Branch]
-        C -->|Merge to Main| G[Build & Test Execution]
-        G --> H[Docker Build & Push]
-        H --> I{Trivy Security Gate}
+    %% 3. Continuous Deployment
+    subgraph CD ["🚀 CD Pipeline (Main Branch)"]
+        E -.->|Merge Action| F[Execute Core Test Suites]
+        F --> G[Build & Push Docker Image]
+        G --> H{Trivy Container Scan}
         
-        %% Scan Gates
-        I -->|Pass: Exit 0| J[Production Deploy]
-        I -->|Fail: Exit 1| K[Upload SARIF Report]
-        K --> L[Terminate Run]
+        H -->|Pass: Exit Code 0| I[Deploy to Production]
+        H -->|Fail: Exit Code 1| J[Upload SARIF Log to GitHub]
     end
 
-    %% Post-Deployment Operations
-    subgraph Ops [Operations]
-        M[Cron Trigger: 12h] --> N[Synthetic Health Check]
-        N --> O[Publish Step Summary]
+    %% 4. Operations
+    subgraph Ops ["📡 Post-Deploy Monitoring"]
+        I --> K[12-Hour Cron Health Check]
+        K --> L[Publish Status Summary]
     end
 
-    %% Lifecycle Connections
-    F -.->|Approved Merge| G
-    J -->|Uptime Monitoring| N
-
-    %% Enterprise Color Palette Styling
-    style Controls fill:#fafafa,stroke:#607d8b,stroke-width:2px;
-    style CI fill:#f4f9fd,stroke:#2196f3,stroke-width:1.5px;
-    style CD fill:#f5fdf9,stroke:#10b981,stroke-width:1.5px;
-    style Ops fill:#faf5ff,stroke:#a855f7,stroke-width:1.5px;
-    style I fill:#fef2f2,stroke:#ef4444,stroke-width:2px;
+    %% Visual Themes
+    style Security fill:#fff9db,stroke:#fab005,stroke-width:2px;
+    style CI fill:#e7f5ff,stroke:#228be6,stroke-width:2px;
+    style CD fill:#ebfbee,stroke:#40c057,stroke-width:2px;
+    style Ops fill:#f3f0ff,stroke:#7950f2,stroke-width:2px;
+    style H fill:#fff5f5,stroke:#fa5252,stroke-width:2px;
 ```
 ---
 
