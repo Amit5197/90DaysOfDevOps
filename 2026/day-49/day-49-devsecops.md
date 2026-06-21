@@ -81,9 +81,24 @@ GitHub can automatically detect if someone pushes a secret (API key, token, pass
 
 That's it — no workflow changes needed. GitHub does this automatically.
 
+<img width="997" height="172" alt="image" src="https://github.com/user-attachments/assets/fe65a8bf-31e1-4318-ac2b-420074f793de" />
+
 Write in your notes:
+
 - What is the difference between secret scanning and push protection?
+   - `Secret Scanning`:
+      - It scans your entire repository for know secret patterns.
+      - It idefntifies secrets after they have been commited to the repository and generates
+        alerts in the security tab of the repository.
+   - `Push protection` :
+      - It aims to stop secrets fron entering your codebase in the first place.
+      - It scans the code for secrets in real time during the `git push` process.
+      - If a secret is detected, then push is blocked and developer receives error message 
+        and remediation guidance 
+
 - What happens if GitHub detects a leaked AWS key in your repo?
+   -  When secret scanning finds a potential secret, GitHub generates an alert on your 
+      repository's Security tab with details about the exposed credential.
 
 ---
 
