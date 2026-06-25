@@ -13,10 +13,27 @@ This is where things get real.
 Before touching a terminal, write down from memory:
 
 1. Why was Kubernetes created? What problem does it solve that Docker alone cannot?
-2. Who created Kubernetes and what was it inspired by?
-3. What does the name "Kubernetes" mean?
+- Kubernetes was created by Google to automate the management, scaling, and deployment of containerized applications across clusters of servers, solving the problem of coordination and management at scale that Docker alone cannot handle.
 
-Do not look anything up yet. Write what you remember from the session, then verify against the official docs.
+- Docker allows to build and run containers,but it mainly focuses on running containers on a single machine.
+- When applications grow and require many containers running across multiple servers, managing them manually becomes difficult. Tasks like scaling containers, restarting failed ones
+- Kubernetes solves these issues by acting as a container orchestration system, which can automatically:
+    - Scale containers based on demand
+    - Restart containers when they fail
+    - Manage and schedule containers across multiple machines
+- In short, Docker runs containers, while Kubernetes manages large numbers of containers across a cluster of servers.
+
+2. Who created Kubernetes and what was it inspired by?
+- Google introduced **Kubernetes** in 2014.
+- The project was inspired by Borg, an internal system used by Google to manage containers at massive scale.
+- Borg could automatically handle tasks such as scaling and restarting containers.
+- Google later released Kubernetes as an open-source project.
+- Today it is maintained by the (CNCF) Cloud Native Computing Foundation, which is part of the Linux Foundation.
+
+3. What does the name "Kubernetes" mean?
+- The name Kubernetes comes from a Greek word meaning “helmsman” or “ship pilot.” It refers to someone who steers a ship.
+- This name reflects the role of Kubernetes, which guides and manages containers, similar to how a helmsman controls a ship.
+- Kubernetes is often shortened to **K8s**, where the number 8 represents the eight letters between K and S.
 
 ---
 
@@ -34,11 +51,27 @@ From memory, draw or describe the Kubernetes architecture. Your diagram should i
 - kube-proxy — handles networking rules so pods can communicate
 - Container Runtime — the engine that actually runs containers (containerd, CRI-O)
 
+![image](images/k8s.png)
+
 After drawing, verify your understanding:
 - What happens when you run `kubectl apply -f pod.yaml`? Trace the request through each component.
-- What happens if the API server goes down?
-- What happens if a worker node goes down?
 
+  1. kubectl reads the pod.yaml file.
+  2. The request is sent to the Kubernetes API Server.
+  3. API Server performs: Authentication, Authorization
+  4. If valid, the Pod object is stored in etcd.
+  5. The Kubernetes Scheduler detects the unscheduled Pod and assigns it to a node.
+  6. The kubelet on that node sees the Pod and instructs the container runtime (e.g., containerd) to start the container.
+  7. The container starts and the Pod status is updated to Running in the API Server.
+
+- What happens if the API server goes down?
+  - You cannot run kubectl commands or make changes to the cluster.
+  - Running pods and services continue working, but no new deployments or scheduling happen.
+
+- What happens if a worker node goes down?
+  - Pods on that node stop running.
+  - Kubernetes detects the failure and reschedules those pods on other healthy nodes.
+    
 ---
 
 ### Task 3: Install kubectl
