@@ -51,7 +51,7 @@ From memory, draw or describe the Kubernetes architecture. Your diagram should i
 - kube-proxy — handles networking rules so pods can communicate
 - Container Runtime — the engine that actually runs containers (containerd, CRI-O)
 
-![image](images/k8s.png)
+[image](images/k8s.png)
 
 After drawing, verify your understanding:
 - What happens when you run `kubectl apply -f pod.yaml`? Trace the request through each component.
