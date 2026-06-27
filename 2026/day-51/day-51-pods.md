@@ -61,17 +61,30 @@ Verify:
 kubectl get pods
 kubectl get pods -o wide
 ```
+<img width="762" height="217" alt="image" src="https://github.com/user-attachments/assets/e95e6cc5-a381-46ac-b672-423d25e38ae5" />
+
+<img width="1147" height="615" alt="image" src="https://github.com/user-attachments/assets/96307406-7cb5-4db5-a383-2745875aa43a" />
 
 Wait until the STATUS shows `Running`. Then explore:
 ```bash
 # Detailed info about the pod
 kubectl describe pod nginx-pod
 
+- It shows pod metadata, node & network info,container details,readiness/status,mounted volumes, scheduling constraints, and lifecycle events.
+
+<img width="1206" height="612" alt="image" src="https://github.com/user-attachments/assets/c8f3d57f-d492-4445-a172-30928f3c78b0" />
+
 # Read the logs
 kubectl logs nginx-pod
 
+- It shows the container’s initialization,configuration steps and Nginx startup logs.
+
+<img width="1031" height="425" alt="image" src="https://github.com/user-attachments/assets/6c2b132b-0037-42fc-bddf-d5d550733234" />
+
 # Get a shell inside the container
 kubectl exec -it nginx-pod -- /bin/bash
+
+
 
 # Inside the container, run:
 curl localhost:80
