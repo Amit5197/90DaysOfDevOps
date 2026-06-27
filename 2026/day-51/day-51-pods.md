@@ -129,6 +129,12 @@ Notice the `command` field — BusyBox does not run a long-lived server like Ngi
 
 **Verify:** Can you see "Hello from BusyBox" in the logs?
 
+- Yes,
+
+<img width="1050" height="617" alt="image" src="https://github.com/user-attachments/assets/e137a9d0-081c-47c0-a1eb-241731a51782" />
+
+<img width="1012" height="387" alt="image" src="https://github.com/user-attachments/assets/766d3c05-7431-4eaf-ba39-d38bc6afd16b" />
+
 ---
 
 ### Task 3: Imperative vs Declarative
