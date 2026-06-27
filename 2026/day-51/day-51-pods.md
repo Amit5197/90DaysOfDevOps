@@ -92,6 +92,9 @@ exit
 
 - Yes i can see Nginx welcome page inside pod
 
+<img width="747" height="297" alt="image" src="https://github.com/user-attachments/assets/a6976a79-1681-4f41-aef8-ffaa01e687aa" />
+
+<img width="1362" height="540" alt="image" src="https://github.com/user-attachments/assets/6bd07530-35e4-4232-b38b-75386627b0eb" />
 
 ---
 
