@@ -164,6 +164,52 @@ This is a powerful trick — use it to quickly scaffold a manifest, then customi
 
 **Verify:** Save the dry-run output to a file and compare its structure with your nginx-pod.yaml. What fields are the same? What is different?
 
+
+<img width="995" height="257" alt="image" src="https://github.com/user-attachments/assets/ee03d2e4-465a-4f6c-acff-57983ba1ff4f" />
+
+<img width="996" height="736" alt="image" src="https://github.com/user-attachments/assets/4351c360-ddc1-4faf-aefd-a77a85b41498" />
+
+<img width="1041" height="442" alt="image" src="https://github.com/user-attachments/assets/fb5c4a5a-157e-4098-9464-f219aaa0e21f" />
+
+**Same fields:**
+- apiVersion: v1
+- kind: Pod
+- metadata.name: nginx-pod
+- metadata.labels.app: nginx
+- spec.containers[0].name: nginx
+- spec.containers[0].image: nginx:latest
+- spec.containers[0].ports[0].containerPort: 80
+
+**Different fields:**
+- metadata.annotations
+- creationTimestamp
+- uid
+- resourceVersion
+- namespace
+- spec.containers[0].imagePullPolicy
+- resources
+- terminationMessagePath/Policy
+- volumeMounts
+- spec.dnsPolicy
+- restartPolicy
+- enableServiceLinks
+- nodeName
+- schedulerName
+- serviceAccount
+- terminationGracePeriodSeconds
+- tolerations
+- volumesstatus
+
+**Imperative (`kubectl run`)**
+
+1. Creates resources immediately with a command.
+2. Quick and good for testing;not stored as a file.
+
+**Declarative (`kubectl apply -f`)**
+
+1. Uses a YAML file to define desired state.
+2. Versionable,repeatable,and preferred for production.
+
 ---
 
 ### Task 4: Validate Before Applying
@@ -180,6 +226,11 @@ kubectl apply -f nginx-pod.yaml --dry-run=server
 Now intentionally break your YAML (remove the `image` field or add an invalid field) and run dry-run again. See what error you get.
 
 **Verify:** What error does Kubernetes give when the image field is missing?
+
+- error getting - pod/nginx-pod unchanged (server dry run)
+
+<img width="990" height="257" alt="image" src="https://github.com/user-attachments/assets/895bbbca-cc79-486d-9ff7-42a4f926286a" />
+
 
 ---
 
@@ -206,6 +257,10 @@ kubectl label pod nginx-pod environment-
 
 Write a manifest for a third pod with at least 3 labels (app, environment, team). Apply it and practice filtering.
 
+<img width="1097" height="862" alt="image" src="https://github.com/user-attachments/assets/44747aad-e219-497e-98c7-6685d5ef74b2" />
+
+<img width="1145" height="357" alt="image" src="https://github.com/user-attachments/assets/63eb5158-fb5b-466a-9323-0d6cc1b74575" />
+
 ---
 
 ### Task 6: Clean Up
@@ -224,6 +279,9 @@ kubectl delete -f nginx-pod.yaml
 kubectl get pods
 ```
 
+<img width="1307" height="817" alt="image" src="https://github.com/user-attachments/assets/c64a0cb9-c55c-4d9a-bd39-7930d9406475" />
+
+
 Notice that when you delete a standalone Pod, it is gone forever. There is no controller to recreate it. This is why in production you use Deployments (coming on Day 52) instead of bare Pods.
 
 ---
@@ -239,24 +297,12 @@ Notice that when you delete a standalone Pod, it is gone forever. There is no co
 
 ---
 
-## Documentation
-Create `day-51-pods.md` with:
-- The four required fields of a Kubernetes manifest and what each does
-- Your nginx, busybox, and third pod manifests
-- Difference between imperative (`kubectl run`) and declarative (`kubectl apply -f`)
-- Screenshot of your pods running
 - What happens when you delete a standalone Pod?
 
----
-
-## Submission
-1. Add `day-51-pods.md` and your YAML files to `2026/day-51/`
-2. Commit and push to your fork
+- when you delete a standalone Pod, it is gone forever. There is no controller to recreate it.
+This is why in production you use Deployments instead of bare Pods.
 
 ---
-
-## Learn in Public
-Share on LinkedIn: "Wrote my first Kubernetes Pod manifests from scratch today. Created pods, got a shell inside them, and learned the difference between imperative and declarative approaches."
 
 `#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
