@@ -66,7 +66,7 @@ kubectl get pods -o wide
 <img width="1147" height="615" alt="image" src="https://github.com/user-attachments/assets/96307406-7cb5-4db5-a383-2745875aa43a" />
 
 Wait until the STATUS shows `Running`. Then explore:
-```bash
+
 # Detailed info about the pod
 kubectl describe pod nginx-pod
 
@@ -84,14 +84,14 @@ kubectl logs nginx-pod
 # Get a shell inside the container
 kubectl exec -it nginx-pod -- /bin/bash
 
-
-
 # Inside the container, run:
 curl localhost:80
 exit
-```
 
 **Verify:** Can you see the Nginx welcome page when you curl from inside the pod?
+
+- Yes i can see Nginx welcome page inside pod
+
 
 ---
 
