@@ -1,0 +1,129 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"labels":{"app":"nginx"},"name":"nginx-pod","namespace":"default"},"spec":{"containers":[{"image":"nginx:latest","name":"nginx","ports":[{"containerPort":80}]}]}}
+  creationTimestamp: "2026-03-17T06:53:42Z"
+  generation: 1
+  labels:
+    app: nginx
+  name: nginx-pod
+  namespace: default
+  resourceVersion: "1149"
+  uid: fb0712a0-2ef0-4908-87a4-b5e298a9180f
+spec:
+  containers:
+  - image: nginx:latest
+    imagePullPolicy: Always
+    name: nginx
+    ports:
+    - containerPort: 80
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-hbn6g
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: my-cluster-worker
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-hbn6g
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2026-03-17T06:53:44Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2026-03-17T06:53:42Z"
+    observedGeneration: 1
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2026-03-17T06:53:44Z"
+    observedGeneration: 1
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2026-03-17T06:53:44Z"
+    observedGeneration: 1
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2026-03-17T06:53:42Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://94680c08f9eb6c19cfdbce44a05825a2bbd1e4a3874963f9b6a5a8c32105dce7
+    image: docker.io/library/nginx:latest
+    imageID: docker.io/library/nginx@sha256:df281a66ef12aa81c32c2a536cf83ca6c21c01b17c6633c43066e22e866dfcd7
+    lastState: {}
+    name: nginx
+    ready: true
+    resources: {}
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2026-03-17T06:53:44Z"
+    user:
+      linux:
+        gid: 0
+        supplementalGroups:
+        - 0
+        uid: 0
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-hbn6g
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 172.18.0.4
+  hostIPs:
+  - ip: 172.18.0.4
+  observedGeneration: 1
+  phase: Running
+  podIP: 10.244.2.3
+  podIPs:
+  - ip: 10.244.2.3
+  qosClass: BestEffort
+  startTime: "2026-03-17T06:53:42Z"
