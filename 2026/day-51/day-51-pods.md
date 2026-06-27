@@ -96,6 +96,8 @@ exit
 
 <img width="1362" height="540" alt="image" src="https://github.com/user-attachments/assets/6bd07530-35e4-4232-b38b-75386627b0eb" />
 
+<img width="785" height="597" alt="image" src="https://github.com/user-attachments/assets/00e6b685-c2fe-48f4-930f-6ba2960da698" />
+
 ---
 
 ### Task 2: Create a Custom Pod (BusyBox)
