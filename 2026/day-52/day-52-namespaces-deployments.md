@@ -263,6 +263,53 @@ kubectl get pods -A
 
 ---
 
+**What namespaces are and why you would use them**
+- Namespaces are like folders in Kubernetes that separate resources inside one cluster
+- They are used to keep things organized and isolated (logical isolation) (e.g., stage,dev and prod don’t mix)
+
+**Explaination of Deployment manifest**
+
+- `apiVersion` & `kind` Defines the resource as a Deployment
+- `metadata`Contains Deployment identity (name, namespace, labels)
+- `spec` Main configuration of the Deployment
+- `spec.replicas` Ensures 3 Pods are always running
+- `spec.selector` Matches Pods with label app: nginx
+- `spec.template` Blueprint used to create Pods
+- `template.metadata` Labels assigned to Pods
+- `template.spec` Pod-level configuration
+- `containers` Defines container details (name, image)
+- `ports` Exposes container port 80
+
+**What happens when you delete a Pod managed by a Deployment vs a standalone Pod**
+
+1. Pod managed by a Deployment:
+ - Kubernetes automatically recreates a new pod to maintain the desired number of replicas.
+ - The new pod gets a different name but keeps the same Deployment/ReplicaSet prefix.
+ - Ensures the desired state is always met.
+
+2. Standalone Pod (not managed by Deployment):
+ - Kubernetes does NOT recreate it.
+ - Once deleted, the pod is gone permanently.
+
+**How scaling works (both imperative and declarative)**
+
+1. `Imperative`: you directly tell Kubernetes how many replicas you want using a command.
+2. `Declarative`: you update the Deployment manifest (YAML) with the desired replicas.
+
+**How rolling updates and rollbacks work**
+
+1. `Rolling Updates`
+- Deployment updates its pod template (e.g., new container image).
+- Kubernetes creates new pods with the updated spec.
+- Old pods are terminated gradually as new pods become ready.
+
+2. `Rollbacks`
+- Deployment keeps a history of previous ReplicaSets.
+- You trigger rollback to a previous revision.
+- Kubernetes recreates pods from the old ReplicaSet while removing the current ones.
+
+---
+
 `#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
 Happy Learning!
