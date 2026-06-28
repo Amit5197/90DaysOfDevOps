@@ -61,6 +61,8 @@ Note the individual Pod IPs. These will change if pods restart — that is the p
 
 **Verify:** Are all 3 pods running? Note down their IP addresses.
 
+<img width="1350" height="222" alt="image" src="https://github.com/user-attachments/assets/8325e2df-6d9c-4eb4-98a7-a0467baa6f4f" />
+
 ---
 
 ### Task 2: ClusterIP Service (Internal Access)
@@ -91,6 +93,7 @@ Key fields:
 kubectl apply -f clusterip-service.yaml
 kubectl get services
 ```
+<img width="816" height="192" alt="image" src="https://github.com/user-attachments/assets/7edfed03-bc4c-4f13-bda0-5417baa28a29" />
 
 You should see `web-app-clusterip` with a CLUSTER-IP address. This IP is stable — it will not change even if Pods restart.
 
@@ -106,7 +109,11 @@ exit
 
 You should see the Nginx welcome page. The Service load-balanced your request to one of the 3 Pods.
 
+<img width="771" height="892" alt="image" src="https://github.com/user-attachments/assets/32b4d475-e2b4-4a32-ba0f-095202754a83" />
+
 **Verify:** Does the Service respond? Try running the wget command multiple times — the Service distributes traffic across all healthy Pods.
+
+- Yes, service responded.
 
 ---
 
@@ -136,6 +143,11 @@ exit
 Both the short name and the full DNS name resolve to the same ClusterIP. In practice, you use the short name when communicating within the same namespace and the full name when reaching across namespaces.
 
 **Verify:** What IP does `nslookup` return? Does it match the CLUSTER-IP from `kubectl get services`?
+
+- Yes — the IPs match perfectly.nslookup is correctly resolving the service to the same ClusterIP shown by Kubernetes.
+
+<img width="715" height="872" alt="image" src="https://github.com/user-attachments/assets/8bbb42b3-39f5-441c-92ee-69af7b8bd54e" />
+<img width="746" height="347" alt="image" src="https://github.com/user-attachments/assets/375480d5-f13d-4ec3-ac68-d1e7fadfa658" />
 
 ---
 
@@ -167,6 +179,8 @@ kubectl apply -f nodeport-service.yaml
 kubectl get services
 ```
 
+<img width="1672" height="385" alt="image" src="https://github.com/user-attachments/assets/725f2d52-2145-4942-84a0-ad0c8e36fa9d" />
+
 Access the service:
 ```bash
 # If using Minikube
@@ -181,6 +195,10 @@ curl http://localhost:30080
 ```
 
 **Verify:** Can you see the Nginx welcome page from your browser or terminal using the NodePort?
+
+- Yes,I see the Nginx welcome page from terminal using the NodePort
+
+<img width="587" height="450" alt="image" src="https://github.com/user-attachments/assets/928438d8-aff7-4a72-be4a-6643d0606d2f" />
 
 ---
 
@@ -221,6 +239,11 @@ kubectl get services
 In a real cloud cluster, the EXTERNAL-IP would be a public IP address or hostname provisioned by the cloud provider.
 
 **Verify:** What does the EXTERNAL-IP column show? Why is it `<pending>` on a local cluster?
+    
+    - In a local cluster, the `EXTERNAL-IP` staying <pending> is expected because there’s no cloud provider to assign an external address.
+    - In a cloud environment,the same Service type would automatically provision a public load balancer and receive an external IP.
+
+<img width="885" height="366" alt="image" src="https://github.com/user-attachments/assets/913a2cb2-ef69-483e-9349-57ff2a434c0f" />
 
 ---
 
@@ -252,6 +275,10 @@ You should see all three: a ClusterIP, a NodePort, and the LoadBalancer configur
 
 **Verify:** Does the LoadBalancer service also have a ClusterIP and NodePort assigned?
 
+    - Yes — a LoadBalancer service always has both `ClusterIP` and `NodePort`.
+
+<img width="1012" height="497" alt="image" src="https://github.com/user-attachments/assets/dcc188b8-ff47-43d8-9b9f-ea28e3dbe46c" />
+
 ---
 
 ### Task 7: Clean Up
@@ -269,40 +296,170 @@ Only the built-in `kubernetes` service in the default namespace should remain.
 
 **Verify:** Is everything cleaned up?
 
----
+- Yes, everything cleaned up
 
-## Hints
-- `selector` in a Service must match `labels` on the Pods — if they do not match, the Service routes traffic to nothing
-- `kubectl get endpoints <service-name>` shows which Pod IPs a Service is currently routing to
-- `port` is what the Service listens on; `targetPort` is what the Pod listens on — they do not have to be the same number
-- NodePort range is 30000-32767; if you do not specify `nodePort`, Kubernetes picks one automatically
-- Use `kubectl describe service <name>` to see the full configuration including Endpoints
-- `kubectl get services -o wide` shows the selector each service uses
-- To test ClusterIP services, you must test from inside the cluster (use a temporary pod)
+<img width="1165" height="277" alt="image" src="https://github.com/user-attachments/assets/c6ca2ecb-edb6-4fa4-9d99-c43abe9037ff" />
 
 ---
 
 ## Documentation
-Create `day-53-services.md` with:
-- What problem Services solve and how they relate to Pods and Deployments
-- Your three Service manifests with an explanation of each type
-- The difference between ClusterIP, NodePort, and LoadBalancer
-- How Kubernetes DNS works for service discovery
-- What Endpoints are and how to inspect them
-- Screenshot of your services and the test output
+**What problem Services solve and how they relate to Pods and Deployments**
 
+**The Problem**
+
+Pods in Kubernetes are ephemeral:
+- They get new IP addresses when restarted
+- They are created/destroyed dynamically by a Deployment
+
+**The Solution:** `Service`
+
+A Service provides:
+- A stable IP address (ClusterIP)
+- A stable DNS name
+- Load balancing across Pods
+
+**Relationship**
+
+`Deployment:` Manages Pods (creates 3 replicas)
+
+`Pods:` Run your application (nginx)
+
+`Service`: Sits in front of Pods, Uses labels (selector) to find them.Routes traffic to them
+
+`Client → Service → Pods (via label selector)`
+
+**Your three Service manifests with an explanation of each type**
+
+`ClusterIP Service`
+
+```bash
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app-clusterip
+spec:
+  type: ClusterIP
+  selector:
+    app: web-app
+  ports:
+  - port: 80
+    targetPort: 80
+```
+- Default Service type
+- Exposes Pods inside the cluster only
+- Provides a stable internal IP + DNS name
+- Used for internal communication between services
+
+`NodePort Service`
+
+```bash
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app-nodeport
+spec:
+  type: NodePort
+  selector:
+    app: web-app
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30080
+```
+- Exposes Service on each node’s IP at a fixed port (30000–32767)
+- Access using: `<NodeIP>:NodePort`
+- Used for external access in development/testing
+
+`LoadBalancer Service`
+
+```bash
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app-loadbalancer
+spec:
+  type: LoadBalancer
+  selector:
+    app: web-app
+  ports:
+    - port: 80
+      targetPort: 80
+```
+- Creates an external load balancer (in cloud environments)
+- Provides a public IP to access the app
+- Used for production external traffic
+- Internally also includes ClusterIP + NodePort
+
+**The difference between ClusterIP, NodePort, and LoadBalancer**
+
+| Type | Accessible From | Use Case |
+|------|----------------|----------|
+| ClusterIP | Inside the cluster only | Internal communication between services |
+| NodePort | Outside via `<NodeIP>:<NodePort>` | Development, testing, direct node access |
+| LoadBalancer | Outside via cloud load balancer | Production traffic in cloud environments |
+
+Each type builds on the previous one:
+- LoadBalancer creates a NodePort, which creates a ClusterIP
+- So a LoadBalancer service also has a ClusterIP and a NodePort
+
+**How Kubernetes DNS works for service discovery**
+
+1. `Service is created`
+- Kubernetes automatically creates a DNS entry for the Service.
+- Example: web-app-clusterip
+
+2. `Pod makes a request using Service name`
+- The Pod accesses the Service using its DNS name:`wget http://web-app-clusterip`
+
+3. `DNS query sent to CoreDNS`
+- The request is sent to Kubernetes DNS (CoreDNS) for resolution.
+
+4. `DNS resolves Service name → ClusterIP`
+- The Service name resolves to its ClusterIP.
+- Example: web-app-clusterip → ClusterIP
+- This matches the output of: kubectl get svc
+
+5. `Request reaches the Service`
+- The request is routed to the Service using the ClusterIP.
+
+6. `Service forwards request to Pods (via Endpoints)`
+- The Service selects Pods using labels (app: web-app)
+- Traffic is load-balanced across all healthy Pods
+
+7. `Response sent back to Pod`
+- One of the Pods processes the request and returns a response
+(e.g., Nginx welcome page)
+
+
+`Pod → CoreDNS → Service (ClusterIP) → Endpoints → Pod`
+
+**What Endpoints are and how to inspect them**
+
+- `Endpoints` = actual Pod IPs behind a Service
+- A Service does NOT directly store Pods — it uses Endpoints.
+
+`Example:`
+- `Service: web-app-clusterip`
+- `Endpoints look like:`
+
+```bash
+  10.244.0.5:80
+  10.244.0.6:80
+  10.244.0.7:80
+```
+
+`Why Endpoints matter:`
+- They show real backend Pods
+- They update automatically when Pods: `Start ,Stop ,Restart`
+
+`How to inspect Endpoints:`
+```bash
+kubectl get endpoints
+```
+```bash
+kubectl describe endpoints web-app-clusterip
+```
 ---
-
-## Submission
-1. Add `day-53-services.md` and your YAML files to `2026/day-53/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share on LinkedIn: "Learned Kubernetes Services today — ClusterIP for internal traffic, NodePort for node-level access, and LoadBalancer for production. Services give Pods a stable identity and load balancing."
-
-`#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
 Happy Learning!
 **TrainWithShubham**
