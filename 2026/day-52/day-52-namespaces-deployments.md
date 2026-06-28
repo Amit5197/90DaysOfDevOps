@@ -27,7 +27,9 @@ kubectl get pods -n kube-system
 
 These are the control plane components keeping your cluster alive. Do not touch them.
 
-**Verify:** How many pods are running in `kube-system`?
+**Verify:** How many pods are running in `kube-system`? - 8 pods are running.
+
+<img width="996" height="417" alt="image" src="https://github.com/user-attachments/assets/d0d7022c-8ad8-40f5-adbc-1155502d44b1" />
 
 ---
 
@@ -44,6 +46,8 @@ Verify they exist:
 kubectl get namespaces
 ```
 
+<img width="737" height="356" alt="image" src="https://github.com/user-attachments/assets/c5711dc9-b4f7-4007-afa9-ad0352d714bc" />
+
 You can also create a namespace from a manifest:
 ```yaml
 # namespace.yaml
@@ -57,11 +61,16 @@ metadata:
 kubectl apply -f namespace.yaml
 ```
 
+<img width="725" height="132" alt="image" src="https://github.com/user-attachments/assets/aed45f93-7922-459b-87e3-a07baa007876" />
+
+
 Now run a pod in a specific namespace:
 ```bash
 kubectl run nginx-dev --image=nginx:latest -n dev
 kubectl run nginx-staging --image=nginx:latest -n staging
 ```
+
+<img width="1175" height="602" alt="image" src="https://github.com/user-attachments/assets/67335195-9a4a-4c97-811d-4032e1cb830e" />
 
 List pods across all namespaces:
 ```bash
@@ -71,6 +80,13 @@ kubectl get pods -A
 Notice that `kubectl get pods` without `-n` only shows the `default` namespace. You must specify `-n <namespace>` or use `-A` to see everything.
 
 **Verify:** Does `kubectl get pods` show these pods? What about `kubectl get pods -A`?
+
+<img width="1207" height="316" alt="image" src="https://github.com/user-attachments/assets/71a98a43-2cf2-41fb-8eff-23b7d36cfb44" />
+
+<img width="735" height="80" alt="image" src="https://github.com/user-attachments/assets/030f34d6-a884-42b2-9046-a06a75f280a3" />
+
+    - When I run kubectl get pods,it does not show any pods.
+    - When I run kubectl get pods -A it shows the pods.
 
 ---
 
@@ -126,6 +142,14 @@ You should see 3 pods with names like `nginx-deployment-xxxxx-yyyyy`.
 
 **Verify:** What do the READY, UP-TO-DATE, and AVAILABLE columns mean in the deployment output?
 
+READY: Pods ready to serve traffic (ready/desired)
+
+UP-TO-DATE: Pods using the latest deployment spec
+
+AVAILABLE: Pods ready and stable
+
+<img width="902" height="632" alt="image" src="https://github.com/user-attachments/assets/f6c8ef9d-46c3-43e5-ba31-996fe5694e08" />
+
 ---
 
 ### Task 4: Self-Healing — Delete a Pod and Watch It Come Back
@@ -146,6 +170,10 @@ The Deployment controller detects that only 2 of 3 desired replicas exist and im
 
 **Verify:** Is the replacement pod's name the same as the one you deleted, or different?
 
+- Yes,different name but same prefix
+
+<img width="897" height="536" alt="image" src="https://github.com/user-attachments/assets/71ecf604-f361-41cf-b72a-a4b7ceef6cc2" />
+
 ---
 
 ### Task 5: Scale the Deployment
@@ -161,11 +189,18 @@ kubectl scale deployment nginx-deployment --replicas=2 -n dev
 kubectl get pods -n dev
 ```
 
+<img width="740" height="272" alt="image" src="https://github.com/user-attachments/assets/f28f1223-850b-41ee-b236-a7f7e673213e" />
+
 Watch how Kubernetes creates or terminates pods to match the desired count.
 
 You can also scale by editing the manifest — change `replicas: 4` in your YAML file and run `kubectl apply -f nginx-deployment.yaml` again.
 
 **Verify:** When you scaled down from 5 to 2, what happened to the extra pods?
+
+<img width="812" height="222" alt="image" src="https://github.com/user-attachments/assets/1a4bfe8f-3ef5-4348-aa48-4dca4803e714" />
+
+- The extra pods are terminated automatically.
+- Kubernetes keeps only the desired number of replicas (2) and removes the remaining 3 pods to match that state.
 
 ---
 
@@ -188,6 +223,8 @@ Check the rollout history:
 kubectl rollout history deployment/nginx-deployment -n dev
 ```
 
+<img width="1112" height="410" alt="image" src="https://github.com/user-attachments/assets/db5d8bcb-628d-4a41-9514-65b3b0a4119d" />
+
 Now roll back to the previous version:
 ```bash
 kubectl rollout undo deployment/nginx-deployment -n dev
@@ -200,6 +237,8 @@ kubectl describe deployment nginx-deployment -n dev | grep Image
 ```
 
 **Verify:** What image version is running after the rollback?
+
+<img width="850" height="236" alt="image" src="https://github.com/user-attachments/assets/efb1f183-90ab-41dc-973a-aefeb0861ce9" />
 
 ---
 
@@ -220,39 +259,9 @@ kubectl get pods -A
 
 **Verify:** Are all your resources gone?
 
----
-
-## Hints
-- `kubectl get <resource> -n <namespace>` — target a specific namespace
-- `kubectl get <resource> -A` — list resources across all namespaces
-- `selector.matchLabels` in a Deployment must match `template.metadata.labels` — if they do not match, the Deployment will not manage the Pods
-- `kubectl scale deployment <name> --replicas=N` — quick way to scale
-- `kubectl set image` updates a container image without editing the YAML
-- `kubectl rollout undo` rolls back to the previous revision
-- `kubectl rollout history` shows past revisions of a Deployment
-- Deployments create ReplicaSets behind the scenes — you can see them with `kubectl get replicasets -n <namespace>`
+<img width="1237" height="692" alt="image" src="https://github.com/user-attachments/assets/bf87a70f-18d2-4b98-8042-a4a28e328833" />
 
 ---
-
-## Documentation
-Create `day-52-namespaces-deployments.md` with:
-- What namespaces are and why you would use them
-- Your Deployment manifest and an explanation of each section
-- What happens when you delete a Pod managed by a Deployment vs a standalone Pod
-- How scaling works (both imperative and declarative)
-- How rolling updates and rollbacks work
-- Screenshot of your Deployment and Pods running
-
----
-
-## Submission
-1. Add `day-52-namespaces-deployments.md` and your YAML files to `2026/day-52/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share on LinkedIn: "Learned Kubernetes Namespaces and Deployments today. Created self-healing deployments, scaled them up and down, and performed a zero-downtime rolling update with rollback."
 
 `#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
