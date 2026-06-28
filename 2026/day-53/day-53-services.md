@@ -240,8 +240,8 @@ In a real cloud cluster, the EXTERNAL-IP would be a public IP address or hostnam
 
 **Verify:** What does the EXTERNAL-IP column show? Why is it `<pending>` on a local cluster?
     
-    - In a local cluster, the `EXTERNAL-IP` staying <pending> is expected because there’s no cloud provider to assign an external address.
-    - In a cloud environment,the same Service type would automatically provision a public load balancer and receive an external IP.
+- In a local cluster, the `EXTERNAL-IP` staying <pending> is expected because there’s no cloud provider to assign an external address.
+- In a cloud environment,the same Service type would automatically provision a public load balancer and receive an external IP.
 
 <img width="885" height="366" alt="image" src="https://github.com/user-attachments/assets/913a2cb2-ef69-483e-9349-57ff2a434c0f" />
 
@@ -275,7 +275,7 @@ You should see all three: a ClusterIP, a NodePort, and the LoadBalancer configur
 
 **Verify:** Does the LoadBalancer service also have a ClusterIP and NodePort assigned?
 
-    - Yes — a LoadBalancer service always has both `ClusterIP` and `NodePort`.
+- Yes — a LoadBalancer service always has both `ClusterIP` and `NodePort`.
 
 <img width="1012" height="497" alt="image" src="https://github.com/user-attachments/assets/dcc188b8-ff47-43d8-9b9f-ea28e3dbe46c" />
 
