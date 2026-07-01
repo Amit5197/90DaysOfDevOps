@@ -5,13 +5,6 @@ Your application needs configuration — database URLs, feature flags, API keys.
 
 ---
 
-## Expected Output
-- ConfigMaps created from literals and from a file
-- Secrets created and consumed in a Pod
-- A markdown file: `day-54-configmaps-secrets.md`
-
----
-
 ## Challenge Tasks
 
 ### Task 1: Create a ConfigMap from Literals
@@ -21,6 +14,11 @@ Your application needs configuration — database URLs, feature flags, API keys.
 
 **Verify:** Can you see all three key-value pairs?
 
+- Yes, all 3 key-value pairs are visible in plain text
+- No encoding, no encryption
+
+<img width="1486" height="887" alt="image" src="https://github.com/user-attachments/assets/10153f8f-0515-46d3-91b8-99edda9e7cf9" />
+
 ---
 
 ### Task 2: Create a ConfigMap from a File
@@ -29,6 +27,10 @@ Your application needs configuration — database URLs, feature flags, API keys.
 3. The key name (`default.conf`) becomes the filename when mounted into a Pod
 
 **Verify:** Does `kubectl get configmap nginx-config -o yaml` show the file contents?
+
+- Yes file contents are fully visible in YAML
+
+<img width="1240" height="497" alt="image" src="https://github.com/user-attachments/assets/d5161d2e-5f3c-4f95-bfcc-89171882d128" />
 
 ---
 
@@ -43,6 +45,11 @@ Use environment variables for simple key-value settings. Use volume mounts for f
 
 ```kubectl exec nginx-config -- curl -s http://localhost/health```
 
+<img width="830" height="722" alt="image" src="https://github.com/user-attachments/assets/d682e0fb-2f21-43e2-a8a8-2eec0e30bcca" />
+
+<img width="812" height="482" alt="image" src="https://github.com/user-attachments/assets/7cee01e9-bac7-463f-9d51-0029298ea18f" />
+
+<img width="871" height="77" alt="image" src="https://github.com/user-attachments/assets/25aabc6b-6f77-4d27-b315-2382988fc759" />
 
 ---
 
@@ -55,6 +62,10 @@ Use environment variables for simple key-value settings. Use volume mounts for f
 
 **Verify:** Can you decode the password back to plaintext?
 
+- Yes, decode the password back to plaintext
+
+<img width="1347" height="592" alt="image" src="https://github.com/user-attachments/assets/db2ec12b-ac06-4382-85bb-77415355ac17" />
+
 ---
 
 ### Task 5: Use Secrets in a Pod
@@ -63,6 +74,12 @@ Use environment variables for simple key-value settings. Use volume mounts for f
 3. Verify: each Secret key becomes a file, and the content is the decoded plaintext value
 
 **Verify:** Are the mounted file values plaintext or base64?
+
+- Mounted file values planintext
+  
+<img width="865" height="542" alt="image" src="https://github.com/user-attachments/assets/55713dc4-8afc-4b40-b92d-94373594ee33" />
+
+<img width="821" height="230" alt="image" src="https://github.com/user-attachments/assets/656c24fa-0375-4cce-ae28-568d6be4eb47" />
 
 ---
 
@@ -75,19 +92,18 @@ Use environment variables for simple key-value settings. Use volume mounts for f
 
 **Verify:** Did the volume-mounted value change without a pod restart?
 
+- Yes, the volume-mounted value does change without restarting the Pod.
+
+<img width="1060" height="586" alt="image" src="https://github.com/user-attachments/assets/ffccaa4e-12b4-48e5-9cb1-8ffc483476a8" />
+
+<img width="807" height="877" alt="image" src="https://github.com/user-attachments/assets/9fbed22b-bbce-4e58-abc5-ef2670d29aec" />
+
 ---
 
 ### Task 7: Clean Up
 Delete all pods, ConfigMaps, and Secrets you created.
 
----
-
-## Hints
-- `--from-literal=KEY=VALUE` for command-line values, `--from-file=key=filename` for file contents
-- `envFrom` injects all keys; `env` with `valueFrom` injects individual keys
-- `echo -n 'value' | base64` — always use `-n` to avoid encoding a trailing newline
-- Volume-mounted ConfigMaps/Secrets auto-update; environment variables do not
-- `kubectl get secret <name> -o jsonpath='{.data.KEY}' | base64 --decode` extracts and decodes a value
+<img width="776" height="965" alt="image" src="https://github.com/user-attachments/assets/56f5c714-eb20-4c00-bef1-99ed150c0662" />
 
 ---
 
@@ -97,12 +113,6 @@ Create `day-54-configmaps-secrets.md` with:
 - The difference between environment variables and volume mounts
 - Why base64 is encoding, not encryption
 - How ConfigMap updates propagate to volumes but not env vars
-
----
-
-## Submission
-1. Add `day-54-configmaps-secrets.md` to `2026/day-54/`
-2. Commit and push to your fork
 
 ---
 
