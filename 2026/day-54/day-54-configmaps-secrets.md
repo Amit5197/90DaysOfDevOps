@@ -108,11 +108,35 @@ Delete all pods, ConfigMaps, and Secrets you created.
 ---
 
 ## Documentation
-Create `day-54-configmaps-secrets.md` with:
-- What ConfigMaps and Secrets are and when to use each
-- The difference between environment variables and volume mounts
-- Why base64 is encoding, not encryption
-- How ConfigMap updates propagate to volumes but not env vars
+
+**What ConfigMaps and Secrets are and when to use each**
+
+- `ConfigMap` stores non-sensitive data (e.g., config, URLs)
+- `Secret` stores sensitive data (e.g., passwords, tokens)
+-  Secrets use base64 (not secure by itself)
+
+**The difference between environment variables and volume mounts**
+
+`Environment Variables:`
+- Injected at Pod startup
+- Do NOT update if ConfigMap/Secret changes
+
+`Volume Mounts:`
+- Data is available as files inside container
+- Auto-updates (after ~30–60 seconds)
+
+**Why base64 is encoding, not encryption**
+
+- Base64 is just encoding, not secure
+- It can be easily decoded by anyone (no key needed)
+- In `Kubernetes Secrets:`
+  - Data is base64 only for safe storage in YAML
+  - Anyone with access can decode it
+
+**How ConfigMap updates propagate to volumes but not env vars**
+
+- `ConfigMap as volume` updates automatically without restart
+- `ConfigMap as env var` stays same until Pod restart
 
 ---
 
