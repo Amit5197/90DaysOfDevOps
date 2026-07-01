@@ -41,6 +41,9 @@ Use environment variables for simple key-value settings. Use volume mounts for f
 
 **Verify:** Does the `/health` endpoint respond?
 
+```kubectl exec nginx-config -- curl -s http://localhost/health```
+
+
 ---
 
 ### Task 4: Create a Secret
