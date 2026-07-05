@@ -115,10 +115,12 @@ Access modes to know:
 
 `Why:` It was manually created and had a Reclaim Policy = Retain, so Kubernetes keeps the PV even after the PVC is deleted to prevent accidental data loss.
 
-<img width="881" height="402" alt="image" src="https://github.com/user-attachments/assets/e1c2ad33-e751-4ebf-be7a-9107da3e7019" /> <img width="1527" height="156" alt="image" src="https://github.com/user-attachments/assets/52d5e710-2879-48c3-a553-29955f8d60f3" />
+<img width="881" height="402" alt="image" src="https://github.com/user-attachments/assets/e1c2ad33-e751-4ebf-be7a-9107da3e7019" /> 
+<img width="1527" height="156" alt="image" src="https://github.com/user-attachments/assets/52d5e710-2879-48c3-a553-29955f8d60f3" />
 
 
-<img width="1655" height="222" alt="image" src="https://github.com/user-attachments/assets/db7495ff-ecee-42b8-a557-a5b4d06a163a" /> <img width="797" height="67" alt="image" src="https://github.com/user-attachments/assets/5744d760-d18e-4ad5-89b0-2b827fd2e361" />
+<img width="866" height="382" alt="image" src="https://github.com/user-attachments/assets/86c5b756-e073-4b6d-8118-8cd73d5e254d" />
+<img width="797" height="67" alt="image" src="https://github.com/user-attachments/assets/5744d760-d18e-4ad5-89b0-2b827fd2e361" />
 
 ---
 
