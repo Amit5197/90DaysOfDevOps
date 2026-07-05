@@ -52,8 +52,9 @@ Check `kubectl describe pod` for `Reason: OOMKilled` and `Exit Code: 137` (128 +
 
 **Verify:** What event message does the scheduler produce?
 
-
-![Uploading image.png…]()
+- 0/3 nodes are available: Insufficient cpu, Insufficient memory
+  
+<img width="1901" height="761" alt="image" src="https://github.com/user-attachments/assets/6aab09c5-4d55-4f1a-8e6c-23c1a8ecaf2d" />
 
 ---
 
@@ -65,6 +66,12 @@ A liveness probe detects stuck containers. If it fails, Kubernetes restarts the 
 3. After the file is deleted, 3 consecutive failures trigger a restart. Watch with `kubectl get pod -w`
 
 **Verify:** How many times has the container restarted?
+
+- 4 times container restarted
+  
+<img width="686" height="155" alt="image" src="https://github.com/user-attachments/assets/c68767f1-4b75-402e-b63c-10e81425150f" />
+
+<img width="1272" height="447" alt="image" src="https://github.com/user-attachments/assets/b816198c-663f-40e5-a9ac-0419c5a19941" />
 
 ---
 
@@ -79,6 +86,12 @@ A readiness probe controls traffic. Failure removes the Pod from Service endpoin
 
 **Verify:** When readiness failed, was the container restarted?
 
+- No, the container was NOT restarted.
+
+<img width="726" height="192" alt="image" src="https://github.com/user-attachments/assets/46fe88cc-c4cf-498a-a019-3adf47997e29" />
+
+<img width="1327" height="941" alt="image" src="https://github.com/user-attachments/assets/43fb7d54-5a89-43a5-a06a-4be658d2dfe1" />
+
 ---
 
 ### Task 6: Startup Probe
@@ -90,30 +103,52 @@ A startup probe gives slow-starting containers extra time. While it runs, livene
 
 **Verify:** What would happen if `failureThreshold` were 2 instead of 12?
 
+
+- If `failureThreshold` is set to `2`,the startup probe allows only 10 seconds (2 × 5s) for the container to start.
+- Since the container takes 20 seconds to start, the startupProbe will fail before the app is ready,causing Kubernetes to restart the container repeatedly.
+
+<img width="1450" height="607" alt="image" src="https://github.com/user-attachments/assets/5caccb02-2557-4a64-b930-c9a3310ff7d7" />
+
+<img width="1760" height="297" alt="image" src="https://github.com/user-attachments/assets/53578023-7916-439e-aca3-d672339cc76f" />
+
+`0/1 READY`: app still starting (startupProbe running)
+
+`1/1 READY`: startup complete, livenessProbe active
+  
 ---
 
 ### Task 7: Clean Up
 Delete all pods and services you created.
 
----
-
-## Hints
-- CPU is compressible (throttled); memory is incompressible (OOMKilled)
-- CPU: `1` = 1 core = `1000m`. Memory: `Mi` (mebibytes), `Gi` (gibibytes)
-- QoS: Guaranteed (requests == limits), Burstable (requests < limits), BestEffort (none set)
-- Probe types: `httpGet`, `exec`, `tcpSocket`
-- Liveness failure = restart. Readiness failure = remove from endpoints. Startup failure = kill.
-- `initialDelaySeconds`, `periodSeconds`, `failureThreshold` control probe timing
-- Exit code 137 = OOMKilled (128 + SIGKILL)
+<img width="872" height="557" alt="image" src="https://github.com/user-attachments/assets/9d535f2c-734c-47ac-9553-665951379431" />
 
 ---
 
-## Documentation
-Create `day-57-resources-probes.md` with:
-- Requests vs limits (scheduling vs enforcement)
-- What happens when CPU or memory limits are exceeded
-- Liveness vs readiness vs startup probes
-- Screenshots of OOMKilled, Pending, and probe events
+**Requests vs limits (scheduling vs enforcement)**
+
+`Requests`
+ - Used by Kubernetes scheduler to decide where to place the Pod
+ - Guarantees minimum resources
+
+`Limits`
+ - Enforced by container runtime
+ - Prevents container from using more than defined resources
+
+**What happens when CPU or memory limits are exceeded**
+
+`CPU limit exceeded`
+- Container is throttled (slowed down, not killed)
+
+`Memory limit exceeded`
+- Container is killed (OOMKilled) and restarted
+
+**Liveness vs readiness vs startup probes**
+
+| Probe Type          | Purpose                        | When it Runs           | If it Fails                       | Simple Meaning            |
+| ------------------- | ------------------------------ | ---------------------- | --------------------------------- | ------------------------- |
+| **Startup Probe**   | Check if app has started       | At container startup   | Container is restarted            | “Has app started?”        |
+| **Liveness Probe**  | Check if app is still alive    | After startup succeeds | Container is restarted            | “Is app alive?”           |
+| **Readiness Probe** | Check if app can serve traffic | Throughout lifecycle   | Removed from service (no traffic) | “Is app ready for users?” |
 
 ---
 
