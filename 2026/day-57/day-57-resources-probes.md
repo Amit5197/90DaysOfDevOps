@@ -39,7 +39,9 @@ Check `kubectl describe pod` for `Reason: OOMKilled` and `Exit Code: 137` (128 +
 
 - An OOMKilled container exits with code 137
 
+<img width="1311" height="392" alt="image" src="https://github.com/user-attachments/assets/f48fa1a6-4a49-41f9-bea5-7e55de257a92" />
 
+<img width="672" height="87" alt="image" src="https://github.com/user-attachments/assets/0c58b9a1-69dd-4f5c-b0ae-c4ddc9ba4b4a" />
 
 ---
 
@@ -49,6 +51,9 @@ Check `kubectl describe pod` for `Reason: OOMKilled` and `Exit Code: 137` (128 +
 3. Run `kubectl describe pod` and read the Events — the scheduler says exactly why: insufficient resources
 
 **Verify:** What event message does the scheduler produce?
+
+
+![Uploading image.png…]()
 
 ---
 
