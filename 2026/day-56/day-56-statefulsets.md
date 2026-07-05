@@ -1,4 +1,4 @@
-<img width="707" height="56" alt="image" src="https://github.com/user-attachments/assets/9fbe3e49-33de-480d-941f-8605df5f3bfa" /># Day 56 – Kubernetes StatefulSets
+# Day 56 – Kubernetes StatefulSets
 
 ## Task
 Deployments work great for stateless apps, but what about databases? You need stable pod names, ordered startup, and persistent storage per replica. Today you learn StatefulSets — the workload designed for stateful applications like MySQL, PostgreSQL, and Kafka.
