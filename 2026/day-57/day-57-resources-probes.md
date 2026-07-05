@@ -152,16 +152,5 @@ Delete all pods and services you created.
 
 ---
 
-## Submission
-1. Add `day-57-resources-probes.md` to `2026/day-57/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share on LinkedIn: "Set resource requests and limits in Kubernetes today, watched a pod get OOMKilled, and added liveness, readiness, and startup probes for self-healing."
-
-`#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
-
 Happy Learning!
 **TrainWithShubham**
