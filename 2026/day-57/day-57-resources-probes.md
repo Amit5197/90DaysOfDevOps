@@ -18,6 +18,12 @@ CPU is in millicores: `100m` = 0.1 CPU. Memory is in mebibytes: `128Mi`.
 
 **Verify:** What QoS class does your Pod have?
 
+- Pod have Qos Class Burstable
+
+<img width="777" height="172" alt="image" src="https://github.com/user-attachments/assets/b472b427-0b39-4bad-a653-1751b9a8fff6" />
+
+<img width="1245" height="916" alt="image" src="https://github.com/user-attachments/assets/120de58c-d932-4537-8999-40daaacccc78" />
+
 ---
 
 ### Task 2: OOMKilled — Exceeding Memory Limits
@@ -30,6 +36,10 @@ CPU is throttled when over limit. Memory is killed — no mercy.
 Check `kubectl describe pod` for `Reason: OOMKilled` and `Exit Code: 137` (128 + SIGKILL).
 
 **Verify:** What exit code does an OOMKilled container have?
+
+- An OOMKilled container exits with code 137
+
+
 
 ---
 
