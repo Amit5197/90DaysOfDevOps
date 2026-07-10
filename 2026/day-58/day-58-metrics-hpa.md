@@ -17,6 +17,21 @@ Yesterday you set resource requests and limits. Today you put that to work. Inst
 
 **Verify:** What is the current CPU and memory usage of your node?
 
+- Current node utilization is low: CPU usage is 0–2% and memory usage is 2–8% across nodes.
+
+- Here is the correct, up-to-date URL to deploy the Metrics Server:- kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+1. The Patch Command
+
+`
+kubectl patch deployment metrics-server -n kube-system \
+  --type='json' \
+  -p='[{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--kubelet-insecure-tls"}]'
+`
+<img width="1501" height="481" alt="image" src="https://github.com/user-attachments/assets/95eb59cd-266e-46e7-a73e-9a62c4da873c" />
+
+<img width="952" height="812" alt="image" src="https://github.com/user-attachments/assets/69733293-0d5f-4f75-b667-1d57640b0d22" />
+
 ---
 
 ### Task 2: Explore kubectl top
@@ -25,6 +40,10 @@ Yesterday you set resource requests and limits. Today you put that to work. Inst
 3. Data comes from the Metrics Server, which polls kubelets every 15 seconds
 
 **Verify:** Which pod is using the most CPU right now?
+
+- `kube-apiserver-devops-cluster-control-plane` Pod using the most CPU
+
+<img width="945" height="165" alt="image" src="https://github.com/user-attachments/assets/93479dc6-4d5e-47bc-81a4-85e39aa9c29a" />
 
 ---
 
@@ -47,6 +66,12 @@ Without CPU requests, HPA cannot work — this is the most common HPA setup mist
 This scales up when average CPU exceeds 50% of requests, and down when it drops below.
 
 **Verify:** What does the TARGETS column show?
+
+- Current CPU Usage is: 1m
+
+<img width="760" height="71" alt="image" src="https://github.com/user-attachments/assets/977b7a8f-4603-4462-b435-1777649d4da9" />
+<img width="756" height="75" alt="image" src="https://github.com/user-attachments/assets/f3322842-7fc3-43f0-a599-6e2f7fff5f3e" />
+<img width="760" height="95" alt="image" src="https://github.com/user-attachments/assets/90599268-7c2e-46ed-9461-40d31e5635d8" />
 
 ---
 
