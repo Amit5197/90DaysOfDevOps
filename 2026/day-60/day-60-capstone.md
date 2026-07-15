@@ -95,6 +95,19 @@ Ten days of Kubernetes — clusters, Pods, Deployments, Services, ConfigMaps, Se
 ### Task 7: (Bonus) Compare with Helm (Day 59)
 1. Install WordPress using `helm install wp-helm bitnami/wordpress` in a separate namespace
 2. Compare: how many resources did each approach create? Which gives more control?
+
+| Resource Type      | Manual YAML (`capstone`)                 | Helm (`wp-helm-ns`)                                             |
+| ------------------ | ---------------------------------------- | --------------------------------------------------------------- |
+| **Pods**           | 3 (2 WordPress + 1 MySQL)                | 2 (1 WordPress + 1 MariaDB)                                     |
+| **Deployments**    | 1 (WordPress)                            | 1 (WordPress)                                                   |
+| **StatefulSets**   | 1 (MySQL)                                | 1 (MariaDB)                                                     |
+| **ReplicaSets**    | 1 (WordPress)                            | 1 (WordPress)                                                   |
+| **Services**       | 2 (WordPress NodePort + MySQL ClusterIP) | 3 (WordPress LoadBalancer + MariaDB ClusterIP + headless)       |
+| **HPA**            | 1 (WordPress CPU-based)                  | 0 (Not created by default)                                      |
+| **ConfigMaps**     | 1 (`wordpress-config`)                   | 1 (`wp-helm-mariadb`)                                           |
+| **Secrets**        | 1 (`mysql-secret`)                       | 3 (`wp-helm-mariadb`, `wp-helm-wordpress`, Helm release secret) |
+| **PVCs / Storage** | 1 (`mysql-data-mysql-0`)                 | 2 (`data-wp-helm-mariadb-0`, `wp-helm-wordpress`)               |
+
 3. Clean up the Helm deployment
 
 ---
@@ -106,38 +119,80 @@ Ten days of Kubernetes — clusters, Pods, Deployments, Services, ConfigMaps, Se
 4. Reset default: `kubectl config set-context --current --namespace=default`
 
 **Verify:** Did deleting the namespace remove everything?
-
----
-
-## Hints
-- If MySQL takes long to start, check: `kubectl logs mysql-0 -n capstone`
-- `WORDPRESS_DB_HOST` must match the StatefulSet DNS pattern: `<pod>.<service>.<namespace>.svc.cluster.local`
-- WordPress probes may fail initially — `initialDelaySeconds` gives it time to boot
-- If PVC stays Pending, check `kubectl get storageclass`
-- `nodePort` must be in range 30000-32767
-- The Bitnami chart uses MariaDB instead of MySQL — compatible but not identical
+- Yes
+  
+<img width="1180" height="672" alt="image" src="https://github.com/user-attachments/assets/f2ba3af6-af39-4d91-9abe-b9e58327c97f" />
 
 ---
 
 ## Documentation
-Create `day-60-capstone.md` with:
-- Architecture of your deployment (which resources connect to which)
-- Results of self-healing and persistence tests
-- A table mapping each concept to the day you learned it
-- Reflection: what was hardest, what clicked, what you would add for production
+**Architecture Diagram**(which resources connect to which)
+1. `User / Local Machine → WordPress NodePort Service`
 
----
+   - External traffic comes from users or local port-forward (127.0.0.1:8080) to the NodePort Service (30080).
 
-## Submission
-1. Add `day-60-capstone.md` to `2026/day-60/`
-2. Commit and push to your fork
+2. `WordPress NodePort Service → WordPress Pods`
 
----
+   - The NodePort Service forwards traffic to the WordPress Deployment pods on port 80.
 
-## Learn in Public
-Share on LinkedIn: "Completed the Kubernetes capstone — deployed WordPress + MySQL using twelve K8s concepts: Namespaces, Deployments, StatefulSets, Services, ConfigMaps, Secrets, PVCs, resource limits, probes, and HPA. Ten days of learning, one real application."
+3. `WordPress Pods → ConfigMap & Secrets`
 
-`#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
+   - Pods read the ConfigMap for WORDPRESS_DB_HOST and WORDPRESS_DB_NAME.
+
+   - Pods read the Secrets for MYSQL_ROOT_PASSWORD, MYSQL_DATABASE, MYSQL_USER, and MYSQL_PASSWORD.
+
+4. `WordPress Pods → MySQL Headless Service`
+
+   - Pods connect to MySQL using the DNS name provided by the Headless Service (mysql-svc:3306).
+
+5. `MySQL Headless Service → MySQL StatefulSet Pods`
+
+   - The Headless Service routes connections to the MySQL StatefulSet pod(mysql-0).
+
+6. `MySQL Pods → PVC (PersistentVolumeClaim)`
+
+   - MySQL pods store their data in the PVC for persistent storage across restarts.
+
+7. `WordPress Deployment → HPA`
+
+   - The HPA monitors WordPress pods for CPU usage and scales replicas between 2 and 10 based on load.
+
+**Results of self-healing and persistence tests**
+
+   - Even if database pod fails/recreated, the data is persistent.
+   - Because of deployment the desired state is maintained and any deleted pod is created again automatically.
+
+**A table mapping each concept to the day you learned it**
+   | Concept | Day |
+   |---------|-----|
+   | Namespace | 52 |
+   | Services | 53 |
+   | ConfigMAp, Secrets | 54 |
+   | Persistent volumes | 55 |
+   | Headless Service | 56 |
+   | Probes | 57 |
+   | Metrics, HPA | 58 |
+   | Helm Charts | 59 |
+
+**Reflection: what was hardest, what clicked, what you would add for production**
+
+`Hardest Part`:
+   - Configuring liveness/readiness probes with correct initialDelaySeconds, periodSeconds, and timeoutSeconds so WordPress pods don’t restart unnecessarily.
+   - Troubleshooting StatefulSet and WordPress → MySQL connectivity.
+
+`What Clicked`
+   - Understanding probe parameters:
+      - initialDelaySeconds: 10 → Wait 10 seconds before the first probe (increase for slow startups).
+      - periodSeconds: 5 → Probe every 5 seconds.
+      - timeoutSeconds: 3 → Mark probe as failed if no response in 3 seconds.
+
+`What I Would Add for Production`
+   - `Database & Secrets:` Use a managed DB (RDS) and a secrets manager.
+   - `Secure Access:` Use Gateway API with TLS 
+   - `Access Control:` Use RBAC to manage who can create Gateways, Routes, or Secrets.
+   - `Monitoring:` Deploy Prometheus + Grafana with alerts
+
+   ---
 
 Happy Learning!
 **TrainWithShubham**
