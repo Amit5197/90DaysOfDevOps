@@ -5,14 +5,6 @@ Ten days of Kubernetes — clusters, Pods, Deployments, Services, ConfigMaps, Se
 
 ---
 
-## Expected Output
-- A complete WordPress + MySQL stack in a `capstone` namespace
-- Self-healing and data persistence verified
-- A markdown file: `day-60-capstone.md`
-- Screenshot of the running WordPress site and `kubectl get all -n capstone`
-
----
-
 ## Challenge Tasks
 
 ### Task 1: Create the Namespace (Day 52)
@@ -34,6 +26,15 @@ Ten days of Kubernetes — clusters, Pods, Deployments, Services, ConfigMaps, Se
 4. Verify MySQL works: `kubectl exec -it mysql-0 -- mysql -u <user> -p<password> -e "SHOW DATABASES;"`
 
 **Verify:** Can you see the `wordpress` database?
+- yes
+
+<img width="882" height="446" alt="image" src="https://github.com/user-attachments/assets/06a2a6d9-d088-4573-9816-124ab7df0e1e" />
+
+`kubectl exec mysql-0 -- env | grep -i mysql`
+`kubectl exec -it mysql-0 -- mysql -u root -p -e "SHOW DATABASES;"`
+`kubectl exec -it mysql-0 -- mysql -u wordpress_user -pwordpresspassword123 -e "SHOW DATABASES;"`
+
+<img width="1030" height="967" alt="image" src="https://github.com/user-attachments/assets/0b372559-1395-4187-afd4-e6e16a5052e9" />
 
 ---
 
