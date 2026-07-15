@@ -16,37 +16,33 @@ Three core concepts:
 - **Release** — a specific installation of a chart in your cluster
 - **Repository** — a collection of charts (like a package repo)
 
-`
 # Download the Windows zip file
-curl -LO https://get.helm.sh/helm-v4.1.3-windows-amd64.zip
+`curl -LO https://get.helm.sh/helm-v4.1.3-windows-amd64.zip`
 
 # Unzip the file
-unzip helm-v4.1.3-windows-amd64.zip
+`unzip helm-v4.1.3-windows-amd64.zip`
 
 # Move the Windows executable to a standard Windows path (requires admin terminal)
-mv windows-amd64/helm.exe /c/Windows/System32/
+`mv windows-amd64/helm.exe /c/Windows/System32/`
 
 If you get a permission denied error with the command above, see Step 3.
 
 # Add it to a custom folder and update your PATH
-export PATH=$PATH:/c/helm
-`
+`export PATH=$PATH:/c/helm`
 
 And 
 
-`
 # 1. Create a helm folder in your user directory
-mkdir -p ~/helm
+`mkdir -p ~/helm`
 
 # 2. Move the windows executable into that new folder
-mv windows-amd64/helm.exe ~/helm/
+`mv windows-amd64/helm.exe ~/helm/`
 
 # 3. Tell your current terminal session where to find it
-export PATH=$PATH:~/helm
+`export PATH=$PATH:~/helm`
 
 # 4. Test it
-helm version
-`
+`helm version`
 
 **Verify:** What version of Helm is installed?
 - v4.1.3
