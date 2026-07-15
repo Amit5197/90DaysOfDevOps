@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wordpress
+  namespace: capstone
   labels:
     app: wordpress
 spec:
@@ -44,13 +45,15 @@ spec:
             httpGet:
               path: /wp-login.php
               port: 80
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 3
+            initialDelaySeconds: 45    # 👈 CHANGED (Increased from 15 to 45 seconds)
+            periodSeconds: 10          # 👈 CHANGED (Check every 10 seconds)
+            timeoutSeconds: 5          # 👈 CHANGED (Timeout raised to 5 seconds)
+            failureThreshold: 6        # 👈 ADDED (Allow 6 failed checks before restarting)
           readinessProbe:
             httpGet:
               path: /wp-login.php
               port: 80
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 3
+            initialDelaySeconds: 30    # 👈 CHANGED (Increased from 15 to 30 seconds)
+            periodSeconds: 10          # 👈 CHANGED (Check every 10 seconds)
+            timeoutSeconds: 5          # 👈 CHANGED (Timeout raised to 5 seconds)
+            failureThreshold: 6        # 👈 ADDED (Allow 6 failed checks)

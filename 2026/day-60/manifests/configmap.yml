@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: wordpress-config
+  namespace: capstone         # 👈 Add this so it deploys in the capstone namespace
 data:
-  WORDPRESS_DB_HOST: mysql-0.mysql-svc.capstone.svc.cluster.local:3306
+  WORDPRESS_DB_HOST: mysql-0.mysql.capstone.svc.cluster.local:3306  # 👈 Fixed: changed mysql-svc to mysql
   WORDPRESS_DB_NAME: wordpress
