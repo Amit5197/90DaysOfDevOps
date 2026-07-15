@@ -19,6 +19,8 @@ Ten days of Kubernetes — clusters, Pods, Deployments, Services, ConfigMaps, Se
 1. Create a `capstone` namespace
 2. Set it as your default: `kubectl config set-context --current --namespace=capstone`
 
+<img width="856" height="427" alt="image" src="https://github.com/user-attachments/assets/b0ed6cc9-9312-4980-8352-807afad68ed6" />
+
 ---
 
 ### Task 2: Deploy MySQL (Days 54-56)
