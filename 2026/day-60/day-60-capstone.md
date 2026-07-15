@@ -48,6 +48,9 @@ Ten days of Kubernetes — clusters, Pods, Deployments, Services, ConfigMaps, Se
 3. Wait until both pods show `1/1 Running`
 
 **Verify:** Are both WordPress pods running and ready?
+- Yes
+
+<img width="790" height="197" alt="image" src="https://github.com/user-attachments/assets/0bd9d4b5-c679-4f95-a6c4-01dbf26dcc48" />
 
 ---
 
@@ -60,6 +63,9 @@ Ten days of Kubernetes — clusters, Pods, Deployments, Services, ConfigMaps, Se
 
 **Verify:** Can you see the WordPress setup page?
 
+<img width="1737" height="952" alt="image" src="https://github.com/user-attachments/assets/99fed39b-6c60-45ff-aa22-d29680a4577d" />
+<img width="1786" height="687" alt="image" src="https://github.com/user-attachments/assets/6a5ff800-bac1-439d-8259-b78366cc11c0" />
+
 ---
 
 ### Task 5: Test Self-Healing and Persistence
@@ -68,6 +74,9 @@ Ten days of Kubernetes — clusters, Pods, Deployments, Services, ConfigMaps, Se
 3. After MySQL recovers, refresh WordPress — your blog post should still be there
 
 **Verify:** After deleting both pods, is your blog post still there?
+- Yes
+
+<img width="740" height="501" alt="image" src="https://github.com/user-attachments/assets/63ffce5a-7235-46a0-9f89-92b27671f26a" />
 
 ---
 
@@ -77,6 +86,9 @@ Ten days of Kubernetes — clusters, Pods, Deployments, Services, ConfigMaps, Se
 3. Run `kubectl get all -n capstone` for the complete picture
 
 **Verify:** Does the HPA show correct min/max and target?
+- Yes
+
+<img width="1692" height="677" alt="image" src="https://github.com/user-attachments/assets/32ceb710-2165-4c3c-ac8e-6654bc15b5ea" />
 
 ---
 
