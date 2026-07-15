@@ -17,6 +17,21 @@ Yesterday you set resource requests and limits. Today you put that to work. Inst
 
 **Verify:** What is the current CPU and memory usage of your node?
 
+- Current node utilization is low: CPU usage is 0–2% and memory usage is 2–8% across nodes.
+
+- Here is the correct, up-to-date URL to deploy the Metrics Server:- kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+1. The Patch Command
+
+`
+kubectl patch deployment metrics-server -n kube-system \
+  --type='json' \
+  -p='[{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--kubelet-insecure-tls"}]'
+`
+<img width="1501" height="481" alt="image" src="https://github.com/user-attachments/assets/95eb59cd-266e-46e7-a73e-9a62c4da873c" />
+
+<img width="952" height="812" alt="image" src="https://github.com/user-attachments/assets/69733293-0d5f-4f75-b667-1d57640b0d22" />
+
 ---
 
 ### Task 2: Explore kubectl top
@@ -25,6 +40,10 @@ Yesterday you set resource requests and limits. Today you put that to work. Inst
 3. Data comes from the Metrics Server, which polls kubelets every 15 seconds
 
 **Verify:** Which pod is using the most CPU right now?
+
+- `kube-apiserver-devops-cluster-control-plane` Pod using the most CPU
+
+<img width="945" height="165" alt="image" src="https://github.com/user-attachments/assets/93479dc6-4d5e-47bc-81a4-85e39aa9c29a" />
 
 ---
 
@@ -37,6 +56,12 @@ Without CPU requests, HPA cannot work — this is the most common HPA setup mist
 
 **Verify:** What is the current CPU usage of the Pod?
 
+- Current CPU Usage is: 1m
+
+<img width="760" height="71" alt="image" src="https://github.com/user-attachments/assets/977b7a8f-4603-4462-b435-1777649d4da9" />
+<img width="756" height="75" alt="image" src="https://github.com/user-attachments/assets/f3322842-7fc3-43f0-a599-6e2f7fff5f3e" />
+<img width="760" height="95" alt="image" src="https://github.com/user-attachments/assets/90599268-7c2e-46ed-9461-40d31e5635d8" />
+
 ---
 
 ### Task 4: Create an HPA (Imperative)
@@ -48,6 +73,10 @@ This scales up when average CPU exceeds 50% of requests, and down when it drops 
 
 **Verify:** What does the TARGETS column show?
 
+- `TARGETS column show:` current usage (1m) vs desired target(50m)
+
+<img width="1510" height="832" alt="image" src="https://github.com/user-attachments/assets/86e70ffa-664f-4972-a4d8-720f5d3875b2" />
+
 ---
 
 ### Task 5: Generate Load and Watch Autoscaling
@@ -58,6 +87,14 @@ This scales up when average CPU exceeds 50% of requests, and down when it drops 
 5. Scale-down is slow (5-minute stabilization window) — you do not need to wait
 
 **Verify:** How many replicas did HPA scale to under load?
+
+- It scaled to max=10 replicas under load.
+
+<img width="1326" height="220" alt="image" src="https://github.com/user-attachments/assets/6b1f32f5-6dd5-445e-83e4-b8ac65657d69" />
+
+- After load removed
+
+<img width="880" height="176" alt="image" src="https://github.com/user-attachments/assets/1ca1b614-4c34-4151-9064-2683642fd501" />
 
 ---
 
@@ -71,42 +108,44 @@ This scales up when average CPU exceeds 50% of requests, and down when it drops 
 
 **Verify:** What does the `behavior` section control?
 
+- The behavior section controls how the HPA scales pods up and down.
+- `Stabilization window:` how long to wait before scaling up or down
+- `Policies:` limit how many pods can be added or removed
+- `Percent:` scale based on percentage
+- `Pods:` scale by a fixed number
+- `periodSeconds:` minimum time between scaling actions
+
+<img width="1595" height="662" alt="image" src="https://github.com/user-attachments/assets/4c39c8b4-ed89-4d35-b323-b52a25cfb385" />
+
 ---
 
 ### Task 7: Clean Up
 Delete the HPA, Service, Deployment, and load-generator pod. Leave the Metrics Server installed.
 
----
-
-## Hints
-- HPA requires `resources.requests` — without them TARGETS shows `<unknown>`
-- `kubectl top` = actual usage. `kubectl describe pod` = configured requests/limits
-- HPA checks every 15 seconds. Scale-up is fast, scale-down has a 5-minute stabilization window
-- `autoscaling/v1` = CPU only. `autoscaling/v2` = CPU + memory + custom metrics
-- Formula: `desiredReplicas = ceil(currentReplicas * (currentUsage / targetUsage))`
-- HPA works with Deployments, StatefulSets, and ReplicaSets
+<img width="711" height="140" alt="image" src="https://github.com/user-attachments/assets/225c96ae-ea25-4ca9-ba85-7488feb1ed65" />
 
 ---
 
-## Documentation
-Create `day-58-metrics-hpa.md` with:
-- What the Metrics Server is and why HPA needs it
-- How HPA calculates desired replicas
-- The difference between `autoscaling/v1` and `v2`
-- Screenshots of `kubectl top`, HPA events, and pod scaling
+**What the Metrics Server is and why HPA needs it**
+
+- Metrics Server collects real-time CPU and memory usage from nodes and pods.
+- HPA uses this data to decide when to scale pods up or down based on actual resource usage.
+
+**How HPA calculates desired replicas**
+
+- desiredReplicas = ceil(currentReplicas * (currentUsage / targetUsage))
+
+**The difference between `autoscaling/v1` and `v2`**
+
+`autoscaling/v1`
+- Supports only CPU-based scaling
+- Basic configuration
+
+`autoscaling/v2`
+- Supports multiple metrics (CPU,memory,custom)
+- Advanced behavior control (scale-up/down rules)
 
 ---
-
-## Submission
-1. Add `day-58-metrics-hpa.md` to `2026/day-58/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share on LinkedIn: "Set up Kubernetes HPA today. Watched my app auto-scale from 1 to multiple replicas under load, then scale back down. This is how production handles variable traffic."
-
-`#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
 Happy Learning!
 **TrainWithShubham**
