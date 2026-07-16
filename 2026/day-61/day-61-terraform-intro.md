@@ -69,6 +69,8 @@ aws configure
 aws sts get-caller-identity
 ```
 
+<img width="762" height="110" alt="image" src="https://github.com/user-attachments/assets/8222e6c7-89d1-4f39-8d0a-9ceeefb97975" />
+
 You should see your AWS account ID and ARN.
 
 ---
