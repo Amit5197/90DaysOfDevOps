@@ -162,36 +162,36 @@ terraform destroy
 
 **Document:** What are the three lifecycle arguments (`create_before_destroy`, `prevent_destroy`, `ignore_changes`) and when would you use each?
 
----
+<img width="1896" height="776" alt="image" src="https://github.com/user-attachments/assets/50baee56-4403-4877-9a08-f963b35b6ad3" />
 
-## Hints
-- `aws_vpc.main.id` syntax: `<resource_type>.<resource_name>.<attribute>`
-- Use `terraform fmt` to keep your HCL clean
-- CIDR `10.0.0.0/16` gives you 65,536 IPs, `10.0.1.0/24` gives you 256
-- If you cannot SSH into the instance, check: security group rules, public IP, route table, internet gateway
-- `terraform graph` outputs DOT format -- paste it into webgraphviz.com if you don't have Graphviz
-- Always destroy resources when done to avoid AWS charges
+<img width="1905" height="690" alt="image" src="https://github.com/user-attachments/assets/6379e437-b5a2-47af-b04f-07ec689ffe0b" />
 
 ---
 
 ## Documentation
-Create `day-62-providers-resources.md` with:
-- Your full `main.tf` with comments explaining each resource
-- Screenshot of `terraform apply` output
-- Screenshot of the VPC and its resources in the AWS console
-- The dependency graph (image or text)
-- Explanation of implicit vs explicit dependencies in your own words
+ 
+ - `create_before_destroy` By default, Terraform destroys a resource before creating a new one; with create_before_destroy = true, Terraform first creates the new resource and then destroys the old one.
+      - `Example` Update RDS instance without downtime.
+
+   - `prevent_destroy` Protects a resource from accidental or intentional deletion; Terraform will block destroy operations and raise an error if attempted.
+      -  `Example` Prevent deletion of a production S3 bucket and database containing critical data.
+
+   - `ignore_changes` Specifies resource attributes to ignore during updates; Terraform will not manage these attributes, useful when they are changed outside Terraform
+      - `Example` Ignore EC2 instance tags or security group rules that are managed manually
 
 ---
 
-## Submission
-1. Add `day-62-providers-resources.md` to `2026/day-62/`
-2. Commit and push to your fork
+**implicit vs explicit dependencies**
+
+- `Implicit dependencies` – Terraform automatically determines the order of resource creation based on references between resources.
+
+   - `Example:` An EC2 instance referencing a security group automatically waits for the security group to be created.
+
+- `explicit dependencies` - Allow you to manually define the order of resource creation when Terraform cannot automatically determine it
+
+    - `Example:` Auto Scaling Group depends on Launch Template – Ensure the launch template exists before creating the Auto Scaling Group
 
 ---
-
-## Learn in Public
-Share on LinkedIn: "Built a complete AWS networking stack with Terraform today -- VPC, subnets, internet gateway, route tables, security groups, and an EC2 instance. All connected through dependency graphs. Terraform decides the order, you define the desired state."
 
 `#90DaysOfDevOps` `#TerraWeek` `#DevOpsKaJosh` `#TrainWithShubham`
 
