@@ -15,9 +15,21 @@ Understanding dependencies is what separates a Terraform beginner from someone w
    - Define the `terraform` block with `required_providers` pinning the AWS provider to version `~> 5.0`
    - Define the `provider "aws"` block with your region
 3. Run `terraform init` and check the output -- what version was installed?
+- `v5.100.0 version` installed
+<img width="885" height="411" alt="image" src="https://github.com/user-attachments/assets/15f7de23-f81d-420d-9563-bd739fe3a876" />
+
 4. Read the provider lock file `.terraform.lock.hcl` -- what does it do?
 
+   - The `.terraform.lock.hcl` file locks the exact provider version (5.100.0) used in the project and ensures Terraform always installs the same version that satisfies the constraint ~> 5.0.
+   - It also stores hashes to verify the provider’s integrity, ensuring it is secure and not modified.
+
 **Document:** What does `~> 5.0` mean? How is it different from `>= 5.0` and `= 5.0.0`?
+
+- `~> 5.0` Allows versions 5.x but not 6.0
+
+- `>= 5.0` Allows 5.0 and any higher version
+
+- `= 5.0.0` Allows only exactly 5.0.0
 
 ---
 
@@ -34,6 +46,9 @@ Run `terraform plan` -- you should see 5 resources to create.
 
 **Verify:** Apply and check the AWS VPC console. Can you see all five resources connected?
 
+<img width="1062" height="936" alt="image" src="https://github.com/user-attachments/assets/df7f1405-b66f-41da-ac50-1928b9f38b93" />
+<img width="1907" height="847" alt="image" src="https://github.com/user-attachments/assets/5d102e1f-300c-429f-b031-e247928021ab" />
+
 ---
 
 ### Task 3: Understand Implicit Dependencies
@@ -45,8 +60,31 @@ Look at your `main.tf` carefully:
 
 Answer these questions:
 - How does Terraform know to create the VPC before the subnet?
+   - Terraform builds a dependency graph based on references between resources.
+    ```sh
+      resource "aws_subnet" "public_subnet" {
+      vpc_id = aws_vpc.vpc.id
+      }
+   ```
+   - `aws_vpc.vpc.id` is an attribute reference
+   - `Terraform sees:` Subnet depends on VPC
+   - So Terraform automatically creates this dependency: `aws_vpc.vpc --> aws_subnet.public_subnet`
+
 - What would happen if you tried to create the subnet before the VPC existed?
+   - AWS would reject the request: `Error: InvalidVpcID.NotFound: The vpc ID 'vpc-xxxx' does not exist`
+   - A subnet must belong to a VPC, AWS requires a valid vpc_id
+   - `No VPC`--> `no subnet possible`
+
 - Find all implicit dependencies in your config and list them
+
+   | Resource Relationship                 | Terraform Reference Mapping                                                 |
+   | ------------------------------------- | --------------------------------------------------------------------------- |
+   | Subnet → VPC                          | `aws_subnet.public_subnet --> aws_vpc.vpc`                                  |
+   | Internet Gateway → VPC                | `aws_internet_gateway.igw --> aws_vpc.vpc`                                  |
+   | Route Table → VPC                     | `aws_route_table.public_rt --> aws_vpc.vpc`                                 |
+   | Route Table → Internet Gateway        | `aws_route_table.public_rt --> aws_internet_gateway.igw`                    |
+   | Route Table Association → Subnet      | `aws_route_table_association.public_rt_assoc --> aws_subnet.public_subnet`  |
+   | Route Table Association → Route Table | `aws_route_table_association.public_rt_assoc --> aws_route_table.public_rt` |
 
 ---
 
