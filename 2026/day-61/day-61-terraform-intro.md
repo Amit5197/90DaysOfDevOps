@@ -69,10 +69,12 @@ aws configure
 aws sts get-caller-identity
 ```
 
-<img width="762" height="110" alt="image" src="https://github.com/user-attachments/assets/8222e6c7-89d1-4f39-8d0a-9ceeefb97975" />
+<img width="1027" height="447" alt="image" src="https://github.com/user-attachments/assets/207df122-4273-46a5-8a2b-7e41553dca15" />
 
 You should see your AWS account ID and ARN.
 
+- Yes
+  
 ---
 
 ### Task 3: Your First Terraform Config -- Create an S3 Bucket
