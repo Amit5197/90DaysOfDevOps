@@ -98,7 +98,15 @@ terraform apply     # Create the bucket (type 'yes' to confirm)
 
 Go to the AWS S3 console and verify your bucket exists.
 
+<img width="1846" height="957" alt="image" src="https://github.com/user-attachments/assets/19ed3615-31c1-4939-8cab-bbe4c2571a8a" />
+
+<img width="790" height="867" alt="image" src="https://github.com/user-attachments/assets/39c19996-cf5c-41f6-9dd7-d5370232c670" />
+
 **Document:** What did `terraform init` download? What does the `.terraform/` directory contain?
+
+- `terrafrom init` is a **CLI** command that initializes the **Terraform** Environment by installing the necessary **provider** plugins and modules and setting up the configuration according to your code.
+
+ `.terraform/` directory contains: downloaded provider plugins
 
 ---
 
