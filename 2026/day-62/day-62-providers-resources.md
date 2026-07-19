@@ -106,6 +106,10 @@ Add to your config:
 
 Apply and verify -- your EC2 instance should have a public IP and be reachable.
 
+<img width="807" height="987" alt="image" src="https://github.com/user-attachments/assets/ced888fc-03a7-4be0-a47f-2cec143f1b1a" />
+<img width="1902" height="877" alt="image" src="https://github.com/user-attachments/assets/361e359c-bd09-4e81-8ead-240e8e0cd8b3" />
+<img width="1887" height="855" alt="image" src="https://github.com/user-attachments/assets/f52bd073-564c-47c6-80f0-92d607f79bd0" />
+
 ---
 
 ### Task 5: Explicit Dependencies with depends_on
@@ -126,6 +130,18 @@ terraform graph
 and paste the output into an online Graphviz viewer.
 
 **Document:** When would you use `depends_on` in real projects? Give two examples.
+
+- `depends_on` is used to enforce the creation order of resources when Terraform cannot automatically determine it.
+
+- Example:
+   
+   - `RDS depends on VPC & Subnets` Ensure the VPC and subnets exist before creating the RDS database.
+
+   - `EC2 depends on IAM Role` Make sure an IAM role with S3 access is created before attaching it to an EC2 instance.
+
+   - `ACM Certificate depends on CloudFront` Ensure the ACM certificate is issued before attaching it to the CloudFront distribution.
+
+<img width="1024" height="234" alt="image" src="https://github.com/user-attachments/assets/bd758dd3-c3fd-4a3f-8dc2-95b4fcb906d6" />
 
 ---
 
