@@ -124,7 +124,13 @@ terraform apply
 
 Go to the AWS EC2 console and verify your instance is running with the correct name tag.
 
+<img width="1896" height="950" alt="image" src="https://github.com/user-attachments/assets/603bda92-fa66-44c2-8d20-0bb12287f57e" />
+
 **Document:** How does Terraform know the S3 bucket already exists and only the EC2 instance needs to be created?
+
+- **Terraform** uses the `state file` to track existing resources.
+- Since the **S3 bucket** is already in the state, Terraform `doesn’t recreate it`.
+- The `EC2 instance is not in the state`, so Terraform plans to create it
 
 ---
 
