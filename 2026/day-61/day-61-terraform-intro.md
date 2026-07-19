@@ -199,36 +199,48 @@ terraform destroy
 ```
 6. Verify in the AWS console -- both the S3 bucket and EC2 instance should be gone
 
----
+- Yes
 
-## Hints
-- S3 bucket names must be globally unique -- use something like `terraweek-<yourname>-2026`
-- AMI IDs are region-specific -- search "Amazon Linux 2 AMI" in your region's EC2 launch wizard
-- `terraform fmt` auto-formats your `.tf` files -- run it before committing
-- `terraform validate` checks for syntax errors without connecting to AWS
-- The `.terraform/` directory contains downloaded provider plugins
-- Add `*.tfstate`, `*.tfstate.backup`, and `.terraform/` to your `.gitignore`
+<img width="1896" height="985" alt="image" src="https://github.com/user-attachments/assets/0a500d4d-5a59-4028-a907-45211a5f06cd" />
+
+<img width="1896" height="975" alt="image" src="https://github.com/user-attachments/assets/2c4f63e1-9980-494b-9bc2-3444e1ca406c" />
+
+<img width="1682" height="746" alt="image" src="https://github.com/user-attachments/assets/6c91c0f5-42de-47c5-978a-fb8204acac43" />
 
 ---
 
 ## Documentation
-Create `day-61-terraform-intro.md` with:
-- IaC explanation in your own words (3-4 sentences)
-- Screenshot of `terraform apply` creating your S3 bucket and EC2 instance
-- Screenshot of the resources in the AWS console
-- What each Terraform command does (init, plan, apply, destroy, show, state list)
-- What the state file contains and why it matters
+**What is IaC (Infrastructure as Code)?**
+
+   - Infrastructure as Code (IaC) is the process of managing and provisioning infrastructure using code instead of manual processes.
+   - It allows you to automate, version and consistently deploy infrastructure.
+
+**Terraform Commands**
+
+   - `terraform init` Initializes the project, downloads providers and modules
+   - `terraform plan` Shows what changes Terraform will make before applying
+   - `terraform apply` Creates or updates infrastructure based on the plan
+   - `terraform destroy` Deletes all resources managed by Terraform
+   - `terraform show` Displays the current state in a readable format
+   - `terraform state list`Lists all resources tracked in the state file
+
+**State File: What It Contains & Why It Matters**
+
+`What it contains:`
+   
+   - Resource IDs and ARNs
+   - Current resource attributes (IP, tags, etc.)
+   - Mapping between Terraform config and real infrastructure
+   - Dependencies between resources
+
+`Why it matters:`
+
+   - Acts as Terraform’s source of truth
+   - Enables Terraform to detect changes and plan updates
+   - Prevents duplicate resource creation
+   - Ensures consistent infrastructure management
 
 ---
-
-## Submission
-1. Add `day-61-terraform-intro.md` to `2026/day-61/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share on LinkedIn: "Started the TerraWeek Challenge -- installed Terraform, created my first S3 bucket and EC2 instance using code, and destroyed it all with one command. Infrastructure as Code just clicked."
 
 `#90DaysOfDevOps` `#TerraWeek` `#DevOpsKaJosh` `#TrainWithShubham`
 
