@@ -146,11 +146,44 @@ terraform state show aws_s3_bucket.<name>   # Detailed view of a specific resour
 terraform state show aws_instance.<name>
 ```
 
+1. `terraform show`
+- Displays the full current state in a human-readable format.
+- It shows detailed information about all managed resources, including:
+   - `EC2 instance (ID, state, IPs, tags, etc.)`
+   - `S3 bucket (name, ARN, region, configuration)`
+
+2. `terraform state list`
+- Lists all resources tracked in the Terraform state.
+   - `Output shows:`  
+      `aws_instance.example`
+      `aws_s3_bucket.bucket`
+- This confirms Terraform is managing both resources.
+
+3. `terraform state show aws_s3_bucket.bucket`
+- Displays detailed state information for the S3 bucket only, such as:
+   - `Bucket name and ARN`
+   - `Region`
+   - `Encryption settings`
+   - `Versioning configuration`
+
+4. `terraform state show aws_instance.instance`
+- Displays detailed state information for the EC2 instance, including:
+   - `Instance ID and state (running)`
+   - `Instance type`
+   - `Public & private IPs`
+   - `Subnet and security groups`
+   - `Tags (Name = TerraWeek-Day1)`
+
 3. Answer these questions in your notes:
    - What information does the state file store about each resource?
-   - Why should you never manually edit the state file?
-   - Why should the state file not be committed to Git?
+      - The state file stores the resource configuration and current attributes, such as resource ID,ARNs,IP addresses,tags and dependencies mapping Terraform config to real infrastructure.
 
+   - Why should you never manually edit the state file?
+      - Manual edits can corrupt the state and cause mismatches between Terraform and actual infrastructure, leading to errors or unintended changes
+   
+   - Why should the state file not be committed to Git?
+      - The state file contains sensitive data and committing it can cause security risks and team conflicts.
+        
 ---
 
 ### Task 6: Modify, Plan, and Destroy
