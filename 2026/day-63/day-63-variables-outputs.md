@@ -7,14 +7,6 @@ This is the difference between a config that works once and a config you can use
 
 ---
 
-## Expected Output
-- A fully parameterized Terraform config with no hardcoded values
-- Separate `.tfvars` files for different environments
-- Outputs printed after every apply
-- A markdown file: `day-63-variables-outputs.md`
-
----
-
 ## Challenge Tasks
 
 ### Task 1: Extract Variables
@@ -35,6 +27,64 @@ Take your Day 62 infrastructure config and refactor it:
 
 **Document:** What are the five variable types in Terraform? (`string`, `number`, `bool`, `list`, `map`)
 
+- `string` names or any text
+   ```bash
+   variable "instance_name" {
+   type    = string
+   default = "my-ec2"
+   }
+
+   # Usage in resource
+   tags = { Name = var.instance_name }
+   ```
+- `number` counts
+   ```bash
+      variable "instance_count" {
+      type    = number
+      default = 2
+      }
+
+      # Usage in resource
+      count = var.instance_count
+   ```
+
+- `bool` conditional true or false
+   ```bash
+      variable "assign_public_ip" {
+      type    = bool
+      default = true
+      }
+
+      # Usage in resource
+      associate_public_ip_address = var.assign_public_ip
+   ```
+
+- `list` Ordered collection
+   ```bash
+      variable "security_groups" {
+      type    = list(string)
+      default = ["sg-123", "sg-456"]
+      }
+
+      # Usage in resource
+      vpc_security_group_ids = var.security_groups
+   ```
+- `map` Key-value pairs
+   ```bash
+      variable "s3_buckets" {
+      type = map(string)
+      default = {
+         bucket1 = "us-east-1"
+         bucket2 = "us-west-2"
+         }
+      }
+
+      # Usage in resource
+      for_each = var.s3_buckets
+      bucket   = each.key
+      region   = each.value
+   ```
+   
 ---
 
 ### Task 2: Variable Files and Precedence
@@ -54,20 +104,31 @@ vpc_cidr     = "10.1.0.0/16"
 subnet_cidr  = "10.1.1.0/24"
 ```
 
+
 3. Apply with the default file:
 ```bash
 terraform plan                              # Uses terraform.tfvars automatically
 ```
+
+<img width="812" height="980" alt="image" src="https://github.com/user-attachments/assets/35ab84d9-1845-42b6-9a0e-8d98c59ce38c" />
+
+- terraform.tfvars is automatically loaded by default
 
 4. Apply with the prod file:
 ```bash
 terraform plan -var-file="prod.tfvars"      # Uses prod.tfvars
 ```
 
+<img width="676" height="746" alt="image" src="https://github.com/user-attachments/assets/e61cf1c6-f3b3-4c54-9f91-4f958223d24c" />
+
+<img width="835" height="761" alt="image" src="https://github.com/user-attachments/assets/affc154d-106f-4ec7-b9a5-bceb64aee3f3" />
+
 5. Override with CLI:
 ```bash
 terraform plan -var="instance_type=t2.nano"  # CLI overrides everything
 ```
+
+<img width="1356" height="990" alt="image" src="https://github.com/user-attachments/assets/021e56cb-9296-4629-aa50-f47338619791" />
 
 6. Set an environment variable:
 ```bash
@@ -75,7 +136,19 @@ export TF_VAR_environment="staging"
 terraform plan                              # env var overrides default but not tfvars
 ```
 
+<img width="1317" height="982" alt="image" src="https://github.com/user-attachments/assets/1060352d-8fa2-4d9e-a54c-ad80991fdbf7" />
+
+- `export TF_VAR_environment="staging"` overrides only the `default` in variables.tf, but does not override `terraform.tfvars`.
+- `terraform.tfvars` have `environment = dev`, Terraform uses `"dev"`
+
 **Document:** Write the variable precedence order from lowest to highest priority.
+
+1. **Default value** in the `variable` block (`variables.tf`)
+2. **`terraform.tfvars`** or other `.tfvars` / `.auto.tfvars` files
+3. **Environment variable** (`TF_VAR_<variable_name>`)
+4. **CLI `-var` flag** 
+
+- So the **highest priority** is the CLI `-var`, and the **lowest** is the default in `variables.tf`.
 
 ---
 
