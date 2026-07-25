@@ -201,7 +201,17 @@ Stop hardcoding the AMI ID. Use a data source to fetch it dynamically.
 
 Apply and verify -- your config now works in any region without changing the AMI.
 
+<img width="1816" height="830" alt="image" src="https://github.com/user-attachments/assets/5883e12e-16a9-4f70-8e6e-0c333fef2ee7" />
+
 **Document:** What is the difference between a `resource` and a `data` source?
+
+   | Feature           | `resource`           | `data`                        |
+   | ----------------- | -------------------- | ----------------------------- |
+   | Creates infra     |   Yes                |    No                          |
+   | Managed by TF     |   Yes                |    No                          |
+   | Stored in state   |   Yes                |     Read-only reference        |
+   | Lifecycle actions | create/update/delete | read-only                     |
+   | Use case          | EC2, VPC, Subnet     | AMI lookup, AZs, existing VPC |
 
 ---
 
@@ -232,6 +242,10 @@ tags = merge(local.common_tags, {
 
 Apply and check the tags in the AWS console -- every resource should have consistent tagging.
 
+<img width="1811" height="855" alt="image" src="https://github.com/user-attachments/assets/4834e46a-8a41-41bf-814e-e8766992d914" />
+
+<img width="1796" height="905" alt="image" src="https://github.com/user-attachments/assets/32574708-1f9c-455a-9321-53a915836f89" />
+
 ---
 
 ### Task 6: Built-in Functions and Conditional Expressions
@@ -260,28 +274,47 @@ instance_type = var.environment == "prod" ? "t3.small" : "t2.micro"
 
 Apply with `environment = "prod"` and verify the instance type changes.
 
+<img width="1040" height="317" alt="image" src="https://github.com/user-attachments/assets/54c18f83-2028-4dc6-8ce7-12beabe94324" />
+
+<img width="1686" height="792" alt="image" src="https://github.com/user-attachments/assets/a850aa2d-bf59-41bc-ad5c-6866f57667b1" />
+
 **Document:** Pick five functions you find most useful and explain what each does.
 
----
-
-## Hints
-- `terraform.tfvars` is loaded automatically. Any other `.tfvars` file needs `-var-file`
-- Variable precedence (low to high): default -> `terraform.tfvars` -> `*.auto.tfvars` -> `-var-file` -> `-var` flag -> `TF_VAR_*` env vars
-- `terraform console` is an interactive REPL for testing expressions and functions
-- Data sources are read-only -- they fetch information, they don't create resources
-- `merge()` combines two maps -- great for tags
-- `terraform output -json` is useful when piping output into other scripts
-
----
-
-## Submission
-1. Add `day-63-variables-outputs.md` to `2026/day-63/`
-2. Commit and push to your fork
+   - `upper()` used for string formatting
+      - upper(var.environment)   `"dev" → "DEV"`
+   - `join()`  used to combine values
+      - join("-", ["app", var.environment, "2026"])   `"app-dev-2026"`
+   - `format()` used to build structured strings (like ARNs)
+      - format("arn:aws:s3:::%s", my-bucket) `"arn:aws:s3:::my-bucket"`
+   - `lookup()` used for environment-based selection
+      - lookup({dev = "t2.micro", prod = "t3.small"}, "dev") `"t2.micro"`
+   - `cidrsubnet()` used for network/subnet creation
+      - cidrsubnet("10.0.0.0/16", 8, 1)  `creates "10.0.1.0/24"`
 
 ---
 
-## Learn in Public
-Share on LinkedIn: "Made my Terraform configs fully dynamic today -- variables for every environment, data sources for AMI lookups, locals for consistent tagging, and conditional expressions for environment-specific sizing. Zero hardcoded values."
+**Explanation of variable precedence with examples**
+
+| Priority (High → Low) | Source                     | Example                                    |  Value       |
+| --------------------- | -------------------------- | ------------------------------------------ | ------------ |
+| 1 (Highest)           | Command-line (`-var`)      | `terraform plan -var="environment=qa"`     | `qa`         |
+| 2                     | Command-line (`-var-file`) | `terraform plan -var-file="prod.tfvars"`   | `prod`       |
+| 3                     | Auto-loaded tfvars         | `terraform.tfvars → environment = "stage"` | `stage`      |
+| 4                     | Environment variable       | `TF_VAR_environment=uat`                   | `uat`        |
+| 5 (Lowest)            | Default value              | `default = "dev"`                          | `dev`        |
+
+
+**The difference between `variable`, `local`, `output`, and `data`**
+
+   `variable:` Used to take input values from the user.
+
+   `local:` Used to define internal reusable values or expressions.
+   
+   `data:` Used to fetch existing resources from the provider (read-only).
+   
+   `output:` Used to display or export values after execution.
+
+---
 
 `#90DaysOfDevOps` `#TerraWeek` `#DevOpsKaJosh` `#TrainWithShubham`
 
