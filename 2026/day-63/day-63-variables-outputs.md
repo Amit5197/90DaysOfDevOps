@@ -172,7 +172,15 @@ terraform output instance_public_ip       # Show a specific output
 terraform output -json                    # JSON format for scripting
 ```
 
+<img width="1117" height="447" alt="image" src="https://github.com/user-attachments/assets/265891d0-74aa-4cd8-8abf-3c224ca1b309" />
+
+<img width="1025" height="575" alt="image" src="https://github.com/user-attachments/assets/51dd0e5a-a6a8-48f1-9159-9bbf8d6b8722" />
+
 **Verify:** Does `terraform output instance_public_ip` return the correct IP?
+
+- Yes
+
+<img width="1912" height="741" alt="image" src="https://github.com/user-attachments/assets/a1778fdd-b4da-41af-97ea-4f6c5ddf1881" />
 
 ---
 
