@@ -7,14 +7,6 @@ Today you learn to manage state like a professional -- remote backends, locking,
 
 ---
 
-## Expected Output
-- Terraform state migrated from local to S3 remote backend with DynamoDB locking
-- An existing AWS resource imported into Terraform state
-- State drift simulated and reconciled
-- A markdown file: `day-64-state-management.md`
-
----
-
 ## Challenge Tasks
 
 ### Task 1: Inspect Your Current State
@@ -26,11 +18,20 @@ terraform state list                              # All resources tracked by Ter
 terraform state show aws_instance.<name>          # Every attribute of the instance
 terraform state show aws_vpc.<name>               # Every attribute of the VPC
 ```
-
 Answer:
 1. How many resources does Terraform track?
+    - Terraform track 7 resources (Data sources are read-only and not counted)
+
 2. What attributes does the state store for an EC2 instance? (hint: way more than what you defined)
+    - `ami`,`instance_type`,`tags`,`key_name`
+
+    - `private_ip`, `public_ip`, `private_dns`, `public_dns`, `subnet_id`, `vpc_security_group_ids`, `primary_network_interface_id`
+
+    - `root_block_device` ,`volume_id`, `volume_size`, `volume_type`, `delete_on_termination`
+
 3. Open `terraform.tfstate` in an editor -- find the `serial` number. What does it represent?
+    - The serial number in `terraform.tfstate` represents how many times the state has been updated.
+    - It increments with every change
 
 ---
 
