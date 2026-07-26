@@ -84,6 +84,10 @@ Terraform will ask: "Do you want to copy existing state to the new backend?" -- 
    - Your local `terraform.tfstate` should now be empty or gone
    - Run `terraform plan` -- it should show no changes (state migrated correctly)
 
+<img width="1896" height="957" alt="image" src="https://github.com/user-attachments/assets/b58f9a2e-f8ef-4266-af16-d1e0bbb6a1b4" />
+
+<img width="1572" height="807" alt="image" src="https://github.com/user-attachments/assets/95aad803-eba1-4d2d-ad68-eccf332f41d4" />
+
 ---
 
 ### Task 3: Test State Locking
