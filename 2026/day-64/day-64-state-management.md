@@ -288,13 +288,12 @@ Create `day-64-state-management.md` with:
   - `terraform state list`
   - You should see `aws_s3_bucket.imported` listed.
 
-
 - Explanation of state drift with your real example
+   - State drift happens when someone changes infrastructure outside of Terraform -- through the AWS console, CLI, or another tool.
+     - Go to the AWS console and manually:
+     - add a new tag Owner:amit
 
- - State drift happens when someone changes infrastructure outside of Terraform -- through the AWS console, CLI, or another tool.
-
-- Go to the AWS console and manually:
-- add a new tag Owner:amit
+<img width="762" height="566" alt="image" src="https://github.com/user-attachments/assets/9f51ca52-de28-42b8-80c6-c15df0aea0b8" />
 
 - When to use: `state mv`, `state rm`, `import`, `force-unlock`, `refresh`
 
