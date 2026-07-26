@@ -60,6 +60,10 @@ aws dynamodb create-table \
   --region ap-south-1
 ```
 
+<img width="1896" height="957" alt="image" src="https://github.com/user-attachments/assets/b58f9a2e-f8ef-4266-af16-d1e0bbb6a1b4" />
+
+<img width="1572" height="807" alt="image" src="https://github.com/user-attachments/assets/95aad803-eba1-4d2d-ad68-eccf332f41d4" />
+
 2. Add the backend block to your Terraform config:
 ```hcl
 terraform {
@@ -84,9 +88,12 @@ Terraform will ask: "Do you want to copy existing state to the new backend?" -- 
    - Your local `terraform.tfstate` should now be empty or gone
    - Run `terraform plan` -- it should show no changes (state migrated correctly)
 
-<img width="1896" height="957" alt="image" src="https://github.com/user-attachments/assets/b58f9a2e-f8ef-4266-af16-d1e0bbb6a1b4" />
 
-<img width="1572" height="807" alt="image" src="https://github.com/user-attachments/assets/95aad803-eba1-4d2d-ad68-eccf332f41d4" />
+<img width="1052" height="487" alt="image" src="https://github.com/user-attachments/assets/2a1ada20-b037-4119-9306-1e5a1f1e9092" />
+
+<img width="1812" height="562" alt="image" src="https://github.com/user-attachments/assets/83f3d166-5995-4731-bb40-c7c870eb5809" />
+
+<img width="1224" height="435" alt="image" src="https://github.com/user-attachments/assets/4cba0246-9df2-4a02-aba7-29ce85b5f90f" />
 
 ---
 
