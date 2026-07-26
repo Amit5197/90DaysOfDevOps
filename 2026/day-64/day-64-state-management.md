@@ -111,7 +111,13 @@ terraform plan
 ```
 4. Terminal 2 should show a **lock error** with a Lock ID
 
+<img width="1825" height="507" alt="image" src="https://github.com/user-attachments/assets/f4d9f157-d4cc-4f20-97ea-9bd0381a68cc" />
+
 **Document:** What is the error message? Why is locking critical for team environments?
+
+- `Error:`Terraform can’t acquire the state lock because DynamoDB says the state is already locked (ConditionalCheckFailedException).
+
+- `Why locking matters:` It prevents concurrent writes, which could corrupt the state file and cause unintended infrastructure changes—critical in team environments.
 
 5. After the test, if you get stuck with a stale lock:
 ```bash
