@@ -130,6 +130,9 @@ terraform force-unlock <LOCK_ID>
 Not everything starts with Terraform. Sometimes resources already exist in AWS and you need to bring them under Terraform management.
 
 1. Manually create an S3 bucket in the AWS console -- name it `terraweek-import-test-<yourname>`
+
+<img width="1267" height="517" alt="image" src="https://github.com/user-attachments/assets/580685a6-a968-47e8-94a6-3d3fe8d41d37" />
+
 2. Write a `resource "aws_s3_bucket"` block in your config for this bucket (just the bucket name, nothing else)
 3. Import it:
 ```bash
@@ -141,7 +144,32 @@ terraform import aws_s3_bucket.imported terraweek-import-test-<yourname>
 
 5. Run `terraform state list` -- the imported bucket should now appear alongside your other resources
 
+<img width="1427" height="922" alt="image" src="https://github.com/user-attachments/assets/a0c2f16b-5857-4583-9dae-59fec10cd239" />
+
 **Document:** What is the difference between `terraform import` and creating a resource from scratch?
+
+`terraform import`
+- Bring an existing resource (already in AWS, etc.) under Terraform management
+- Updates the Terraform state file to track the resource
+- `use case` Migrating manual or existing resources into Terraform
+- `Example:`
+    ```bash
+    # Import an existing S3 bucket
+    terraform import aws_s3_bucket.imported terraweek-import-test-sanketdangat
+    ```
+    
+`Creating a Resource from Scratch`
+- Terraform creates a new resource in the cloud
+- Both state and actual resource are created by Terraform
+- `use case` Standard workflow when starting from scratch
+- `Example:`
+    ```bash
+    # Create a new S3 bucket from scratch
+    resource "aws_s3_bucket" "new" {
+    bucket = "terraweek-new-bucket"
+    }
+
+    ```
 
 ---
 
@@ -155,11 +183,17 @@ terraform state mv aws_s3_bucket.imported aws_s3_bucket.logs_bucket
 ```
 Update your `.tf` file to match the new name. Run `terraform plan` -- it should show no changes.
 
+<img width="1567" height="347" alt="image" src="https://github.com/user-attachments/assets/c18ac34d-cbe0-40d2-81d7-e0341e8ff2f2" />
+<img width="1051" height="975" alt="image" src="https://github.com/user-attachments/assets/2cd1b6ba-cf4c-4920-9322-d8d9c2507dee" />
+<img width="1155" height="990" alt="image" src="https://github.com/user-attachments/assets/1e6da62c-75b4-4a41-bab8-c45e11c83e7f" />
+
 2. **Remove a resource from state (without destroying it):**
 ```bash
 terraform state rm aws_s3_bucket.logs_bucket
 ```
 Run `terraform plan` -- Terraform no longer knows about the bucket, but it still exists in AWS.
+
+<img width="1267" height="592" alt="image" src="https://github.com/user-attachments/assets/deddbdf8-6c80-4fc7-921e-fa1bf87d4a4a" />
 
 3. **Re-import it** to bring it back:
 ```bash
@@ -167,6 +201,21 @@ terraform import aws_s3_bucket.logs_bucket terraweek-import-test-<yourname>
 ```
 
 **Document:** When would you use `state mv` in a real project? When would you use `state rm`?
+
+- **When to Use state `mv`**
+  - Renaming resources: Change a resource block name in your code (e.g., from aws_instance.old to aws_instance.new) without forcing Terraform to delete and recreate the server.
+  - Moving into modules: Reorganize your flat files by shifting a resource inside a new child module path in your state.
+  - Changing loops: Switch a resource from using count or for_each without losing track of existing live objects.
+  - Splitting state files: Move specific resources safely between different state files or environments. 
+
+```terraform state mv aws_s3_bucket.my_bucket aws_s3_bucket.logs_bucket```
+
+- **When to Use state `rm`**
+  - Orphaning safely: Stop tracking a shared or legacy resource (like a production database or shared network) so future apply commands ignore it instead of deleting it. 
+  - Migrating across projects: Pull a resource out of one distinct Terraform project's state before importing it into a completely separate project. 
+  - Cleaning up deleted items: Remove stale entries from your state file if the real infrastructure was already manually destroyed outside of Terraform.
+
+```terraform state rm aws_db_instance.legacy_db```
 
 ---
 
@@ -177,11 +226,17 @@ State drift happens when someone changes infrastructure outside of Terraform -- 
 2. Go to the **AWS console** and manually:
    - Change the Name tag of your EC2 instance to `"ManuallyChanged"`
    - Change the instance type if it's stopped (or add a new tag)
+
+<img width="1207" height="492" alt="image" src="https://github.com/user-attachments/assets/ac011797-ace0-4537-bf6f-97773f5482c4" />
+
+
 3. Run:
 ```bash
 terraform plan
 ```
 You should see a **diff** -- Terraform detects that reality no longer matches the desired state.
+
+<img width="1332" height="412" alt="image" src="https://github.com/user-attachments/assets/7e468d6e-0ce2-4465-a6ac-aea9f15594ec" />
 
 4. You have two choices:
    - **Option A:** Run `terraform apply` to force reality back to match your config (reconcile)
@@ -189,44 +244,67 @@ You should see a **diff** -- Terraform detects that reality no longer matches th
 
 5. Choose Option A -- apply and verify the tags are restored.
 
+- Yes
+  
+<img width="1432" height="485" alt="image" src="https://github.com/user-attachments/assets/fcceec0f-f381-48b7-89ca-7ee8fd9bafdf" />
+
 6. Run `terraform plan` again -- it should show "No changes." Drift resolved.
+
+<img width="1315" height="816" alt="image" src="https://github.com/user-attachments/assets/83f86290-312f-4f65-91a3-d42a01a5aa6b" />
 
 **Document:** How do teams prevent state drift in production? (hint: restrict console access, use CI/CD for all changes)
 
----
-
-## Hints
-- S3 bucket names must be globally unique
-- DynamoDB table must have a `LockID` string key -- this is what Terraform uses for locking
-- `terraform init -migrate-state` explicitly triggers state migration
-- `terraform refresh` (or `terraform apply -refresh-only`) updates state to match real infrastructure without making changes
-- State locking only works with backends that support it (S3+DynamoDB, Consul, Terraform Cloud)
-- `terraform force-unlock` should only be used when you are sure no other operation is running
-- Always version your S3 bucket so you can recover a previous state file if something goes wrong
+- Teams prevent state drift in production by restricting console access and ensuring all changes go through CI/CD pipelines with version-controlled configurations.
 
 ---
 
 ## Documentation
 Create `day-64-state-management.md` with:
 - Diagram: local state vs remote state setup
-- Screenshot of state file in S3 bucket
-- Screenshot of the lock error from Task 3
+
+<img width="1192" height="782" alt="image" src="https://github.com/user-attachments/assets/ff7ee3ce-6cf0-4c98-ad50-c3a63a0656b8" />
+
 - Steps you followed for `terraform import` and the result
+
+1. `Write the Terraform resource block:`
+  - Make sure the name matches the existing bucket exactly:
+    ```bash
+    resource "aws_s3_bucket" "imported" {
+    bucket = "terraweek-import-test-sanketdangat"
+    }
+    ```
+  - `Note:` Don’t include any other arguments yet (ACLs, versioning, etc.). Just the bucket name.
+
+2. `Import the existing bucket`
+  - `Run the command:`
+    ```bash
+    terraform import aws_s3_bucket.imported terraweek-import-test-sanketdangat
+    ```
+  - Here:
+    `aws_s3_bucket.imported` : resource type + Terraform name
+    `terraweek-import-test-sanketdangat` : existing AWS bucket name
+
+3. `Check Terraform state`
+  - `terraform state list`
+  - You should see `aws_s3_bucket.imported` listed.
+
+
 - Explanation of state drift with your real example
+
+ - State drift happens when someone changes infrastructure outside of Terraform -- through the AWS console, CLI, or another tool.
+
+- Go to the AWS console and manually:
+- add a new tag Owner:amit
+
 - When to use: `state mv`, `state rm`, `import`, `force-unlock`, `refresh`
 
+  -  `state mv`	Rename/move a resource in state without recreating it
+  -  `state rm`	Stop Terraform from managing a resource
+  -  `import`	Bring an existing resource under Terraform management
+  -  `force-unlock`	Unlock a stuck state file after a failed operation
+  -  `refresh`	ync state with real-world resources (detect drift)
+
 ---
-
-## Submission
-1. Add `day-64-state-management.md` to `2026/day-64/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share on LinkedIn: "Mastered Terraform state today -- migrated to S3 remote backend with DynamoDB locking, imported existing AWS resources, performed state surgery, and simulated drift. State management is the foundation of reliable infrastructure as code."
-
-`#90DaysOfDevOps` `#TerraWeek` `#DevOpsKaJosh` `#TrainWithShubham`
 
 Happy Learning!
 **TrainWithShubham**
