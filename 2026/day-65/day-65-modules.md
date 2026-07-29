@@ -153,6 +153,8 @@ terraform apply
 
 <img width="1687" height="883" alt="image" src="https://github.com/user-attachments/assets/1b77b423-f452-4fd1-8214-805ccfe523e9" />
 
+<img width="1642" height="897" alt="image" src="https://github.com/user-attachments/assets/4f2aa8d4-a799-4feb-90a8-b19ee61f7f5c" />
+
 
 ---
 
@@ -188,9 +190,39 @@ terraform plan
 terraform apply
 ```
 
+<img width="1917" height="797" alt="image" src="https://github.com/user-attachments/assets/e0850513-9b49-4a0c-9a12-fc22872033b9" />
+
+<img width="1142" height="955" alt="image" src="https://github.com/user-attachments/assets/7e817641-3330-4f96-893e-f53e5fc48067" />
+
 4. Compare: how many resources did the VPC module create vs your hand-written VPC from Day 62?
 
+**Hand-written VPC (Day 62)**
+- VPC `1`
+- Subnet `1`
+- Internet Gateway `1`
+- Route Table  `1`
+- Route Table Association `1`
+- Security Group `1`
+- Total = `6 resources`
+
+**VPC Module Terraform Registry**
+- VPC
+  - aws_vpc.this `1`
+- Default resources (auto-managed by module)
+  - aws_default_network_acl.this `1`
+  - aws_default_route_table.default `1`
+- aws_default_security_group.this `1`
+- Internet Gateway
+  - aws_internet_gateway.this `1`
+- Subnets `Public` `2` , `Private`  `2` `Total subnets` = `4`
+- Route Tables Public `1` `Private` `2` ,`Total` = `3`
+- Routes `aws_route.public_internet_gateway` `1`
+- Route Table Associations `Public` `2` `Private` `2` `Total` = 4
+- Total = `17`
+  
 **Document:** Where does Terraform download registry modules to? Check `.terraform/modules/`.
+
+- `location` `.terraform/modules/`
 
 ---
 
@@ -208,38 +240,39 @@ terraform state list
 ```
 Notice the `module.vpc.`, `module.web_server.`, `module.web_sg.` prefixes.
 
+<img width="972" height="827" alt="image" src="https://github.com/user-attachments/assets/b8c22f8c-dc52-4320-a990-8d39d142e041" />
+
 4. Destroy everything:
 ```bash
 terraform destroy
 ```
-
-**Document:** Write down five module best practices:
-- Always pin versions for registry modules
-- Keep modules focused -- one concern per module
-- Use variables for everything, hardcode nothing
-- Always define outputs so callers can reference resources
-- Add a README.md to every custom module
-
----
-
-## Hints
-- `terraform init` must be re-run after adding a new module source
-- Module outputs are accessed as `module.<name>.<output>`
-- `dynamic` blocks use `content {}` inside to define the repeated block
-- Registry modules document all inputs and outputs on registry.terraform.io
-- Local modules use `source = "./modules/<name>"`, registry modules use `source = "<org>/<name>/<provider>"`
-- `terraform get` downloads modules without full init
+<img width="925" height="940" alt="image" src="https://github.com/user-attachments/assets/ce0579f5-1842-4029-b8ff-4cd1cd815f5b" />
 
 ---
 
 ## Documentation
-Create `day-65-modules.md` with:
-- Your custom module structure (directory tree)
-- The `variables.tf`, `main.tf`, and `outputs.tf` for your EC2 module
-- Root `main.tf` showing how you call both custom and registry modules
-- Screenshot of both EC2 instances running from the same module
-- Comparison: hand-written VPC vs registry VPC module (resources created)
-- Five module best practices in your own words
+
+**Hand-Written VPC vs Registry VPC Module**
+
+| Aspect           | Hand-written VPC | Registry VPC Module  |
+| ---------------- | ---------------- | -------------------- |
+| Total Resources  | 6                | 17                   |
+| Lines of Code    | ~50              | ~20                  |
+| Production Ready | No               | Yes                  |
+| Maintained       | By Developer     | By Community         |
+| Reusable         | Limited          | High                 |
+
+---
+
+**Module best practices:**
+- `Use clear names` easy to understand resources and variables
+- `Keep files organized` use `main.tf`, `variables.tf`, `outputs.tf`
+- `Use locals` avoid repeating the same values
+- `Don’t assume environment` no hardcoded region, account, or names
+- `Validate inputs` add rules so wrong values fail early
+- `Use defaults carefully` only when it makes sense
+- `Keep modules small` easier to reuse and debug
+- `Test before using` run plan and validate
 
 ---
 
@@ -248,9 +281,6 @@ Create `day-65-modules.md` with:
 2. Commit and push to your fork
 
 ---
-
-## Learn in Public
-Share on LinkedIn: "Built my first custom Terraform modules today -- EC2 and security group modules called multiple times with different configs. Then replaced 50 lines of VPC code with one registry module. Modules are the key to scalable infrastructure as code."
 
 `#90DaysOfDevOps` `#TerraWeek` `#DevOpsKaJosh` `#TrainWithShubham`
 
