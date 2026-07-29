@@ -7,14 +7,6 @@ Today you learn Terraform modules -- the way to package, reuse, and share infras
 
 ---
 
-## Expected Output
-- A custom EC2 module you built from scratch
-- A custom security group module wired into the EC2 module
-- A VPC created using the official public registry module
-- A markdown file: `day-65-modules.md`
-
----
-
 ## Challenge Tasks
 
 ### Task 1: Understand Module Structure
@@ -40,6 +32,14 @@ terraform-modules/
 Create all the directories and empty files. This is the standard layout every Terraform project follows.
 
 **Document:** What is the difference between a "root module" and a "child module"?
+
+- `Root Module`
+   - The root module is the main place where everything starts.
+   - It’s the folder where you run Terraform commands
+
+- `Child Module`
+  - A child module is a smaller part used by the root module.
+  - It does a specific task (like create a vpc, ec2, database)
 
 ---
 
@@ -144,7 +144,15 @@ terraform plan    # Should show all resources from both module calls
 terraform apply
 ```
 
+<img width="902" height="312" alt="image" src="https://github.com/user-attachments/assets/9b3025af-4974-4d53-95d0-4f4123983060" />
+
+<img width="1076" height="290" alt="image" src="https://github.com/user-attachments/assets/5feb24eb-c271-40b1-8b54-115135e5f0ef" />
+<img width="1076" height="951" alt="image" src="https://github.com/user-attachments/assets/0b12a96d-e6bd-4774-a4b6-e1ed606f7bf2" />
+
 **Verify:** Two EC2 instances running, same security group, different names. Check the AWS console.
+
+<img width="1687" height="883" alt="image" src="https://github.com/user-attachments/assets/1b77b423-f452-4fd1-8214-805ccfe523e9" />
+
 
 ---
 
