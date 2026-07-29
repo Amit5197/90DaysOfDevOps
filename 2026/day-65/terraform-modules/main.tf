@@ -34,7 +34,7 @@ data "aws_availability_zones" "available" {
 # Locals for common values and tags
 locals {
   common_tags = {
-    Owner     = "Sanket Dangat"
+    Owner     = "Amit Pandey"
     ManagedBy = "Terraform"
   }
 }
