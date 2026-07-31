@@ -7,15 +7,6 @@ This is what infrastructure teams do every day in production.
 
 ---
 
-## Expected Output
-- A running EKS cluster on AWS provisioned entirely through Terraform
-- kubectl connected to the cluster with nodes visible
-- An Nginx deployment running on the cluster
-- A markdown file: `day-66-eks-terraform.md`
-- Everything destroyed cleanly after the exercise
-
----
-
 ## Challenge Tasks
 
 ### Task 1: Project Setup
@@ -68,7 +59,32 @@ private_subnet_tags = {
 
 Run `terraform init` and `terraform plan` to verify the VPC config before moving on.
 
+<img width="957" height="862" alt="image" src="https://github.com/user-attachments/assets/cc47380b-5c12-48f3-bf28-7a40ba78f17a" />
+
+<img width="1427" height="781" alt="image" src="https://github.com/user-attachments/assets/7c79e61e-bfcf-4f19-a0a2-c6253b752294" />
+
 **Document:** Why does EKS need both public and private subnets? What do the subnet tags do?
+
+- Why both subnets?
+
+  - **Private subnets**: run your EKS nodes/pods securely (no direct internet access)
+  - **Public subnets**: host internet-facing load balancers
+
+- What do the tags do?
+  - "kubernetes.io/role/elb" tells AWS to use these **public subnets** for external load balancers
+  - "kubernetes.io/role/internal-elb" tells AWS to use these **private subnets** for internal load balancers
+
+- **Why Both Subnet Types Are Needed** ?
+
+ - **Private Subnets**:
+     - Host worker nodes (EC2 instances) and backend application pods.
+     - Prevent direct inbound attacks from the public internet.
+     - Use a NAT Gateway to safely pull container images or updates outward.
+ 
+ - **Public Subnets**:
+     - Host internet-facing AWS Load Balancers (ALBs or NLBs).
+     - Accept incoming requests from end users on the internet.
+     - Forward traffic safely down to the worker nodes hiding in the private subnets.
 
 ---
 
@@ -113,6 +129,8 @@ terraform init      # Download EKS module and its dependencies
 terraform plan      # Review -- this will create 30+ resources
 ```
 
+<img width="1376" height="975" alt="image" src="https://github.com/user-attachments/assets/25ac91b2-961f-4cbe-a705-3ae784047c77" />
+
 Review the plan carefully before applying. You should see: EKS cluster, IAM roles, node group, security groups, and more.
 
 ---
@@ -139,6 +157,8 @@ output "cluster_region" {
 }
 ```
 
+<img width="1622" height="527" alt="image" src="https://github.com/user-attachments/assets/d2d5558f-3a50-4524-9f29-7306fd2d9e5e" />
+
 3. Update your kubeconfig:
 ```bash
 aws eks update-kubeconfig --name terraweek-eks --region <your-region>
@@ -151,8 +171,16 @@ kubectl get pods -A
 kubectl cluster-info
 ```
 
+<img width="1627" height="682" alt="image" src="https://github.com/user-attachments/assets/5fcec7da-22b1-44ed-8b04-c98f7fb18f7c" />
+
+<img width="1942" height="732" alt="image" src="https://github.com/user-attachments/assets/ef6aca8d-1a20-4b34-8f64-a2c172c2279f" />
+
+<img width="1890" height="797" alt="image" src="https://github.com/user-attachments/assets/fb025759-58c0-4b8f-9f9a-77bc3a1615f2" />
+
 **Verify:** Do you see 2 nodes in `Ready` state? Can you see the kube-system pods running?
 
+- Yes, both nodes are in the Ready state, and all kube-system pods are running.
+  
 ---
 
 ### Task 5: Deploy a Workload on the Cluster
