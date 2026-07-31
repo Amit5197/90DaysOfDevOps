@@ -260,7 +260,7 @@ This is the most important step. EKS clusters cost money. Clean up completely.
 ```bash
 kubectl delete -f k8s/nginx-deployment.yaml
 ```
-![Uploading image.png…]()
+<img width="1896" height="990" alt="image" src="https://github.com/user-attachments/assets/b06a08b4-d201-4c94-b986-6b554646effd" />
 
 2. Wait for the LoadBalancer to be fully removed (check EC2 > Load Balancers in AWS console)
 
@@ -269,6 +269,8 @@ kubectl delete -f k8s/nginx-deployment.yaml
 terraform destroy
 ```
 This will take 10-15 minutes.
+
+<img width="697" height="95" alt="image" src="https://github.com/user-attachments/assets/9463ccd0-74fa-41d5-a103-be8088e46446" />
 
 4. Verify in the AWS console:
    - EKS clusters: empty
