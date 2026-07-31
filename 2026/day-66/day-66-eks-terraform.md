@@ -243,7 +243,13 @@ kubectl get pods
 kubectl get svc
 ```
 
+<img width="1322" height="382" alt="image" src="https://github.com/user-attachments/assets/e5f83245-3673-47cc-931c-3ae713f2348f" />
+
 **Verify:** Can you access the Nginx welcome page through the LoadBalancer URL?
+
+- Yes
+
+<img width="1102" height="470" alt="image" src="https://github.com/user-attachments/assets/797eca3b-d34f-4d58-8e8a-a435192d1f92" />
 
 ---
 
@@ -254,6 +260,7 @@ This is the most important step. EKS clusters cost money. Clean up completely.
 ```bash
 kubectl delete -f k8s/nginx-deployment.yaml
 ```
+![Uploading image.png…]()
 
 2. Wait for the LoadBalancer to be fully removed (check EC2 > Load Balancers in AWS console)
 
@@ -272,18 +279,8 @@ This will take 10-15 minutes.
 
 **Verify:** Is your AWS account completely clean? No leftover resources?
 
----
-
-## Hints
-- EKS creation takes 10-15 minutes, destruction takes about the same -- plan your time
-- Always delete Kubernetes LoadBalancer services before `terraform destroy`, otherwise the ELB will block VPC deletion
-- If `terraform destroy` gets stuck, check for leftover ENIs or security groups in the VPC
-- `t3.medium` is the minimum recommended instance type for EKS nodes
-- The EKS module creates IAM roles automatically -- you don't need to create them manually
-- If you see `Unauthorized` with kubectl, re-run the `aws eks update-kubeconfig` command
-- Use `kubectl get events --sort-by=.metadata.creationTimestamp` to debug pod issues
-- Cost warning: NAT Gateway charges ~$0.045/hour. Destroy when done.
-
+- Yes, my AWS account is completely clean with no leftover resources.
+  
 ---
 
 ## Documentation
