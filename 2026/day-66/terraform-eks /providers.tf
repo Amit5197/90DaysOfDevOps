@@ -11,7 +11,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket       = "terraweek-state-sanketdangat"
+    bucket       = "terraweek-state-Amit-Pandey"
     key          = "eks/terraform.tfstate"
     region       = "us-east-1"
     encrypt      = true
