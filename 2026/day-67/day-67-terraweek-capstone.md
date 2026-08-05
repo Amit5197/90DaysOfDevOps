@@ -172,6 +172,8 @@ Write and validate each module:
 terraform validate
 ```
 
+<img width="1002" height="452" alt="image" src="https://github.com/user-attachments/assets/ff02603c-028c-47da-8ceb-18f4d0c7a573" />
+
 ---
 
 ### Task 4: Wire It All Together with Workspace-Aware Config
