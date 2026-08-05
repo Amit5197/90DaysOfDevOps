@@ -9,7 +9,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket       = "terraweek-capstone-sanketdangat"
+    bucket       = "terraweek-capstone-amit-pandey"
     key          = "terraweek-capstone/terraform.tfstate"
     region       = "us-east-1"
     encrypt      = true
