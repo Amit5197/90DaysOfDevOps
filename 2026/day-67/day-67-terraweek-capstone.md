@@ -41,11 +41,57 @@ terraform workspace select dev
 terraform workspace select staging
 terraform workspace select prod
 ```
+1- Create the S3 bucket using AWS CLI:
+
+```aws s3api create-bucket --bucket terraweek-capstone-amit-pandey --region us-east-1```
+
+2- Enable versioning on the bucket (Best Practice for State Files):
+
+```aws s3api put-bucket-versioning --bucket terraweek-capstone-amit-pandey --versioning-configuration Status=Enabled```
+
+3- Re-run initialization:
+
+```terraform init```
+
+<img width="1897" height="887" alt="image" src="https://github.com/user-attachments/assets/e5edef90-0455-447b-bdfe-06f7ef4c22e6" />
+
+<img width="998" height="783" alt="image" src="https://github.com/user-attachments/assets/a0bbd79f-a71d-4175-a86f-26eb3074e16b" />
 
 Answer:
 1. What does `terraform.workspace` return inside a config?
+ - `terraform.workspace` is a built-in variable that returns the name of the currently selected workspace.
+
+- ***Dynamic Resource Naming***
+
+```resource "aws_s3_bucket" "example" {
+  bucket = "my-app-bucket-${terraform.workspace}"
+}```
+
+# Evaluates to "my-app-bucket-dev", "my-app-bucket-prod", etc.
+
+- ***Environment-Based Variable Lookup(Maps)***
+
+```
+locals {
+  instance_type = {
+    dev  = "t3.micro"
+    prod = "t3.large"
+  }
+}
+
+resource "aws_instance" "web" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = local.instance_type[terraform.workspace]
+}```
+
 2. Where does each workspace store its state file?
+
+- In `terraform.tfstate.d` directory
+
 3. How is this different from using separate directories per environment?
+
+`Workspaces`: One codebase, multiple environments via separate state files
+`Directories`: Multiple copies of code, one per environment
 
 ---
 
