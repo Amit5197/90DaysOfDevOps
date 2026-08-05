@@ -7,15 +7,6 @@ Build a multi-environment AWS infrastructure using custom modules and Terraform 
 
 ---
 
-## Expected Output
-- A complete Terraform project with custom modules and proper file structure
-- Three separate environments (dev, staging, prod) deployed using workspaces
-- Each environment with its own VPC, security group, and EC2 instance with different sizing
-- A markdown file: `day-67-terraweek-capstone.md`
-- Everything destroyed cleanly after verification
-
----
-
 ## Challenge Tasks
 
 ### Task 1: Learn Terraform Workspaces
