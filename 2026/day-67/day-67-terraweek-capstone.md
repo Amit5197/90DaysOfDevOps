@@ -290,6 +290,8 @@ Go to the AWS console and verify:
 
 **Verify:** Are all three environments completely isolated from each other?
 
+<img width="1625" height="406" alt="image" src="https://github.com/user-attachments/assets/b92497f9-595d-4c15-9dd3-0cf01d89c617" />
+
 ---
 
 ### Task 6: Document Best Practices
