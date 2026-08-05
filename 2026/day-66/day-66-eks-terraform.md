@@ -286,7 +286,7 @@ This will take 10-15 minutes.
 ---
 
 ## Documentation
-Create `day-66-eks-terraform.md` with:
+
 - Your complete file structure and key config files
 
 ```
