@@ -59,15 +59,19 @@ terraform workspace select prod
 
 Answer:
 1. What does `terraform.workspace` return inside a config?
+ 
  - `terraform.workspace` is a built-in variable that returns the name of the currently selected workspace.
 
 - ###Dynamic Resource Naming
 
-```resource "aws_s3_bucket" "example" {
+```
+resource "aws_s3_bucket" "example" {
   bucket = "my-app-bucket-${terraform.workspace}"
-}```
+}
 
 # Evaluates to "my-app-bucket-dev", "my-app-bucket-prod", etc.
+
+```
 
 - ###Environment-Based Variable Lookup(Maps)
 
@@ -82,7 +86,8 @@ locals {
 resource "aws_instance" "web" {
   ami           = "ami-0c55b159cbfafe1f0"
   instance_type = local.instance_type[terraform.workspace]
-}```
+}
+```
 
 2. Where does each workspace store its state file?
 
