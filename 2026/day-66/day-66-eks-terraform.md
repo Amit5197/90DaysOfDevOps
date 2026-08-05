@@ -288,23 +288,63 @@ This will take 10-15 minutes.
 ## Documentation
 Create `day-66-eks-terraform.md` with:
 - Your complete file structure and key config files
-- Screenshot of `terraform apply` completing
-- Screenshot of `kubectl get nodes` showing the managed node group
-- Screenshot of Nginx running on the cluster
+
+```
+terraform-eks/
+│
+├── .terraform/                # Terraform cache (auto-generated)
+├── .gitignore
+├── .terraform.lock.hcl       # Provider lock file
+│
+├── k8s/                      # Kubernetes manifests (post-EKS setup)
+│   ├── nginx-deployment.yaml
+│
+├── eks.tf                    # EKS module call
+├── vpc.tf                    # VPC module call
+├── providers.tf              # Provider and backend config
+├── variables.tf              # All input variables
+├── terraform.tfvars          # Variable values
+├── outputs.tf                # Cluster outputs
+```
+
 - How many resources Terraform created in total (check the apply output)
-- The destroy process and verification
-- Reflection: compare this to manually setting up a cluster with kind/minikube (Day 50)
+  - 57 resources
+
+**Local Cluster manual setup vs Terraform + EKS**
+
+| Local cluster             | Production-grade cluster       |
+| ------------------------- | ------------------------------ |
+| Manual setup              | Automated (IaC with Terraform) |
+| Not reusable              | Reusable                       |
+| Not scalable              | Scalable                       |
+| No IAM integration        | IAM integrated (Amazon EKS)    |
+| Not highly available      | Highly available               |
+| Runs on local machine     | Runs on AWS cloud              |
+| Free                      | Paid                           |
+| Basic networking          | Advanced VPC networking        |
+| Used for learning/testing | Used for production workloads  |
+
+***Key Takeaways***
+ - `Local / Manual Setup`: Ideal for understanding low-level Kubernetes architecture and components without incurring cloud expenses. However, maintaining high availability, cluster upgrades, and state persistence requires heavy operational overhead.
+
+ - `Terraform + EKS`: Industry standard for enterprise environments. Terraform provides consistent environment provisioning (Dev/Staging/Prod), while EKS offloads the risk and overhead of control plane management.
+
+**Challenges Faced and Fixes**
+
+| Challenge                                                                                   | Cause                                                             | Fix                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `kubectl get nodes` fails with "the server has asked for the client to provide credentials" | IAM user has AWS permissions but is not mapped to the EKS cluster | Add `access_entries` in Terraform v20 module using `data.aws_caller_identity.current.arn`, run `terraform apply`, then refresh kubeconfig with `aws eks update-kubeconfig` |
+
+
+| Configuration                          | Description                                         |
+| -------------------------------------- | --------------------------------------------------- |
+| `data "aws_caller_identity" "current"` | Fetches current IAM user/role details from AWS      |
+| `principal_arn`                        | Uses current IAM identity ARN for cluster access    |
+| `access_entries`                       | Maps IAM identity to EKS cluster access             |
+| `policy_arn`                           | Grants admin access using Amazon EKS cluster policy |
+| `access scope`                         | Defines access level (cluster-wide)                 |
 
 ---
-
-## Submission
-1. Add `day-66-eks-terraform.md` to `2026/day-66/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share on LinkedIn: "Provisioned a full AWS EKS cluster with Terraform modules today -- VPC, subnets, NAT gateway, IAM roles, node groups, the works. 30+ resources created with one command, deployed Nginx on it, and destroyed everything cleanly. This is real-world infrastructure as code."
 
 `#90DaysOfDevOps` `#TerraWeek` `#DevOpsKaJosh` `#TrainWithShubham`
 
