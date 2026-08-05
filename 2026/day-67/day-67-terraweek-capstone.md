@@ -61,7 +61,7 @@ Answer:
 1. What does `terraform.workspace` return inside a config?
  - `terraform.workspace` is a built-in variable that returns the name of the currently selected workspace.
 
-- ***Dynamic Resource Naming***
+- ###Dynamic Resource Naming
 
 ```resource "aws_s3_bucket" "example" {
   bucket = "my-app-bucket-${terraform.workspace}"
@@ -69,7 +69,7 @@ Answer:
 
 # Evaluates to "my-app-bucket-dev", "my-app-bucket-prod", etc.
 
-- ***Environment-Based Variable Lookup(Maps)***
+- ###Environment-Based Variable Lookup(Maps)
 
 ```
 locals {
