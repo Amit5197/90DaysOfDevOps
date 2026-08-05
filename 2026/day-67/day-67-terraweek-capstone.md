@@ -62,7 +62,7 @@ Answer:
  
  - `terraform.workspace` is a built-in variable that returns the name of the currently selected workspace.
 
-- ###Dynamic Resource Naming
+- ***Dynamic Resource Naming***
 
 ```
 resource "aws_s3_bucket" "example" {
@@ -73,7 +73,7 @@ resource "aws_s3_bucket" "example" {
 
 ```
 
-- ###Environment-Based Variable Lookup(Maps)
+- ***Environment-Based Variable Lookup(Maps)***
 
 ```
 locals {
@@ -139,6 +139,12 @@ Create the `.gitignore`:
 ```
 
 **Document:** Why is this file structure considered best practice?
+- This Terraform structure is best practice because it keeps everything clean and easy to manage.
+- We separate files `main.tf` `variables.tf`and `outputs.tf` so the code is more organized and easier to understand.
+- We use modules, which helps us reuse code instead of writing the same thing again and again.
+- We also support different environments like `dev` `staging` and `prod` using `.tfvars` files, which makes deployment safer.
+- The `.gitignore` file protects sensitive data like state files and secrets.
+- Overall, this structure makes the project organized, reusable and secure which is important for real-world use.
 
 ---
 
@@ -287,16 +293,16 @@ Go to the AWS console and verify:
 ### Task 6: Document Best Practices
 Write down everything you have learned this week as a Terraform best practices guide:
 
-1. **File structure** -- separate files for providers, variables, outputs, main, locals
-2. **State management** -- always use remote backend, enable locking, enable versioning
-3. **Variables** -- never hardcode, use tfvars per environment, validate with `validation` blocks
-4. **Modules** -- one concern per module, always define inputs/outputs, pin registry module versions
-5. **Workspaces** -- use for environment isolation, reference `terraform.workspace` in configs
-6. **Security** -- .gitignore for state and tfvars, encrypt state at rest, restrict backend access
-7. **Commands** -- always run `plan` before `apply`, use `fmt` and `validate` before committing
-8. **Tagging** -- tag every resource with project, environment, and managed-by
-9. **Naming** -- consistent prefix pattern: `<project>-<environment>-<resource>`
-10. **Cleanup** -- always `terraform destroy` non-production environments when not in use
+1. **File Structure** — Separate files for each concern: `providers.tf`, `variables.tf`, `outputs.tf`, `locals.tf`, `main.tf`
+2. **State Management** — Remote S3 backend with `encrypt = true`, `use_lockfile = true`. Each workspace gets its own state file at `env:/<workspace>/terraweek-capstone/terraform.tfstate`
+3. **Variables** — Never hardcode values. Used `dev/staging/prod.tfvars` per environment.
+4. **Modules** — One concern per module. Three focused modules: `vpc/` (networking), `security-group/` (access control), `ec2-instance/` (compute). Each module has `main.tf`, `variables.tf`, `outputs.tf`
+5. **Workspaces** — Three workspaces for full environment isolation. `terraform.workspace` drives environment name through `locals.tf`. One codebase, three environments
+6. **Security** — `.gitignore` excludes `*.tfvars`, `*.tfstate`, `.terraform/`. State encrypted at rest with `encrypt = true`. No credentials hardcoded anywhere
+7. **Commands** — Always `terraform validate` → `terraform plan` → `terraform apply`. Never skip plan. Use `terraform fmt` before committing
+8. **Tagging** — Every resource tagged with `Environment`, `Project`, `ManagedBy = "Terraform"`.
+9. **Naming** — Consistent pattern: `<environment>-<project>-<resource>` e.g. `dev-terraweek-VPC`, `terraweek-prod-Server`
+10. **Cleanup** — always `terraform destroy` non-production environments when not in use
 
 ---
 
@@ -342,6 +348,33 @@ terraform workspace delete prod
 ## Documentation
 Create `day-67-terraweek-capstone.md` with:
 - Your complete project structure (directory tree)
+
+```
+terraweek-capstone/
+├── main.tf                    # Root module — calls all 3 child modules
+├── variables.tf               # Input variables with validation blocks
+├── outputs.tf                 # Root outputs (vpc_id, subnet_id, sg_id, instance_id, public_ip)
+├── providers.tf               # AWS provider + S3 remote backend
+├── locals.tf                  # Workspace-aware locals (environment, name_prefix, common_tags)
+├── dev.tfvars                 # Dev environment values
+├── staging.tfvars             # Staging environment values
+├── prod.tfvars                # Prod environment values
+├── .gitignore                 # Ignores .terraform/, *.tfstate, *.tfvars
+├── modules/
+    ├── vpc/
+    │   ├── main.tf            # aws_vpc, aws_subnet, aws_internet_gateway, aws_route_table, aws_route_table_association
+    │   ├── variables.tf       # cidr, public_subnet_cidr, environment, project_name
+    │   └── outputs.tf         # vpc_id, subnet_id
+    ├── security-group/
+    │   ├── main.tf            # aws_security_group — dynamic ingress + allow-all egress
+    │   ├── variables.tf       # vpc_id, ingress_ports, environment, project_name
+    │   └── outputs.tf         # sg_id
+    └── ec2-instance/
+        ├── main.tf            # aws_instance with environment tags
+        ├── variables.tf       # ami_id, instance_type, subnet_id, security_group_ids, environment, project_name
+        └── outputs.tf         # instance_id, public_ip
+```
+
 - All three custom module configs
 - Root `main.tf` showing workspace-aware module calls
 - All three tfvars files with the differences highlighted
@@ -367,9 +400,6 @@ Create `day-67-terraweek-capstone.md` with:
 2. Commit and push to your fork
 
 ---
-
-## Learn in Public
-Share on LinkedIn: "Completed the TerraWeek Challenge -- seven days from terraform init to a full multi-environment infrastructure project. Custom modules for VPC, security groups, and EC2. Three environments deployed with workspaces. One codebase, three isolated environments, zero console clicks."
 
 `#90DaysOfDevOps` `#TerraWeek` `#DevOpsKaJosh` `#TrainWithShubham`
 
