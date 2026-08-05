@@ -274,6 +274,9 @@ terraform workspace select prod
 terraform plan -var-file="prod.tfvars"
 terraform apply -var-file="prod.tfvars"
 ```
+<img width="1833" height="746" alt="Screenshot 2026-08-05 121939" src="https://github.com/user-attachments/assets/a58bb9d3-a78e-4fc9-b8d9-5c19fc214ee1" />
+
+<img width="1872" height="954" alt="Screenshot 2026-08-05 121725" src="https://github.com/user-attachments/assets/93a4b028-7693-45ee-bcc8-182de5004a6b" />
 
 After all three are deployed, verify:
 ```bash
@@ -283,6 +286,8 @@ terraform workspace select staging && terraform output
 terraform workspace select prod && terraform output
 ```
 
+<img width="1836" height="162" alt="Screenshot 2026-08-05 122434" src="https://github.com/user-attachments/assets/e36c1bea-95c4-41c0-9656-c7a4218a6dcb" />
+
 Go to the AWS console and verify:
 - Three separate VPCs with different CIDR ranges
 - Three EC2 instances with different instance types
@@ -290,7 +295,11 @@ Go to the AWS console and verify:
 
 **Verify:** Are all three environments completely isolated from each other?
 
-<img width="1625" height="406" alt="image" src="https://github.com/user-attachments/assets/b92497f9-595d-4c15-9dd3-0cf01d89c617" />
+<img width="1625" height="406" alt="image" src="https://github.com/user-attachments/assets/3c1ca294-fba7-45be-9292-26f5fe73725e" />
+
+<img width="1602" height="508" alt="image" src="https://github.com/user-attachments/assets/dcdaad31-4b71-4250-b63c-413145b6b75c" />
+
+<img width="1830" height="623" alt="image" src="https://github.com/user-attachments/assets/b50f37ab-f478-404e-9f34-74dcaecfe6c7" />
 
 ---
 
