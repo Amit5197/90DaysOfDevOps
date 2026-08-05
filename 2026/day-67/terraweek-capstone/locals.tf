@@ -6,19 +6,19 @@ locals {
     dev = {
       vpc_cidr      = "10.0.0.0/16"
       subnet_cidr   = "10.0.1.0/24"
-      instance_type = "t2.micro"
+      instance_type = "t3.micro"  # Free Tier eligible
       ingress_ports = [22, 80]
     }
     staging = {
       vpc_cidr      = "10.1.0.0/16"
       subnet_cidr   = "10.1.1.0/24"
-      instance_type = "t2.micro"
+      instance_type = "t3.micro"  # Changed from t3.small
       ingress_ports = [22, 80, 443]
     }
     prod = {
       vpc_cidr      = "10.2.0.0/16"
       subnet_cidr   = "10.2.1.0/24"
-      instance_type = "t2.micro"
+      instance_type = "t3.micro"  # Free Tier eligible
       ingress_ports = [80, 443]
     }
   }
