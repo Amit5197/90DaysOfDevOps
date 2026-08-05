@@ -333,7 +333,16 @@ terraform workspace select dev
 terraform destroy -var-file="dev.tfvars"
 ```
 
+<img width="1832" height="918" alt="image" src="https://github.com/user-attachments/assets/52fb97c9-c47d-494e-a863-bacae16d091d" />
+
+<img width="1843" height="952" alt="image" src="https://github.com/user-attachments/assets/eaf91946-b8b7-4b4d-b8f3-2a7c14724eea" />
+
 Verify in the AWS console -- all VPCs, instances, security groups, and gateways should be gone.
+
+<img width="1480" height="382" alt="image" src="https://github.com/user-attachments/assets/02c57def-0fc7-4f76-b2c5-56f0e75ecde3" />
+
+<img width="1871" height="422" alt="image" src="https://github.com/user-attachments/assets/c01fd3da-d48e-4744-979a-a0c03468c2d3" />
+
 
 Delete the workspaces:
 ```bash
@@ -343,8 +352,12 @@ terraform workspace delete staging
 terraform workspace delete prod
 ```
 
+<img width="1002" height="415" alt="image" src="https://github.com/user-attachments/assets/658bd09d-76f2-41ff-871b-c47a966404fe" />
+
 **Verify:** Is your AWS account completely clean?
 
+- Yes
+  
 ---
 
 ## Hints
