@@ -187,13 +187,22 @@ sudo yum install ansible -y
 # or
 pip3 install ansible
 
+<img width="1282" height="778" alt="image" src="https://github.com/user-attachments/assets/06fb4c65-3ba4-459f-b1dd-13a48a8da2c9" />
+
+<img width="1897" height="786" alt="image" src="https://github.com/user-attachments/assets/cc0378f4-a618-4a04-a44c-c0d9be569628" />
+
 # Verify
 ansible --version
 ```
 
 Confirm the output shows the Ansible version, config file path, and Python version.
 
+<img width="1881" height="303" alt="image" src="https://github.com/user-attachments/assets/63282e1a-41db-4ede-a273-c835ca0bb8a1" />
+
 **Document:** On which machine did you install Ansible? Why is it only needed on the control node?
+
+- Ansible is installed on the control node because it runs playbooks from there and connects to other servers via SSH.
+- Target machines only need SSH and Python—no Ansible installation is required.
 
 ---
 
