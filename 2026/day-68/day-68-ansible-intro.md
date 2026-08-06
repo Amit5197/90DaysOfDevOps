@@ -89,7 +89,7 @@ Research and write short notes on:
    - Delivers the package (runs the module), gets a signature (receives JSON result) and drives away. 
    - The house doesn't need any special equipment installed to receive deliveries — just a doorbell (SSH).
 
-
+```
     +----------------------------------+
                |           CONTROL NODE           |
                |  (Your Machine / Jump Server)    |
@@ -116,6 +116,7 @@ Research and write short notes on:
    |  (EC2 Instance) | |  (EC2 Instance) | |  (EC2 Instance) |
    +-----------------+ +-----------------+ +-----------------+
 
+```
    
 ---
 
