@@ -90,7 +90,7 @@ Research and write short notes on:
    - The house doesn't need any special equipment installed to receive deliveries — just a doorbell (SSH).
 
 ```
-    +----------------------------------+
+               +----------------------------------+
                |           CONTROL NODE           |
                |  (Your Machine / Jump Server)    |
                |                                  |
