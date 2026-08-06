@@ -138,12 +138,36 @@ Label them mentally:
 - **Instance 2:** app server
 - **Instance 3:** db server
 
+- Step 1: Generate the SSH Key Pair
+  - ```ssh-keygen -t rsa -b 4096 -f ansible -N ""```
+
+- This creates two files in your folder:
+
+   - ansible.pub: The public key that Terraform reads and uploads to AWS.
+   - ansible: The private key you will use to SSH into your EC2 instances.
+
+- Step 2: Set Proper Private Key Permissions
+  - chmod 400 ansible
+ 
+- Step 3: Run Terraform
+Now that ansible.pub exists in the current directory, run Terraform:
+- ```terraform plan
+     terraform apply -auto-approve```
+
+<img width="1002" height="911" alt="image" src="https://github.com/user-attachments/assets/a359ebcb-ea16-4052-8050-96987b7dff4d" />
+
+<img width="1423" height="508" alt="image" src="https://github.com/user-attachments/assets/62e445f4-2f77-450a-9976-9fa65ce2ad7f" />
+
 Verify you can SSH into each one from your control node:
 ```bash
 ssh -i ~/your-key.pem ec2-user@<public-ip-1>
 ssh -i ~/your-key.pem ec2-user@<public-ip-2>
 ssh -i ~/your-key.pem ec2-user@<public-ip-3>
 ```
+
+<img width="731" height="932" alt="image" src="https://github.com/user-attachments/assets/d2fb383e-9c45-4091-b75a-d87401610ac9" />
+
+<img width="1452" height="420" alt="image" src="https://github.com/user-attachments/assets/22a54270-b2a2-4f7d-bdb8-9845f170ab7d" />
 
 ---
 
