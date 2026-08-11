@@ -238,6 +238,8 @@ ansible all -i inventory.ini -m ping
 
 You should see green `SUCCESS` with `"ping": "pong"` for each host.
 
+<img width="1892" height="992" alt="image" src="https://github.com/user-attachments/assets/dc138d2f-860b-4c8d-a021-03bf46dfb53b" />
+
 **Troubleshoot:** If ping fails:
 - Check the SSH key path and permissions (`chmod 400 your-key.pem`)
 - Check the security group allows SSH from your IP
@@ -252,16 +254,19 @@ Ad-hoc commands let you run quick one-off tasks without writing a playbook.
 ```bash
 ansible all -i inventory.ini -m command -a "uptime"
 ```
+<img width="1047" height="188" alt="image" src="https://github.com/user-attachments/assets/1c392d32-9e4f-4574-b587-d2c9b17158c4" />
 
 2. **Check free memory on web servers only:**
 ```bash
 ansible web -i inventory.ini -m command -a "free -h"
 ```
+<img width="933" height="113" alt="image" src="https://github.com/user-attachments/assets/381bc91b-258c-43f3-9aca-1904691994ec" />
 
 3. **Check disk space on all servers:**
 ```bash
 ansible all -i inventory.ini -m command -a "df -h"
 ```
+<img width="957" height="537" alt="image" src="https://github.com/user-attachments/assets/c169911d-45cc-4db0-b61f-72b121c5c59d" />
 
 4. **Install a package on the web group:**
 ```bash
@@ -269,18 +274,26 @@ ansible web -i inventory.ini -m yum -a "name=git state=present" --become
 ```
 (Use `apt` instead of `yum` if running Ubuntu)
 
+<img width="1225" height="341" alt="image" src="https://github.com/user-attachments/assets/d81d13c3-8ede-4091-975f-6be87076c529" />
+
 5. **Copy a file to all servers:**
 ```bash
 echo "Hello from Ansible" > hello.txt
 ansible all -i inventory.ini -m copy -a "src=hello.txt dest=/tmp/hello.txt"
 ```
 
+<img width="1091" height="808" alt="image" src="https://github.com/user-attachments/assets/a38ebd01-74e9-489e-9d12-d0246994e6a5" />
+
 6. **Verify the file was copied:**
 ```bash
 ansible all -i inventory.ini -m command -a "cat /tmp/hello.txt"
 ```
 
+<img width="1051" height="128" alt="image" src="https://github.com/user-attachments/assets/6d3e36c7-2392-43ea-b8ea-2c3cf54738a4" />
+
 **Document:** What does `--become` do? When do you need it?
+
+- `--become` escalates to root (like `sudo`) -- needed for package installation and service management
 
 ---
 
@@ -303,11 +316,15 @@ ansible db -i inventory.ini -m ping               # only db server
 ansible all_servers -i inventory.ini -m ping      # everything
 ```
 
+<img width="906" height="568" alt="image" src="https://github.com/user-attachments/assets/24d188cf-806f-4f1d-a115-19a86c1ebe32" />
+
 3. **Use patterns:**
 ```bash
 ansible 'web:app' -i inventory.ini -m ping        # OR: web or app
 ansible 'all:!db' -i inventory.ini -m ping        # NOT: all except db
 ```
+
+<img width="962" height="340" alt="image" src="https://github.com/user-attachments/assets/ec28404c-ebb8-4663-bd01-fef5afd1f996" />
 
 4. **Create an `ansible.cfg`** to avoid typing `-i inventory.ini` every time:
 ```ini
@@ -324,6 +341,10 @@ ansible all -m ping
 ```
 
 **Verify:** Does `ansible all -m ping` work without specifying the inventory file?
+
+- yes
+
+<img width="667" height="281" alt="image" src="https://github.com/user-attachments/assets/bf30bd30-c081-4e55-9f0e-bd700da2d7b7" />
 
 ---
 
