@@ -199,6 +199,8 @@ Confirm the output shows the Ansible version, config file path, and Python versi
 
 <img width="1881" height="303" alt="image" src="https://github.com/user-attachments/assets/63282e1a-41db-4ede-a273-c835ca0bb8a1" />
 
+<img width="912" height="290" alt="image" src="https://github.com/user-attachments/assets/9e1a5a62-57ab-42ef-9c8b-d64a76f2cf1b" />
+
 **Document:** On which machine did you install Ansible? Why is it only needed on the control node?
 
 - Ansible is installed on the control node because it runs playbooks from there and connects to other servers via SSH.
