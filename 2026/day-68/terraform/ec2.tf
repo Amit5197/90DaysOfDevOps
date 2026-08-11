@@ -1,7 +1,7 @@
 resource "aws_key_pair" "deployer" {
 
   key_name   = "ansible"
-  public_key = file("ansible.pub")
+  public_key = file("terra-key.pub")
 }
 
 
