@@ -360,24 +360,34 @@ ansible all -m ping
 ---
 
 ## Documentation
-Create `day-68-ansible-intro.md` with:
 - Ansible architecture in your own words
-- How you set up your lab (Terraform or manual, with instance details)
-- Your `inventory.ini` file (redact IPs if sharing publicly)
-- Screenshot of `ansible all -m ping` with all green results
-- Five ad-hoc commands you ran and their outputs
+
+```
+  [Control Node]
+        │
+        ├── 1. Reads Inventory & Playbook
+        ├── 2. Translates Tasks into Python/PowerShell Scripts
+        ├── 3. Connects via SSH / WinRM
+        ▼
+┌─────────────────────────────────────────────────────────┐
+│                    Managed Nodes                        │
+│                                                         │
+│  ┌──────────────┐   ┌──────────────┐   ┌──────────────┐ │
+│  │ Web Servers  │   │ App Servers  │   │ DB Servers   │ │
+│  └──────────────┘   └──────────────┘   └──────────────┘ │
+└─────────────────────────────────────────────────────────┘
+        │
+        ├── 4. Pushes temporary module code to remote hosts
+        ├── 5. Executes modules and collects JSON status output
+        └── 6. Removes temporary code automatically
+
+```
+
 - Difference between `command` and `shell` modules
+  - The core difference is that the `command module` executes binaries directly on the target host,
+  - while the `shell module` routes commands through a shell environment (like /bin/sh)
 
 ---
-
-## Submission
-1. Add `day-68-ansible-intro.md` to `2026/day-68/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share on LinkedIn: "Started the Ansible journey today -- set up a control node, created an inventory with three EC2 instances, and ran ad-hoc commands to manage all servers from one terminal. No agents installed anywhere. Ansible just works over SSH."
 
 `#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
