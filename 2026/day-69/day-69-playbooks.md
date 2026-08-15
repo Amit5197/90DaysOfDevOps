@@ -52,9 +52,15 @@ ansible-playbook install-nginx.yml
 
 Read the output carefully -- every task shows `changed`, `ok`, or `failed`.
 
+<img width="1892" height="985" alt="image" src="https://github.com/user-attachments/assets/54fe5bca-c364-4c9b-8283-8473e4bbb79d" />
+
 Now run it **again**. Notice that tasks show `ok` instead of `changed`. This is **idempotency** -- Ansible only makes changes when needed.
 
+<img width="1917" height="362" alt="image" src="https://github.com/user-attachments/assets/48d4bfcd-fcdb-4caf-aae1-75c7c3e89c4c" />
+
 **Verify:** Curl the web server's public IP. Do you see your custom page?
+
+<img width="1518" height="461" alt="image" src="https://github.com/user-attachments/assets/5b5c254d-55b4-473a-add3-83a9465db957" />
 
 ---
 
