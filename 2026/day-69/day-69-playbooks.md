@@ -244,8 +244,26 @@ Practice each of these modules by writing a playbook called `essential-modules.y
 
 Create a `files/` directory with a sample `app.conf` file for the copy task. Run the playbook against all servers.
 
+<img width="1907" height="397" alt="image" src="https://github.com/user-attachments/assets/f04573ee-b830-4c90-b1c4-2dc7f7324a67" />
+
+<img width="1892" height="598" alt="image" src="https://github.com/user-attachments/assets/41afbcf9-6395-45a8-b37c-ce63802f88c8" />
+
+<img width="1902" height="647" alt="image" src="https://github.com/user-attachments/assets/128bb353-760c-45de-bc31-16f2c90048f0" />
+
 **Document:** What is the difference between `command` and `shell`? When should you use each?
 
+  - `command` module runs simple commands, `shell` module supports pipes and redirects
+  
+  - Use `command`
+    - For simple commands
+    - No pipes, redirects, or variables
+
+  - Use `shell`
+    - When you need shell features
+    - Pipes (|)
+    - Redirects (>)
+    - Variables ($HOME)
+    
 ---
 
 ### Task 4: Handlers -- Restart Services Only When Needed
@@ -297,6 +315,7 @@ Run the playbook:
 - Second run: handler does NOT trigger because nothing changed
 
 **Verify:** Run it twice and compare the output. Does the handler run both times?
+ - No, Handler run first run
 
 ---
 
