@@ -81,9 +81,88 @@ Open your playbook and annotate each part in your notes:
 
 Answer:
 1. What is the difference between a play and a task?
+
+ - `Play`: The top-level mapping that connects a targeted group of managed hosts from your inventory to specific **roles**, **variables**, and **tasks**. It defines where and under what context actions should take place.
+
+      - Which hosts to target
+      - What roles/tasks to apply
+  
+ - `Task`: An individual action defined inside a play. Each task invokes a specific Ansible module (such as **apt**, **service**, or **copy**) to execute a single atomic operation on the target host.
+  
+      - Single unit of work
+      - Calls one module (like apt, copy, service)
+      - It’s a high-level mapping between hosts and work
+
 2. Can you have multiple plays in one playbook?
+ - Yes. An Ansible playbook is a YAML list of plays. You can define multiple plays within a single file to target different host groups with different roles, privileges, or variables in sequential order:
+
+ - `Each play:` `Targets different host groups` and `Runs independently in sequence`
+
+```
+# Play 1: Target database servers
+- name: Configure Database Servers
+  hosts: db_servers
+  become: true
+  tasks:
+    - name: Install PostgreSQL
+      apt:
+        name: postgresql
+        state: present
+
+# Play 2: Target web servers
+- name: Configure Web Servers
+  hosts: web_servers
+  become: true
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+```
+
 3. What does `become: true` do at the play level vs the task level?
+
+    - `play level` Applies to ALL tasks in the play
+      - Play Level: Sets privilege escalation globally for all tasks within that play.
+      - Every task in the play will run with escalated privileges (e.g., sudo) by default.
+
+   - `task level` Applies only to that task
+     - Task Level: Restricts privilege escalation to that specific task only.
+     - This is best practice when only one or two tasks need root privileges (e.g., package installation), while the rest should execute as the standard connecting user.
+
+    **Play Level:** Applies elevated permissions (`sudo`) across all tasks in the play.
+    **Task Level:** Granularly elevates permissions only for the specific task requiring root access.
+
+```
+- name: Play-level vs Task-level Privilege Escalation
+  hosts: web
+  become: false  # Runs non-root by default across the play
+
+  tasks:
+    - name: Install package as root
+      apt:
+        name: htop
+        state: present
+      become: true  # Escalates to sudo only for this task
+
+    - name: Read user-level file
+      command: whoami
+```
+      
 4. What happens if a task fails -- do remaining tasks still run?
+
+    - `Default behavior:`
+      - Execution stops for that host
+        ```
+        tasks:
+          - name: Task 1 (fails)
+          - name: Task 2 (won’t run)
+        ```
+    - But other hosts --> `Continue normally`
+
+- If a task fails on a host, Ansible halts execution for that host to prevent configuration drift.
+- Unaffected hosts continue execution.
+- Use `ignore_errors: true` or `block/rescue` blocks to implement fallback logic without stopping the run.
 
 ---
 
