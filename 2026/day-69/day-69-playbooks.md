@@ -430,22 +430,117 @@ Watch the output -- each play targets a different group, and tasks run only on t
 ## Documentation
 Create `day-69-playbooks.md` with:
 - Your first playbook with annotations explaining each section
+
+```bash
+---                                                                # YAML document start
+- name: Install and start Nginx on web servers                     # PLAY name
+  hosts: web                                                       # Target Inventory Group: Executes on all hosts in the 'web' group
+  become: true                                                     # Privilege Escalation: Executes tasks as root using sudo
+
+  tasks:                                                           # list of Tasks
+
+    - name: Install Nginx                                          # Task 1: Ensure Nginx is installed
+      yum:                                                         # Module: yum 
+        name: nginx                                                # Name of the package to install
+        state: present                                             # Desired State: Package must be installed (idempotent)
+
+    - name: Start and Enable Nginx                                 # Task 2: Ensure Nginx service is running and enabled on boot
+      service:                                                     # Module: service (manages system services)
+        name: nginx                                                # Service to manage
+        state: started                                             # Desired State: Service must be running
+        enabled: true                                              # Boot Behavior: Service enabled to start on system boot
+
+    - name: Create a custom index page                             # Task 3: Create a custom HTML page
+      copy:                                                        # Module: copy (copies files or content to remote hosts)
+        content: "<h1>Deploy by Ansible - TerraWeek Server</h1>"   # Inline content for index.html
+        dest: /usr/share/nginx/html/index.html                     # Destination path on remote host(web)
+```
+
 - All seven module examples with what each does
-- Screenshot of the playbook run showing changed vs ok tasks
-- Screenshot proving idempotency (second run shows all ok)
+
+1. **`yum`/`apt`** -- Install and remove packages:
+```yaml
+- name: Remove multiple packages
+  yum:
+    name:
+      - git
+      - curl
+      - wget
+      - tree
+    state: absent
+```
+
+2. **`service`** -- Manage services:
+```yaml
+- name: Ensure Nginx is running
+  service:
+    name: nginx
+    state: started
+    enabled: true
+```
+
+3. **`copy`** -- Copy files from control node to managed nodes:
+```yaml
+- name: Copy config file
+  copy:
+    src: files/app.conf
+    dest: /etc/app.conf
+    owner: root
+    group: root
+    mode: '0644'
+```
+
+4. **`file`** -- Create directories and manage permissions:
+```yaml
+- name: Create application directory
+  file:
+    path: /opt/myapp
+    state: directory
+    owner: ec2-user
+    mode: '0755'
+```
+
+5. **`command`** -- Run a command (no shell features):
+```yaml
+- name: Check disk space
+  command: df -h
+  register: disk_output
+
+- name: Print disk space
+  debug:
+    var: disk_output.stdout_lines
+```
+
+6. **`shell`** -- Run a command with shell features (pipes, redirects):
+```yaml
+- name: Count running processes
+  shell: ps aux | wc -l
+  register: process_count
+```
+
+7. **`lineinfile`** -- Add or modify a single line in a file:
+```yaml
+- name: Disable root SSH login
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PermitRootLogin'
+    line: 'PermitRootLogin no'
+```
+
 - How handlers work with a before/after comparison
+
+  - First run: handler triggers because the config file is new
+  - Second run: handler does NOT trigger because nothing changed
+
 - Difference between `--check`, `--diff`, and `-v`
 
+  `--check` Dry run (shows what would change, doesn’t apply anything)
+
+  `--diff` Shows actual differences (before vs after changes in files)
+
+  `-v` Verbose output
+
 ---
-
-## Submission
-1. Add `day-69-playbooks.md` to `2026/day-69/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share on LinkedIn: "Wrote my first Ansible playbooks today -- installed Nginx, managed services, copied files, and learned handlers. Ran the same playbook twice and it made zero changes the second time. Idempotency is beautiful."
 
 `#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
