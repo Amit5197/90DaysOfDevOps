@@ -7,13 +7,6 @@ Today you write your first playbooks and learn the modules that you will use on 
 
 ---
 
-## Expected Output
-- Multiple playbooks that install packages, manage services, and configure files
-- A clear understanding of plays, tasks, modules, and handlers
-- A markdown file: `day-69-playbooks.md`
-
----
-
 ## Challenge Tasks
 
 ### Task 1: Your First Playbook
