@@ -320,10 +320,14 @@ Before running playbooks on production, always preview changes first.
 ansible-playbook install-nginx.yml --check
 ```
 
+<img width="1262" height="317" alt="image" src="https://github.com/user-attachments/assets/db90d1b2-0090-4a33-a7fd-1ee11eb26c3b" />
+
 2. **Diff mode** -- shows the actual file differences:
 ```bash
 ansible-playbook nginx-config.yml --check --diff
 ```
+
+<img width="1261" height="331" alt="image" src="https://github.com/user-attachments/assets/5f0dc69f-01b2-494c-8db1-0ec6f9f4926d" />
 
 3. **Verbosity** -- increase output detail for debugging:
 ```bash
@@ -332,18 +336,27 @@ ansible-playbook install-nginx.yml -vv      # more verbose
 ansible-playbook install-nginx.yml -vvv     # connection debugging
 ```
 
+<img width="1262" height="662" alt="image" src="https://github.com/user-attachments/assets/7ad124ac-6d01-4502-bb1f-f16db4eb31bf" />
+
+<img width="1263" height="631" alt="image" src="https://github.com/user-attachments/assets/84641a29-f077-4e8b-b13f-75e1da1d54ac" />
+
 4. **Limit to specific hosts:**
 ```bash
 ansible-playbook install-nginx.yml --limit web-server
 ```
+
+<img width="1062" height="814" alt="image" src="https://github.com/user-attachments/assets/674ea889-1fc3-4bf9-8c4b-54d961ccee4d" />
 
 5. **List what would be affected without running:**
 ```bash
 ansible-playbook install-nginx.yml --list-hosts
 ansible-playbook install-nginx.yml --list-tasks
 ```
+<img width="1184" height="526" alt="image" src="https://github.com/user-attachments/assets/42699312-6a9c-4ed9-b1f3-73f1ff62c683" />
 
 **Document:** Why is `--check --diff` the most important flag combination for production use?
+
+- Because `--check --diff` let's you simulate changes without applying them and see exactly what would change, helping avoid mistakes in production.
 
 ---
 
@@ -402,9 +415,15 @@ Run it:
 ansible-playbook multi-play.yml
 ```
 
+<img width="955" height="836" alt="image" src="https://github.com/user-attachments/assets/d81f90fb-bf52-4025-a017-5ec70e694006" />
+
 Watch the output -- each play targets a different group, and tasks run only on the relevant hosts.
 
 **Verify:** Is Nginx only installed on web servers? Is MySQL only on db servers?
+
+- Yes, `Nginx` is Installed on `web server` & `Mysql` is on `db server`
+
+<img width="1069" height="570" alt="image" src="https://github.com/user-attachments/assets/c1022325-2459-435d-88c6-44afe129daea" />
 
 ---
 
