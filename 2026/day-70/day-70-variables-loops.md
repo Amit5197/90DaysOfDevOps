@@ -7,14 +7,6 @@ Variables, facts, conditionals, and loops turn a rigid script into flexible auto
 
 ---
 
-## Expected Output
-- Playbooks using variables from multiple sources
-- Conditional tasks that run only on specific OS or groups
-- Loops that install packages and create users dynamically
-- A markdown file: `day-70-variables-loops.md`
-
----
-
 ## Challenge Tasks
 
 ### Task 1: Variables in Playbooks
@@ -54,12 +46,18 @@ Create `variables-demo.yml`:
 
 Run it and verify the variables resolve correctly.
 
+<img width="1072" height="618" alt="image" src="https://github.com/user-attachments/assets/a9bf92b0-6b7d-4df8-9dd6-09e82f9fbb40" />
+
 Now, override a variable from the command line:
 ```bash
 ansible-playbook variables-demo.yml -e "app_name=my-custom-app app_port=9090"
 ```
 
 **Verify:** Does the CLI variable override the playbook variable?
+
+- Yes
+
+<img width="1095" height="564" alt="image" src="https://github.com/user-attachments/assets/13c2f07d-7fe1-455f-b7ca-802e41a8ba98" />
 
 ---
 
@@ -143,9 +141,20 @@ Write a playbook `site.yml` that uses these variables:
         msg: "{{ custom_message }}"
 ```
 
+<img width="1109" height="804" alt="image" src="https://github.com/user-attachments/assets/b84ec42b-f4f7-466b-9e83-ca275a4a6343" />
+
 Run it and observe which variables apply to which hosts.
 
+- `Observations:`
+  - `app_env` applied to all hosts
+  - `http_port` only web group
+  - `db_port` only db group
+  - `custom_message` only web-server
+  - `max_connections` came from group_vars
+  
 **Document:** What is the variable precedence? (hint: host_vars > group_vars > playbook vars, and `-e` overrides everything)
+
+ - `host_vars` > `group_vars` > `playbook vars`, and `-e` overrides everything
 
 ---
 
@@ -157,6 +166,8 @@ Ansible automatically collects "facts" about each managed node -- OS, IP, memory
 ansible web-server -m setup
 ```
 
+<img width="762" height="770" alt="image" src="https://github.com/user-attachments/assets/70b41489-aa9e-4757-9010-af71e2bbb0dc" />
+
 2. **Filter specific facts:**
 ```bash
 ansible web-server -m setup -a "filter=ansible_os_family"
@@ -164,6 +175,8 @@ ansible web-server -m setup -a "filter=ansible_distribution*"
 ansible web-server -m setup -a "filter=ansible_memtotal_mb"
 ansible web-server -m setup -a "filter=ansible_default_ipv4"
 ```
+
+<img width="877" height="819" alt="image" src="https://github.com/user-attachments/assets/ec3c38de-2386-4793-a9be-a2432aab90c7" />
 
 3. **Use facts in a playbook** -- create `facts-demo.yml`:
 ```yaml
@@ -186,7 +199,15 @@ ansible web-server -m setup -a "filter=ansible_default_ipv4"
 
 Run it and observe the facts printed for each host.
 
+<img width="883" height="767" alt="image" src="https://github.com/user-attachments/assets/04f2ece4-3502-4e1b-bcc6-6f7e32cc16cb" />
+
 **Document:** Name five facts you would use in real playbooks and why.
+
+- `ansible_hostname` to identify the host and use it in configs/logs
+- `ansible_default_ipv4.address` to get the primary IP for networking tasks
+- `ansible_os_family` to apply OS-specific tasks (e.g., RedHat vs Debian)
+- `ansible_distribution` to handle version-specific package installs
+- `ansible_mounts` determine available disk space dynamically
 
 ---
 
@@ -249,8 +270,23 @@ Create `conditional-demo.yml`:
 
 Run it and observe which tasks are skipped on which hosts.
 
+- Observation
+
+  - `Nginx installation` – skipped on db-server and app-server; runs on web-server.
+  - `MariaDB installation` – skipped on web-server and app-server; runs on db-server.
+  - `Low memory warning` – runs on all hosts.
+  - `Amazon Linux check` – runs on all hosts.
+  - `Ubuntu check` – skipped on all hosts.
+  - `Production check` – skipped on all hosts.
+  - `Multiple conditions (AND)` – runs only on web-server.
+  -  `OR condition` – runs on web-server and app-server; skipped on db-server.
+
+  <img width="836" height="762" alt="image" src="https://github.com/user-attachments/assets/a5fc1c25-6b2d-421c-b596-ac0f40cd25bc" />
+
 **Verify:** Are tasks correctly skipping on hosts that don't match the condition?
 
+- Yes
+   
 ---
 
 ### Task 5: Loops
@@ -310,7 +346,35 @@ Create `loops-demo.yml`:
 
 Run it and observe the loop output -- each iteration is shown separately.
 
+<img width="767" height="749" alt="image" src="https://github.com/user-attachments/assets/77452070-6958-46dc-a612-121c723aa285" />
+
+<img width="865" height="660" alt="image" src="https://github.com/user-attachments/assets/9cd9dd57-a8eb-44a4-b6b7-d63a2cd4473e" />
+
 **Document:** What is the difference between `loop` and the older `with_items`? (hint: `loop` is the modern recommended syntax)
+
+- `with_items` is the old looping syntax
+
+  ```
+  - name: Install packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - nginx
+    - git
+  ```
+
+- `loop` is the modern recommended syntax
+
+```
+- name: Install packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - nginx
+    - git
+```
 
 ---
 
@@ -365,41 +429,27 @@ Build a real-world playbook `server-report.yml` that combines variables, facts, 
 
 Run it and verify the report file is created on each server.
 
+<img width="936" height="767" alt="image" src="https://github.com/user-attachments/assets/35f07afc-a9fd-47d4-a5f4-543c035c6838" />
+
 **Verify:** SSH into a server and read `/tmp/server-report-*.txt`. Does it contain accurate information?
 
----
+- Yes
 
-## Hints
-- Variable precedence (simplified, low to high): role defaults -> group_vars/all -> group_vars/<group> -> host_vars/<host> -> playbook vars -> task vars -> extra vars (`-e`)
-- `group_names` is a built-in variable containing the groups the current host belongs to
-- `inventory_hostname` is the name of the host as defined in the inventory
-- `when` conditions do not need `{{ }}` -- you reference variables directly: `when: app_env == "production"`
-- `register` stores the entire result object including `stdout`, `stderr`, `rc` (return code), and `stdout_lines`
-- `loop` replaces `with_items`, `with_dict`, `with_file` from older Ansible versions
-- Use `ansible <host> -m setup -a "filter=<pattern>"` to quickly find fact names
-- `debug` with `var` shows the raw variable, `msg` shows a formatted string
+<img width="1120" height="753" alt="image" src="https://github.com/user-attachments/assets/0d7c28ce-129b-4812-a085-6f371eb846a5" />
+<img width="1097" height="450" alt="image" src="https://github.com/user-attachments/assets/691aefa5-5f69-4613-9b6e-67319b7d2bb7" />
 
----
+- Variable precedence (simplified, low to high):
+   
+  - role defaults -> group_vars/all -> group_vars/ -> host_vars/ -> playbook vars -> task vars -> extra vars (`-e`)
 
-## Documentation
-Create `day-70-variables-loops.md` with:
-- Your `group_vars/` and `host_vars/` directory structure
 - How variable precedence works with examples from your test
-- Five useful Ansible facts and where you would use them
-- Conditional playbook with screenshot showing skipped vs executed tasks
-- Loop playbook with screenshot showing multiple iterations
-- The server report output from Task 6
+
+  - `host_vars` > `group_vars` > `group_vars/all`
+
+- `group_vars`/ and `host_vars`/ directory structure
+<img width="655" height="353" alt="image" src="https://github.com/user-attachments/assets/726acddc-18f3-4f15-a5ac-ad6347685cea" />
 
 ---
-
-## Submission
-1. Add `day-70-variables-loops.md` to `2026/day-70/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share on LinkedIn: "Made Ansible playbooks smart today -- variables from group_vars and host_vars, OS-based conditionals, loops for bulk operations, and facts-driven server reports. Same playbook, different behavior per host. This is how real configuration management works."
 
 `#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
