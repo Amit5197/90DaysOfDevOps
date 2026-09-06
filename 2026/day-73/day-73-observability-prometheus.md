@@ -16,6 +16,13 @@ Research and write short notes on:
    - **Monitoring** tells you _when_ something is wrong (alerts, thresholds)
    - **Observability** tells you _why_ something is wrong (explore, query, correlate)
 
+      | Monitoring                             | Observability                                      |
+      | -------------------------------------- | -------------------------------------------------- |
+      | Checks if system is **working or not** | Helps understand **why it is not working**         |
+      | Gives **alerts when something breaks** | Helps **find the reason of the problem**           |
+      | Looks at **fixed metrics**             | Uses **metrics, logs, and traces**                 |
+      | **Example:** Alert-> “Website is slow” | **Example:** Find cause-> “Database query is slow” |
+     
 2. The three pillars of observability:
    - **Metrics** -- numerical measurements over time (CPU usage, request count, error rate). Tools: Prometheus, Datadog, CloudWatch
    - **Logs** -- timestamped text records of events (application output, error messages). Tools: Loki, ELK Stack, Fluentd
@@ -35,6 +42,49 @@ Research and write short notes on:
    [Docker]   --> metrics --> [cAdvisor] --> [Prometheus]
    ```
 
+    `[Your App] --> metrics --> [Prometheus] --> [Grafana Dashboards]`
+     
+      - The app generates performance metrics such as: `request count`, `response time`, `CPU usage`and `memory usage`
+      - Prometheus collects (scrapes) metrics from the app
+      - Prometheus stores this data over time
+      - Grafana displays the data as graphs and dashboards
+      - This helps you monitor how the system is performing
+
+            
+    `[Your App] --> logs --> [Promtail] --> [Loki] --> [Grafana]`
+        
+      - The app generates logs (event messages)
+      - `Example:` “User logged in”, “Error occurred”
+      - Promtail collects logs from the app (from files or stdout)
+      - Promtail sends logs to Loki for storage
+      - Grafana is used to search and view logs
+      - This helps you understand what happened inside the system
+
+    `[Your App] --> traces --> [OTEL Collector] --> [Grafana/Debug]`
+      
+      - Traces show how a request moves through the system
+      - `Example:` User request → API → Database → Response
+      - The app sends trace data using OpenTelemetry
+      - OTEL Collector processes the trace data
+      - Grafana is used to visualize the full request journey
+      - This helps find where delays or failures occur
+
+    `[Your Host] --> metrics --> [Node Exporter] --> [Prometheus]`
+     
+      - The host machine is also monitored
+      - It collects: CPU usage, memory usage, disk usage
+      - Node Exporter collects system metrics
+      - Prometheus stores this data
+      - This helps monitor server health
+
+    `[Your Docker] --> metrics --> [cAdvisor] --> [Prometheus]`
+     
+      - Each Docker container is monitored individually
+      - It tracks: CPU usage per container, memory usage per container
+      - cAdvisor collects container metrics
+      - Prometheus stores this data
+      - This helps monitor container performance
+      
 ---
 
 ### Task 2: Set Up Prometheus with Docker
@@ -273,6 +323,8 @@ curl http://localhost:8000
 curl http://localhost:8000
 ```
 
+<img width="1911" height="815" alt="image" src="https://github.com/user-attachments/assets/1b68b1a2-d88b-4211-a830-b800ae56cb2d" />
+
 **Note:** Not all applications expose Prometheus metrics natively. In later days you will learn how Node Exporter, cAdvisor, and OTEL Collector act as metric exporters for systems that do not have built-in Prometheus support.
 
 ---
@@ -285,6 +337,8 @@ Understand how Prometheus stores data:
 docker exec prometheus du -sh /prometheus
 ```
 
+<img width="897" height="75" alt="image" src="https://github.com/user-attachments/assets/4b3d0618-5f7e-4f9a-bf54-4a746bd52a72" />
+
 2. Prometheus stores data in a local time-series database (TSDB). Default retention is 15 days. You can change it:
 ```yaml
 command:
@@ -295,40 +349,26 @@ command:
 
 3. Check the TSDB status in the UI: Status > TSDB Status
 
+<img width="1637" height="447" alt="image" src="https://github.com/user-attachments/assets/c299ac09-8604-4ed8-82ec-e376612089bf" />
+
 **Document:** What happens when retention is exceeded? Why is a volume mount important for Prometheus data?
 
----
+- Retention exceeded
 
-## Hints
-- Prometheus uses a **pull model** -- it scrapes targets at regular intervals, unlike push-based systems
-- The `up` metric is automatically created for every scrape target -- 1 means healthy, 0 means the target is unreachable
-- `rate()` only works on counters, not gauges -- applying rate to a gauge gives meaningless results
-- Always use `rate()` before `sum()` when aggregating counters: `sum(rate(...))` not `rate(sum(...))`
-- If a target shows as DOWN in Status > Targets, check: is the container running? Is the port correct? Are they on the same Docker network?
-- `prometheus.yml` changes require a restart or a POST to `/-/reload` (if `--web.enable-lifecycle` flag is set)
-- Reference repo for the full stack: https://github.com/LondheShubham153/observability-for-devops
+    - Old metrics are automatically deleted, keeping only recent data within the retention period.
 
----
+    - Prometheus stores time-series data locally on disk inside its TSDB (Time Series Database) organized into blocks (typically spanning 2-hour windows, compacted into larger blocks over time). Retention can be controlled by time (--storage.tsdb.retention.time, e.g., 30d) or size (--storage.tsdb.retention.size, e.g., 1GB).
 
-## Documentation
-Create `day-73-observability-prometheus.md` with:
-- The three pillars of observability in your own words
-- Your `prometheus.yml` and `docker-compose.yml`
-- Screenshot of Prometheus Targets page showing all targets UP
-- Five PromQL queries you ran and what they returned
-- Explanation of counter vs gauge with examples
-- Architecture diagram of what you will build over days 73-77
+- Why volume mount matters
+
+    - It ensures Prometheus data is persisted. Without it, all metrics are lost when the container restarts or is removed.
+
+```
+volumes:
+  - ./prometheus.yml:/etc/prometheus/prometheus.yml
+  - prometheus_data:/prometheus
 
 ---
-
-## Submission
-1. Add `day-73-observability-prometheus.md` to `2026/day-73/`
-2. Commit and push to your fork
-
----
-
-## Learn in Public
-Share on LinkedIn: "Started the observability block today -- learned the three pillars (metrics, logs, traces), set up Prometheus in Docker, wrote my first PromQL queries, and started monitoring a sample app. Observability is what separates running services from actually understanding them."
 
 `#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
