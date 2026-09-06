@@ -112,21 +112,41 @@ Explore the Prometheus UI and understand these concepts:
 
 Go to the Prometheus UI graph page (`http://localhost:9090/graph`) and run these queries:
 
-```
 # How many metrics is Prometheus collecting about itself?
-count({__name__=~".+"})
+
+```count({__name__=~".+"})```
+
+<img width="1902" height="927" alt="image" src="https://github.com/user-attachments/assets/1774edf4-b93c-4eba-955d-2d6919ef3048" />
 
 # How much memory is Prometheus using?
-process_resident_memory_bytes
+
+```process_resident_memory_bytes```
+
+<img width="1917" height="975" alt="image" src="https://github.com/user-attachments/assets/066dd575-8933-4a5e-945b-41613c3a5060" />
 
 # Total HTTP requests to the Prometheus server
-prometheus_http_requests_total
+
+```prometheus_http_requests_total```
+
+- 55
+
+<img width="1875" height="955" alt="image" src="https://github.com/user-attachments/assets/c046645a-2a31-43fe-8d36-25f10eeab982" />
 
 # Break it down by handler
-prometheus_http_requests_total{handler="/api/v1/query"}
-```
+
+```prometheus_http_requests_total{handler="/api/v1/query"}```
+
+<img width="1875" height="965" alt="image" src="https://github.com/user-attachments/assets/f83627e5-6374-429a-bd9c-517141aa6ef8" />
 
 **Document:** What is the difference between a counter and a gauge? Give one real-world example of each.
+
+- `Counter`: A metric that only increases over time
+
+    - `Example`: `http_requests_total` — counts how many requests your server (e.g., Nginx, API service) has handled since it started
+
+- `Gauge`: A metric that can go up or down, showing a current value
+
+    - `Example`: `memory_usage_bytes` — current memory usage of a container or VM
 
 ---
 
