@@ -92,7 +92,7 @@ Open `http://Public-IP:9090` in your browser. You should see the Prometheus web 
 
 <img width="1901" height="887" alt="image" src="https://github.com/user-attachments/assets/873a90c1-deb1-4bf7-a530-d6ee35a924f3" />
 
-<img width="1631" height="110" alt="image" src="https://github.com/user-attachments/assets/5cef818a-2439-4f87-b729-05c20246a526" />
+<img width="1535" height="591" alt="image" src="https://github.com/user-attachments/assets/9ae4e851-6c2c-454c-b4a2-0fa70d713d5b" />
 
 <img width="1910" height="827" alt="image" src="https://github.com/user-attachments/assets/2925d1ca-2e5d-4d25-bbd9-681ac874cee7" />
 
