@@ -159,11 +159,15 @@ up
 ```
 This returns 1 (up) or 0 (down) for each scrape target.
 
+<img width="1917" height="517" alt="image" src="https://github.com/user-attachments/assets/f03e78da-7903-4010-993f-54ee85157ee4" />
+
 2. **Range vector** -- values over a time window:
 ```promql
 prometheus_http_requests_total[5m]
 ```
 Returns all values from the last 5 minutes.
+
+<img width="1890" height="917" alt="image" src="https://github.com/user-attachments/assets/38ba9699-6c21-4e29-9f98-93f7c2e9276b" />
 
 3. **Rate** -- per-second rate of a counter over a time window:
 ```promql
@@ -171,10 +175,14 @@ rate(prometheus_http_requests_total[5m])
 ```
 This is the most common function you will use. Counters always go up -- `rate()` converts them to a useful per-second speed.
 
+<img width="1906" height="905" alt="image" src="https://github.com/user-attachments/assets/8fdfa51e-cd58-4a44-83c8-08ba06e6308e" />
+
 4. **Aggregation** -- sum across all label combinations:
 ```promql
 sum(rate(prometheus_http_requests_total[5m]))
 ```
+
+<img width="1890" height="906" alt="image" src="https://github.com/user-attachments/assets/e62b6c5b-2220-4c2e-b31b-fbf5c612f9aa" />
 
 5. **Filter by label:**
 ```promql
@@ -182,18 +190,29 @@ prometheus_http_requests_total{code="200"}
 prometheus_http_requests_total{code!="200"}
 ```
 
+<img width="1897" height="910" alt="image" src="https://github.com/user-attachments/assets/2adf5839-6401-4511-a691-2f7afd85179c" />
+
+<img width="1906" height="912" alt="image" src="https://github.com/user-attachments/assets/8b726a9f-d620-46ea-9ce6-9ca046e2fbc7" />
+
 6. **Arithmetic:**
 ```promql
 process_resident_memory_bytes / 1024 / 1024
 ```
 This converts bytes to megabytes.
 
+<img width="1882" height="907" alt="image" src="https://github.com/user-attachments/assets/06e62207-b3f8-4da7-9db7-7beeb2cf8d72" />
+
 7. **Top-K:**
 ```promql
 topk(5, prometheus_http_requests_total)
 ```
+<img width="1902" height="905" alt="image" src="https://github.com/user-attachments/assets/806b969a-5243-4954-8957-8ab813a71f07" />
 
 **Try this exercise:** Write a PromQL query that shows the per-second rate of non-200 HTTP requests to Prometheus over the last 5 minutes. (Hint: use `rate()` with a label filter on `code!="200"`)
+
+- rate(prometheus_http_requests_total{code!="200"}[5m])
+  
+<img width="1902" height="907" alt="image" src="https://github.com/user-attachments/assets/b167971b-b802-41e4-afab-af71eb24b66e" />
 
 ---
 
