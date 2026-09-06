@@ -7,15 +7,6 @@ That is where observability comes in. Today you learn the three pillars of obser
 
 ---
 
-## Expected Output
-- Clear understanding of observability vs traditional monitoring
-- Prometheus running in a Docker container
-- A working `prometheus.yml` with scrape targets
-- Prometheus scraping its own metrics and responding to PromQL queries
-- A markdown file: `day-73-observability-prometheus.md`
-
----
-
 ## Challenge Tasks
 
 ### Task 1: Understand Observability
@@ -93,7 +84,17 @@ docker compose up -d
 
 Open `http://localhost:9090` in your browser. You should see the Prometheus web UI.
 
+Or
+
+Open `http://Public-IP:9090` in your browser. You should see the Prometheus web UI.
+
 **Verify:** Go to Status > Targets. You should see one target (`prometheus`) with state `UP`.
+
+<img width="1901" height="887" alt="image" src="https://github.com/user-attachments/assets/873a90c1-deb1-4bf7-a530-d6ee35a924f3" />
+
+<img width="1631" height="110" alt="image" src="https://github.com/user-attachments/assets/5cef818a-2439-4f87-b729-05c20246a526" />
+
+<img width="1910" height="827" alt="image" src="https://github.com/user-attachments/assets/2925d1ca-2e5d-4d25-bbd9-681ac874cee7" />
 
 ---
 
