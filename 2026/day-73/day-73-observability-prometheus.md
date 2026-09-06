@@ -42,6 +42,8 @@ Research and write short notes on:
    [Docker]   --> metrics --> [cAdvisor] --> [Prometheus]
    ```
 
+<img width="882" height="425" alt="image" src="https://github.com/user-attachments/assets/e5d8553e-f1fa-401c-946c-9d769f487494" />
+
     `[Your App] --> metrics --> [Prometheus] --> [Grafana Dashboards]`
      
       - The app generates performance metrics such as: `request count`, `response time`, `CPU usage`and `memory usage`
