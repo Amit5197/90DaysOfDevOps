@@ -133,24 +133,41 @@ docker compose up -d
 
 Open `http://localhost:8080` to see the cAdvisor web UI. Click on Docker Containers to see per-container stats.
 
+<img width="1597" height="911" alt="image" src="https://github.com/user-attachments/assets/38c24419-9844-4ed3-9867-e1f9a2d4c8de" />
+
 Run these queries in Prometheus:
-```promql
+promql
 # CPU usage per container (in seconds)
-rate(container_cpu_usage_seconds_total{name!=""}[5m])
+```rate(container_cpu_usage_seconds_total{id!="/", id=~".*docker.*"}[5m])```
+
+<img width="1924" height="777" alt="image" src="https://github.com/user-attachments/assets/14a81420-c7c9-4ae2-abb3-e56ccd6a7502" />
 
 # Memory usage per container
-container_memory_usage_bytes{name!=""}
+```container_memory_usage_bytes{id!="/", id=~".*docker.*"}```
+
+<img width="1917" height="770" alt="image" src="https://github.com/user-attachments/assets/09868a92-02a9-48fd-86c7-3acf9091eca5" />
 
 # Network received bytes per container
-rate(container_network_receive_bytes_total{name!=""}[5m])
+```rate(container_network_receive_bytes_total[5m])```
+
+<img width="1917" height="460" alt="image" src="https://github.com/user-attachments/assets/8714a2d8-41b7-460d-a551-d02e0c2f954a" />
 
 # Which container is using the most memory?
-topk(3, container_memory_usage_bytes{name!=""})
-```
+```topk(3, container_memory_usage_bytes{name!=""})```
+
+<img width="1917" height="470" alt="image" src="https://github.com/user-attachments/assets/a1a7dfc2-6219-4c19-8792-5d743c24b9f8" />
 
 The `{name!=""}` filter removes aggregated/system-level entries and shows only named containers.
 
+  - The {name!=""} filter was not working because the name label is not present in the metric. Instead, {id!="/"} is used to remove aggregated/system-level entries and show container-level data.
+
 **Document:** What is the difference between Node Exporter and cAdvisor? When would you use each?
+
+- `Node Exporter` is used to monitor **host/system-level metrics** like CPU, memory, disk, and network of the entire machine.
+
+- `cAdvisor` is used to monitor **container-level metrics** like CPU and memory usage per container.
+
+- Use `Node Exporter` for **server monitoring** and `cAdvisor` for **container monitoring**.
 
 ---
 
@@ -185,6 +202,8 @@ docker compose up -d
 ```
 
 Open `http://localhost:3000`. Log in with `admin` / `admin123`.
+
+<img width="1912" height="762" alt="image" src="https://github.com/user-attachments/assets/65cfac20-f2bd-441b-9973-1d257bdd4322" />
 
 **Add Prometheus as a datasource:**
 1. Go to Connections > Data Sources > Add data source
