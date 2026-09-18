@@ -365,11 +365,10 @@ command:
 
     - It ensures Prometheus data is persisted. Without it, all metrics are lost when the container restarts or is removed.
 
-```
-volumes:
+`volumes:
   - ./prometheus.yml:/etc/prometheus/prometheus.yml
   - prometheus_data:/prometheus
-
+`
 ---
 
 `#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
