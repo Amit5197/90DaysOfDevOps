@@ -7,15 +7,6 @@ Today you add Node Exporter for host metrics, cAdvisor for container metrics, an
 
 ---
 
-## Expected Output
-- Node Exporter running and scraped by Prometheus
-- cAdvisor running and scraped by Prometheus
-- Grafana running with Prometheus configured as a datasource
-- At least one custom Grafana dashboard with CPU, memory, and container panels
-- A markdown file: `day-74-exporters-grafana.md`
-
----
-
 ## Challenge Tasks
 
 ### Task 1: Add Node Exporter for Host Metrics
@@ -63,6 +54,7 @@ Restart the stack:
 ```bash
 docker compose up -d
 ```
+<img width="1892" height="611" alt="image" src="https://github.com/user-attachments/assets/bcf9bb76-f2ef-441a-940b-2ab1a7745a9e" />
 
 Verify Node Exporter is healthy:
 ```bash
@@ -71,10 +63,15 @@ curl http://localhost:9100/metrics | head -20
 
 Check Prometheus Targets page -- `node-exporter` should show as `UP`.
 
+<img width="1907" height="440" alt="image" src="https://github.com/user-attachments/assets/de36bd1b-9351-4520-90fe-fa42e3ebf6de" />
+
 Run these queries in Prometheus to see host metrics:
-```promql
+
+promql
 # CPU: percentage of time spent idle (per core)
 node_cpu_seconds_total{mode="idle"}
+
+<img width="1912" height="482" alt="image" src="https://github.com/user-attachments/assets/0a876237-bf2b-408c-acbc-7f642a6e56fa" />
 
 # Memory: total vs available
 node_memory_MemTotal_bytes
@@ -82,13 +79,21 @@ node_memory_MemAvailable_bytes
 
 # Memory usage percentage
 (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100
+```Out of 100% RAM: ~10% is in use```
+
+<img width="1907" height="447" alt="image" src="https://github.com/user-attachments/assets/ca0e0500-a43d-4157-a02c-e60f5099f3f6" />
 
 # Disk: filesystem usage percentage
 (1 - node_filesystem_avail_bytes / node_filesystem_size_bytes) * 100
+```root filesystem (/) is using approximately 5.60% disk space```
+
+<img width="1915" height="765" alt="image" src="https://github.com/user-attachments/assets/72a7cfd9-42b6-4aee-bb37-b5ae8fccbc9c" />
 
 # Network: bytes received per second
 rate(node_network_receive_bytes_total[5m])
-```
+```Network receive rate on eth0 is approximately 48 bytes per second```
+
+<img width="1912" height="446" alt="image" src="https://github.com/user-attachments/assets/732da1a0-f770-400f-baea-71256f99984b" />
 
 ---
 
