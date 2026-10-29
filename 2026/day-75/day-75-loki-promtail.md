@@ -7,15 +7,6 @@ You will set up Grafana Loki (a log aggregation system built by the Grafana team
 
 ---
 
-## Expected Output
-- Loki running as a log storage backend
-- Promtail collecting Docker container logs and shipping them to Loki
-- Loki added as a datasource in Grafana
-- LogQL queries running in Grafana Explore
-- A markdown file: `day-75-loki-promtail.md`
-
----
-
 ## Challenge Tasks
 
 ### Task 1: Understand the Logging Pipeline
@@ -47,6 +38,15 @@ Key differences from the ELK stack:
 - Think of it as "Prometheus, but for logs" -- same label-based approach
 
 **Document:** Why does Loki only index labels instead of full text? What is the trade-off?
+- Loki indexes only labels to keep storage and costs low.
+
+- **Benefit**
+    - Much cheaper & faster ingestion
+    - Uses less storage than full-text indexing
+
+- **Trade-off**
+   - Log searches are slower (needs to scan log content)
+   - Less powerful than full-text search systems
 
 ---
 
